@@ -1,0 +1,70 @@
+- job-template:
+    name: '{value_stream}_{name}_unit-clj_jjb'
+    display-name: '{name} 01: Clojure Unit Tests'
+    scm:
+        - '{name}'
+    builders:
+        - shell:
+            !include-raw-escape unit-clj.sh
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_unit-jruby_jjb'
+              current-parameters: True
+
+- job-template:
+    name: '{value_stream}_{name}_unit-jruby_jjb'
+    display-name: '{name} 05: JRuby Unit Tests'
+    scm:
+        - '{name}'
+    builders:
+        - shell:
+            !include-raw-escape unit-jruby.sh
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_packaging-os-clj_jjb'
+              current-parameters: True
+
+- job-template:
+    name: '{value_stream}_{name}_packaging-os-clj_jjb'
+    display-name: '{name} 10: Lein Deploy'
+    scm:
+        - '{name}'
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+              current-parameters: True
+
+- job-template:
+    name: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+    display-name: '{name} 15: Packaging Uberbuild'
+    scm:
+        - ezbake-mirror
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_system-integration_smoke'
+              current-parameters: True
+
+- job-template:
+    name: '{value_stream}_{name}_integration-system_smoke-jjb'
+    display-name: '{name} 20: Integration Smoke Test Suite'
+    builders:
+        - shell:
+            !include-raw-escape integration-system.sh
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+              current-parameters: True
+
+- job-template:
+    name: '{value_stream}_{name}_integration-system_full-jjb'
+    display-name: '{name} 25: Integration Full Test Suite'
+    builders:
+        - shell:
+            !include-raw-escape integration-system-full.sh
+
+- job-group:
+    name: '{value_stream}_{name}_demo-pipeline_jjb'
+    jobs:
+        - '{value_stream}_{name}_unit-jruby_jjb'
+        - '{value_stream}_{name}_packaging-nexus-clj_jjb'
+        - '{value_stream}_{name}_packaging-os-clj_jjb'

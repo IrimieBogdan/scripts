@@ -5,10 +5,7 @@
     scm:
         - puppet-server
     jobs:
-        - '{value_stream}_{name}_unit-clj_jjb'
-        - '{value_stream}_{name}_packaging-{type}_jjb'
-        - '{value_stream}_{name}_integration-system_smoke-jjb'
-        - '{value_stream}_{name}_integration-system_full-jjb'
+        - '{value_stream}_{name}_demo-pipeline_jjb'
 
 - project:
     name: puppet-server-cve-test
@@ -17,7 +14,4 @@
     scm:
         - puppet-server-cve-test
     jobs:
-        - '{value_stream}_{name}_unit-clj_jjb'
-        - '{value_stream}_{name}_packaging-{type}_jjb'
-        - '{value_stream}_{name}_integration-system_smoke-jjb'
-        - '{value_stream}_{name}_integration-system_full-jjb'
+        - '{value_stream}_{name}_demo-pipeline_jjb'

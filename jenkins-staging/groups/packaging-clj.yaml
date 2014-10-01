@@ -1,6 +1,0 @@
-- job-group:
-    name: '{value_stream}_{name}_packaging-{type}_jjb'
-    jobs:
-        - '{value_stream}_{name}_unit-jruby_jjb'
-        - '{value_stream}_{name}_packaging-nexus-clj_jjb'
-        - '{value_stream}_{name}_packaging-os-clj_jjb'
