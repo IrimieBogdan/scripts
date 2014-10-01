@@ -1,0 +1,23 @@
+- project:
+    name: puppet-server
+    value_stream: puppet-enterprise
+    type: clj
+    scm:
+        - puppet-server
+    jobs:
+        - '{value_stream}_{name}_unit-clj_jjb'
+        - '{value_stream}_{name}_packaging-{type}_jjb'
+        - '{value_stream}_{name}_integration-system_smoke-jjb'
+        - '{value_stream}_{name}_integration-system_full-jjb'
+
+- project:
+    name: puppet-server-cve-test
+    value_stream: puppet-enterprise
+    type: clj
+    scm:
+        - puppet-server-cve-test
+    jobs:
+        - '{value_stream}_{name}_unit-clj_jjb'
+        - '{value_stream}_{name}_packaging-{type}_jjb'
+        - '{value_stream}_{name}_integration-system_smoke-jjb'
+        - '{value_stream}_{name}_integration-system_full-jjb'

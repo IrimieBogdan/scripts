@@ -1,0 +1,9 @@
+- job-template:
+    name: '{value_stream}_{name}_packaging-os-clj_jjb'
+    display-name: '{name} 10: Lein Deploy'
+    scm:
+        - '{name}'
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+              current-parameters: True

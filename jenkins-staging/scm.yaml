@@ -1,0 +1,21 @@
+- scm:
+    name: puppet-server-cve-test
+    scm:
+        - git:
+            url: git@github.com:puppetlabs/puppet-server-cve-test.git
+            branches:
+                - origin/master
+- scm:
+    name: puppet-server
+    scm:
+        - git:
+            url: git@github.com:puppetlabs/puppet-server.git
+            branches:
+                - origin/master
+- scm:
+    name: ezbake-mirror
+    scm:
+        - git:
+            url: gitmirror@github.delivery.puppetlabs.net:puppetlabs-ezbake.git
+            branches:
+                - origin/master

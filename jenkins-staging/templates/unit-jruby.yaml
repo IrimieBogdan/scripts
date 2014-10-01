@@ -1,0 +1,12 @@
+- job-template:
+    name: '{value_stream}_{name}_unit-jruby_jjb'
+    display-name: '{name} 05: JRuby Unit Tests'
+    scm:
+        - '{name}'
+    builders:
+        - shell:
+            !include-raw-escape unit-jruby.sh
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_packaging-os-clj_jjb'
+              current-parameters: True

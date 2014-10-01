@@ -1,0 +1,9 @@
+- job-template:
+    name: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+    display-name: '{name} 15: Packaging Uberbuild'
+    scm:
+        - ezbake-mirror
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_system-integration_smoke'
+              current-parameters: True

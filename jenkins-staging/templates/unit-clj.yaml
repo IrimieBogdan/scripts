@@ -1,0 +1,12 @@
+- job-template:
+    name: '{value_stream}_{name}_unit-clj_jjb'
+    display-name: '{name} 01: Clojure Unit Tests'
+    scm:
+        - '{name}'
+    builders:
+        - shell:
+            !include-raw-escape unit-clj.sh
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_unit-jruby_jjb'
+              current-parameters: True
