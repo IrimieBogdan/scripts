@@ -6,6 +6,13 @@
             branches:
                 - origin/master
 - scm:
+    name: pe-puppet-server-extensions
+    scm:
+        - git:
+            url: git@github.com:puppetlabs/pe-puppet-server-extension.git
+            branches:
+                - origin/master
+- scm:
     name: puppet-server
     scm:
         - git:

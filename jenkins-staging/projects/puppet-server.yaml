@@ -1,17 +1,26 @@
 - project:
     name: puppet-server
-    value_stream: puppet-enterprise
+    value_stream: platform
     type: clj
     scm:
         - puppet-server
     jobs:
         - '{value_stream}_{name}_demo-pipeline_jjb'
 
-- project:
-    name: puppet-server-cve-test
-    value_stream: puppet-enterprise
-    type: clj
-    scm:
-        - puppet-server-cve-test
-    jobs:
-        - '{value_stream}_{name}_demo-pipeline_jjb'
+#- project:
+#    name: puppet-server-cve-test
+#    value_stream: security
+#    type: clj
+#    scm:
+#        - puppet-server-cve-test
+#    jobs:
+#        - '{value_stream}_{name}_demo-pipeline_jjb'
+
+#- project:
+#    name: pe-puppet-server-extensions
+#    value_stream: puppet-enterprise
+#    type: clj
+#    scm:
+#        - pe-puppet-server-extensions
+#    jobs:
+#        - '{value_stream}_{name}_demo-pipeline_jjb'

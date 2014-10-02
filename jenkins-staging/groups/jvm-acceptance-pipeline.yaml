@@ -1,8 +1,58 @@
 - job-template:
+    name: '{value_stream}_{name}_init-merge_jjb'
+    display-name: '{name} 00: Mergely Kickoff'
+    logrotate:
+        daysToKeep: -1
+        numToKeep: -1
+    project-type: freestyle
+    parameters:
+        - label:
+            name: label
+            default: worker
+    scm:
+        - '{name}'
+    triggers:
+        - pollscm: "H/5 * * * *"
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_unit-clj_jjb'
+              predefined-parameters: "PLATFORM_AXIS=el-6 ubuntu-1404"
+              current-parameters: False
+              condition: ALWAYS
+
+- job-template:
+    name: '{value_stream}_{name}_init_nightly-jjb'
+    display-name: '{name} 00: Nightly Kickoff'
+    logrotate:
+        daysToKeep: -1
+        numToKeep: -1
+    project-type: freestyle
+    parameters:
+        - label:
+            name: label
+            default: worker
+    scm:
+        - '{name}'
+    triggers:
+        - timed: "@midnight"
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{value_stream}_{name}_unit-clj_jjb'
+              predefined-parameters: "PLATFORM_AXIS=el-6 el-7 redhat-5 redhat-6 redhat-7 debian-6 ubuntu-1204 ubuntu-1404"
+              current-parameters: False
+              condition: ALWAYS
+
+- job-template:
     name: '{value_stream}_{name}_unit-clj_jjb'
     display-name: '{name} 01: Clojure Unit Tests'
     scm:
         - '{name}'
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - unit
     builders:
         - shell:
             !include-raw-escape unit-clj.sh
@@ -10,12 +60,19 @@
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_unit-jruby_jjb'
               current-parameters: True
+              condition: UNSTABLE_OR_BETTER
 
 - job-template:
     name: '{value_stream}_{name}_unit-jruby_jjb'
     display-name: '{name} 05: JRuby Unit Tests'
     scm:
         - '{name}'
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - unit
     builders:
         - shell:
             !include-raw-escape unit-jruby.sh
@@ -23,30 +80,54 @@
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_packaging-os-clj_jjb'
               current-parameters: True
+              condition: UNSTABLE_OR_BETTER
 
 - job-template:
     name: '{value_stream}_{name}_packaging-os-clj_jjb'
     display-name: '{name} 10: Lein Deploy'
     scm:
         - '{name}'
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - worker
     publishers:
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
               current-parameters: True
+              condition: UNSTABLE_OR_BETTER
 
 - job-template:
     name: '{value_stream}_{name}_packaging-nexus-clj_jjb'
     display-name: '{name} 15: Packaging Uberbuild'
     scm:
         - ezbake-mirror
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - worker
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_system-integration_smoke'
+            - project: '{value_stream}_{name}_system-integration_smoke-jjb'
               current-parameters: True
+              condition: UNSTABLE_OR_BETTER
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_smoke-jjb'
     display-name: '{name} 20: Integration Smoke Test Suite'
+    logrotate:
+        daysToKeep: 5
+        numToKeep: 5
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
     builders:
         - shell:
             !include-raw-escape integration-system.sh
@@ -54,10 +135,17 @@
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
               current-parameters: True
+              condition: UNSTABLE_OR_BETTER
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_full-jjb'
     display-name: '{name} 25: Integration Full Test Suite'
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
     builders:
         - shell:
             !include-raw-escape integration-system-full.sh
@@ -65,6 +153,11 @@
 - job-group:
     name: '{value_stream}_{name}_demo-pipeline_jjb'
     jobs:
+        - '{value_stream}_{name}_init-merge_jjb'
+        - '{value_stream}_{name}_init_nightly-jjb'
+        - '{value_stream}_{name}_unit-clj_jjb'
         - '{value_stream}_{name}_unit-jruby_jjb'
         - '{value_stream}_{name}_packaging-nexus-clj_jjb'
         - '{value_stream}_{name}_packaging-os-clj_jjb'
+        - '{value_stream}_{name}_integration-system_full-jjb'
+        - '{value_stream}_{name}_integration-system_smoke-jjb'
