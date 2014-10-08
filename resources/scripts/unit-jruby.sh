@@ -3,6 +3,12 @@
 set -e
 set -x
 
+#-------------------------------------------------------------------------------
+# Configure Ruby
+
+source /usr/local/rvm/scripts/rvm
+rvm use ruby-1.9.3-p484
+
 # Set Java JDK version based on current matrix value of JDK_BIN_PATH which
 # should be a path to the bin directory of the desired JDK.
 #

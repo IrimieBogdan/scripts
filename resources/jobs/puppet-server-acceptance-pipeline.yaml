@@ -19,6 +19,7 @@
               predefined-parameters: "PLATFORM_AXIS=el-6 ubuntu-1404"
               current-parameters: False
               condition: ALWAYS
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_init_nightly-jjb'
@@ -41,6 +42,7 @@
               predefined-parameters: "PLATFORM_AXIS=el-6 el-7 redhat-5 redhat-6 redhat-7 debian-6 ubuntu-1204 ubuntu-1404"
               current-parameters: False
               condition: ALWAYS
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_unit-clj_jjb'
@@ -61,6 +63,7 @@
             - project: '{value_stream}_{name}_unit-jruby_jjb'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_unit-jruby_jjb'
@@ -78,12 +81,13 @@
             !include-raw-escape unit-jruby.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-os-clj_jjb'
+            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_packaging-os-clj_jjb'
+    name: '{value_stream}_{name}_packaging-nexus-clj_jjb'
     display-name: '{name} 10: Lein Deploy'
     scm:
         - '{name}'
@@ -93,14 +97,18 @@
             name: label
             values:
                 - worker
+    builders:
+        - shell:
+            !include-raw-escape pkg-nexus.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+            - project: '{value_stream}_{name}_packaging-os-clj_jjb'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+    name: '{value_stream}_{name}_packaging-os-clj_jjb'
     display-name: '{name} 15: Packaging Uberbuild'
     scm:
         - ezbake-mirror
@@ -110,11 +118,15 @@
             name: label
             values:
                 - worker
+    builders:
+        - shell:
+            !include-raw-escape pkg-ezbake.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_system-integration_smoke-jjb'
+            - project: '{value_stream}_{name}_integration-system_smoke-jjb'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_smoke-jjb'
@@ -133,9 +145,10 @@
             !include-raw-escape integration-system.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+            - project: '{value_stream}_{name}_integration-system_full-jjb'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_full-jjb'

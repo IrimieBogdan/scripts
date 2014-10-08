@@ -2,8 +2,6 @@
 
 set -x
 
-#git checkout "${JVMPUPPET_REF}"
-
 #-------------------------------------------------------------------------------
 # Prepare external acceptance testing repository. Whoops, definitely not
 # necessary for FOSS since FOSS is a submodule of jvm-puppet. Leaving it here as
@@ -37,7 +35,7 @@ export BEAKER_TYPE=foss
 unset IS_PE
 
 #-------------------------------------------------------------------------------
-# Install ruby jank
+# Configure Ruby
 
 set +x
 source /usr/local/rvm/scripts/rvm

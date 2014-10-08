@@ -16,7 +16,7 @@
     name: puppet-server
     scm:
         - git:
-            url: git@github.com:puppetlabs/puppet-server.git
+            url: git://github.com/puppetlabs/puppet-server.git
             branches:
                 - origin/master
 - scm:
