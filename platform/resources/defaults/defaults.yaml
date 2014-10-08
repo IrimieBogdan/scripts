@@ -1,5 +1,5 @@
 - defaults:
-    name: global
+    name: staging
     project-type: matrix
     retry-count: 10
     quiet-period: 10
