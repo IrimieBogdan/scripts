@@ -3,7 +3,7 @@
 export NEXUS_JENKINS_USERNAME=jenkins
 export NEXUS_JENKINS_PASSWORD=Qu@lity!
 
-set -e # failed commands below should cause the job to fail
+set -e
 
 LEIN=$(mktemp lein.XXXXXX)
 wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -O ${LEIN}
