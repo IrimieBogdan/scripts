@@ -5,7 +5,7 @@ lein version
 echo
 
 set -e
-output=$(lein build -- {name})
+output=$(lein run -- build {name})
 set +e
 
 
