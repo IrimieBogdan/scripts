@@ -1,0 +1,7 @@
+- project:
+    name: pe-console-services
+    value_stream: experimental
+    type: clj
+    jobs:
+        - '{value_stream}_{name}_package-ezbake_jjb'
+

@@ -1,0 +1,5 @@
+- builder:
+    name: git-clone
+    builders:
+        - shell:
+            !include-raw git-clone.sh

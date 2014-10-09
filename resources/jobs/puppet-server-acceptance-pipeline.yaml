@@ -99,7 +99,7 @@
                 - worker
     builders:
         - shell:
-            !include-raw-escape pkg-nexus.sh
+            !include-raw-escape package-nexus.sh
     publishers:
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_packaging-os-clj_jjb'
@@ -120,7 +120,7 @@
                 - worker
     builders:
         - shell:
-            !include-raw-escape pkg-ezbake.sh
+            !include-raw ezbake-packaging-foss.sh
     publishers:
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_integration-system_smoke-jjb'

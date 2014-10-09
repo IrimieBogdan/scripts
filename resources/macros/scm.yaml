@@ -26,3 +26,10 @@
             url: gitmirror@github.delivery.puppetlabs.net:puppetlabs-ezbake.git
             branches:
                 - origin/master
+- scm:
+    name: pe-console-services
+    scm:
+        - git:
+            url: git@github.com:puppetlabs/pe-console-services.git
+            branches:
+                - origin/master

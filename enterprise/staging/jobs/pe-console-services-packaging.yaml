@@ -1,0 +1,40 @@
+- job-template:
+    hipchat:
+        enabled: true
+        version: 0.1.8
+        room:  $PROJECT_ROOM
+        start-notify: true
+        notify-success: true
+        notify-aborted: true
+        notify-notbuilt: true
+        notify-failure: true
+        notify-normal: true
+    name: '{value_stream}_{name}_package-ezbake_jjb'
+    display-name: 'Update pe-console-services Dependency'
+    logrotate:
+        daysToKeep: 7
+        numToKeep: 7
+    project-type: freestyle
+    parameters:
+        - string:
+            name: DEP_NAME
+            description: "Name of the dependency whose version will get updated."
+        - string:
+            name: DEP_VERSION
+            description: "New version to set on the given DEP_NAME"
+        - string:
+            name: PE_VER
+            default: "3.4"
+            description: "New version to set on the given DEP_NAME"
+        - label:
+            name: label
+            default: worker
+    scm:
+        - ezbake-mirror
+    builders:
+        - git-clone:
+            git-repo: git@github.com:puppetlabs/pe-console-services.git
+        - shell: 
+            !include-raw updatedeps-clj.sh
+        - shell: 
+            !include-raw ezbakedir-packaging-pe-jank.sh
