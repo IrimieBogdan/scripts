@@ -1,6 +1,7 @@
 - project:
     name: pe-console-services
     value_stream: experimental
+    hipchat_room: ${PROJECT_ROOM}
     type: clj
     jobs:
         - '{value_stream}_{name}_package-ezbake_jjb'

@@ -1,14 +1,4 @@
 - job-template:
-    hipchat:
-        enabled: true
-        version: 0.1.8
-        room:  $PROJECT_ROOM
-        start-notify: true
-        notify-success: true
-        notify-aborted: true
-        notify-notbuilt: true
-        notify-failure: true
-        notify-normal: true
     name: '{value_stream}_{name}_package-ezbake_jjb'
     display-name: 'pe-console-services: Build OS Packages'
     logrotate:
@@ -46,16 +36,6 @@
             !include-raw ezbakedir-packaging-pe.sh
 
 - job-template:
-    hipchat:
-        enabled: true
-        version: 0.1.8
-        room:  $PROJECT_ROOM
-        start-notify: true
-        notify-success: true
-        notify-aborted: true
-        notify-notbuilt: true
-        notify-failure: true
-        notify-normal: true
     name: '{value_stream}_{name}_release-ezbake_jjb'
     display-name: 'pe-console-services: Release & Promote to PE'
     logrotate:

@@ -3,7 +3,18 @@
     project-type: matrix
     retry-count: 10
     shell_workspace: ''
+    hipchat_room: ''
     quiet-period: 10
     logrotate:
         daysToKeep: 14
         numToKeep: 14
+    hipchat:
+        enabled: true
+        version: 0.1.8
+        room: '{hipchat_room}'
+        start-notify: true
+        notify-success: true
+        notify-aborted: true
+        notify-notbuilt: true
+        notify-failure: true
+        notify-normal: true
