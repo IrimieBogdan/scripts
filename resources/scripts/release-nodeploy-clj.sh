@@ -32,5 +32,6 @@ git push origin HEAD:master $RELEASE_VERSION
 echo
 echo "Append to .props file to pass PACKAGE_BUILD_VERSION to next job."
 cat >> .props <<DOWNSTREAM_BUILD_PARAMETERS
-REF=$(lein with-profile ci pprint :version | tail -n 1 | cut -d\" -f2)
+REF=$RELEASE_VERSION
+GIT_REF=$RELEASE_VERSION
 DOWNSTREAM_BUILD_PARAMETERS

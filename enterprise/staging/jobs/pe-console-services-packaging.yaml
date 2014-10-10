@@ -28,6 +28,7 @@
             description: "Target PE Version"
         - string:
             name: GIT_REF
+            default: master
             description: "{name} git reference to build."
         - label:
             name: label
@@ -37,6 +38,8 @@
     builders:
         - git-clone:
             git-repo: git@github.com:puppetlabs/pe-console-services.git
+            git-dir-name: pe-console-services
+            git-ref: "$GIT_REF"
         - shell: 
             !include-raw updatedeps-clj.sh
         - shell: 
