@@ -34,6 +34,8 @@
             !include-raw updatedeps-clj.sh
         - shell: 
             !include-raw ezbakedir-packaging-pe.sh
+        - shell: 
+            !include-raw git-push.sh
 
 - job-template:
     name: '{value_stream}_{name}_release-ezbake_jjb'
