@@ -35,8 +35,15 @@ fi
 
 sleep 30 # give the packaging job time to finish setting up the repo
 
+echo
+echo "Create .props file to pass PACKAGE_BUILD_VERSION to next job."
 pushd "target/staging"
+
+set +x
 cat > "$WORKSPACE/.props" <<PROPS
 PACKAGE_BUILD_VERSION=$(rake pl:print_build_param[ref] | tail -n 1)
 PROPS
+set -x
+
+cat "$WORKSPACE/.props"
 popd

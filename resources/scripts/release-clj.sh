@@ -21,6 +21,11 @@ lein release
 
 echo
 echo "Append to .props file to pass PACKAGE_BUILD_VERSION to next job."
+
+set +x
 cat >> .props <<DOWNSTREAM_BUILD_PARAMETERS
 REF=$(lein with-profile ci pprint :version | tail -n 1 | cut -d\" -f2)
 DOWNSTREAM_BUILD_PARAMETERS
+set -x
+
+cat .props
