@@ -4,8 +4,8 @@ set +x
 set -e
 
 if [ -z "$PE_VER" ] ;then
-	echo 'Must set $PE_VER'
-	exit 1
+    echo 'Must set $PE_VER'
+    exit 1
 fi
 
 echo
