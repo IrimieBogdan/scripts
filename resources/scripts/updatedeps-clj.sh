@@ -8,7 +8,7 @@ set +x
 
 if [ ! -z "$DEP_VERSION" ] && [ ! -z "$DEP_NAME" ] ;then
 
-    if [ ! "$GIT_VER" = "master" ] ;then
+    if [ ! "$GIT_REF" = "master" ] ;then
         echo "GIT_VER must be 'master' when changing dependency versions."
         exit 1
     fi
