@@ -1,6 +1,7 @@
 - defaults:
     name: global
-    project-type: matrix
+    node: worker
+    project-type: freestyle
     retry-count: 10
     shell_workspace: ''
     hipchat_room: ''

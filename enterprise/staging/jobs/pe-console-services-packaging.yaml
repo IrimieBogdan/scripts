@@ -1,6 +1,7 @@
 - job-template:
     name: '{value_stream}_{name}_package-ezbake_jjb'
     display-name: 'pe-console-services: Build OS Packages'
+    node: worker
     logrotate:
         daysToKeep: 7
         numToKeep: 7
@@ -20,9 +21,6 @@
             name: GIT_REF
             default: master
             description: "{name} git reference to build."
-        - label:
-            name: label
-            default: worker
     scm:
         - ezbake-mirror
     builders:
@@ -40,6 +38,7 @@
 - job-template:
     name: '{value_stream}_{name}_release-ezbake_jjb'
     display-name: 'pe-console-services: Release & Promote to PE'
+    node: worker
     logrotate:
         daysToKeep: 7
         numToKeep: 7
@@ -49,9 +48,6 @@
             name: PE_VER
             default: "3.4"
             description: "Target PE Version"
-        - label:
-            name: label
-            default: worker
     scm:
         - pe-console-services
     builders:
