@@ -83,8 +83,8 @@
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_packaging-os-clj_jjb'
               current-parameters: True
+              property-file: '.props'
               condition: UNSTABLE_OR_BETTER
-              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_packaging-os-clj_jjb'
@@ -103,8 +103,8 @@
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_integration-system_smoke-jjb'
               current-parameters: True
+              property-file: '.props'
               condition: UNSTABLE_OR_BETTER
-              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_smoke-jjb'
