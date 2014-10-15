@@ -1,6 +1,6 @@
 - project:
     name: pe-console-services
-    value_stream: experimental
+    value_stream: enterprise
     hipchat_room: ${PROJECT_ROOM}
     type: clj
     jobs:
