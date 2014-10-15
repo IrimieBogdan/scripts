@@ -5,6 +5,9 @@
     retry-count: 10
     shell_workspace: ''
     hipchat_room: ''
+    wrappers:
+        - ansicolor:
+            colormap: xterm
     quiet-period: 10
     logrotate:
         daysToKeep: 14
