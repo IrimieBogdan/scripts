@@ -21,6 +21,10 @@
             name: GIT_REF
             default: master
             description: "{name} git reference to build."
+        - bool:
+            name: COMMIT
+            default: false
+            description: "If this field is checked, commit dependency changes to pe-console-services repo."
     scm:
         - ezbake-mirror
     builders:

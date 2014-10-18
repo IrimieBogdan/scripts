@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 set -x
-set +x
+set -e
+
+if [ ! "$COMMIT" = "true" ] ;then
+    exit 0
+fi
 
 #-------------------------------------------------------------------------------
 # Check build parameters
