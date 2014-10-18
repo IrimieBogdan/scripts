@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set +x
+set -x
 set -e
 
 if [ -z "$PE_VER" ] ;then
@@ -10,8 +10,10 @@ fi
 
 echo
 echo "Configure Ruby"
+set +x
 source /usr/local/rvm/scripts/rvm
 rvm use ruby-1.9.3-p484
+set -x
 
 echo
 echo "Show version information:"
