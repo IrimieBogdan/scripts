@@ -1,0 +1,10 @@
+- defaults:
+    name: deployment
+    value_stream: enterprise
+    project-type: matrix
+    retry-count: 10
+    shell_workspace: ''
+    quiet-period: 10
+    logrotate:
+        daysToKeep: 14
+        numToKeep: 14

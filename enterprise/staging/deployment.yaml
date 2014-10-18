@@ -1,0 +1,24 @@
+- defaults:
+    name: deployment
+
+    hipchat_room: blah
+    quiet-period: 2
+    logrotate:
+        daysToKeep: 1
+        numToKeep: 1
+
+    hipchat:
+        enabled: true
+        version: 0.1.8
+        room: '${PROJECT_ROOM}'
+        start-notify: true
+        notify-success: true
+        notify-aborted: true
+        notify-notbuilt: true
+        notify-failure: true
+        notify-normal: true
+
+    # what follows are simple JJB variables, not module parameters
+    hipchat_room: ''
+    value_stream: experimental
+    shell_workspace: ''

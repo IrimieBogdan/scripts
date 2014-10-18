@@ -1,15 +1,10 @@
 - defaults:
     name: instance
-    project-type: matrix
-    retry-count: 10
-    shell_workspace: ''
-    quiet-period: 10
-    logrotate:
-        daysToKeep: 14
-        numToKeep: 14
+
+    node: worker
+
     hipchat:
         enabled: true
-        version: 0.1.8
         room: '{hipchat_room}'
         start-notify: true
         notify-success: true
@@ -17,3 +12,7 @@
         notify-notbuilt: true
         notify-failure: true
         notify-normal: true
+
+    # what follows are simple JJB variables, not module parameters
+    hipchat_room: ''
+    value_stream: enterprise

@@ -1,17 +1,12 @@
 - defaults:
     name: global
-    node: worker
     project-type: freestyle
+
     retry-count: 10
     shell_workspace: ''
-    hipchat_room: ''
     wrappers:
         - ansicolor:
             colormap: xterm
-    quiet-period: 10
-    logrotate:
-        daysToKeep: 14
-        numToKeep: 14
     hipchat:
         enabled: true
         version: 0.1.8
@@ -22,3 +17,6 @@
         notify-notbuilt: true
         notify-failure: true
         notify-normal: true
+
+    # what follows are simple JJB variables, not module parameters
+    value_stream: global
