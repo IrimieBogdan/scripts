@@ -64,7 +64,7 @@
               block: true
     publishers:
         - trigger-parameterized-builds:
-            - project: 'Package-Promote'
+            - project: 'Package-Promotion'
               property-file: '.props'
               predefined-parameters: 
                   PKG={name}
