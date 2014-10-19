@@ -1,26 +1,19 @@
 - project:
     name: puppet-server
-    value_stream: platform
     type: clj
-    scm:
-        - puppet-server
+    classifier: 'stable'
+    ezbake_package_name: puppetserver
+    maven_artifact_name: puppet-server
+    default_platform_axis: el-6 el-7 redhat-5 redhat-6 debian-7 ubuntu-1204 ubuntu-1404
+    hipchat_room: '${PROJECT_ROOM}'
+    value_stream: experimental
+    shell_workspace: ''
+    logrotate_daystokeep: 14
+    logrotate_numtokeep: 14
+
     jobs:
-        - '{value_stream}_{name}_demo-pipeline_jjb'
+        - '{value_stream}_{name}_demo-pipeline_{scm_branch}':
+            scm_branch: 'stable'
+        - '{value_stream}_{name}_demo-pipeline_{scm_branch}':
+            scm_branch: 'master'
 
-#- project:
-#    name: puppet-server-cve-test
-#    value_stream: security
-#    type: clj
-#    scm:
-#        - puppet-server-cve-test
-#    jobs:
-#        - '{value_stream}_{name}_demo-pipeline_jjb'
-
-#- project:
-#    name: pe-puppet-server-extensions
-#    value_stream: puppet-enterprise
-#    type: clj
-#    scm:
-#        - pe-puppet-server-extensions
-#    jobs:
-#        - '{value_stream}_{name}_demo-pipeline_jjb'
