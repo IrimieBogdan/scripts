@@ -17,8 +17,9 @@
     scm:
         - git:
             url: git://github.com/puppetlabs/puppet-server.git
+            recursive-submodules: true
             branches:
-                - origin/master
+                - 'origin/{branches}'
 - scm:
     name: ezbake-mirror
     scm:

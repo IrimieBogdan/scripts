@@ -2,8 +2,17 @@
     name: global
     project-type: freestyle
 
+    scm:
+        - '{name}':
+            branches: '{scm_branch}'
+
+    logrotate:
+        daysToKeep: '{logrotate_daystokeep}'
+        numToKeep: '{logrotate_numtokeep}'
+
     retry-count: 10
-    shell_workspace: ''
+    quiet-period: 2
+
     wrappers:
         - ansicolor:
             colormap: xterm
@@ -18,5 +27,3 @@
         notify-failure: true
         notify-normal: true
 
-    # what follows are simple JJB variables, not module parameters
-    value_stream: global
