@@ -1,94 +1,84 @@
 - job-template:
-    name: '{value_stream}_{name}_init-merge_jjb'
-    display-name: '{name} 00: Mergely Kickoff'
+    name: '{value_stream}_{name}_init-merge_{scm_branch}'
+    display-name: '{name} ({scm_branch}) 00: Mergely Kickoff'
     node: worker
     logrotate:
         daysToKeep: -1
         numToKeep: -1
     project-type: freestyle
-    scm:
-        - '{name}'
     triggers:
         - pollscm: "H/5 * * * *"
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_unit-clj_jjb'
+            - project: '{value_stream}_{name}_unit-clj_{scm_branch}'
               predefined-parameters: "PLATFORM_AXIS=el-6 ubuntu-1404"
               current-parameters: False
               condition: ALWAYS
               git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_init_nightly-jjb'
-    display-name: '{name} 00: Nightly Kickoff'
+    name: '{value_stream}_{name}_init_nightly-{scm_branch}'
+    display-name: '{name} ({scm_branch}) 00: Nightly Kickoff'
     node: worker
     logrotate:
         daysToKeep: -1
         numToKeep: -1
     project-type: freestyle
-    scm:
-        - '{name}'
     triggers:
         - timed: "@midnight"
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_unit-clj_jjb'
+            - project: '{value_stream}_{name}_unit-clj_{scm_branch}'
               predefined-parameters: "PLATFORM_AXIS=el-6 el-7 redhat-5 redhat-6 redhat-7 debian-6 ubuntu-1204 ubuntu-1404"
               current-parameters: False
               condition: ALWAYS
               git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_unit-clj_jjb'
-    display-name: '{name} 01: Clojure Unit Tests'
+    name: '{value_stream}_{name}_unit-clj_{scm_branch}'
+    display-name: '{name} ({scm_branch}) 01: Clojure Unit Tests'
     node: unit
-    scm:
-        - '{name}'
     builders:
         - shell:
             !include-raw-escape unit-clj.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_unit-jruby_jjb'
+            - project: '{value_stream}_{name}_unit-jruby_{scm_branch}'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
               git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_unit-jruby_jjb'
-    display-name: '{name} 05: JRuby Unit Tests'
+    name: '{value_stream}_{name}_unit-jruby_{scm_branch}'
+    display-name: '{name} ({scm_branch}) 05: JRuby Unit Tests'
     node: unit
-    scm:
-        - '{name}'
     builders:
         - shell:
             !include-raw-escape unit-jruby.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-nexus-clj_jjb'
+            - project: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
               git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_packaging-nexus-clj_jjb'
-    display-name: '{name} 10: Lein Deploy'
+    name: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
+    display-name: '{name} ({scm_branch}) 10: Lein Deploy'
     node: worker
-    scm:
-        - '{name}'
     builders:
         - shell:
             !include-raw-escape package-nexus.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-os-clj_jjb'
+            - project: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
               current-parameters: True
               property-file: '.props'
               condition: UNSTABLE_OR_BETTER
 
 - job-template:
-    name: '{value_stream}_{name}_packaging-os-clj_jjb'
-    display-name: '{name} 15: Packaging Uberbuild'
+    name: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
+    display-name: '{name} ({scm_branch}) 15: Packaging Uberbuild'
     node: worker
     parameters:
         - string:
@@ -101,19 +91,16 @@
             !include-raw ezbake-packaging-foss.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_integration-system_smoke-jjb'
+            - project: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
               current-parameters: True
               property-file: '.props'
               condition: UNSTABLE_OR_BETTER
 
 - job-template:
-    name: '{value_stream}_{name}_integration-system_smoke-jjb'
-    display-name: '{name} 20: Integration Smoke Test Suite'
+    name: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
+    display-name: '{name} ({scm_branch}) 20: Integration Smoke Test Suite'
     project-type: matrix
     node: beaker
-    logrotate:
-        daysToKeep: 5
-        numToKeep: 5
     parameters:
         - string:
             name: PACKAGE_BUILD_VERSION
@@ -122,14 +109,12 @@
             name: PLATFORM_AXIS
             default: '{default_platform_axis}'
             description: "Version of {name} to use in test."
-    scm:
-        - '{name}'
     axes:
         - axis:
             type: user-defined
             name: LAYOUT
-            values: 
-                - x86_64-mdca 
+            values:
+                - x86_64-mdca
                 - x86_64-mdca-a
         - axis:
             type: dynamic
@@ -146,14 +131,14 @@
             !include-raw-escape integration-system.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_integration-system_full-jjb'
+            - project: '{value_stream}_{name}_integration-system_full-{scm_branch}'
               current-parameters: True
               condition: UNSTABLE_OR_BETTER
               git-revision: True
 
 - job-template:
-    name: '{value_stream}_{name}_integration-system_full-jjb'
-    display-name: '{name} 25: Integration Full Test Suite'
+    name: '{value_stream}_{name}_integration-system_full-{scm_branch}'
+    display-name: '{name} ({scm_branch}) 25: Integration Full Test Suite'
     project-type: matrix
     node: beaker
     parameters:
@@ -164,14 +149,12 @@
             name: PLATFORM_AXIS
             default: '{default_platform_axis}'
             description: "Platforms on which to test {name}"
-    scm:
-        - '{name}'
     axes:
         - axis:
             type: user-defined
             name: LAYOUT
-            values: 
-                - x86_64-mdca 
+            values:
+                - x86_64-mdca
                 - x86_64-mdca-a
         - axis:
             type: dynamic
@@ -188,13 +171,13 @@
             !include-raw-escape integration-system-full.sh
 
 - job-group:
-    name: '{value_stream}_{name}_demo-pipeline_jjb'
+    name: '{value_stream}_{name}_demo-pipeline_{scm_branch}'
     jobs:
-        - '{value_stream}_{name}_init-merge_jjb'
-        - '{value_stream}_{name}_init_nightly-jjb'
-        - '{value_stream}_{name}_unit-clj_jjb'
-        - '{value_stream}_{name}_unit-jruby_jjb'
-        - '{value_stream}_{name}_packaging-nexus-clj_jjb'
-        - '{value_stream}_{name}_packaging-os-clj_jjb'
-        - '{value_stream}_{name}_integration-system_full-jjb'
-        - '{value_stream}_{name}_integration-system_smoke-jjb'
+        - '{value_stream}_{name}_init-merge_{scm_branch}'
+        - '{value_stream}_{name}_init_nightly-{scm_branch}'
+        - '{value_stream}_{name}_unit-clj_{scm_branch}'
+        - '{value_stream}_{name}_unit-jruby_{scm_branch}'
+        - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
+        - '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
+        - '{value_stream}_{name}_integration-system_full-{scm_branch}'
+        - '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
