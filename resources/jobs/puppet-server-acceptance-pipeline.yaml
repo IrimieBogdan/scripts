@@ -2,9 +2,7 @@
     name: '{value_stream}_{name}_init-merge_{scm_branch}'
     display-name: '{name} ({scm_branch}) 00: Mergely Kickoff'
     node: worker
-    logrotate:
-        daysToKeep: -1
-        numToKeep: -1
+    disabled: '{kickoff_disabled}'
     project-type: freestyle
     triggers:
         - pollscm: "H/5 * * * *"
@@ -20,9 +18,7 @@
     name: '{value_stream}_{name}_init_nightly-{scm_branch}'
     display-name: '{name} ({scm_branch}) 00: Nightly Kickoff'
     node: worker
-    logrotate:
-        daysToKeep: -1
-        numToKeep: -1
+    disabled: '{kickoff_disabled}'
     project-type: freestyle
     triggers:
         - timed: "@midnight"
