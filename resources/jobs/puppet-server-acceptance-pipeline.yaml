@@ -126,6 +126,7 @@
         - shell:
             !include-raw-escape integration-system.sh
     publishers:
+        - puppet-server-junit
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_integration-system_full-{scm_branch}'
               current-parameters: True
@@ -165,6 +166,8 @@
     builders:
         - shell:
             !include-raw-escape integration-system-full.sh
+    publishers:
+        - puppet-server-junit
 
 - job-group:
     name: '{value_stream}_{name}_demo-pipeline_{scm_branch}'

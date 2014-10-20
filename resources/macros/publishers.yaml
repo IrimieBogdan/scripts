@@ -1,0 +1,15 @@
+- publisher:
+    name: beaker-junit-publisher
+    publishers:
+        - archive:
+            artifacts: 'junit/latest/*.xml{additional}'
+            allow-empty: true
+        - junit:
+            results: 'junit/latest/*.xml'
+            test-stability: true
+
+- publisher:
+    name: puppet-server-junit
+    publishers:
+        - beaker-junit-publisher:
+            additional: ',log/latest/puppetserver/**/*'
