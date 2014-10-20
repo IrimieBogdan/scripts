@@ -14,8 +14,15 @@
     quiet-period: 2
 
     wrappers:
+        - timeout:
+            version: '1.14'
+            timeout: 600
+            type: no-activity
+            actions:
+                - abort
         - ansicolor:
             colormap: xterm
+
     hipchat:
         enabled: true
         version: 0.1.8
