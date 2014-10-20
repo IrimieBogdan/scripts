@@ -34,3 +34,4 @@
         notify-failure: true
         notify-normal: true
 
+    script_dir: ''

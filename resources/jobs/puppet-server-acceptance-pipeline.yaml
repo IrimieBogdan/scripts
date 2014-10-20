@@ -71,26 +71,36 @@
               current-parameters: True
               property-file: '.props'
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
     display-name: '{name} ({scm_branch}) 15: Packaging Uberbuild'
     node: worker
+    metadata:
+        - string:
+            name: SCRIPT_DIR
+            value: ezbake
+            expose-to-env: true
     parameters:
         - string:
             name: LEIN_PROJECT_VERSION
             description: "Maven artifact version to build."
-    scm:
-        - ezbake-mirror
     builders:
-        - shell:
-            !include-raw ezbake-packaging-foss.sh
+        - git-clone:
+            git-repo: git@github.com:puppetlabs/ezbake.git
+            git-dir-name: ezbake
+        - ezbake-packaging-foss:
+            script_dir: ezbake
+            ezbake_package_name: '{ezbake_package_name}'
+            maven_artifact_name: '{maven_artifact_name}'
     publishers:
         - trigger-parameterized-builds:
             - project: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
               current-parameters: True
               property-file: '.props'
               condition: UNSTABLE_OR_BETTER
+              git-revision: True
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'

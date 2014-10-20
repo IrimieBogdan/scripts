@@ -3,6 +3,10 @@
 set -x
 set -e
 
+if [ ! -z "{script_dir}" ] ;then
+    pushd {script_dir}
+fi
+
 echo
 echo "Configure Ruby"
 source /usr/local/rvm/scripts/rvm
