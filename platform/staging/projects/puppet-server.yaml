@@ -13,8 +13,8 @@
     logrotate_numtokeep: 14
 
     jobs:
-        - '{value_stream}_{name}_demo-pipeline_{scm_branch}':
+        - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'stable'
-        - '{value_stream}_{name}_demo-pipeline_{scm_branch}':
+        - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'master'
 

@@ -180,7 +180,7 @@
         - puppet-server-junit
 
 - job-group:
-    name: '{value_stream}_{name}_demo-pipeline_{scm_branch}'
+    name: '{value_stream}_{name}_foss-pipeline_{scm_branch}'
     jobs:
         - '{value_stream}_{name}_init-merge_{scm_branch}'
         - '{value_stream}_{name}_init_nightly-{scm_branch}'
