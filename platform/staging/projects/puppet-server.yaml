@@ -4,7 +4,7 @@
     classifier: 'stable'
     ezbake_package_name: puppetserver
     maven_artifact_name: puppet-server
-    default_platform_axis: el-6 el-7 redhat-5 redhat-6 debian-7 ubuntu-1204 ubuntu-1404
+    default_platform_axis: el-6
     hipchat_room: '${PROJECT_ROOM}'
     value_stream: experimental
     kickoff_disabled: true
