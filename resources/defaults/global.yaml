@@ -32,6 +32,7 @@
         notify-aborted: true
         notify-notbuilt: true
         notify-failure: true
+        notify-unstable: true
         notify-normal: true
 
     script_dir: ''
