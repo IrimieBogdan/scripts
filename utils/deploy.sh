@@ -28,10 +28,10 @@ echo "Deployment type:  ${DEPLOYMENT_TYPE}"
 
 case $COMMAND in
 	update)
-	jenkins-jobs --conf ${JJB_CONFIG} update ${JJB_PATHS}
+	COMMAND="jenkins-jobs --conf ${JJB_CONFIG} update ${JJB_PATHS}"
 	;;
 	test)
-	jenkins-jobs --conf ${JJB_CONFIG} test ${JJB_PATHS}
+	COMMAND="jenkins-jobs --conf ${JJB_CONFIG} test ${JJB_PATHS}"
 	;;
 	*)
 	echo
@@ -40,4 +40,12 @@ case $COMMAND in
 	;;
 esac
 
-exit 0
+echo
+echo "Command:          ${COMMAND}"
+echo
+echo "Output:"
+echo
+
+$COMMAND
+
+exit $?
