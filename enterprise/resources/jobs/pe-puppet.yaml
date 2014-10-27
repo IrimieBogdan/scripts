@@ -1,0 +1,111 @@
+- job-template:
+    name: '{value_stream}_{name}_integration-system_pe-{qualifier}'
+    display-name: '{name} PE Integration Tests ({qualifier})'
+    project-type: matrix
+    node: beaker
+    parameters:
+        - string:
+            name: pe_family
+            default: '3.4'
+            description: "PE \"family\" to test."
+        - string:
+            name: pe_version_override
+            default: ''
+            description: "Override for <pe_version> otherwise obtained from redis."
+        - string:
+            name: PLATFORM_AXIS
+            default: '{default_platform_axis}'
+            description: "Platforms on which to test {name}"
+        - string:
+            name: LAYOUT_AXIS
+            default: '{default_layout_axis}'
+            description: "Layouts on which to test {name}"
+    axes:
+        - axis:
+            type: dynamic
+            name: LAYOUT
+            values:
+                - LAYOUT_AXIS
+        - axis:
+            type: dynamic
+            name: PLATFORM
+            values:
+                - PLATFORM_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
+    builders:
+        - shell:
+            !include-raw integration-system-pe.sh
+
+    publishers:
+        - beaker-junit-publisher:
+            additional: ''
+        - description-setter:
+            regexp: "export pe_version=([\\w\\-.]+)"
+            description: '\1 {beaker_testsuite}'
+            regexp-for-failed: "export pe_version=([\\w\\-.]+)"
+            description-for-failed: '\1 {beaker_testsuite}'
+            set-for-matrix: true
+
+- job-template:
+    name: '{value_stream}_{name}_intg-system_pe-windows-{qualifier}'
+    display-name: '{name} Windows PE Integration Tests ({qualifier})'
+    project-type: matrix
+    execution-strategy:
+        combination-filter: '!(ARCH == "64" && (AGENT ==~ /windows2003(r2)?-\d\d/))'
+    node: beaker
+    parameters:
+        - string:
+            name: pe_family
+            default: '3.4'
+            description: "PE \"family\" to test."
+        - string:
+            name: pe_version_override
+            default: ''
+            description: "Override for <pe_version> otherwise obtained from redis."
+        - string:
+            name: AGENT_AXIS
+            default: '{default_agent_axis}'
+            description: "Agent platforms on which to test {name}"
+        - string:
+            name: ARCH_AXIS
+            default: '{default_arch_axis}'
+            description: "Architectures on which to run {name} windows tests."
+    axes:
+        - axis:
+            type: dynamic
+            name: ARCH
+            values:
+                - ARCH_AXIS
+        - axis:
+            type: dynamic
+            name: AGENT
+            values:
+                - AGENT_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
+    builders:
+        - shell:
+            !include-raw integration-system-pe-windows.sh
+
+    publishers:
+        - beaker-junit-publisher:
+            additional: ''
+        - description-setter:
+            regexp: "export pe_version=([\\w\\-.]+)"
+            description: '\1 {beaker_testsuite}'
+            regexp-for-failed: "export pe_version=([\\w\\-.]+)"
+            description-for-failed: '\1 {beaker_testsuite}'
+            set-for-matrix: true
+
+
+- job-group:
+    name: '{value_stream}_{name}_pe-pipeline'
+    jobs:
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}'

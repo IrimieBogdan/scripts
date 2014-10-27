@@ -1,0 +1,38 @@
+- job-group:
+    name: 'qatest-split-jobs'
+    scm_name: qatests
+    scm_branch: master
+    beaker_loadpath: lib/
+    beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
+    preserve_hosts: never
+    jobs:
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_02X
+            beaker_testsuite: suites/puppet/tests/02{0,1,2,5}_puppet_resource_*
+        - '{value_stream}_{name}_intg-system_pe-windows-{qualifier}':
+            qualifier: resource_0XX
+            beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
+            default_agent_axis: windows2008r2-64
+            default_arch_axis: 32
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_030
+            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_031
+            beaker_testsuite: suites/puppet/tests/031_puppet_resource_exec
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_041
+            beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
+
+- project:
+    name: puppet-enterprise
+    default_platform_axis: centos6
+    default_layout_axis: 64mcd
+    hipchat_room: '${PROJECT_ROOM}'
+    value_stream: experimental
+    shell_workspace: ''
+    logrotate_daystokeep: '-1'
+    logrotate_numtokeep: 5
+
+    jobs:
+        - 'qatest-split-jobs'

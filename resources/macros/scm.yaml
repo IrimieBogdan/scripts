@@ -28,6 +28,13 @@
             branches:
                 - origin/master
 - scm:
+    name: qatests
+    scm:
+        - git:
+            url: git@github.com:puppetlabs/qatests.git
+            branches:
+                - 'origin/{branches}'
+- scm:
     name: pe-console-services
     scm:
         - git:
