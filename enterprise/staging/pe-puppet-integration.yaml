@@ -12,8 +12,6 @@
         - '{value_stream}_{name}_intg-system_pe-windows-{qualifier}':
             qualifier: resource_0XX
             beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
-            default_agent_axis: windows2008r2-64
-            default_arch_axis: 32
         - '{value_stream}_{name}_integration-system_pe-{qualifier}':
             qualifier: resource_030
             beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount
@@ -28,6 +26,8 @@
     name: puppet-enterprise
     default_platform_axis: centos6
     default_layout_axis: 64mcd
+    default_windows-agent_axis: windows2008r2-64
+    default_windows-arch_axis: 32
     hipchat_room: '${PROJECT_ROOM}'
     value_stream: experimental
     shell_workspace: ''

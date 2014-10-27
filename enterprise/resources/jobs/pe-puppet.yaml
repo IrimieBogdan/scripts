@@ -68,11 +68,11 @@
             description: "Override for <pe_version> otherwise obtained from redis."
         - string:
             name: AGENT_AXIS
-            default: '{default_agent_axis}'
+            default: '{default_windows-agent_axis}'
             description: "Agent platforms on which to test {name}"
         - string:
             name: ARCH_AXIS
-            default: '{default_arch_axis}'
+            default: '{default_windows-arch_axis}'
             description: "Architectures on which to run {name} windows tests."
     axes:
         - axis:
@@ -105,7 +105,3 @@
             set-for-matrix: true
 
 
-- job-group:
-    name: '{value_stream}_{name}_pe-pipeline'
-    jobs:
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}'
