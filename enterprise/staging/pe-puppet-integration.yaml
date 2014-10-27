@@ -13,11 +13,8 @@
             qualifier: resource_0XX
             beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
         - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_030
-            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_031
-            beaker_testsuite: suites/puppet/tests/031_puppet_resource_exec
+            qualifier: resource_03X
+            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount suites/puppet/tests/031_puppet_resource_exec
         - '{value_stream}_{name}_integration-system_pe-{qualifier}':
             qualifier: resource_041
             beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
