@@ -1,7 +1,7 @@
 - project:
     name: puppet-server
+    scm_name: puppet-server
     type: clj
-    classifier: 'stable'
     ezbake_package_name: puppetserver
     maven_artifact_name: puppet-server
     default_platform_axis: el-6

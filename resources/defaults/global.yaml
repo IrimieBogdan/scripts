@@ -3,7 +3,7 @@
     project-type: freestyle
 
     scm:
-        - '{name}':
+        - '{scm_name}':
             branches: '{scm_branch}'
 
     logrotate:
@@ -16,7 +16,7 @@
     wrappers:
         - timeout:
             version: '1.14'
-            timeout: 600
+            timeout: '{console_timeout}'
             type: no-activity
             actions:
                 - abort
@@ -36,3 +36,5 @@
         notify-normal: true
 
     script_dir: ''
+    console_timeout: '600'
+    preserve_hosts: never

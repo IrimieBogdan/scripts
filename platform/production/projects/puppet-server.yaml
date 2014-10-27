@@ -1,7 +1,7 @@
 - project:
     name: puppet-server
+    scm_name: puppet-server
     type: clj
-    classifier: 'stable'
     ezbake_package_name: puppetserver
     maven_artifact_name: puppet-server
     default_platform_axis: el-6 el-7 redhat-5 redhat-6 debian-7 ubuntu-1204 ubuntu-1404
@@ -11,6 +11,7 @@
     shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14
+    console_timeout: '1200'
 
     jobs:
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
