@@ -1,26 +1,13 @@
 - job-group:
-    name: 'qatest-split-jobs'
-    scm_name: qatests
-    scm_branch: master
-    beaker_loadpath: lib/
-    beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
-    preserve_hosts: never
+    name: 'pe-nightly-kickoff'
+    defaults: global-no-scm
     jobs:
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_02X
-            beaker_testsuite: suites/puppet/tests/02{0,1,2,5}_puppet_resource_*
-        - '{value_stream}_{name}_intg-system_pe-windows-{qualifier}':
-            qualifier: resource_0XX
-            beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_03X
-            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount suites/puppet/tests/031_puppet_resource_exec
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_041
-            beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
+        - '{value_stream}_{name}_init-merge':
+            phase-1-projects: 'PE Integration Tests,PE Agent-only Platform Integration,PE Frictionless Agent (CentOS Master),PE Puppet Acceptance Tests,PE Windows Integration, PE Upgrader Integration, PE Agent-only platform upgrader integration,PE Puppet Acceptance Tests (Future Parser)'
+            phase-2-projects: 'experimental_pe-puppet_integration-system_pe-qatests-resource_02X, experimental_pe-puppet_intg-system_pe-windows-qatests-resource_0XX, experimental_pe-puppet_integration-system_pe-qatests-resource_03X, experimental_pe-puppet_integration-system_pe-qatests-resource_041'
 
 - project:
-    name: puppet-enterprise
+    name: pe-puppet
     default_platform_axis: centos6
     default_layout_axis: 64mcd
     default_windows-agent_axis: windows2008r2-64
@@ -28,8 +15,10 @@
     hipchat_room: '${PROJECT_ROOM}'
     value_stream: experimental
     shell_workspace: ''
+    kickoff_disabled: 'true'
     logrotate_daystokeep: '-1'
     logrotate_numtokeep: 5
 
     jobs:
+        - 'pe-nightly-kickoff'
         - 'qatest-split-jobs'

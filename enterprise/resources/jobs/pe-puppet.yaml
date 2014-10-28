@@ -104,4 +104,58 @@
             description-for-failed: '\1 {beaker_testsuite}'
             set-for-matrix: true
 
+- job-template:
+    name: '{value_stream}_{name}_init-merge'
+    display-name: '{name} Nightly Kickoff'
+    defaults: global-no-scm
+    node: worker
+    disabled: '{kickoff_disabled}'
+    project-type: matrix
+    execution-strategy:
+        sequential: true
+    triggers:
+        - timed: '0 3 * * *'
+    axes:
+        - axis:
+            type: user-defined
+            name: pe_family
+            values:
+                - 3.7
+    builders:
+        - shell:
+            !include-raw redis-dump-pe_version.sh
+        #- trigger-builds:
+        #- project: '{phase-1-projects}'
+        #property-file: '.props'
+        #current-parameters: true
+        #block: true
+        - trigger-builds:
+            - project: '{phase-2-projects}'
+              property-file: '.props'
+              current-parameters: true
+              block: true
+
+- job-group:
+    name: 'qatest-split-jobs'
+    scm_name: qatests
+    scm_branch: master
+    beaker_loadpath: lib/
+    beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
+    preserve_hosts: never
+    jobs:
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_02X
+            beaker_testsuite: suites/puppet/tests/02{0,1,2,5}_puppet_resource_*
+        - '{value_stream}_{name}_intg-system_pe-windows-{qualifier}':
+            qualifier: resource_0XX
+            beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_030
+            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_031
+            beaker_testsuite: suites/puppet/tests/031_puppet_resource_exec
+        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
+            qualifier: resource_041
+            beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
 
