@@ -6,7 +6,7 @@
     parameters:
         - string:
             name: pe_family
-            default: '3.4'
+            default: '3.7'
             description: "PE \"family\" to test."
         - string:
             name: pe_version_override
@@ -60,7 +60,7 @@
     parameters:
         - string:
             name: pe_family
-            default: '3.4'
+            default: '3.7'
             description: "PE \"family\" to test."
         - string:
             name: pe_version_override

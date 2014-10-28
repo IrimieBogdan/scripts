@@ -15,7 +15,7 @@
             description: "New version to set on the given DEP_NAME"
         - string:
             name: PE_VER
-            default: "3.4"
+            default: "3.7"
             description: "Target PE Version"
         - string:
             name: GIT_REF
@@ -50,7 +50,7 @@
     parameters:
         - string:
             name: PE_VER
-            default: "3.4"
+            default: "3.7"
             description: "Target PE Version"
     scm:
         - pe-console-services
