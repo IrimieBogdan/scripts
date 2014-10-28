@@ -12,7 +12,7 @@
     default_layout_axis: 64mcd-64f-32a 64m-64d-64c-64a-32f
     default_windows-agent_axis: windows2003r2-32 windows2003r2-64 windows2003-64 windows2008-64 windows2008r2-64 windows2012-64 windows2012r2-64
     default_windows-arch_axis: 64 32
-    hipchat_room: 'PE-Team, PE Green Team'
+    hipchat_room: 'PE-Team,PE Green Team'
     value_stream: enterprise
     shell_workspace: ''
     kickoff_disabled: 'false'
