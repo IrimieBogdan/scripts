@@ -2,6 +2,7 @@
     name: pe-console-services
     value_stream: enterprise
     hipchat_room: ${PROJECT_ROOM}
+    shell_workspace: 'pe-console-services'
     type: clj
     jobs:
         - '{value_stream}_{name}_package-ezbake_jjb'
