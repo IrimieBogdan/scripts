@@ -1,0 +1,37 @@
+
+- defaults:
+    name: global-no-scm
+    project-type: freestyle
+
+    logrotate:
+        daysToKeep: '{logrotate_daystokeep}'
+        numToKeep: '{logrotate_numtokeep}'
+
+    retry-count: 10
+    quiet-period: 2
+
+    wrappers:
+        - timeout:
+            version: '1.14'
+            timeout: '{console_timeout}'
+            type: no-activity
+            actions:
+                - abort
+        - ansicolor:
+            colormap: xterm
+
+    hipchat:
+        enabled: true
+        version: 0.1.8
+        room: '{hipchat_room}'
+        start-notify: true
+        notify-success: true
+        notify-aborted: true
+        notify-notbuilt: true
+        notify-failure: true
+        notify-unstable: true
+        notify-normal: true
+
+    script_dir: ''
+    console_timeout: '600'
+    preserve_hosts: never
