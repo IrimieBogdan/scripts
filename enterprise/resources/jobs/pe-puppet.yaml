@@ -124,11 +124,11 @@
     builders:
         - shell:
             !include-raw redis-dump-pe_version.sh
-        #- trigger-builds:
-        #- project: '{phase-1-projects}'
-        #property-file: '.props'
-        #current-parameters: true
-        #block: true
+        - trigger-builds:
+            - project: '{phase-1-projects}'
+              property-file: '.props'
+              current-parameters: true
+              block: true
         - trigger-builds:
             - project: '{phase-2-projects}'
               property-file: '.props'
@@ -144,18 +144,15 @@
     preserve_hosts: never
     jobs:
         - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_02X
+            qualifier: qatests-resource_02X
             beaker_testsuite: suites/puppet/tests/02{0,1,2,5}_puppet_resource_*
         - '{value_stream}_{name}_intg-system_pe-windows-{qualifier}':
-            qualifier: resource_0XX
+            qualifier: qatests-resource_0XX
             beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
         - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_030
-            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount
+            qualifier: qatests-resource_03X
+            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount suites/puppet/tests/031_puppet_resource_exec
         - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_031
-            beaker_testsuite: suites/puppet/tests/031_puppet_resource_exec
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: resource_041
+            qualifier: qatests-resource_041
             beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
 
