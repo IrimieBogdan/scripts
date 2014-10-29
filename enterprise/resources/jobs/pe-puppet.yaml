@@ -105,7 +105,7 @@
             set-for-matrix: true
 
 - job-template:
-    name: '{value_stream}_{name}_init-merge'
+    name: '{value_stream}_{name}_init_{qualifier}'
     display-name: '{displayname}'
     defaults: global-no-scm
     node: worker

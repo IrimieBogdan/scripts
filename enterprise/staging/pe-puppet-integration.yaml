@@ -1,6 +1,7 @@
 - job-group:
     name: 'pe-kickoff'
     displayname: qatests QA Validation Kickoff
+    qualifier: manual-kickoff
     default_platform_axis: centos6 redhat7 ubuntu1004 ubuntu1204 ubuntu1404
     default_layout_axis: 64mcd
     default_windows-agent_axis: windows2008r2-64 windows2012r2-64
@@ -8,7 +9,7 @@
     defaults: global-no-scm
     interval: ''
     jobs:
-        - '{value_stream}_{name}_init-merge':
+        - '{value_stream}_{name}_init_{qualifier}':
             phase-1-projects: 'experimental_qatests_integration-system_pe-qatests-resource_02X, experimental_qatests_intg-system_pe-windows-qatests-resource_0XX, experimental_qatests_integration-system_pe-qatests-resource_03X, experimental_qatests_integration-system_pe-qatests-resource_041'
             phase-2-projects: ''
 
