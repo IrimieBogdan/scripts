@@ -18,9 +18,10 @@ bundle install --path vendor/bundle
 #-------------------------------------------------------------------------------
 # Run acceptance tests.
 
+{additional_exports}
 export BEAKER_POSTSUITE="acceptance/suites/post_suite"
 export BEAKER_LOADPATH="acceptance/lib"
-export BEAKER_OPTS="--keyfile ${HOME}/.ssh/id_rsa-acceptance --preserve-hosts onfail --xml --log-level debug"
+export BEAKER_OPTS="--keyfile ${{HOME}}/.ssh/id_rsa-acceptance --preserve-hosts onfail --xml --log-level debug"
 export BEAKER_OPTIONSFILE="acceptance/config/beaker/options.rb"
 export BEAKER_TYPE=foss
 

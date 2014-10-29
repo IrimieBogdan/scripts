@@ -96,11 +96,47 @@
             maven_artifact_name: '{maven_artifact_name}'
     publishers:
         - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
+            - project: '{value_stream}_{name}_integration-system_smoke-{scm_branch},{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}'
               current-parameters: True
               property-file: '.props'
               condition: UNSTABLE_OR_BETTER
               git-revision: True
+
+- job-template:
+    name: '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}'
+    display-name: '{name} ({scm_branch}) 21: Integration Upgrade Smoke Test'
+    project-type: matrix
+    node: beaker
+    parameters:
+        - string:
+            name: PACKAGE_BUILD_VERSION
+            description: "Version of {name} to use in test."
+        - string:
+            name: PLATFORM_AXIS
+            default: '{default_platform_axis}'
+            description: "Version of {name} to use in test."
+    axes:
+        - axis:
+            type: user-defined
+            name: LAYOUT
+            values:
+                - x86_64-mdca
+                - x86_64-mdca-a
+        - axis:
+            type: dynamic
+            name: PLATFORM
+            values:
+                - PLATFORM_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
+    builders:
+        - shell:
+            !include-raw integration-system.sh
+    publishers:
+        - puppet-server-junit
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
@@ -134,7 +170,7 @@
                 - beaker
     builders:
         - shell:
-            !include-raw-escape integration-system.sh
+            !include-raw integration-system.sh
     publishers:
         - puppet-server-junit
         - trigger-parameterized-builds:
@@ -189,4 +225,6 @@
         - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
         - '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
         - '{value_stream}_{name}_integration-system_full-{scm_branch}'
+        - '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}':
+            additional_exports: 'export PUPPETSERVER_INSTALL_MODE=upgrade'
         - '{value_stream}_{name}_integration-system_smoke-{scm_branch}'

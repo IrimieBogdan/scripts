@@ -38,3 +38,4 @@
     script_dir: ''
     console_timeout: '600'
     preserve_hosts: never
+    additional_exports: ''
