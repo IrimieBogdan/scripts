@@ -106,15 +106,32 @@
 
 - job-template:
     name: '{value_stream}_{name}_init-merge'
-    display-name: '{name} Nightly Kickoff'
+    display-name: '{displayname}'
     defaults: global-no-scm
     node: worker
+    parameters:
+        - string:
+            name: AGENT_AXIS
+            default: '{default_windows-agent_axis}'
+            description: "Agent platforms on which to test {name}"
+        - string:
+            name: ARCH_AXIS
+            default: '{default_windows-arch_axis}'
+            description: "Architectures on which to run {name} windows tests."
+        - string:
+            name: PLATFORM_AXIS
+            default: '{default_platform_axis}'
+            description: "Platforms on which to test {name}"
+        - string:
+            name: LAYOUT_AXIS
+            default: '{default_layout_axis}'
+            description: "Layouts on which to test {name}"
     disabled: '{kickoff_disabled}'
     project-type: matrix
     execution-strategy:
         sequential: true
     triggers:
-        - timed: '0 3 * * *'
+        - timed: '{interval}'
     axes:
         - axis:
             type: user-defined

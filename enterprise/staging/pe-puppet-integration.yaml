@@ -1,10 +1,16 @@
 - job-group:
-    name: 'pe-nightly-kickoff'
+    name: 'pe-kickoff'
+    displayname: qatests QA Validation Kickoff
+    default_platform_axis: centos6 redhat7 ubuntu1004 ubuntu1204 ubuntu1404
+    default_layout_axis: 64mcd
+    default_windows-agent_axis: windows2008r2-64 windows2012r2-64
+    default_windows-arch_axis: 64
     defaults: global-no-scm
+    interval: ''
     jobs:
         - '{value_stream}_{name}_init-merge':
-            phase-1-projects: 'PE Integration Tests,PE Agent-only Platform Integration,PE Frictionless Agent (CentOS Master),PE Puppet Acceptance Tests,PE Windows Integration, PE Upgrader Integration, PE Agent-only platform upgrader integration,PE Puppet Acceptance Tests (Future Parser)'
-            phase-2-projects: 'experimental_pe-puppet_integration-system_pe-qatests-resource_02X, experimental_pe-puppet_intg-system_pe-windows-qatests-resource_0XX, experimental_pe-puppet_integration-system_pe-qatests-resource_03X, experimental_pe-puppet_integration-system_pe-qatests-resource_041'
+            phase-1-projects: 'experimental_qatests_integration-system_pe-qatests-resource_02X, experimental_qatests_intg-system_pe-windows-qatests-resource_0XX, experimental_qatests_integration-system_pe-qatests-resource_03X, experimental_qatests_integration-system_pe-qatests-resource_041'
+            phase-2-projects: ''
 
 - project:
     name: pe-puppet
@@ -20,5 +26,21 @@
     logrotate_numtokeep: 5
 
     jobs:
-        - 'pe-nightly-kickoff'
+        - 'qatest-split-jobs'
+
+- project:
+    name: qatests
+    default_platform_axis: centos6 redhat7 ubuntu1004 ubuntu1204 ubuntu1404
+    default_layout_axis: 64mcd
+    default_windows-agent_axis: windows2008r2-64 windows2012r2-64
+    default_windows-arch_axis: 64 32
+    hipchat_room: 'QE-QA'
+    value_stream: experimental
+    shell_workspace: ''
+    kickoff_disabled: 'true'
+    logrotate_daystokeep: '-1'
+    logrotate_numtokeep: 3
+
+    jobs:
+        - 'pe-kickoff'
         - 'qatest-split-jobs'
