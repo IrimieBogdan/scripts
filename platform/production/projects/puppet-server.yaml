@@ -7,7 +7,7 @@
     default_platform_axis: el-6 el-7 redhat-5 redhat-6 debian-7 ubuntu-1204 ubuntu-1404
     hipchat_room: 'PE Green Team'
     value_stream: platform
-    kickoff_disabled: false
+    kickoff_disabled: 'false'
     shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14
