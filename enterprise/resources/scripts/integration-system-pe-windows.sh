@@ -24,7 +24,7 @@ export pe_version="${{pe_version_override:-$pe_version}}"
 #---------------------------------------
 # PE variables
 
-#export pe_dep_versions="$(pwd)/config/versions/pe_version"
+export pe_dep_versions="$(pwd)/config/versions/pe_version"
 
 export pe_dist_dir="http://neptune.puppetlabs.lan/$pe_family/ci-ready/"
 
