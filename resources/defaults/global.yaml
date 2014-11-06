@@ -25,15 +25,14 @@
 
     hipchat:
         enabled: true
-        version: 0.1.8
         room: '{hipchat_room}'
         start-notify: true
         notify-success: true
         notify-aborted: true
-        notify-notbuilt: true
+        notify-not-built: true
         notify-failure: true
         notify-unstable: true
-        notify-normal: true
+        notify-back-to-normal: true
 
     script_dir: ''
     console_timeout: '600'
