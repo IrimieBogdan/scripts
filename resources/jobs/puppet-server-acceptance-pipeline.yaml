@@ -211,7 +211,7 @@
                 - beaker
     builders:
         - shell:
-            !include-raw-escape integration-system-full.sh
+            !include-raw integration-system-full.sh
     publishers:
         - puppet-server-junit
 
