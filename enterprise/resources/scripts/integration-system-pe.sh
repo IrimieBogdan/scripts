@@ -48,7 +48,7 @@ if [ $PLATFORM == centos7 ] \
     || [ $PLATFORM == redhat7 ] \
     || [ $PLATFORM == sles12 ]
 then
-  export layout=${{LAYOUT//32/64}}
+  export LAYOUT=${{LAYOUT//32/64}}
 fi
 
 bundle exec genconfig $PLATFORM-$LAYOUT > hosts.cfg
