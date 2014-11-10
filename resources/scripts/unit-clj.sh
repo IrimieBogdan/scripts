@@ -17,4 +17,4 @@ java -version
 #
 
 ${LEIN:-lein} version
-${LEIN:-lein} -U test
+${LEIN:-lein} -U test :all
