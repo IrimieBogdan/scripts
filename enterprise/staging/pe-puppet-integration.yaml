@@ -36,7 +36,7 @@
     default_layout_axis: 64mcd
     default_windows-agent_axis: windows2008r2-64 windows2012r2-64
     default_windows-arch_axis: 64 32
-    hipchat_room: 'QE-QA,QATests&Jenkins'
+    hipchat_room: 'QATests&Jenkins'
     value_stream: experimental
     shell_workspace: ''
     kickoff_disabled: 'true'
