@@ -10,7 +10,7 @@
     interval: ''
     jobs:
         - '{value_stream}_{name}_init_{qualifier}':
-            phase-1-projects: 'experimental_qatests_integration-system_pe-qatests-resource_02X, experimental_qatests_intg-system_pe-windows-qatests-resource_0XX, experimental_qatests_integration-system_pe-qatests-resource_03X, experimental_qatests_integration-system_pe-qatests-resource_041'
+            phase-1-projects: 'experimental_qatests_intg-system_qatests-resource_02X, experimental_qatests_intg-system_windows-qatests-resource_0XX, experimental_qatests_intg-system_qatests-resource_03X, experimental_qatests_intg-system_qatests-resource_041'
             phase-2-projects: ''
 
 - project:
@@ -27,7 +27,8 @@
     logrotate_numtokeep: 5
 
     jobs:
-        - 'qatest-split-jobs'
+        - 'qatest-puppet-split-jobs'
+        - 'qatest-pe-split-jobs'
 
 - project:
     name: qatests
@@ -35,7 +36,7 @@
     default_layout_axis: 64mcd
     default_windows-agent_axis: windows2008r2-64 windows2012r2-64
     default_windows-arch_axis: 64 32
-    hipchat_room: 'QE-QA'
+    hipchat_room: 'QE-QA,QATests&Jenkins'
     value_stream: experimental
     shell_workspace: ''
     kickoff_disabled: 'true'
@@ -44,4 +45,5 @@
 
     jobs:
         - 'pe-kickoff'
-        - 'qatest-split-jobs'
+        - 'qatest-puppet-split-jobs'
+        - 'qatest-pe-split-jobs'

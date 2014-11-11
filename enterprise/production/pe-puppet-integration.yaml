@@ -11,7 +11,7 @@
     jobs:
         - '{value_stream}_{name}_init_{qualifier}':
             phase-1-projects: 'PE Integration Tests,PE Agent-Only Platform Upgrader Integration,PE Agent-only Platform Integration,PE Frictionless Agent (CentOS Master),PE Puppet Acceptance Tests,PE Windows Integration, PE Upgrader Integration, PE Puppet Acceptance Tests (Future Parser)'
-            phase-2-projects: 'enterprise_pe-puppet_intg-system_pe-windows-qatests-resource_0XX, enterprise_pe-puppet_integration-system_pe-qatests-resource_03X, enterprise_pe-puppet_integration-system_pe-qatests-resource_041'
+            phase-2-projects: 'enterprise_puppet_intg-system_windows-qatests-resource_0XX, enterprise_puppet_intg-system_qatests-resource_03X, enterprise_puppet_intg-system_qatests-resource_041'
 
 - job-group:
     name: pe-weekly-kickoff
@@ -25,7 +25,7 @@
     interval: '0 3 * * * '
     jobs:
         - '{value_stream}_{name}_init_{qualifier}':
-            phase-1-projects: 'enterprise_pe-puppet_integration-system_pe-qatests-resource_02X, enterprise_pe-puppet_intg-system_pe-windows-qatests-resource_0XX, enterprise_pe-puppet_integration-system_pe-qatests-resource_03X, enterprise_pe-puppet_integration-system_pe-qatests-resource_041'
+            phase-1-projects: 'enterprise_puppet_intg-system_qatests-resource_02X, enterprise_puppet_intg-system_windows-qatests-resource_0XX, enterprise_puppet_intg-system_qatests-resource_03X, enterprise_puppet_intg-system_qatests-resource_041'
             phase-2-projects: ''
 
 - project:
@@ -42,6 +42,6 @@
     logrotate_numtokeep: 14
 
     jobs:
-        - 'qatest-split-jobs'
+        - 'qatest-puppet-split-jobs'
         #- 'pe-nightly-kickoff'
         #- 'pe-weekly-kickoff'

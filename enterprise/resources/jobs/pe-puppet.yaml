@@ -1,5 +1,5 @@
 - job-template:
-    name: '{value_stream}_{name}_integration-system_pe-{qualifier}'
+    name: '{value_stream}_{name}_intg-system_{qualifier}'
     display-name: '{name} PE Integration Tests ({qualifier})'
     project-type: matrix
     node: beaker
@@ -51,7 +51,7 @@
             set-for-matrix: true
 
 - job-template:
-    name: '{value_stream}_{name}_intg-system_pe-windows-{qualifier}'
+    name: '{value_stream}_{name}_intg-system_windows-{qualifier}'
     display-name: '{name} Windows PE Integration Tests ({qualifier})'
     project-type: matrix
     execution-strategy:
@@ -153,23 +153,46 @@
               block: true
 
 - job-group:
-    name: 'qatest-split-jobs'
+    name: 'qatest-puppet-split-jobs'
     scm_name: qatests
     scm_branch: master
     beaker_loadpath: lib/
     beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
     preserve_hosts: never
     jobs:
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: qatests-resource_02X
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-puppet_02X
             beaker_testsuite: suites/puppet/tests/02{0,1,2,5}_puppet_resource_*
-        - '{value_stream}_{name}_intg-system_pe-windows-{qualifier}':
-            qualifier: qatests-resource_0XX
+        - '{value_stream}_{name}_intg-system_windows-{qualifier}':
+            qualifier: qatests-puppet_0XX
             beaker_testsuite: suites/puppet/tests/0{2,3}[0-9]*windows
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: qatests-resource_03X
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-puppet_03X
             beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount suites/puppet/tests/031_puppet_resource_exec
-        - '{value_stream}_{name}_integration-system_pe-{qualifier}':
-            qualifier: qatests-resource_041
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-puppet_041
             beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
 
+- job-group:
+    name: 'qatest-pe-split-jobs'
+    scm_name: qatests
+    scm_branch: master
+    beaker_loadpath: lib/
+    beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
+    preserve_hosts: never
+    jobs:
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe_02X
+            beaker_testsuite: suites/pe/tests/02*
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe_03X
+            beaker_testsuite: suites/pe/tests/03*
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe_12X
+            beaker_testsuite: suites/pe/tests/12*
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe_130
+            beaker_testsuite: suites/pe/tests/130*
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe_215
+            beaker_testsuite: suites/pe/tests/215*
