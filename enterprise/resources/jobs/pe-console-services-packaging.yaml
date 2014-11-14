@@ -32,11 +32,11 @@
             git-repo: git@github.com:puppetlabs/pe-console-services.git
             git-dir-name: pe-console-services
             git-ref: "$GIT_REF"
-        - shell: 
+        - shell:
             !include-raw updatedeps-clj.sh
-        - shell: 
+        - shell:
             !include-raw ezbakedir-packaging-pe.sh
-        - shell: 
+        - shell:
             !include-raw git-push.sh
 
 - job-template:
@@ -66,6 +66,6 @@
         - trigger-parameterized-builds:
             - project: 'Package-Promotion'
               property-file: '.props'
-              predefined-parameters: 
+              predefined-parameters:
                   PKG={name}
               condition: UNSTABLE_OR_BETTER
