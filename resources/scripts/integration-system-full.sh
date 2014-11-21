@@ -36,6 +36,7 @@ unset IS_PE
 #-------------------------------------------------------------------------------
 # Configure Ruby
 
+export GEM_SOURCE="http://rubygems.delivery.puppetlabs.net"
 set +x
 source /usr/local/rvm/scripts/rvm
 rvm use ruby-1.9.3-p484

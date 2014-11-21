@@ -4,8 +4,9 @@ set -e
 set -x
 
 #-------------------------------------------------------------------------------
-# Install ruby jank
+# Configure ruby
 
+export GEM_SOURCE="http://rubygems.delivery.puppetlabs.net"
 set +x
 source /usr/local/rvm/scripts/rvm
 rvm use ruby-1.9.3-p484
