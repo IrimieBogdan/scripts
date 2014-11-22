@@ -9,8 +9,10 @@ fi
 
 echo
 echo "Configure Ruby"
+set +x
 source /usr/local/rvm/scripts/rvm
 rvm use ruby-1.9.3-p484
+set -x
 
 echo
 echo "Show version information:"
