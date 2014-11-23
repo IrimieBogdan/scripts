@@ -19,6 +19,11 @@ echo "Show version information:"
 lein version
 
 echo
+echo "Clear local puppetlabs Maven artifacts."
+# This is necessary
+rm -rf $HOME/.m2/repository/puppetlabs/*
+
+echo
 echo "Create ezbake staging directory."
 lein run -- stage {ezbake_package_name} "{maven_artifact_name}-version=$LEIN_PROJECT_VERSION"
 
