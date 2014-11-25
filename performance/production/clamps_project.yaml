@@ -1,0 +1,13 @@
+- project:
+    name: scale
+    value_stream: performance
+    scm_name: pe_acceptance
+    scm_branch: performance
+    qualifier:
+        - 'all-in-one'
+        - 'split'
+        - 'multi-master'
+    jobs:
+        - '{value_stream}_{name}_intn-sys_{qualifier}'
+    hipchat_room: 'qe-team'
+

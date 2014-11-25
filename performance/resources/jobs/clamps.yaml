@@ -1,0 +1,7 @@
+- job-template:
+    name: '{value_stream}_{name}_intn-sys_{qualifier}'
+    display-name: 'Performance Scale ({qualifier})'
+    builders:
+        - shell:
+            !include-raw run_clamps.sh
+
