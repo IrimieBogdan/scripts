@@ -182,17 +182,31 @@
     preserve_hosts: never
     jobs:
         - '{value_stream}_{name}_intg-system_{qualifier}':
-            qualifier: qatests-pe_02X
-            beaker_testsuite: suites/pe/tests/02*
+            qualifier: qatests-pe_020_puppet_server_http_ca
+            beaker_testsuite: suites/pe/tests/020_puppet_server_http_ca
         - '{value_stream}_{name}_intg-system_{qualifier}':
-            qualifier: qatests-pe_03X
-            beaker_testsuite: suites/pe/tests/03*
+            qualifier: qatests-pe-023_reports_processor
+            beaker_testsuite: suites/pe/tests/023_pe_reports_processor
         - '{value_stream}_{name}_intg-system_{qualifier}':
-            qualifier: qatests-pe_12X
-            beaker_testsuite: suites/pe/tests/12*
+            qualifier: qatests-pe-030_external_ca
+            beaker_testsuite: suites/pe/tests/030_pe_external_ca
+            beaker_presuite: pre-suite/pre_ste-remote_ca.rb
+            LAYOUT_AXIS: 64u-64mda-64f
         - '{value_stream}_{name}_intg-system_{qualifier}':
-            qualifier: qatests-pe_130
-            beaker_testsuite: suites/pe/tests/130*
+            qualifier: qatests-pe-035_puppet_server_basic
+            beaker_testsuite: suites/pe/tests/035_puppet_server_basic
         - '{value_stream}_{name}_intg-system_{qualifier}':
-            qualifier: qatests-pe_215
-            beaker_testsuite: suites/pe/tests/215*
+            qualifier: qatests-pe-120_jenkins_user_scenario
+            beaker_testsuite: suites/pe/tests/120_jenkins_user_scenario
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe-121_jvm_metrics
+            beaker_testsuite: suites/pe/tests/121_jvm_metrics
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe-122_jvm_stdlib_module
+            beaker_testsuite: suites/pe/tests/122_jvm_stdlib_module
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe-130_wordpress_user_scenario
+            beaker_testsuite: suites/pe/tests/130_wordpress_user_scenario
+        - '{value_stream}_{name}_intg-system_{qualifier}':
+            qualifier: qatests-pe-215_jvm_inifile_module
+            beaker_testsuite: suites/pe/tests/215_jvm_inifile_module
