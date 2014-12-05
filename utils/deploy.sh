@@ -7,6 +7,7 @@
 COMMAND=${1:?}
 JENKINS_INSTANCE=${2:?}
 DEPLOYMENT_TYPE=${3:-staging}
+GLOB=${4:-*}
 
 if [ ! "$DEPLOYMENT_TYPE" = "staging" ] && \
 	[ ! "$DEPLOYMENT_TYPE" = "production" ]
@@ -32,6 +33,9 @@ case $COMMAND in
 	;;
 	test)
 	COMMAND="jenkins-jobs --conf ${JJB_CONFIG} test ${JJB_PATHS}"
+	;;
+	delete)
+	COMMAND="jenkins-jobs --conf ${JJB_CONFIG} delete --path ${JJB_PATHS} ${GLOB}"
 	;;
 	*)
 	echo
