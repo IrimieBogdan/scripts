@@ -41,7 +41,6 @@
 
     wrappers:
         - timeout:
-            version: '1.14'
             timeout: '{console_timeout}'
             type: no-activity
             actions:
