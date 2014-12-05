@@ -38,3 +38,7 @@
     console_timeout: '600'
     preserve_hosts: never
     additional_exports: ''
+
+    # Used in the git-clone shell script to set a default for the GIT_REF
+    # environment variable.
+    git-branch: 'master'

@@ -89,6 +89,7 @@
     builders:
         - git-clone:
             git-repo: git@github.com:puppetlabs/ezbake.git
+            git-branch: '{ezbake-git-branch}'
             git-dir-name: ezbake
         - ezbake-packaging-foss:
             script_dir: ezbake

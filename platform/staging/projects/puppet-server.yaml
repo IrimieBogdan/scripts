@@ -11,10 +11,12 @@
     shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14
+    ezbake-git-branch: 'master'
 
     jobs:
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'stable'
+            ezbake-git-branch: 'puppetserver/stable'
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'master'
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-GIT_REF="${{GIT_REF:-}}"
+GIT_REF="${{GIT_REF:-{git-branch}}}"
 
 set -x
 set -e
