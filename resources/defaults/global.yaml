@@ -1,3 +1,19 @@
+# This defaults file contains both JJB variables and project configuration
+# stanzas which apply to all jobs that do not have an alternate "defaults:"
+# declaration.
+#
+# JJB variables are values that get interpolated into templates and shell
+# scripts where ever that variable appears through  JJB yaml & shells scripts in
+# the form of {varnam}.
+#
+# JJB project configuration is actual JJB declaration of some built-in Jenkins
+# job feature or plugin and the attributes necessary to get the desired
+# behavior our of that plugin/feature.
+#
+# In this file the distinction between "JJB variable" and "JJB project
+# configuration" is made by the presence of a line comment with "# VAR" above
+# the description of that variable.
+#
 - defaults:
     name: global
     project-type: freestyle
@@ -9,6 +25,16 @@
     logrotate:
         daysToKeep: '{logrotate_daystokeep}'
         numToKeep: '{logrotate_numtokeep}'
+
+    # VAR
+    # Default values for the logrotate feature. These values determine how many
+    # builds to keep history for and how long each build history should be
+    # tracked.
+    #
+    # Set to -1 to disable either either method of keeping builds around.
+    #
+    logrotate_daystokeep: 14
+    logrotate_numtokeep: 14
 
     retry-count: 10
     quiet-period: 2
@@ -23,6 +49,10 @@
         - ansicolor:
             colormap: xterm
 
+    # VAR
+    # Default no-activity build timeout wrapper in seconds.
+    console_timeout: '600'
+
     hipchat:
         enabled: true
         room: '{hipchat_room}'
@@ -34,11 +64,40 @@
         notify-unstable: true
         notify-back-to-normal: true
 
+    # VAR
+    # Can be a comma-delimited list of hipchat room names. There should be no
+    # spaces between comma and room names.
+    hipchat_room: ''
+
+    ###
+    # Below are variables that would ideally belong to project or job-specific
+    # defaults. However, with JJB's current design/implementation each job can
+    # only have a single template and there is no such thing as template
+    # inheritance.
+    #
+
+    # VAR
+    # Deprecated variable used by ezbake packaging jobs to work around jankiness
+    # with original ezbake design. This variable can be removed once EZ-14 is
+    # finished and implemented in all relevant clojure projects.
     script_dir: ''
-    console_timeout: '600'
+
+    # VAR
+    # Used by shell scripts that call beaker to set a default --preserve-hosts
+    # value. Being explicit about "never" ensures that staging/experimental jobs
+    # and jobs that don't explicitly need to preserve hosts don't unnecessarily
+    # consume vsphere resources.
     preserve_hosts: never
+
+    # VAR
+    # This variable is intended to be used in shell scripts to export additional
+    # variables on a per-job or per-project basis. This allows changes to
+    # individual jobs or projects that can be accomplished by exporting
+    # environment variables that won't necessarily affect other jobs using the
+    # same script.
     additional_exports: ''
 
+    # VAR
     # Used in the git-clone shell script to set a default for the GIT_REF
     # environment variable.
     git-branch: 'master'
