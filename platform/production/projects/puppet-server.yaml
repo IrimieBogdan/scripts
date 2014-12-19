@@ -22,4 +22,5 @@
             scm_branch: 'master'
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'future'
+            kickoff_disabled: 'true'
 
