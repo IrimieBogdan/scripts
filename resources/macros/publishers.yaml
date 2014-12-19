@@ -13,3 +13,14 @@
     publishers:
         - beaker-junit-publisher:
             additional: ',log/latest/puppetserver/**/*'
+
+- publisher:
+    name: trigger-parameterized-build
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '{tpb_property_file}'
+              git-revision: '{tpb_git_revision}'

@@ -7,12 +7,13 @@
     triggers:
         - pollscm: "H/5 * * * *"
     publishers:
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_unit-clj_{scm_branch}'
-              predefined-parameters: "PLATFORM_AXIS=el-6 ubuntu-1404"
-              current-parameters: False
-              condition: ALWAYS
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_init_nightly-{scm_branch}'
@@ -23,12 +24,13 @@
     triggers:
         - timed: "@midnight"
     publishers:
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_unit-clj_{scm_branch}'
-              predefined-parameters: "PLATFORM_AXIS=el-6 el-7 redhat-5 redhat-6 redhat-7 ubuntu-1204 ubuntu-1404"
-              current-parameters: False
-              condition: ALWAYS
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_unit-clj_{scm_branch}'
@@ -38,11 +40,13 @@
         - shell:
             !include-raw-escape unit-clj.sh
     publishers:
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_unit-jruby_{scm_branch}'
-              current-parameters: True
-              condition: UNSTABLE_OR_BETTER
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_unit-jruby_{scm_branch}'
@@ -52,11 +56,13 @@
         - shell:
             !include-raw-escape unit-jruby.sh
     publishers:
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
-              current-parameters: True
-              condition: UNSTABLE_OR_BETTER
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
@@ -66,12 +72,13 @@
         - shell:
             !include-raw-escape package-nexus.sh
     publishers:
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
-              current-parameters: True
-              property-file: '.props'
-              condition: UNSTABLE_OR_BETTER
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '.props'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
@@ -96,12 +103,13 @@
             ezbake_package_name: '{ezbake_package_name}'
             maven_artifact_name: '{maven_artifact_name}'
     publishers:
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_integration-system_smoke-{scm_branch},{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}'
-              current-parameters: True
-              property-file: '.props'
-              condition: UNSTABLE_OR_BETTER
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '.props'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}'
@@ -174,11 +182,13 @@
             !include-raw integration-system.sh
     publishers:
         - puppet-server-junit
-        - trigger-parameterized-builds:
-            - project: '{value_stream}_{name}_integration-system_full-{scm_branch}'
-              current-parameters: True
-              condition: UNSTABLE_OR_BETTER
-              git-revision: True
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_full-{scm_branch}'
@@ -219,13 +229,22 @@
 - job-group:
     name: '{value_stream}_{name}_foss-pipeline_{scm_branch}'
     jobs:
-        - '{value_stream}_{name}_init-merge_{scm_branch}'
-        - '{value_stream}_{name}_init_nightly-{scm_branch}'
-        - '{value_stream}_{name}_unit-clj_{scm_branch}'
-        - '{value_stream}_{name}_unit-jruby_{scm_branch}'
-        - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
-        - '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
-        - '{value_stream}_{name}_integration-system_full-{scm_branch}'
+        - '{value_stream}_{name}_init-merge_{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS=el-6 ubuntu-1404"
+        - '{value_stream}_{name}_init_nightly-{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS=el-6 el-7 redhat-5 redhat-6 redhat-7 ubuntu-1204 ubuntu-1404"
+        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_unit-jruby_{scm_branch}'
+        - '{value_stream}_{name}_unit-jruby_{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
+        - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
+        - '{value_stream}_{name}_packaging-os-clj_{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch},{value_stream}_{name}_integration-system_smoke-{scm_branch}'
         - '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}':
             additional_exports: 'export PUPPETSERVER_INSTALL_MODE=upgrade'
-        - '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
+        - '{value_stream}_{name}_integration-system_smoke-{scm_branch}':
+            tpb_projects: '{value_stream}_{name}_integration-system_full-{scm_branch}'
+        - '{value_stream}_{name}_integration-system_full-{scm_branch}'

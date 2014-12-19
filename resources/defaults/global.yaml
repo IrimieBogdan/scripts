@@ -48,6 +48,35 @@
         - ansicolor:
             colormap: xterm
 
+    # VAR for ci-job-configs' trigger-parameterized-build publisher macro
+    # Default predefined parameters for triggered job.
+    # Probably most useful to set on a per job-template basis.
+    tpb_predefined_parameters: ''
+
+    # VAR for ci-job-configs' trigger-parameterized-build publisher macro
+    # Default property file for triggered job.
+    tpb_property_file: ''
+
+    # VAR for ci-job-configs' trigger-parameterized-build publisher macro
+    # Default current parameter passing behavior.
+    tpb_current_parameters: True
+
+    # VAR for ci-job-configs' trigger-parameterized-build publisher macro
+    # Default condition under which to trigger downstream job. Note that JJB
+    # doesn't care what value it receives for this field so be careful! Valid
+    # values:
+    #   - ALWAYS
+    #   - SUCCESS
+    #   - FAILED
+    #   - UNSTABLE
+    #   - UNSTABLE_OR_BETTER
+    #   - UNSTABLE_OR_WORSE
+    tpb_condition: 'UNSTABLE_OR_BETTER'
+
+    # VAR for ci-job-configs' trigger-parameterized-build publisher macro
+    # Default git revision passing behavior for downstream job.
+    tpb_git_revision: True
+
     # VAR
     # Default no-activity build timeout wrapper in seconds.
     console_timeout: '600'
