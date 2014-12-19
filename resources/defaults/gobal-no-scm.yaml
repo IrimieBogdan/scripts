@@ -32,6 +32,6 @@
         notify-back-to-normal: true
 
     script_dir: ''
-    console_timeout: '600'
+    console_timeout: '10'
     preserve_hosts: never
     additional_exports: ''

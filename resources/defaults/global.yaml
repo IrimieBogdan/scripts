@@ -79,7 +79,7 @@
 
     # VAR
     # Default no-activity build timeout wrapper in seconds.
-    console_timeout: '600'
+    console_timeout: '10'
 
     hipchat:
         enabled: true
