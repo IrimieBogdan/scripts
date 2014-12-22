@@ -131,7 +131,7 @@
     execution-strategy:
         sequential: true
     triggers:
-        - timed: '{interval}'
+        - timed: '{kickoff_interval}'
     axes:
         - axis:
             type: user-defined

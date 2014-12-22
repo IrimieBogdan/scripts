@@ -7,7 +7,7 @@
     default_windows-agent_axis: windows2003r2-32 windows2003r2-64 windows2003-64 windows2008-64 windows2008r2-64 windows2012-64 windows2012r2-64
     default_windows-arch_axis: 64 32
     defaults: global-no-scm
-    interval: '0 3 * * * '
+    kickoff_interval: '0 3 * * * '
     jobs:
         - '{value_stream}_{name}_init_{qualifier}':
             phase-1-projects: 'PE Integration Tests,PE Agent-Only Platform Upgrader Integration,PE Agent-only Platform Integration,PE Frictionless Agent (CentOS Master),PE Puppet Acceptance Tests,PE Windows Integration, PE Upgrader Integration, PE Puppet Acceptance Tests (Future Parser)'
@@ -22,7 +22,7 @@
     default_windows-agent_axis: windows2003r2-32 windows2003r2-64 windows2003-64 windows2008-64 windows2008r2-64 windows2012-64 windows2012r2-64
     default_windows-arch_axis: 64 32
     defaults: global-no-scm
-    interval: '0 3 * * * '
+    kickoff_interval: '0 3 * * * '
     jobs:
         - '{value_stream}_{name}_init_{qualifier}':
             phase-1-projects: 'enterprise_puppet_intg-system_qatests-resource_02X, enterprise_puppet_intg-system_windows-qatests-resource_0XX, enterprise_puppet_intg-system_qatests-resource_03X, enterprise_puppet_intg-system_qatests-resource_041'
