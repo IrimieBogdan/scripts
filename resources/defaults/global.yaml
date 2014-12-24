@@ -126,6 +126,11 @@
     additional_exports: ''
 
     # VAR
+    # Intended to be used in the display-name field of job templates to help
+    # sort jobs alphanumerically in Jenkins Web UI view.
+    dn-sort-index: ''
+
+    # VAR
     # Used in the git-clone shell script to set a default for the GIT_REF
     # environment variable.
     git-branch: 'master'
