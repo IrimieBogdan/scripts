@@ -17,6 +17,9 @@ Usage: ${0} [<options>] <jenkins-instance> <revision-A> [<revision-B>]
   current working directory to produce output to be passed as the right-hand
   argument to 'diff -ur'.
 
+  <revision-A> and <revision-B> must be valid git SHA since the clone repo will
+  not necessarily contain the same branches as the local working directory.
+
   OPTIONS:
   -h          Print this usage message.
   -d <deploy> Use specified deployment type (see ./utils/deploy.sh usage for
@@ -89,9 +92,21 @@ shift `expr $OPTIND - 1`
 # Positional Arg Handling
 #
 
-JENKINS_INSTANCE=${1:?}
-REVISION_A=${2:?}
+JENKINS_INSTANCE=${1:-}
+REVISION_A=${2:-}
 REVISION_B=${3:-}
+
+if [ -z "$JENKINS_INSTANCE" ]
+then
+	print_usage
+	exit $1
+fi
+
+if [ -z "$REVISION_A" ]
+then
+	print_usage
+	exit $1
+fi
 
 if [ ! "$DEPLOYMENT_TYPE" = "staging" ] && \
 	[ ! "$DEPLOYMENT_TYPE" = "production" ]

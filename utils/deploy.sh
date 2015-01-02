@@ -62,10 +62,22 @@ shift `expr $OPTIND - 1`
 # Positional Arg Handling
 #
 
-COMMAND=${1:?}
-JENKINS_INSTANCE=${2:?}
+COMMAND=${1:-}
+JENKINS_INSTANCE=${2:-}
 DEPLOYMENT_TYPE=${3:-staging}
 GLOB=${4:-*}
+
+if [ -z "$COMMAND" ]
+then
+	print_usage
+	exit $1
+fi
+
+if [ -z "$JENKINS_INSTANCE" ]
+then
+	print_usage
+	exit $1
+fi
 
 if [ ! "$DEPLOYMENT_TYPE" = "staging" ] && \
 	[ ! "$DEPLOYMENT_TYPE" = "production" ]
