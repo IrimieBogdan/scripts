@@ -128,6 +128,7 @@ B_OUTDIR="$RUNDIR/b"
 #
 
 set -x
+set -e
 
 # clone ci-job-configs repo to avoid interfering with local working directory
 # changes
@@ -143,6 +144,7 @@ then # use working directory
 else # use specified git revision
 	gen_jjb_output $TMP_REPO $B_OUTDIR $REVISION_B
 fi
+set +e
 
 # diff A vs B
 
