@@ -15,6 +15,7 @@ Usage: ${0} <cmd> [<options>] <jenkins-instance> [<deployment-type>[,
             [, <sub-command-args>]]
 
   OPTIONS:
+  -h Print this usage message.
   -v Print script name and version number.
 
   COMMANDS:
