@@ -1,0 +1,46 @@
+- job-template:
+    name: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Lein Deploy'
+    node: worker
+    builders:
+        - shell:
+            !include-raw-escape package-nexus.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '.props'
+            tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Packaging Uberbuild'
+    node: worker
+    metadata:
+        - string:
+            name: SCRIPT_DIR
+            value: ezbake
+            expose-to-env: true
+    parameters:
+        - string:
+            name: LEIN_PROJECT_VERSION
+            description: "Maven artifact version to build."
+    builders:
+        - git-clone:
+            git-repo: git@github.com:puppetlabs/ezbake.git
+            git-branch: '{ezbake-git-branch}'
+            git-dir-name: ezbake
+        - ezbake-packaging-foss:
+            script_dir: ezbake
+            ezbake_package_name: '{ezbake_package_name}'
+            maven_artifact_name: '{maven_artifact_name}'
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '.props'
+            tpb_git_revision: '{tpb_git_revision}'

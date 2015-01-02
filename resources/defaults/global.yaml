@@ -77,6 +77,8 @@
     # Default git revision passing behavior for downstream job.
     tpb_git_revision: True
 
+    tpb_projects: ''
+
     # VAR
     # Default no-activity build timeout wrapper in seconds.
     console_timeout: '10'
@@ -129,6 +131,9 @@
     # Intended to be used in the display-name field of job templates to help
     # sort jobs alphanumerically in Jenkins Web UI view.
     dn-sort-index: ''
+
+    # VAR
+    is-pe: ''
 
     # VAR
     # Used in the git-clone shell script to set a default for the GIT_REF

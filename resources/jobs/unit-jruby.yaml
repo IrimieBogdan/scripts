@@ -1,6 +1,6 @@
 - job-template:
     name: '{value_stream}_{name}_unit-jruby_{scm_branch}'
-    display-name: '{name} ({scm_branch}) {dn-sort-index} JRuby Unit Tests'
+    display-name: '{name} ({scm_branch}){dn-sort-index} JRuby Unit Tests'
     node: unit
     builders:
         - shell:

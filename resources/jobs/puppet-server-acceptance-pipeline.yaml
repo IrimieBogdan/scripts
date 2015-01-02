@@ -1,176 +1,14 @@
-- job-template:
-    name: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
-    display-name: '{name} ({scm_branch}) 10: Lein Deploy'
-    node: worker
-    builders:
-        - shell:
-            !include-raw-escape package-nexus.sh
-    publishers:
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '.props'
-            tpb_git_revision: '{tpb_git_revision}'
-
-- job-template:
-    name: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
-    display-name: '{name} ({scm_branch}) 15: Packaging Uberbuild'
-    node: worker
-    metadata:
-        - string:
-            name: SCRIPT_DIR
-            value: ezbake
-            expose-to-env: true
-    parameters:
-        - string:
-            name: LEIN_PROJECT_VERSION
-            description: "Maven artifact version to build."
-    builders:
-        - git-clone:
-            git-repo: git@github.com:puppetlabs/ezbake.git
-            git-branch: '{ezbake-git-branch}'
-            git-dir-name: ezbake
-        - ezbake-packaging-foss:
-            script_dir: ezbake
-            ezbake_package_name: '{ezbake_package_name}'
-            maven_artifact_name: '{maven_artifact_name}'
-    publishers:
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '.props'
-            tpb_git_revision: '{tpb_git_revision}'
-
-- job-template:
-    name: '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}'
-    display-name: '{name} ({scm_branch}) 21: Integration Upgrade Smoke Test'
-    project-type: matrix
-    node: beaker
-    parameters:
-        - string:
-            name: PACKAGE_BUILD_VERSION
-            description: "Version of {name} to use in test."
-        - string:
-            name: PLATFORM_AXIS
-            default: '{default_platform_axis}'
-            description: "Version of {name} to use in test."
-    axes:
-        - axis:
-            type: user-defined
-            name: LAYOUT
-            values:
-                - x86_64-mdca
-                - x86_64-mdca-a
-        - axis:
-            type: dynamic
-            name: PLATFORM
-            values:
-                - PLATFORM_AXIS
-        - axis:
-            type: slave
-            name: label
-            values:
-                - beaker
-    builders:
-        - shell:
-            !include-raw integration-system.sh
-    publishers:
-        - puppet-server-junit
-
-- job-template:
-    name: '{value_stream}_{name}_integration-system_smoke-{scm_branch}'
-    display-name: '{name} ({scm_branch}) 20: Integration Smoke Test Suite'
-    project-type: matrix
-    node: beaker
-    parameters:
-        - string:
-            name: PACKAGE_BUILD_VERSION
-            description: "Version of {name} to use in test."
-        - string:
-            name: PLATFORM_AXIS
-            default: '{default_platform_axis}'
-            description: "Version of {name} to use in test."
-    axes:
-        - axis:
-            type: user-defined
-            name: LAYOUT
-            values:
-                - x86_64-mdca
-                - x86_64-mdca-a
-        - axis:
-            type: dynamic
-            name: PLATFORM
-            values:
-                - PLATFORM_AXIS
-        - axis:
-            type: slave
-            name: label
-            values:
-                - beaker
-    builders:
-        - shell:
-            !include-raw integration-system.sh
-    publishers:
-        - puppet-server-junit
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '{tpb_property_file}'
-            tpb_git_revision: '{tpb_git_revision}'
-
-- job-template:
-    name: '{value_stream}_{name}_integration-system_full-{scm_branch}'
-    display-name: '{name} ({scm_branch}) 25: Integration Full Test Suite'
-    project-type: matrix
-    node: beaker
-    parameters:
-        - string:
-            name: PACKAGE_BUILD_VERSION
-            description: "Version of {name} to use in test."
-        - string:
-            name: PLATFORM_AXIS
-            default: '{default_platform_axis}'
-            description: "Platforms on which to test {name}"
-    axes:
-        - axis:
-            type: user-defined
-            name: LAYOUT
-            values:
-                - x86_64-mdca
-                - x86_64-mdca-a
-        - axis:
-            type: dynamic
-            name: PLATFORM
-            values:
-                - PLATFORM_AXIS
-        - axis:
-            type: slave
-            name: label
-            values:
-                - beaker
-    builders:
-        - shell:
-            !include-raw integration-system-full.sh
-    publishers:
-        - puppet-server-junit
-
 - job-group:
     name: '{value_stream}_{name}_foss-pipeline_{scm_branch}'
     jobs:
         - '{value_stream}_{name}_init-merge_{scm_branch}':
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: "PLATFORM_AXIS=el-6 ubuntu-1404"
+            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
         - '{value_stream}_{name}_init_nightly-{scm_branch}':
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: "PLATFORM_AXIS=el-6 el-7 redhat-5 redhat-6 redhat-7 ubuntu-1204 ubuntu-1404"
+            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
         - '{value_stream}_{name}_unit-clj_{scm_branch}':
             dn-sort-index: ' 01:'
             tpb_projects: '{value_stream}_{name}_unit-jruby_{scm_branch}'
@@ -178,11 +16,44 @@
             dn-sort-index: ' 05:'
             tpb_projects: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
         - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}':
+            dn-sort-index: ' 10:'
             tpb_projects: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
         - '{value_stream}_{name}_packaging-os-clj_{scm_branch}':
+            dn-sort-index: ' 15:'
             tpb_projects: '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch},{value_stream}_{name}_integration-system_smoke-{scm_branch}'
-        - '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch}':
-            additional_exports: 'export PUPPETSERVER_INSTALL_MODE=upgrade'
-        - '{value_stream}_{name}_integration-system_smoke-{scm_branch}':
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'smoke-{scm_branch}'
+            dn-sort-index: ' 20:'
+            dn-qualifier: ' Smoke'
             tpb_projects: '{value_stream}_{name}_integration-system_full-{scm_branch}'
-        - '{value_stream}_{name}_integration-system_full-{scm_branch}'
+            bjp_additional: ',log/latest/puppetserver/**/*'
+            beaker_loadpath: 'acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'acceptance/suites/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'smoke-upgrade-{scm_branch}'
+            dn-sort-index: ' 21:'
+            dn-qualifier: ' Upgrade Smoke'
+            bjp_additional: ',log/latest/puppetserver/**/*'
+            additional_exports: 'export PUPPETSERVER_INSTALL_MODE=upgrade'
+            beaker_loadpath: 'acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'acceptance/suites/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'full-{scm_branch}'
+            dn-sort-index: ' 25:'
+            dn-qualifier: ' Full'
+            bjp_additional: ',log/latest/puppetserver/**/*'
+            beaker_loadpath: 'ruby/puppet/acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'ruby/puppet/acceptance/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'

@@ -9,12 +9,6 @@
             test-stability: true
 
 - publisher:
-    name: puppet-server-junit
-    publishers:
-        - beaker-junit-publisher:
-            additional: ',log/latest/puppetserver/**/*'
-
-- publisher:
     name: trigger-parameterized-build
     publishers:
         - trigger-parameterized-builds:
