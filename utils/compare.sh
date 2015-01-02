@@ -36,6 +36,7 @@ gen_jjb_output() {
 	pushd $cijobconfig_dir
 	if [ ! -z "${revision}" ]
 	then
+		git checkout ./
 		git checkout $revision
 	fi
 
@@ -125,7 +126,7 @@ if [ -z "$REVISION_B" ]
 then # use working directory
 	gen_jjb_output $project_dir $B_OUTDIR
 else # use specified git revision
-	gen_jjb_output $TMP_REPO $A_OUTDIR $REVISION_A
+	gen_jjb_output $TMP_REPO $B_OUTDIR $REVISION_B
 fi
 
 # diff A vs B
