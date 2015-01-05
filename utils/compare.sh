@@ -65,6 +65,7 @@ while getopts d:o:Dhv OPT; do
         DEPLOYMENT_TYPE="${OPTARG}"
         ;;
     D)
+        DEBUG_ON="yes"
         LEAVE_RUNDIR="yes"
         ;;
     h)
@@ -127,7 +128,11 @@ B_OUTDIR="$RUNDIR/b"
 # Meat and Potatoes
 #
 
-set -x
+if [ ! -z "$DEBUG_ON" ]
+then
+	set -x
+fi
+
 set -e
 
 # clone ci-job-configs repo to avoid interfering with local working directory
@@ -146,9 +151,23 @@ else # use specified git revision
 fi
 set +e
 
-# diff A vs B
+OUTPUT=$(diff -ur $A_OUTDIR $B_OUTDIR 2>&1)
 
-diff -ur $A_OUTDIR $B_OUTDIR
+if [ -z "$OUTPUT" ]
+then
+	cat <<HEREDOC
+
+  No difference in XML output.
+HEREDOC
+else
+	cat <<HEREDOC
+
+  Diff of $JENKINS_INSTANCE XML output for git revision $REVISION_A vs \
+${REVISION_B:-current working directory}
+
+	$OUTPUT
+HEREDOC
+fi
 
 #-------------------------------------------------------------------------------
 # Cleanup
