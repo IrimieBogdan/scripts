@@ -1,17 +1,17 @@
 - project:
     name: puppet-server
     scm_name: puppet-server
-    type: clj
     ezbake_package_name: puppetserver
     maven_artifact_name: puppet-server
-    default_platform_axis: el-6 el-7 redhat-5 redhat-6 debian-7 ubuntu-1204 ubuntu-1404
+    default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
+    default_layout_axis: 64mdca 64mdca-64a
     hipchat_room: 'PE Green Team'
     value_stream: platform
     kickoff_disabled: 'false'
     shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14
-    console_timeout: '10'
+    console_timeout: '20'
     ezbake-git-branch: 'master'
 
     jobs:

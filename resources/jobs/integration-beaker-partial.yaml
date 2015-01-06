@@ -1,0 +1,47 @@
+- job-template:
+    name: '{value_stream}_{name}_integration-system_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Integration{dn-qualifier} Test Suite'
+    project-type: matrix
+    node: beaker
+    parameters:
+        - string:
+            name: PACKAGE_BUILD_VERSION
+            description: "Version of {name} to use in test."
+        - string:
+            name: PLATFORM_AXIS
+            default: '{default_platform_axis}'
+            description: "List of platforms for user-defined PLAFORM axis."
+        - string:
+            name: LAYOUT_AXIS
+            default: '{default_layout_axis}'
+            description: "List of layouts for user-defined LAYOUT axis."
+    axes:
+        - axis:
+            type: dynamic
+            name: LAYOUT
+            values:
+                - LAYOUT_AXIS
+        - axis:
+            type: dynamic
+            name: PLATFORM
+            values:
+                - PLATFORM_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
+    builders:
+        - shell:
+            !include-raw integration-beaker.sh
+    publishers:
+        - beaker-junit-publisher:
+            additional: '{bjp_additional}'
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
+
