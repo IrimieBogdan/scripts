@@ -141,4 +141,8 @@
     # environment variable.
     git-branch: 'master'
 
+    # VAR
+    # Used to set default values for PE_VER job parameters when duplicating CI
+    # pipelines for different PE versions. Non-PE jobs don't need this value set
+    # so the default is empty string.
     default_PE_VER: ''

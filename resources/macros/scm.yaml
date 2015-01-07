@@ -9,9 +9,10 @@
     name: pe-puppet-server-extensions
     scm:
         - git:
-            url: git@github.com:puppetlabs/pe-puppet-server-extension.git
+            url: git@github.com:puppetlabs/pe-puppet-server-extensions.git
+            recursive-submodules: true
             branches:
-                - origin/master
+                - 'origin/{branches}'
 - scm:
     name: puppet-server
     scm:
