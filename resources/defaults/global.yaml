@@ -21,6 +21,7 @@
     scm:
         - '{scm_name}':
             branches: '{scm_branch}'
+    scm_branch: 'master'
 
     logrotate:
         daysToKeep: '{logrotate_daystokeep}'
@@ -139,3 +140,5 @@
     # Used in the git-clone shell script to set a default for the GIT_REF
     # environment variable.
     git-branch: 'master'
+
+    default_PE_VER: ''
