@@ -19,10 +19,13 @@ Usage: ${0} <cmd> [<options>] <jenkins-instance> [<deployment-type>[,
   -v Print script name and version number.
 
   COMMANDS:
-    update
-      Produce XML and update/create jobs on given jenkins instance.
-    test
-      Produce XML output for the given jenkins instance.
+    update <glob>
+      Produce XML and update/create jobs on given jenkins instance. If <glob> is
+      passed, use that to filter the list of jobs such that only those whose job
+      names match <glob> will be updated/created.
+    test <glob>
+      Produce XML output for the given jenkins instance. <glob> for works here
+      the same as it does for the 'update' command.
         OPTIONS:
         -o <output-dir> Direct XML to given directory.
     delete <glob>
@@ -65,7 +68,7 @@ shift `expr $OPTIND - 1`
 COMMAND=${1:-}
 JENKINS_INSTANCE=${2:-}
 DEPLOYMENT_TYPE=${3:-staging}
-GLOB=${4:-*}
+GLOB=${4}
 
 if [ -z "$COMMAND" ]
 then
@@ -99,15 +102,15 @@ echo "Deployment type:  ${DEPLOYMENT_TYPE}"
 
 case $COMMAND in
 	update)
-	COMMAND="jenkins-jobs ${JJB_OPTS} update ${JJB_PATHS}"
+	COMMAND="jenkins-jobs ${JJB_OPTS} update ${JJB_PATHS} ${GLOB}"
 	;;
 	test)
 	if [ ! -z "${OUTPUT_DIR}" ]
 	then
 		mkdir -p ${OUTPUT_DIR}
-		COMMAND="jenkins-jobs ${JJB_OPTS} test -o ${OUTPUT_DIR} ${JJB_PATHS}"
+		COMMAND="jenkins-jobs ${JJB_OPTS} test -o ${OUTPUT_DIR} ${JJB_PATHS} ${GLOB}"
 	else
-		COMMAND="jenkins-jobs ${JJB_OPTS} test ${JJB_PATHS}"
+		COMMAND="jenkins-jobs ${JJB_OPTS} test ${JJB_PATHS} ${GLOB}"
 	fi
 	;;
 	delete)
