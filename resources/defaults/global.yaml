@@ -21,6 +21,7 @@
     scm:
         - '{scm_name}':
             branches: '{scm_branch}'
+    scm_branch: 'master'
 
     logrotate:
         daysToKeep: '{logrotate_daystokeep}'
@@ -139,3 +140,9 @@
     # Used in the git-clone shell script to set a default for the GIT_REF
     # environment variable.
     git-branch: 'master'
+
+    # VAR
+    # Used to set default values for PE_VER job parameters when duplicating CI
+    # pipelines for different PE versions. Non-PE jobs don't need this value set
+    # so the default is empty string.
+    default_PE_VER: ''

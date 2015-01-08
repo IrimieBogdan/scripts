@@ -1,0 +1,20 @@
+- project:
+    name: pe-puppet-server-extensions
+    scm_name: pe-puppet-server-extensions
+    ezbake_package_name: pe-puppetserver
+    maven_artifact_name: pe-puppet-server
+    default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
+    default_layout_axis: 64mdca 64mdca-64a
+    hipchat_room: 'PE Green Team'
+    value_stream: enterprise
+    kickoff_disabled: 'false'
+    shell_workspace: ''
+    logrotate_daystokeep: 14
+    logrotate_numtokeep: 14
+    console_timeout: '20'
+    ezbake-git-branch: 'puppetserver/stable'
+
+    jobs:
+        - '{value-stream}_pe-puppet-server-extensions_integration-{scm_branch}':
+            scm_branch: 'master'
+            default_PE_VER: '3.7'

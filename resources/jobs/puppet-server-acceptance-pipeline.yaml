@@ -57,3 +57,20 @@
             beaker_presuite: 'acceptance/suites/pre_suite/foss'
             beaker_testsuite: 'ruby/puppet/acceptance/tests'
             beaker_postsuite: 'acceptance/suites/post_suite'
+
+- job-group:
+    name: '{value-stream}_pe-puppet-server-extensions_integration-{scm_branch}'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{scm_branch}':
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
+        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+            dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
+        - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}':
+            dn-sort-index: ' 10:'
+            tpb_projects: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
+        - '{value_stream}_{name}_packaging-os-clj_{scm_branch}':
+            dn-sort-index: ' 15:'
+

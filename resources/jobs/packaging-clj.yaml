@@ -27,6 +27,10 @@
         - string:
             name: LEIN_PROJECT_VERSION
             description: "Maven artifact version to build."
+        - string:
+            name: PE_VER
+            default: '{default_PE_VER}'
+            description: "Maven artifact version to build."
     builders:
         - git-clone:
             git-repo: git@github.com:puppetlabs/ezbake.git
