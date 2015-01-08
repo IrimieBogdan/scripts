@@ -50,3 +50,11 @@
             url: git@github.com:doug-rosser/pe_acceptance_tests.git
             branches:
                 - origin/3.7.x
+
+- scm:
+     name: live-management
+     scm:
+         - git:
+            url: git@github.com:puppetlabs/live-management.git
+            branches:
+                - 'origin/{branches}'
