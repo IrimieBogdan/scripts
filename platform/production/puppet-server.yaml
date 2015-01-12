@@ -20,6 +20,8 @@
             ezbake-git-branch: 'puppetserver/stable'
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'master'
+            ezbake-git-branch: 'stable'
         - '{value_stream}_{name}_foss-pipeline_{scm_branch}':
             scm_branch: 'future'
+            ezbake-git-branch: 'stable'
             kickoff_disabled: 'true'
