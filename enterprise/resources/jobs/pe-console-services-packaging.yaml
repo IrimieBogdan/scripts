@@ -31,7 +31,7 @@
         - git-clone:
             git-repo: git@github.com:puppetlabs/pe-console-services.git
             git-dir-name: pe-console-services
-            git-ref: "$GIT_REF"
+            git-branch: "$GIT_REF"
         - shell:
             !include-raw updatedeps-clj.sh
         - shell:
