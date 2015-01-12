@@ -1,5 +1,5 @@
 - job-group:
-    name: '{value_stream}_{name}_foss-pipeline_{scm_branch}'
+    name: 'foss_puppet-server_full-pipeline'
     jobs:
         - '{value_stream}_{name}_init-merge_{scm_branch}':
             dn-sort-index: ' 00:'
@@ -59,7 +59,7 @@
             beaker_postsuite: 'acceptance/suites/post_suite'
 
 - job-group:
-    name: '{value-stream}_pe-puppet-server-extensions_integration-{scm_branch}'
+    name: 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline'
     jobs:
         - '{value_stream}_{name}_init-merge_{scm_branch}':
             dn-sort-index: ' 00:'

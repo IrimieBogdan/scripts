@@ -15,6 +15,6 @@
     ezbake-git-branch: 'puppetserver/stable'
 
     jobs:
-        - '{value-stream}_pe-puppet-server-extensions_integration-{scm_branch}':
+        - 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline':
             scm_branch: 'master'
             default_PE_VER: '3.7'
