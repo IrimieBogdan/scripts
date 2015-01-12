@@ -6,3 +6,12 @@
             dn-sort-index: ' 00:'
         - '{value_stream}_{name}_unit-ruby_legacy-{scm_branch}':
             dn-sort-index: ' 01:'
+
+- job-group:
+    name: 'dashboard'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{scm_branch}':
+            tpb_projects: '{value_stream}_dashboard_unit-ruby_legacy-{scm_branch}'
+            dn-sort-index: ' 00:'
+        - '{value_stream}_dashboard_unit-ruby_legacy-{scm_branch}':
+            dn-sort-index: ' 01:'

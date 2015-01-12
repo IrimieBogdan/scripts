@@ -58,3 +58,11 @@
             url: git@github.com:puppetlabs/live-management.git
             branches:
                 - 'origin/{branches}'
+
+- scm:
+     name: pe-puppet-dashboard
+     scm:
+         - git:
+            url: git@github.com:puppetlabs/pe-puppet-dashboard.git
+            branches:
+                - 'origin/{branches}'
