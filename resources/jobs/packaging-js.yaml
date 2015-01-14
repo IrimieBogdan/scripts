@@ -4,7 +4,7 @@
     node: worker
     builders:
         - shell:
-            !include-raw-escape packaging-js-grunt-assets.sh
+            !include-raw packaging-js-grunt-assets.sh
     publishers:
         - trigger-parameterized-build:
             tpb_projects: '{tpb_projects}'

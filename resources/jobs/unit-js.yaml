@@ -4,10 +4,10 @@
     node: unit
     builders:
         - shell:
-            !include-raw-escape unit-js-grunt.sh
+            !include-raw unit-js-grunt.sh
     publishers:
         - cobertura:
-            report-file: 'dev-resources/{name}/test/coverage/xml/**/coverage.xml'
+            report-file: '{cobertura-report-file}'
             fail-no-reports: "true"
             targets:
                 - line:
@@ -19,7 +19,7 @@
                     unhealthy: 0
                     failing: 0
         - junit:
-            results:  'dev-resources/{name}/test/reports/results.xml'
+            results:  '{junit-results}'
         - email:
             recipients:  'pe-ci@puppetlabs.com'
         - trigger-parameterized-build:

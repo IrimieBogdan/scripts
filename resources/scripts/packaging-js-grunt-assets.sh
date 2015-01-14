@@ -10,13 +10,11 @@ set -x
 
 echo
 echo "Remove old assets from the gitz"
-#git rm -r resources/rbac-ui/dist
-#git rm -r resources/auth-ui/dist
-git rm -r {assets-outdir}
+git rm -r {assets-outdirs}
 
 # set our umask to ensure we can install gems sanely to shared rvm dir
 # but keep the old one around so perms aren't weird on built files
-export OLD_UMASK=`umask`
+OLD_UMASK=`umask`
 umask 0002
 
 echo
@@ -29,7 +27,6 @@ umask $OLD_UMASK
 echo
 echo "Enter assets dir and commence build"
 set +x
-#pushd dev-resources/rbac-ui
 pushd {assets-builddir}
 set -x
 
@@ -42,9 +39,8 @@ popd
 set -x
 
 echo
-echo "Add rebuilt assets to git repository"
-# git add resources/rbac-ui/dist
-# git add resources/auth-ui/dist
-git rm -r {assets-outdir}
-git commit -m "Build frontend assets for commit ${SHA}"
-git push origin HEAD:${PE_VER}.x
+echo "Push rebuilt assets to git repository"
+
+git add {assets-outdirs}
+git commit -m "Build frontend assets for commit $GIT_COMMIT"
+git push origin HEAD:{scm_branch}

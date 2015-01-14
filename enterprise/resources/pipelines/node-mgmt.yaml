@@ -1,14 +1,14 @@
 - job-group:
-    name: 'node-mgmt-legacy-pipeline'
+    name: 'pe-rbac-ui-legacy-pipeline'
     jobs:
         - '{value_stream}_{name}_init-merge_{scm_branch}':
             dn-sort-index: ' 00:'
-            tpb_projects: '{value_stream}_{name}_unit-js_grunt-{scm_branch}'
-            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
+            tpb_projects: '{value_stream}_{name}_unit-js_grunt-{scm_branch},{value_stream}_{name}_unit-clj_{scm_branch}'
         - '{value_stream}_{name}_unit-js_grunt-{scm_branch}':
             dn-sort-index: ' 01:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-        - '{value_stream}_{name}_unit-clj_{scm_branch}':
-            dn-sort-index: ' 05:'
+            tpb_projects: '{value_stream}_{name}_packaging-js_grunt-{scm_branch}'
         - '{value_stream}_{name}_packaging-js_grunt-{scm_branch}':
-            dn-sort-index: ' 10:'
+            dn-sort-index: ' 05:'
+
+        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+            dn-sort-index: ' 15:'

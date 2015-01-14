@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd dev-resources/{name}
+cd {assets-builddir}
 npm install grunt-cli
 npm install
 grunt test-ci
