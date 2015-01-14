@@ -1,0 +1,15 @@
+- job-template:
+    name: '{value_stream}_{name}_packaging-js_grunt-{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Build Grunt Assets'
+    node: worker
+    builders:
+        - shell:
+            !include-raw-escape packaging-js-grunt-assets.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
