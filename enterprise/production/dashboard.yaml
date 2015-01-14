@@ -2,7 +2,7 @@
     name: dashboard
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
-    scm_name: pe-puppet-dashboard
+    git_url: git@github.com:puppetlabs/pe-puppet-dashboard.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: False

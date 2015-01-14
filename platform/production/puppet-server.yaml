@@ -1,6 +1,6 @@
 - project:
     name: puppet-server
-    scm_name: puppet-server
+    git_url: git@github.com:puppetlabs/puppet-server.git
     ezbake_package_name: puppetserver
     maven_artifact_name: puppet-server
     default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404

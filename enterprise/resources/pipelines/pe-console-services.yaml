@@ -25,8 +25,8 @@
             name: COMMIT
             default: false
             description: "If this field is checked, commit dependency changes to pe-console-services repo."
-    scm:
-        - ezbake-mirror
+    git-url: git@github.com:puppetlabs/ezbake.git
+    scm_branch: stable
     builders:
         - git-clone:
             git-repo: git@github.com:puppetlabs/pe-console-services.git
@@ -52,8 +52,8 @@
             name: PE_VER
             default: "3.7"
             description: "Target PE Version"
-    scm:
-        - pe-console-services
+    git-url: git@github.com:puppetlabs/pe-console-services.git
+    scm_branch: master
     builders:
         - shell:
             !include-raw release-nodeploy-clj.sh

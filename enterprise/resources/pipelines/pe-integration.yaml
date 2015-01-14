@@ -1,6 +1,6 @@
 - job-group:
     name: 'qatest-puppet-split-jobs'
-    scm_name: qatests
+    git_url: git@github.com:puppetlabs/qatests.git
     scm_branch: master
     beaker_loadpath: lib/
     beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
@@ -45,7 +45,7 @@
 
 - job-group:
     name: 'qatest-pe-split-jobs'
-    scm_name: qatests
+    git_url: git@github.com:puppetlabs/qatests.git
     scm_branch: master
     beaker_loadpath: lib/
     beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
