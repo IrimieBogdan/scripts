@@ -1,5 +1,11 @@
 - job-template:
     name: '{value_stream}_{name}_init-merge_{scm_branch}'
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '{scm_branch}'
+            excluded-regions: '{obj:git_excluded_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Mergely Kickoff'
     node: worker
     disabled: '{kickoff_disabled}'
@@ -17,6 +23,12 @@
 
 - job-template:
     name: '{value_stream}_{name}_init_nightly-{scm_branch}'
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '{scm_branch}'
+            excluded-regions: '{obj:git_excluded_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Nightly Kickoff'
     node: worker
     disabled: '{kickoff_disabled}'

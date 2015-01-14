@@ -23,7 +23,6 @@
             url: '{git_url}'
             branches:
                 - '{scm_branch}'
-            excluded-regions: '{obj:git_excluded_regions}'
     git_excluded_regions: ''
     scm_branch: ''
 
