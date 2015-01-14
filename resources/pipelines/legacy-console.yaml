@@ -1,10 +1,10 @@
 - job-group:
-    name: 'legacy-console'
+    name: 'live-management'
     jobs:
         - '{value_stream}_{name}_init-merge_{scm_branch}':
-            tpb_projects: '{value_stream}_{name}_unit-ruby_legacy-{scm_branch}'
+            tpb_projects: '{value_stream}_live-management_unit-ruby_legacy-{scm_branch}'
             dn-sort-index: ' 00:'
-        - '{value_stream}_{name}_unit-ruby_legacy-{scm_branch}':
+        - '{value_stream}_live-management_unit-ruby_legacy-{scm_branch}':
             dn-sort-index: ' 01:'
 
 - job-group:

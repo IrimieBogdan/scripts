@@ -1,9 +1,9 @@
 - job-template:
-    name: '{value_stream}_{name}_unit-ruby_legacy-{scm_branch}'
+    name: '{value_stream}_live-management_unit-ruby_legacy-{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
     node: unit
     builders:
-        - shell: !include-raw unit-console-legacy.sh
+        - shell: !include-raw unit-live-management.sh
     publishers:
         - trigger-parameterized-build:
             tpb_projects: '{tpb_projects}'

@@ -7,6 +7,6 @@
     logrotate_numtokeep: 30
     kickoff_disabled: False
     jobs:
-        - 'legacy-console':
+        - 'live-management':
                 pe_family: 3.7
                 scm_branch: 3.7.x
