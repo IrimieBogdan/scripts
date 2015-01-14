@@ -1,9 +1,10 @@
 - project:
     name: pe-console-services
-    scm_name: pe-console-services
+    git_url: git@github.com:puppetlabs/pe-console-services.git
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
     shell_workspace: 'pe-console-services'
+    ezbake-git-branch: 'stable'
     type: clj
     jobs:
         - '{value_stream}_{name}_package-ezbake_jjb'

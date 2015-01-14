@@ -1,0 +1,18 @@
+- project:
+    name: pe-rbac-ui
+    git_url: git@github.com:puppetlabs/pe-rbac-ui.git
+    hipchat_room: ''
+    value_stream: enterprise
+    kickoff_disabled: 'false'
+    logrotate_daystokeep: -1
+    logrotate_numtokeep: 30
+    console_timeout: '10'
+
+    cobertura-report-file: 'dev-resources/rbac-ui/test/coverage/xml/**/coverage.xml'
+    junit-results:  'dev-resources/rbac-ui/test/reports/results.xml'
+
+    jobs:
+        - 'pe-rbac-ui-legacy-pipeline':
+            assets-outdirs: "resources/{{rbac-ui,auth-ui}}/dist"
+            assets-builddir: "dev-resources/rbac-ui"
+            scm_branch: '3.7.x'

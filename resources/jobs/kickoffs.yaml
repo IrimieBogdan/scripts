@@ -1,6 +1,14 @@
 - job-template:
-    name: '{value_stream}_{name}_init-merge_{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Mergely Kickoff'
+    name: '{value_stream}_{name}_init-merge_{qualifier}'
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '{scm_branch}'
+            recursive-submodules: true
+            excluded-regions: '{obj:git_excluded_regions}'
+            included-regions: '{obj:git_included_regions}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Mergely Kickoff'
     node: worker
     disabled: '{kickoff_disabled}'
     project-type: freestyle
@@ -16,8 +24,16 @@
             tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
-    name: '{value_stream}_{name}_init_nightly-{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Nightly Kickoff'
+    name: '{value_stream}_{name}_init_nightly-{qualifier}'
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '{scm_branch}'
+            recursive-submodules: true
+            excluded-regions: '{obj:git_excluded_regions}'
+            included-regions: '{obj:git_included_regions}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Nightly Kickoff'
     node: worker
     disabled: '{kickoff_disabled}'
     project-type: freestyle

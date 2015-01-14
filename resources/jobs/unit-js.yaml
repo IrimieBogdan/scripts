@@ -1,0 +1,31 @@
+- job-template:
+    name: '{value_stream}_{name}_unit-js_grunt-{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} JS Unit Tests'
+    node: unit
+    builders:
+        - shell:
+            !include-raw unit-js-grunt.sh
+    publishers:
+        - cobertura:
+            report-file: '{cobertura-report-file}'
+            fail-no-reports: "true"
+            targets:
+                - line:
+                    healthy: 8000000
+                    unhealthy: 0
+                    failing: 0
+                - conditional:
+                    healthy: 7000000
+                    unhealthy: 0
+                    failing: 0
+        - junit:
+            results:  '{junit-results}'
+        - email:
+            recipients:  'pe-ci@puppetlabs.com'
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'

@@ -1,6 +1,6 @@
 - project:
     name: pe-puppet-server-extensions
-    scm_name: pe-puppet-server-extensions
+    git_url: git@github.com:puppetlabs/pe-puppet-server-extensions.git
     ezbake_package_name: pe-puppetserver
     maven_artifact_name: pe-puppet-server
     default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
@@ -15,6 +15,6 @@
     ezbake-git-branch: 'puppetserver/stable'
 
     jobs:
-        - '{value-stream}_pe-puppet-server-extensions_integration-{scm_branch}':
+        - 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline':
             scm_branch: 'master'
             default_PE_VER: '3.7'

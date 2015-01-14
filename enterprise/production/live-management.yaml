@@ -2,7 +2,7 @@
     name: live-management
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
-    scm_name: live-management
+    git_url: git@github.com:puppetlabs/live-management.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: False

@@ -1,0 +1,27 @@
+- job-group:
+    name: 'pe-rbac-ui-legacy-pipeline'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'assets_{scm_branch}'
+            dn-qualifier: 'Assets '
+            git_included_regions: !!python/tuple
+                - dev-resources/.*
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-js_grunt-{scm_branch}'
+        - '{value_stream}_{name}_unit-js_grunt-{scm_branch}':
+            dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_packaging-js_grunt-{scm_branch}'
+        - '{value_stream}_{name}_packaging-js_grunt-{scm_branch}':
+            dn-sort-index: ' 05:'
+
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'clj_{scm_branch}'
+            dn-qualifier: 'Clojure '
+            git_excluded_regions: !!python/tuple
+                - dev-resources/.*
+                - resources/rbac-ui/dist/.*
+                - resources/auth-ui/dist/.*
+            dn-sort-index: ' 10:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+            dn-sort-index: ' 15:'
