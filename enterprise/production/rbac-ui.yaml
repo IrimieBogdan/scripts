@@ -15,7 +15,4 @@
         - 'pe-rbac-ui-legacy-pipeline':
             assets-outdirs: "resources/{{rbac-ui,auth-ui}}/dist"
             assets-builddir: "dev-resources/rbac-ui"
-            git_excluded_regions: !!python/tuple
-                - resources/rbac-ui/dist/*
-                - resources/auth-ui/dist/*
             scm_branch: '3.7.x'

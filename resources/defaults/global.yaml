@@ -21,10 +21,13 @@
     scm:
         - git:
             url: '{git_url}'
+            recursive-submodules: true
             branches:
                 - '{scm_branch}'
     git_excluded_regions: ''
+    git_included_regions: ''
     scm_branch: ''
+    qualifier: '{scm_branch}'
 
     logrotate:
         daysToKeep: '{logrotate_daystokeep}'
@@ -130,6 +133,12 @@
     # environment variables that won't necessarily affect other jobs using the
     # same script.
     additional_exports: ''
+
+    # VAR
+    # Intended to be used in the display-name field of job templates to
+    # distinguish multiple jobs reified from the same template from one another
+    # when viewing in Jenkins Web UI
+    dn-qualifier: ''
 
     # VAR
     # Intended to be used in the display-name field of job templates to help
