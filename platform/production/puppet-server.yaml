@@ -14,6 +14,7 @@
     console_timeout: '20'
     ezbake-git-branch: 'master'
     preserve_hosts: 'onfail'
+    genconfig: "bundle exec genconfig $PLATFORM-$LAYOUT"
 
     jobs:
         - 'foss_puppet-server_full-pipeline':

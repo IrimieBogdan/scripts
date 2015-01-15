@@ -16,6 +16,7 @@
         - '{value_stream}_{name}_unit-jruby_{scm_branch}':
             dn-sort-index: ' 05:'
             tpb_projects: '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}'
+            gem_source: 'https://rubygems.org'
         - '{value_stream}_{name}_packaging-nexus-clj_{scm_branch}':
             dn-sort-index: ' 10:'
             tpb_projects: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'

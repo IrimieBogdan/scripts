@@ -1,0 +1,18 @@
+- project:
+    name: pe-classifier-ui
+    git_url: git@github.com:puppetlabs/pe-classifier-ui.git
+    hipchat_room: ''
+    value_stream: enterprise
+    kickoff_disabled: 'false'
+    logrotate_daystokeep: 14
+    logrotate_numtokeep: 14
+    console_timeout: '10'
+
+    cobertura-report-file: 'dev-resources/classifier-ui/test/coverage/xml/**/coverage.xml'
+    junit-results:  'dev-resources/classifier-ui/test/reports/results.xml'
+
+    jobs:
+        - 'pe-classifier-ui-legacy-pipeline':
+            assets-outdirs: "resources/classifier-ui/dist"
+            assets-builddir: "dev-resources/classifier-ui"
+            scm_branch: '3.7.x'
