@@ -32,6 +32,7 @@ set -x
 
 npm install grunt-cli
 npm install
+{assets-prebuild-cmd}
 grunt build
 
 set +x

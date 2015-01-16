@@ -158,3 +158,8 @@
     # pipelines for different PE versions. Non-PE jobs don't need this value set
     # so the default is empty string.
     default_PE_VER: ''
+
+    # VAR
+    # Used to add a command to run before frontend assets are built, but after
+    # npm install has completed.
+    assets-prebuild-cmd: ''

@@ -15,3 +15,37 @@
             dn-sort-index: ' 00:'
         - '{value_stream}_dashboard_unit-ruby_legacy-{scm_branch}':
             dn-sort-index: ' 01:'
+
+- job-group:
+    name: 'event-inspector'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'ruby_{scm_branch}'
+            dn-qualifier: 'Ruby '
+            tpb_projects: '{value_stream}_event-inspector_unit-ruby_legacy-{scm_branch}'
+            dn-sort-index: ' 10:'
+            git_excluded_regions: !!python/tuple
+                - resources/app/.*
+                - resources/test/.*
+                - resources/Gruntfile.js
+                - resources/karma.conf.js
+        - '{value_stream}_event-inspector_unit-ruby_legacy-{scm_branch}':
+            dn-sort-index: ' 11:'
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'frontend_{scm_branch}'
+            dn-qualifier: 'Javascript '
+            tpb_projects: '{value_stream}_event-inspector_unit-javascript_legacy-{scm_branch}'
+            dn-sort-index: ' 00:'
+            git_included_regions: !!python/tuple
+                - resources/app/.*
+                - resources/test/.*
+                - resources/Gruntfile.js
+                - resources/karma.conf.js
+        - '{value_stream}_event-inspector_unit-javascript_legacy-{scm_branch}':
+            dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_packaging-js_grunt-{scm_branch}'
+        - '{value_stream}_{name}_packaging-js_grunt-{scm_branch}':
+            dn-sort-index: ' 02:'
+            assets-outdirs: resources/dist/
+            assets-builddir: resources
+            assets-prebuild-cmd: './node_modules/.bin/bower install'
