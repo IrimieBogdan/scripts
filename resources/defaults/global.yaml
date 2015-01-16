@@ -163,3 +163,7 @@
     # Used to add a command to run before frontend assets are built, but after
     # npm install has completed.
     assets-prebuild-cmd: ''
+
+    # VAR
+    # Used to add options to `bundler install` when running ruby unit tests
+    unit-bundler-opts: ''
