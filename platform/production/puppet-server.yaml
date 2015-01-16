@@ -13,6 +13,7 @@
     logrotate_numtokeep: 14
     console_timeout: '20'
     ezbake-git-branch: 'master'
+    preserve_hosts: 'onfail'
 
     jobs:
         - 'foss_puppet-server_full-pipeline':
