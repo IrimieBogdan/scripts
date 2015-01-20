@@ -29,11 +29,11 @@
             tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
-    name: '{value_stream}_event-inspector_unit-ruby_legacy-{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
+    name: '{value_stream}_event-inspector_unit-javascript_legacy-{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Javascript Unit Test'
     node: unit
     builders:
-        - shell: !include-raw unit-rb-event-inspector.sh
+        - shell: !include-raw unit-js-event-inspector.sh
     publishers:
         - trigger-parameterized-build:
             tpb_projects: '{tpb_projects}'
@@ -43,13 +43,12 @@
             tpb_property_file: '{tpb_property_file}'
             tpb_git_revision: '{tpb_git_revision}'
 
-
 - job-template:
-    name: '{value_stream}_event-inspector_unit-javascript_legacy-{scm_branch}'
+    name: '{value_stream}_certificate-manager_unit-javascript_legacy-{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Javascript Unit Test'
     node: unit
     builders:
-        - shell: !include-raw unit-js-event-inspector.sh
+        - shell: !include-raw unit-js-certificate-manager.sh
     publishers:
         - trigger-parameterized-build:
             tpb_projects: '{tpb_projects}'

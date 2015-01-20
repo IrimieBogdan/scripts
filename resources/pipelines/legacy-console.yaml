@@ -1,7 +1,8 @@
 - job-group:
     name: 'live-management'
     jobs:
-        - '{value_stream}_{name}_init-merge_{scm_branch}':
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
             tpb_projects: '{value_stream}_live-management_unit-ruby_legacy-{scm_branch}'
             dn-sort-index: ' 00:'
         - '{value_stream}_live-management_unit-ruby_legacy-{scm_branch}':
@@ -10,7 +11,8 @@
 - job-group:
     name: 'dashboard'
     jobs:
-        - '{value_stream}_{name}_init-merge_{scm_branch}':
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
             tpb_projects: '{value_stream}_dashboard_unit-ruby_legacy-{scm_branch}'
             dn-sort-index: ' 00:'
         - '{value_stream}_dashboard_unit-ruby_legacy-{scm_branch}':
@@ -22,14 +24,14 @@
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: 'ruby_{scm_branch}'
             dn-qualifier: 'Ruby '
-            tpb_projects: '{value_stream}_event-inspector_unit-ruby_legacy-{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_unit-ruby_{scm_branch}'
             dn-sort-index: ' 10:'
             git_excluded_regions: !!python/tuple
                 - resources/app/.*
                 - resources/test/.*
                 - resources/Gruntfile.js
                 - resources/karma.conf.js
-        - '{value_stream}_event-inspector_unit-ruby_legacy-{scm_branch}':
+        - '{value_stream}_{name}_unit-ruby_{scm_branch}':
             dn-sort-index: ' 11:'
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: 'frontend_{scm_branch}'
@@ -49,3 +51,17 @@
             assets-outdirs: resources/dist/
             assets-builddir: resources
             assets-prebuild-cmd: './node_modules/.bin/bower install'
+
+- job-group:
+    name: 'certificate-manager'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_unit-ruby_{scm_branch}'
+            dn-sort-index: ' 00:'
+        - '{value_stream}_{name}_unit-ruby_{scm_branch}':
+            dn-sort-index: ' 01:'
+            unit-bundler-opts: '--without=mysql postgresql other_pe assets'
+            tpb_projects: '{value_stream}_certificate-manager_unit-javascript_legacy-{scm_branch}'
+        - '{value_stream}_certificate-manager_unit-javascript_legacy-{scm_branch}':
+            dn-sort-index: ' 02:'
