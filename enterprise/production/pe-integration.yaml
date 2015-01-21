@@ -1,0 +1,69 @@
+- project:
+    name: pe-integration
+    value_stream: experimental
+    hipchat_room: ${{PROJECT_ROOM}}
+    git_url: git@github.com:puppetlabs/pe_acceptance_tests.git
+    logrotate_daystokeep: 30
+    logrotate_numtokeep: 30
+    kickoff_disabled: True
+
+    upgrader_smoke_upgrade_from_axis:
+        - 3.3.2
+        - 3.7.1
+    upgrader_smoke_layout_axis:
+        - 64mcd
+    upgrader_smoke_platform_axis:
+        - centos6
+        - debian7
+        - redhat7
+        - ubuntu1204
+
+    split_smoke_upgrade_from_axis:
+        - 'NONE'
+    split_smoke_layout_axis:
+        - 64m-64c-64d
+    split_smoke_platform_axis:
+        - centos6
+        - debian7
+        - redhat7
+        - ubuntu1204
+
+    mono_smoke_upgrade_from_axis:
+        - 'NONE'
+    mono_smoke_layout_axis:
+        - 64mcd
+    mono_smoke_platform_axis:
+        - centos5
+        - debian6
+        - sles11
+        - ubuntu1404
+
+    jobs:
+        - 'pe-integration-smoke':
+            pe_family: 3.99
+            scm_branch: 3.99.x
+
+            upgrader_smoke_upgrade_from_axis:
+                - 'NONE'
+            upgrader_smoke_layout_axis:
+                - 64mcd
+            upgrader_smoke_platform_axis:
+                - centos7
+
+            split_smoke_upgrade_from_axis:
+                - 'NONE'
+            split_smoke_layout_axis:
+                - 64m-64c-64d
+            split_smoke_platform_axis:
+                - centos7
+
+            mono_smoke_platform_axis:
+                - centos7
+
+        - 'pe-integration-smoke':
+            pe_family: 3.7
+            scm_branch: 3.7.x
+
+        - 'pe-integration-smoke':
+            pe_family: 4.0
+            scm_branch: 4.0.x

@@ -23,3 +23,17 @@
                 REF=$REF
                 PKG=$PKG
                 BRANCH=$BRANCH
+
+- job-template:
+    name: '{value_stream}_pe-integration_packaging_promotion_{scm_branch}'
+    disabled: True
+    display-name: '{name} ({scm_branch}){dn-sort-index} PE Promote Build'
+    node: worker
+    parameters:
+        - string:
+            name: pe_version
+            description: "Name of package to promote."
+    builders:
+        - shell: |
+            #!/usr/bin/env bash
+            redis-cli -h {redis_hostname} set {pe_family}_pe_version $pe_version
