@@ -1,7 +1,8 @@
 - job-group:
     name: 'foss_puppet-server_full-pipeline'
     jobs:
-        - '{value_stream}_{name}_init-merge_{scm_branch}':
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
@@ -61,7 +62,8 @@
 - job-group:
     name: 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline'
     jobs:
-        - '{value_stream}_{name}_init-merge_{scm_branch}':
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
