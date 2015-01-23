@@ -167,3 +167,30 @@
     # VAR
     # Used to add options to `bundler install` when running ruby unit tests
     unit-bundler-opts: ''
+
+    # VAR
+    # Used in shell scripts to set default location of puppet git repository.
+    puppet_repo: 'git://github.com/puppetlabs/puppet.git'
+
+    # VAR
+    # Used in shell scripts to set default branch of puppet to check out.
+    puppet_branch: 'master'
+
+    # VAR
+    # Used in shell scripts to set GEM_SOURCE, which is typically used in
+    # project Gemfile to indicate where to look for ruby gems.
+    gem_source: 'http://rubygems.delivery.puppetlabs.net'
+
+    # VAR
+    # Used in shell scripts to indicate default version of ruby to set with rvm.
+    rvm_ruby_version: '1.9.3-p484'
+
+    # VAR
+    # Used in shell scripts to indicate default version of ruby to set with rvm.
+    pe_family: ''
+
+    # VAR
+    # Used in packaging-clj-lein-ezbake-multiproject.sh to set a default
+    # variable name for beaker presuites to pick up on when isntalling a
+    # package built by releng jobs.
+    package_build_version_varname: 'PACKAGE_BUILD_VERSION'

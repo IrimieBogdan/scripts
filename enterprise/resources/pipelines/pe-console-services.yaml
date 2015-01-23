@@ -1,51 +1,58 @@
 - job-template:
-    name: '{value_stream}_{name}_package-ezbake_jjb'
-    display-name: 'pe-console-services: Build OS Packages'
+    name: '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Build pe-console-services'
     node: worker
-    logrotate:
-        daysToKeep: 7
-        numToKeep: 7
     project-type: freestyle
     parameters:
-        - string:
-            name: DEP_NAME
-            description: "Name of the dependency whose version will get updated."
-        - string:
-            name: DEP_VERSION
-            description: "New version to set on the given DEP_NAME"
         - string:
             name: PE_VER
             default: "3.7"
             description: "Target PE Version"
-        - string:
-            name: GIT_REF
-            default: master
-            description: "{name} git reference to build."
-        - bool:
-            name: COMMIT
-            default: false
-            description: "If this field is checked, commit dependency changes to pe-console-services repo."
-    git-url: git@github.com:puppetlabs/ezbake.git
-    scm_branch: stable
     builders:
-        - git-clone:
-            git-repo: git@github.com:puppetlabs/pe-console-services.git
-            git-dir-name: pe-console-services
-            git-branch: '{ezbake-git-branch}'
+        - shell: !include-raw packaging-clj-lein-ezbake-multiproject.sh
+
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '.props'
+            tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_pe-console-services_packaging-ezbake'
+    display-name: 'pe-console-services: Build OS Packages'
+    node: worker
+    project-type: freestyle
+    parameters:
+        - string:
+            name: DEPLIST
+            description: |
+                Comma-separated list of leiningen deps and versions to set:
+                <depname>=<version>[,<depname>=<version>[...]]
+        - string:
+            name: PE_VER
+            default: "3.7"
+            description: "Target PE Version"
+        - bool:
+            name: COMMIT_CHANGES
+            default: false
+            description: |
+                If this field is checked, commit dependency changes to
+                pe-console-services repo.
+    builders:
         - shell:
-            !include-raw updatedeps-clj.sh
+            !include-raw clj-updatedeps.sh
         - shell:
-            !include-raw ezbakedir-packaging-pe.sh
+            !include-raw packaging-clj-lein-ezbake.sh
         - shell:
             !include-raw git-push.sh
 
 - job-template:
-    name: '{value_stream}_{name}_release-ezbake_jjb'
+    name: '{value_stream}_pe-console-services_release-ezbake'
     display-name: 'pe-console-services: Release & Promote to PE'
     node: worker
-    logrotate:
-        daysToKeep: 7
-        numToKeep: 7
     project-type: freestyle
     parameters:
         - string:
@@ -58,7 +65,7 @@
         - shell:
             !include-raw release-nodeploy-clj.sh
         - trigger-builds:
-            - project: '{value_stream}_{name}_package-ezbake_jjb'
+            - project: '{value_stream}_pe-console-services_package-ezbake'
               property-file: '.props'
               current-parameters: true
               block: true
@@ -69,3 +76,8 @@
               predefined-parameters:
                   PKG={name}
               condition: UNSTABLE_OR_BETTER
+- job-group:
+    name: 'pe-console-services_packaging-pipelines'
+    jobs:
+        - '{value_stream}_pe-console-services_packaging-ezbake'
+        - '{value_stream}_pe-console-services_release-ezbake'

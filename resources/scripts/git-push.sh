@@ -3,14 +3,14 @@
 set -x
 set -e
 
-if [ ! "$COMMIT" = "true" ] ;then
+if [ ! "$COMMIT_CHANGES" = "true" ] ;then
     exit 0
 fi
 
 #-------------------------------------------------------------------------------
 # Check build parameters
 
-if [ ! -z "$DEP_VERSION" ] && [ ! -z "$DEP_NAME" ] ;then
+if [ ! -z "$DEPLIST" ] ;then
 
     if [ ! "$GIT_REF" = "master" ] ;then
         echo "GIT_VER must be 'master' when changing dependency versions."
@@ -23,7 +23,7 @@ if [ ! -z "$DEP_VERSION" ] && [ ! -z "$DEP_NAME" ] ;then
     # Update git repository
 
     git add project.clj
-    git commit -m "Set $DEP_NAME to $DEP_VERSION"
+    git commit -m "Set $DEPLIST"
     git push origin master
 
     popd

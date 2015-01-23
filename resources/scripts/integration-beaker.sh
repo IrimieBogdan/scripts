@@ -31,11 +31,12 @@ if [ ! -z "{is-pe}" ] ;then
     # Get pe info from redis
 
     REDIS_HOSTNAME=redis.delivery.puppetlabs.net
-    pe_version="$(redis-cli -h $REDIS_HOSTNAME get ${{pe_family}}_pe_version)"
+    pe_version="$(redis-cli -h $REDIS_HOSTNAME get {pe_family}_pe_version)"
 
     export pe_version="${{pe_version_override:-$pe_version}}"
     #export pe_dep_versions="$(pwd)/config/versions/pe_version"
-    export pe_dist_dir="http://neptune.puppetlabs.lan/$pe_family/ci-ready/"
+    export pe_dist_dir="http://neptune.puppetlabs.lan/{pe_family}/ci-ready/"
+    export pe_family="{pe_family}"
 
     #---------------------------------------
     # Beaker variables
@@ -73,25 +74,40 @@ then
   export LAYOUT=${{LAYOUT//32/64}}
 fi
 
-bundle exec genconfig $PLATFORM-$LAYOUT > hosts.cfg
+{genconfig} > hosts.cfg
+cat hosts.cfg
 
 #-------------------------------------------------------------------------------
 # Run Beaker
 
 {additional_exports}
 
-bundle exec beaker           \
-  --xml                      \
-  --debug                    \
-  --root-keys                \
-  --repo-proxy               \
-  --preserve-hosts {preserve_hosts}       \
-  --config hosts.cfg                      \
-  --type "$BEAKER_TYPE"                   \
-  --keyfile "$BEAKER_KEYFILE"             \
-  --load-path "$BEAKER_LOADPATH"          \
-  --options-file "$BEAKER_OPTIONSFILE"    \
-  --pre-suite "$BEAKER_PRESUITE"          \
-  --post-suite "$BEAKER_POSTSUITE"        \
-  --helper "$BEAKER_HELPER"               \
-  --tests "$BEAKER_TESTSUITE"
+set +x
+BEAKER="bundle exec beaker --xml --debug --root-keys --repo-proxy"
+BEAKER="$BEAKER --preserve-hosts {preserve_hosts} --config hosts.cfg"
+BEAKER="$BEAKER --type $BEAKER_TYPE"
+BEAKER="$BEAKER --keyfile $BEAKER_KEYFILE"
+BEAKER="$BEAKER --tests $BEAKER_TESTSUITE"
+
+if [ ! -z "$BEAKER_HELPER" ] ;then
+  BEAKER="$BEAKER --helper $BEAKER_HELPER"
+fi
+
+if [ ! -z "$BEAKER_OPTIONSFILE" ] ;then
+  BEAKER="$BEAKER --options-file $BEAKER_OPTIONSFILE"
+fi
+
+if [ ! -z "$BEAKER_POSTSUITE" ] ;then
+  BEAKER="$BEAKER --post-suite $BEAKER_POSTSUITE"
+fi
+
+if [ ! -z "$BEAKER_PRESUITE" ] ;then
+  BEAKER="$BEAKER --pre-suite $BEAKER_PRESUITE"
+fi
+
+if [ ! -z "$BEAKER_LOADPATH" ] ;then
+  BEAKER="$BEAKER --load-path $BEAKER_LOADPATH"
+fi
+set -x
+
+$BEAKER
