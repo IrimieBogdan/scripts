@@ -51,12 +51,9 @@
 
 - job-template:
     name: '{value_stream}_{name}_packaging-os-clj_lein-ezbake_{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Packaging Uberbuild'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Lein EZBake'
     node: worker
     parameters:
-        - string:
-            name: LEIN_PROJECT_VERSION
-            description: "Maven artifact version to build."
         - string:
             name: PE_VER
             default: '{default_PE_VER}'

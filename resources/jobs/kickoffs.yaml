@@ -10,7 +10,7 @@
             included-regions: '{obj:git_included_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Mergely Kickoff'
     node: worker
-    disabled: '{kickoff_disabled}'
+    disabled: '{obj:kickoff_disabled}'
     project-type: freestyle
     triggers:
         - pollscm: "H/5 * * * *"
@@ -35,7 +35,7 @@
             included-regions: '{obj:git_included_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Nightly Kickoff'
     node: worker
-    disabled: '{kickoff_disabled}'
+    disabled: '{obj:kickoff_disabled}'
     project-type: freestyle
     triggers:
         - timed: "@midnight"

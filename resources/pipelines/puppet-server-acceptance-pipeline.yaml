@@ -1,4 +1,64 @@
 - job-group:
+    name: 'foss_puppet-server_full-lein-ezbake'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
+        - '{value_stream}_{name}_init_nightly-{qualifier}':
+            qualifier: '{scm_branch}'
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
+        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+            dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_unit-jruby_{scm_branch}'
+        - '{value_stream}_{name}_unit-jruby_{scm_branch}':
+            dn-sort-index: ' 05:'
+            tpb_projects: '{value_stream}_{name}_packaging-os-clj_lein-ezbake_{scm_branch}'
+            gem_source: 'https://rubygems.org'
+        - '{value_stream}_{name}_packaging-os-clj_lein-ezbake_{scm_branch}':
+            dn-sort-index: ' 10:'
+            tpb_projects: '{value_stream}_{name}_integration-system_smoke-upgrade-{scm_branch},{value_stream}_{name}_integration-system_smoke-{scm_branch}'
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'smoke-{scm_branch}'
+            dn-sort-index: ' 20:'
+            dn-qualifier: ' Smoke'
+            tpb_projects: '{value_stream}_{name}_integration-system_full-{scm_branch}'
+            bjp_additional: ',log/latest/puppetserver/**/*'
+            beaker_loadpath: 'acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'acceptance/suites/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'smoke-upgrade-{scm_branch}'
+            dn-sort-index: ' 21:'
+            dn-qualifier: ' Upgrade Smoke'
+            bjp_additional: ',log/latest/puppetserver/**/*'
+            additional_exports: 'export PUPPETSERVER_INSTALL_MODE=upgrade'
+            beaker_loadpath: 'acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'acceptance/suites/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'full-{scm_branch}'
+            dn-sort-index: ' 25:'
+            dn-qualifier: ' Full'
+            bjp_additional: ',log/latest/puppetserver/**/*'
+            beaker_loadpath: 'ruby/puppet/acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'ruby/puppet/acceptance/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
+
+- job-group:
     name: 'foss_puppet-server_full-pipeline'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
@@ -6,7 +66,8 @@
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
-        - '{value_stream}_{name}_init_nightly-{scm_branch}':
+        - '{value_stream}_{name}_init_nightly-{qualifier}':
+            qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"

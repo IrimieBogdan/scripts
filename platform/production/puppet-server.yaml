@@ -7,7 +7,7 @@
     default_layout_axis: 64mdca 64mdca-64a
     hipchat_room: 'PE Green Team'
     value_stream: platform
-    kickoff_disabled: 'false'
+    kickoff_disabled: False
     shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14
@@ -20,10 +20,6 @@
         - 'foss_puppet-server_full-pipeline':
             scm_branch: 'stable'
             ezbake-git-branch: 'puppetserver/stable'
-        - 'foss_puppet-server_full-pipeline':
+        - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
             ezbake-git-branch: 'stable'
-        - 'foss_puppet-server_full-pipeline':
-            scm_branch: 'future'
-            ezbake-git-branch: 'stable'
-            kickoff_disabled: 'true'
