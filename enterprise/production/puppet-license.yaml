@@ -1,0 +1,12 @@
+- project:
+    name: 'puppet-license'
+    value_stream: enterprise
+    hipchat_room: ${{PROJECT_ROOM}}
+    git_url: git@github.com:puppetlabs/puppet-license-cli.git
+    logrotate_daystokeep: 30
+    logrotate_numtokeep: 30
+    kickoff_disabled: False
+    jobs:
+        - 'puppet-license-cli':
+                pe_family: 3.7
+                scm_branch: 3.7.x
