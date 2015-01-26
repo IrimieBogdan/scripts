@@ -7,7 +7,7 @@
     default_layout_axis: 64mdca 64mdca-64a
     hipchat_room: 'PE Green Team'
     value_stream: enterprise
-    kickoff_disabled: 'false'
+    kickoff_disabled: False
     shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14

@@ -169,14 +169,6 @@
     unit-bundler-opts: ''
 
     # VAR
-    # Used in shell scripts to set default location of puppet git repository.
-    puppet_repo: 'git://github.com/puppetlabs/puppet.git'
-
-    # VAR
-    # Used in shell scripts to set default branch of puppet to check out.
-    puppet_branch: 'master'
-
-    # VAR
     # Used in shell scripts to set GEM_SOURCE, which is typically used in
     # project Gemfile to indicate where to look for ruby gems.
     gem_source: 'http://rubygems.delivery.puppetlabs.net'
@@ -194,3 +186,8 @@
     # variable name for beaker presuites to pick up on when isntalling a
     # package built by releng jobs.
     package_build_version_varname: 'PACKAGE_BUILD_VERSION'
+
+    # VAR
+    # Used in kickoff jobs to set the value for the "disabled" field. Here we
+    # ensure that kickoff jobs cannot be accidentally enabled.
+    kickoff_disabled: True

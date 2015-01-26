@@ -3,7 +3,7 @@
     git_url: git@github.com:puppetlabs/pe-rbac-ui.git
     hipchat_room: ''
     value_stream: enterprise
-    kickoff_disabled: 'false'
+    kickoff_disabled: False
     logrotate_daystokeep: -1
     logrotate_numtokeep: 30
     console_timeout: '10'

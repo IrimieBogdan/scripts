@@ -37,7 +37,7 @@
     hipchat_room: 'PE-Team,PE Green Team'
     value_stream: enterprise
     shell_workspace: ''
-    kickoff_disabled: 'false'
+    kickoff_disabled: False
     logrotate_daystokeep: '-1'
     logrotate_numtokeep: 14
 

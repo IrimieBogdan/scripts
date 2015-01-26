@@ -13,17 +13,18 @@
             pgdb_password: 'classifier919'
             pgdb_user: 'classifier'
 
-        - '{value_stream}_classifier_unit-jruby_{scm_branch}':
+        - '{value_stream}_{name}_unit-jruby_{scm_branch}':
             dn-sort-index: ' 05:'
             tpb_projects: '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}'
+            additional_exports: "export PUPPET_LOCATION='git://github.com/puppetlabs/puppet.git#master'"
 
         - '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}':
             dn-sort-index: ' 10:'
-            tpb_projects: '{value_stream}_{name}_integration-system_full-{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_integration-system_full_{scm_branch}'
 
 
         - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 'full-{scm_branch}'
+            qualifier: 'full_{scm_branch}'
             dn-sort-index: ' 25:'
             dn-qualifier: ' Full'
             bjp_additional: ''

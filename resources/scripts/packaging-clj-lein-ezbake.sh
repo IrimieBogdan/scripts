@@ -5,6 +5,9 @@ echo "Configure Ruby"
 source /usr/local/rvm/scripts/rvm
 rvm use ruby-1.9.3-p484
 
+export NEXUS_JENKINS_USERNAME=jenkins
+export NEXUS_JENKINS_PASSWORD=Qu@lity!
+
 set -x
 set -e
 
@@ -42,7 +45,7 @@ echo "Create .props file to pass PACKAGE_BUILD_VERSION to next job."
 
 set +x
 cat > "$WORKSPACE/.props" <<PROPS
-PACKAGE_BUILD_VERSION=$(rake pl:print_build_param[ref] | tail -n 1)
+{package_build_version_varname}=$(rake pl:print_build_param[ref] | tail -n 1)
 PROPS
 set -x
 

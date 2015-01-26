@@ -6,7 +6,7 @@
     default_layout_axis: 64mdcal
     hipchat_room: ''
     value_stream: enterprise
-    kickoff_disabled: 'true'
+    kickoff_disabled: False
     shell_workspace: ''
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
