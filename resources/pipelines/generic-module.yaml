@@ -1,0 +1,9 @@
+- job-group:
+    name: 'generic-unit-module'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_unit-module_{scm_branch}'
+            dn-sort-index: ' 00:'
+        - '{value_stream}_{name}_unit-module_{scm_branch}':
+            dn-sort-index: ' 01:'
