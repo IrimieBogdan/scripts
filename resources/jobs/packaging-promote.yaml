@@ -1,0 +1,25 @@
+- job-template:
+    name: '{value_stream}_enterprise-dist_packaging_promotion'
+    display-name: '{name} Package Promotion'
+    node: worker
+    parameters:
+        - string:
+            name: PKG
+            description: "Name of package to promote."
+        - string:
+            name: REF
+            description: "Version of specified package to promote."
+        - string:
+            name: BRANCH
+            default: 3.7.x
+            description: "Branch of enterprise-dist to push to."
+    builders:
+        - trigger-remote:
+            remote-jenkins-name: jenkins-compose.delivery.puppetlabs.net
+            token: MYVOICEISMYPASSPORT
+            job: Package-Promotion
+            prevent-remote-build-queue: True
+            predefined-parameters: |
+                REF=$REF
+                PKG=$PKG
+                BRANCH=$BRANCH
