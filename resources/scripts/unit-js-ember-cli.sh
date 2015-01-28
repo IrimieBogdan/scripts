@@ -3,5 +3,12 @@
 cd {assets-builddir}
 
 npm install
-bower install
-node_modules/ember-cli/bin/ember test --environment=ci
+
+# install bower locally
+npm install bower
+
+# alias the local npm bin directory
+alias npm-exec='PATH=$(npm bin):$PATH'
+
+npm-exec bower install
+npm-exec ember test --environment=ci
