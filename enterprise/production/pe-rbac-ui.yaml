@@ -16,3 +16,7 @@
             assets-outdirs: "resources/{{rbac-ui,auth-ui}}/dist"
             assets-builddir: "dev-resources/rbac-ui"
             scm_branch: '3.7.x'
+        - 'pe-rbac-ui-ember-cli-pipeline':
+            assets-outdirs: "resources/rbac-ui/dist"
+            assets-builddir: "dev-resources/rbac-ui"
+            scm_branch: 'pod-conversion'
