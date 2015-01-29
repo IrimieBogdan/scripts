@@ -1,5 +1,5 @@
 - job-group:
-    name: 'classifier-acceptance-pipeline'
+    name: 'classifier-unit-pipeline'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: '{scm_branch}'
@@ -15,13 +15,17 @@
 
         - '{value_stream}_{name}_unit-jruby_{scm_branch}':
             dn-sort-index: ' 05:'
-            tpb_projects: '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}'
+            tpb_projects: '{obj:downstream_jobs}'
             additional_exports: "export PUPPET_LOCATION='git://github.com/puppetlabs/puppet.git#{puppet_branch}'"
 
-        - '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}':
+
+- job-group:
+    name: 'classifier-acceptance-pipeline'
+    jobs:
+        - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
+            qualifier: '{pe_family}_{scm_branch}'
             dn-sort-index: ' 10:'
             tpb_projects: '{value_stream}_{name}_integration-system_full-{pe_family}_{scm_branch}'
-
 
         - '{value_stream}_{name}_integration-system_{qualifier}':
             qualifier: 'full-{pe_family}_{scm_branch}'

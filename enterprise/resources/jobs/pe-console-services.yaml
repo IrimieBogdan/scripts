@@ -1,6 +1,6 @@
 - job-template:
-    name: '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Build pe-console-services'
+    name: '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Build pe-console-services for PE {pe_family}'
     node: worker
     project-type: freestyle
     parameters:
