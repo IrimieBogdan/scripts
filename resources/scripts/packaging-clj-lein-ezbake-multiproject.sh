@@ -44,7 +44,7 @@ update_dep() {{
 
 mkdir -p tmp
 cd tmp
-git clone git@github.com:puppetlabs/pe-console-services.git
+git clone -b {pe_family}.x git@github.com:puppetlabs/pe-console-services.git
 
 cd pe-console-services
 
