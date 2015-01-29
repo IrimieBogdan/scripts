@@ -67,6 +67,7 @@ $LEIN checkouts install
 
 echo
 echo "Create ezbake staging directory."
+sleep {packaging_sleep}
 $LEIN with-profile ezbake ezbake stage
 
 TMPD=$PWD

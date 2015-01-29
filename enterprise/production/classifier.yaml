@@ -18,8 +18,8 @@
             scm_branch: "master"
             puppet_branch: "master"
             downstream_jobs:
-                - 'experimental_classifier_packaging-ezbake_multiproject_3.7_master'
-                - 'experimental_classifier_packaging-ezbake_multiproject_4.0_master'
+                - 'enterprise_classifier_packaging-ezbake_multiproject_3.7_master'
+                - 'enterprise_classifier_packaging-ezbake_multiproject_4.0_master'
         - 'classifier-acceptance-pipeline':
             pe_family: '3.7'
             scm_branch: "master"
@@ -28,6 +28,7 @@
             pe_family: '4.0'
             scm_branch: "master"
             puppet_branch: "master"
+            packaging_sleep: 10
 
         - 'classifier-unit-pipeline':
             scm_branch: "stable"
