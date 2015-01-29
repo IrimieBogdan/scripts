@@ -11,7 +11,7 @@
             description: "Version of specified package to promote."
         - string:
             name: BRANCH
-            default: 3.7.x
+            default: 4.0.x
             description: "Branch of enterprise-dist to push to."
     builders:
         - trigger-remote:

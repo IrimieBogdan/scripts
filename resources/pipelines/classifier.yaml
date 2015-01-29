@@ -20,13 +20,13 @@
 
         - '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}':
             dn-sort-index: ' 10:'
-            tpb_projects: '{value_stream}_{name}_integration-system_full_{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_integration-system_full-{pe_family}_{scm_branch}'
 
 
         - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 'full_{scm_branch}'
+            qualifier: 'full-{pe_family}_{scm_branch}'
             dn-sort-index: ' 25:'
-            dn-qualifier: ' Full'
+            dn-qualifier: ' PE {pe_family}.x Full'
             bjp_additional: ''
             is-pe: "true"
             beaker_loadpath: ''
@@ -35,4 +35,3 @@
             beaker_helper: ''
             beaker_presuite: ''
             beaker_testsuite: 'integration/tests'
-
