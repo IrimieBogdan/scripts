@@ -6,19 +6,19 @@
     parameters:
         - string:
             name: PE_VER
-            default: "3.7"
+            default: "{pe_family}"
             description: "Target PE Version"
     builders:
         - shell: !include-raw packaging-clj-lein-ezbake-multiproject.sh
 
     publishers:
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '.props'
-            tpb_git_revision: '{tpb_git_revision}'
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '.props'
+              git-revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_pe-console-services_release_{scm_branch}'
