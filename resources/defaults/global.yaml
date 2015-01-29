@@ -24,6 +24,7 @@
             recursive-submodules: true
             branches:
                 - '{scm_branch}'
+            skip-tag: '{git-skip-tag}'
     git_excluded_regions: ''
     git_included_regions: ''
     scm_branch: ''
@@ -191,3 +192,8 @@
     # Used in kickoff jobs to set the value for the "disabled" field. Here we
     # ensure that kickoff jobs cannot be accidentally enabled.
     kickoff_disabled: True
+
+    # VAR
+    # Used to indicate that Jenkins shouldn't do its default stupid
+    # tagging behavior
+    git-skip-tag: False

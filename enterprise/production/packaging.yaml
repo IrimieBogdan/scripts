@@ -1,6 +1,7 @@
 - project:
     name: enterprise-dist
     git_url: git@github.com:puppetlabs/enterprise-dist.git
+    scm_branch: '$BRANCH'
     value_stream: enterprise
     jobs:
         - '{value_stream}_enterprise-dist_packaging_promotion'

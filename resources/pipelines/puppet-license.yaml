@@ -7,3 +7,9 @@
             dn-sort-index: ' 00:'
         - '{value_stream}_puppet-license_unit-ruby_{scm_branch}':
             dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+        - '{value_stream}_{name}_pkg-pe_{scm_branch}':
+            dn-sort-index: ' 02:'
+            tpb_projects: 'enterprise_enterprise-dist_packaging_promotion'
+            tpb_property_file: 'promote.properties'
+            tbp_git_revision: False
