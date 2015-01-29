@@ -33,8 +33,9 @@ echo "Run pl:jenkin:uber_build w/ 5s polling interval"
 
 pushd "target/staging"
 set -x
+export PE_VER={pe_family}
 rake package:bootstrap
-rake pl:jenkins:uber_build[5]
+rake pe:jenkins:uber_build[5]
 set +x
 popd
 
