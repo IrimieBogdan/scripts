@@ -5,7 +5,7 @@
     maven_artifact_name: pe-puppet-server
     default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
     default_layout_axis: 64mdca 64mdca-64a
-    hipchat_room: 'PE Green Team'
+    hipchat_room: 'Puppet Server (aka PE Green Team)'
     value_stream: enterprise
     kickoff_disabled: False
     shell_workspace: ''
