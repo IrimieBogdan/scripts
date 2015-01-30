@@ -69,7 +69,7 @@
         - trigger-parameterized-builds:
             - project: '{value_stream}_enterprise-dist_packaging_promotion'
               property-file: '.props'
-              predefined-parameters:
+              predefined-parameters: |
                   PKG={name}
                   BRANCH={scm_branch}
               condition: UNSTABLE_OR_BETTER
