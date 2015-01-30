@@ -65,11 +65,10 @@
             !include-raw clj-updatedeps.sh
         - shell:
             !include-raw release-nodeploy-clj.sh
-    publishers:
-        - trigger-parameterized-builds:
+        - trigger-builds:
             - project: '{value_stream}_enterprise-dist_packaging_promotion'
               property-file: '.props'
               predefined-parameters: |
                   PKG={name}
                   BRANCH={scm_branch}
-              condition: UNSTABLE_OR_BETTER
+              block: True
