@@ -1,11 +1,12 @@
 - project:
     name: 'console-license-status'
     value_stream: enterprise
-    hipchat_room: ${{PROJECT_ROOM}}
+    hipchat_room: pe-team
     git_url: git@github.com:puppetlabs/console_license_status.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: False
+    promote_package: 'pe-license-status'
     jobs:
         - 'generic-unit-ruby':
                 pe_family: 3.7
