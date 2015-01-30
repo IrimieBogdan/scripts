@@ -197,3 +197,9 @@
     # Used to indicate that Jenkins shouldn't do its default stupid
     # tagging behavior
     git-skip-tag: False
+
+    # VAR
+    # Used in jobs that call 'rake pl:jenkins:uber_build' to conflicts between
+    # simultaneous triggers of two jobs building the same version of the same
+    # package.
+    packaging_sleep: 0

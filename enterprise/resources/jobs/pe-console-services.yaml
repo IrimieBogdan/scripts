@@ -1,28 +1,47 @@
 - job-template:
-    name: '{value_stream}_{name}_packaging-ezbake_multiproject_{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Build pe-console-services'
+    name: '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Build pe-console-services for PE {pe_family}'
     node: worker
     project-type: freestyle
     parameters:
-        - string:
-            name: PE_VER
-            default: "3.7"
-            description: "Target PE Version"
     builders:
         - shell: !include-raw packaging-clj-lein-ezbake-multiproject.sh
 
     publishers:
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '.props'
-            tpb_git_revision: '{tpb_git_revision}'
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '.props'
+              git-revision: '{tpb_git_revision}'
 
 - job-template:
-    name: '{value_stream}_pe-console-services_packaging-ezbake'
-    display-name: 'pe-console-services: Build OS Packages'
+    name: '{value_stream}_pe-console-services_release_{scm_branch}'
+    display-name: 'pe-console-services ({scm_branch}): Release & Promote to PE'
+    description: |
+
+        This job runs against {git_url} at the {scm_branch} branch.
+
+        It accepts a comma-separated list of project=version tuples representing
+        new versions of components that should be included in the
+        pe-console-services package.
+
+        It performs the following tasks in order:
+            * Updates the given list of pe-console-services dependencies.
+            * Bumps the current pe-console-services version to the next "release".
+            * Commits this change to the git repo then tags it with the release version.
+            * Builds a pe-console-services uberjar and packages for Puppet Enterprise.
+            * Bump the current pe-console-services version from its current
+              "release" state to the next snapshot level.
+            * Pushes the current head and recently-created release snapshot to
+              the {scm_branch} branch of pe-console-services repo.
+            * Promotes the built package into the {pe_family}.x branch of
+              https://github.com/puppetlabs/enterprise-dis
+
+        **NOTE** that if the package building step of this job is successful it
+        will COMMIT the project.clj changes to the pe-console-services
+        repository.
     node: worker
     project-type: freestyle
     parameters:
@@ -31,53 +50,26 @@
             description: |
                 Comma-separated list of leiningen deps and versions to set:
                 <depname>=<version>[,<depname>=<version>[...]]
-        - string:
-            name: PE_VER
-            default: "3.7"
-            description: "Target PE Version"
-        - bool:
-            name: COMMIT_CHANGES
-            default: false
-            description: |
-                If this field is checked, commit dependency changes to
-                pe-console-services repo.
+
+                Example: pe-rbac-service=0.3.2,classifier=1.2.2
+
+                Setting this parameter will cause the pe-console-services
+                project.clj file to be updated with these new versions. The
+                updated versions will be committed to the repo, assuming the
+                package builds succeed.
+
+                **NOTE** The value for depname must reference the maven artifact
+                name of the project, NOT the git repo name.
     builders:
         - shell:
             !include-raw clj-updatedeps.sh
         - shell:
-            !include-raw packaging-clj-lein-ezbake.sh
-        - shell:
-            !include-raw git-push.sh
-
-- job-template:
-    name: '{value_stream}_pe-console-services_release-ezbake'
-    display-name: 'pe-console-services: Release & Promote to PE'
-    node: worker
-    project-type: freestyle
-    parameters:
-        - string:
-            name: PE_VER
-            default: "3.7"
-            description: "Target PE Version"
-    git-url: git@github.com:puppetlabs/pe-console-services.git
-    scm_branch: master
-    builders:
-        - shell:
             !include-raw release-nodeploy-clj.sh
-        - trigger-builds:
-            - project: '{value_stream}_pe-console-services_package-ezbake'
-              property-file: '.props'
-              current-parameters: true
-              block: true
     publishers:
         - trigger-parameterized-builds:
-            - project: 'Package-Promotion'
+            - project: '{value_stream}_enterprise-dist_packaging_promotion'
               property-file: '.props'
               predefined-parameters:
                   PKG={name}
+                  BRANCH={scm_branch}
               condition: UNSTABLE_OR_BETTER
-- job-group:
-    name: 'pe-console-services_packaging-pipelines'
-    jobs:
-        - '{value_stream}_pe-console-services_packaging-ezbake'
-        - '{value_stream}_pe-console-services_release-ezbake'

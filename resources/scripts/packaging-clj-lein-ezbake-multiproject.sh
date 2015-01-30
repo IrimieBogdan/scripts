@@ -44,7 +44,7 @@ update_dep() {{
 
 mkdir -p tmp
 cd tmp
-git clone git@github.com:puppetlabs/pe-console-services.git
+git clone -b {pe_family}.x git@github.com:puppetlabs/pe-console-services.git
 
 cd pe-console-services
 
@@ -67,6 +67,7 @@ $LEIN checkouts install
 
 echo
 echo "Create ezbake staging directory."
+sleep {packaging_sleep}
 $LEIN with-profile ezbake ezbake stage
 
 TMPD=$PWD
@@ -74,8 +75,9 @@ cd "target/staging"
 
 echo
 echo "Run pl:jenkin:uber_build w/ 5s polling interval"
+export PE_VER={pe_family}
 rake package:bootstrap
-rake pl:jenkins:uber_build[5]
+rake pe:jenkins:uber_build[5]
 
 echo
 echo "Create .props file to pass PACKAGE_BUILD_VERSION to next job."

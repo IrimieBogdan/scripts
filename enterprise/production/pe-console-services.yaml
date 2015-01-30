@@ -2,10 +2,12 @@
     name: pe-console-services
     git_url: git@github.com:puppetlabs/pe-console-services.git
     value_stream: enterprise
-    hipchat_room: ${{PROJECT_ROOM}}
-    shell_workspace: 'pe-console-services'
-    ezbake-git-branch: 'stable'
-    type: clj
+    hipchat_room: 'Node Classifier'
     jobs:
-        - 'pe-console-services_packaging-pipelines'
+        - '{value_stream}_pe-console-services_release_{scm_branch}':
+            scm_branch: '4.0.x'
+            pe_family: '4.0'
+        - '{value_stream}_pe-console-services_release_{scm_branch}':
+            scm_branch: '3.7.x'
+            pe_family: '3.7'
 
