@@ -34,7 +34,7 @@
             scm_branch: "stable"
             puppet_branch: "stable"
             downstream_jobs:
-                - 'experimental_classifier_packaging-ezbake_multiproject_3.7_stable'
+                - 'enterprise_classifier_packaging-ezbake_multiproject_3.7_stable'
         - 'classifier-acceptance-pipeline':
             pe_family: '3.7'
             scm_branch: "stable"
