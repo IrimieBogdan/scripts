@@ -226,3 +226,9 @@
     # Used in various shell script steps to set the hostname for redis-cli
     # calls.
     redis_hostname: 'redis.delivery.puppetlabs.net'
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for path to a file
+    # containing what are presumably dependency versions for PE but it's not
+    # clear where exactly this file is used.
+    pe_dep_versions: ''

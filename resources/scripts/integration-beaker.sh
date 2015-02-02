@@ -33,6 +33,10 @@ if [ ! -z "{is-pe}" ] ;then
     REDIS_HOSTNAME=redis.delivery.puppetlabs.net
     redis_pe_version="$(redis-cli -h $REDIS_HOSTNAME get {pe_family}_pe_version)"
 
+    if [ ! -z "{pe_dep_versions}" ] ;then
+      export pe_dep_versions="{pe_dep_versions}"
+    fi
+
     if [ "$UPGRADE_FROM" != "NONE" ] ;then
       export pe_upgrade_version="${{pe_version:-$redis_pe_version}}"
       export pe_upgrade_family={pe_upgrade_family}
