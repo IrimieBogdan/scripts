@@ -179,10 +179,6 @@
     rvm_ruby_version: '1.9.3-p484'
 
     # VAR
-    # Used in shell scripts to indicate default version of ruby to set with rvm.
-    pe_family: ''
-
-    # VAR
     # Used in packaging-clj-lein-ezbake-multiproject.sh to set a default
     # variable name for beaker presuites to pick up on when isntalling a
     # package built by releng jobs.
@@ -203,3 +199,30 @@
     # simultaneous triggers of two jobs building the same version of the same
     # package.
     packaging_sleep: 0
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for environment
+    # variable of same name.
+    pe_upgrade_family: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for environment
+    # variable of same name.
+    pe_upgrade_version: ''
+
+    # VAR
+    # Used in PE integration job templates to set default value for the
+    # UPGRADE_FROM axis on various jobs. NONE is interpreted in the
+    # integration-beaker.sh script as meaning "do not upgrade from any version
+    # of PE"
+    upgrade_from_axis: 'NONE'
+
+    # VAR
+    # Used to set the default pe_family to distinguish pipelines from one
+    # another.
+    pe_family: ''
+
+    # VAR
+    # Used in various shell script steps to set the hostname for redis-cli
+    # calls.
+    redis_hostname: 'redis.delivery.puppetlabs.net'

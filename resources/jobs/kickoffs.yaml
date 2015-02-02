@@ -47,3 +47,53 @@
             tpb_condition: '{tpb_condition}'
             tpb_property_file: '{tpb_property_file}'
             tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_pe-integration_init_compose-shim'
+    scm_branch: '3.7.x'
+    description: |
+        This job is intended to act as a shim between the
+        jenkins-compose.delivery.puppetlabs.net PE Compose jobs and the new
+        per-PE integration pipelines. The compose jobs expect a single job
+        parameterized on the version of PE being built which is incompatible
+        with the new PE pipelines.
+    display-name: '{name} {dn-sort-index} PE Compose Shim'
+    node: worker
+    parameters:
+        - string:
+            name: pe_family
+        - string:
+            name: pe_version
+    disabled: '{obj:kickoff_disabled}'
+    project-type: freestyle
+    builders:
+        - conditional-step:
+            condition-kind: strings-match
+            condition-string1: '${{ENV,var="pe_family"}}'
+            condition-string2: '3.7'
+            on-evaluation-failure: 'dont-run'
+            steps:
+                - trigger-builds:
+                    - project: '{value_stream}_pe-integration_integration-system_smoke-monolithic_3.7.x'
+                      block: False
+                      current-parameters: True
+        - conditional-step:
+            condition-kind: strings-match
+            condition-string1: '${{ENV,var="pe_family"}}'
+            condition-string2: '3.99'
+            on-evaluation-failure: 'dont-run'
+            steps:
+                - trigger-builds:
+                    - project: '{value_stream}_pe-integration_integration-system_smoke-monolithic_3.99.x'
+                      block: False
+                      current-parameters: True
+        - conditional-step:
+            condition-kind: strings-match
+            condition-string1: '${{ENV,var="pe_family"}}'
+            condition-string2: '4.0'
+            on-evaluation-failure: 'dont-run'
+            steps:
+                - trigger-builds:
+                    - project: '{value_stream}_pe-integration_integration-system_smoke-monolithic_4.0.x'
+                      block: False
+                      current-parameters: True

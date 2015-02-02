@@ -31,12 +31,19 @@ if [ ! -z "{is-pe}" ] ;then
     # Get pe info from redis
 
     REDIS_HOSTNAME=redis.delivery.puppetlabs.net
-    pe_version="$(redis-cli -h $REDIS_HOSTNAME get {pe_family}_pe_version)"
+    redis_pe_version="$(redis-cli -h $REDIS_HOSTNAME get {pe_family}_pe_version)"
 
-    export pe_version="${{pe_version_override:-$pe_version}}"
-    #export pe_dep_versions="$(pwd)/config/versions/pe_version"
-    export pe_dist_dir="http://neptune.puppetlabs.lan/{pe_family}/ci-ready/"
-    export pe_family="{pe_family}"
+    if [ "$UPGRADE_FROM" != "NONE" ] ;then
+      export pe_upgrade_version="${{pe_version:-$redis_pe_version}}"
+      export pe_upgrade_family={pe_upgrade_family}
+      export pe_version=$UPGRADE_FROM
+      export pe_family=$UPGRADE_FROM
+      export pe_dist_dir="http://neptune.puppetlabs.lan/{pe_family}/ci-ready/"
+    else
+      export pe_version="${{pe_version:-$redis_pe_version}}"
+      export pe_family="{pe_family}"
+      export pe_dist_dir="http://neptune.puppetlabs.lan/{pe_family}/ci-ready/"
+    fi
 
     #---------------------------------------
     # Beaker variables

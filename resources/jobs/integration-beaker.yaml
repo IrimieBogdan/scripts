@@ -1,25 +1,20 @@
 - job-template:
-    name: '{value_stream}_{name}_intg-system_{qualifier}'
-    display-name: '{name} PE Integration Tests ({qualifier})'
+    name: '{value_stream}_{name}_integration-system_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Integration{dn-qualifier} Test Suite'
     project-type: matrix
     node: beaker
     parameters:
         - string:
-            name: pe_family
-            default: '3.7'
-            description: "PE \"family\" to test."
-        - string:
-            name: pe_version_override
-            default: ''
-            description: "Override for <pe_version> otherwise obtained from redis."
+            name: PACKAGE_BUILD_VERSION
+            description: "Version of {name} to use in test."
         - string:
             name: PLATFORM_AXIS
             default: '{default_platform_axis}'
-            description: "Platforms on which to test {name}"
+            description: "List of platforms for user-defined PLAFORM axis."
         - string:
             name: LAYOUT_AXIS
             default: '{default_layout_axis}'
-            description: "Layouts on which to test {name}"
+            description: "List of layouts for user-defined LAYOUT axis."
     axes:
         - axis:
             type: dynamic
@@ -38,11 +33,59 @@
                 - beaker
     builders:
         - shell:
-            !include-raw integration-system-pe.sh
+            !include-raw integration-beaker.sh
+    publishers:
+        - beaker-junit-publisher:
+            additional: '{bjp_additional}'
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '{tpb_property_file}'
+              git-revision: '{tpb_git_revision}'
 
+- job-template:
+    name: '{value_stream}_pe-integration_integration-system_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
+    dn-qualifier: 'Integration'
+    project-type: matrix
+    node: beaker
+    parameters:
+        - string:
+            name: pe_version
+            description: "Version of {name} to use in test."
+    axes:
+        - axis:
+            type: user-defined
+            name: UPGRADE_FROM
+            values: '{obj:upgrade_from_axis}'
+        - axis:
+            type: user-defined
+            name: LAYOUT
+            values: '{obj:layout_axis}'
+        - axis:
+            type: user-defined
+            name: PLATFORM
+            values: '{obj:platform_axis}'
+        - axis:
+            type: slave
+            name: label
+            values:
+                - beaker
+    builders:
+        - shell:
+            !include-raw integration-beaker.sh
     publishers:
         - beaker-junit-publisher:
             additional: ''
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '{tpb_property_file}'
+              git-revision: '{tpb_git_revision}'
         - description-setter:
             regexp: "export pe_version=([\\w\\-.]+)"
             description: '\1 {beaker_testsuite}'
@@ -51,7 +94,7 @@
             set-for-matrix: true
 
 - job-template:
-    name: '{value_stream}_{name}_intg-system_windows-{qualifier}'
+    name: '{value_stream}_{name}_integration-system_windows-{qualifier}'
     display-name: '{name} Windows PE Integration Tests ({qualifier})'
     project-type: matrix
     execution-strategy:
@@ -66,25 +109,15 @@
             name: pe_version_override
             default: ''
             description: "Override for <pe_version> otherwise obtained from redis."
-        - string:
-            name: AGENT_AXIS
-            default: '{default_windows-agent_axis}'
-            description: "Agent platforms on which to test {name}"
-        - string:
-            name: ARCH_AXIS
-            default: '{default_windows-arch_axis}'
-            description: "Architectures on which to run {name} windows tests."
     axes:
         - axis:
-            type: dynamic
+            type: user-defined
             name: ARCH
-            values:
-                - ARCH_AXIS
+            values: '{obj:default_windows-arch_axis}'
         - axis:
-            type: dynamic
+            type: user-defined
             name: AGENT
-            values:
-                - AGENT_AXIS
+            values: '{obj:default_windows-agent_axis}'
         - axis:
             type: slave
             name: label
@@ -92,7 +125,7 @@
                 - beaker
     builders:
         - shell:
-            !include-raw integration-system-pe-windows.sh
+            !include-raw integration-beaker.sh
 
     publishers:
         - beaker-junit-publisher:
@@ -109,46 +142,16 @@
     display-name: '{displayname}'
     defaults: global-no-scm
     node: worker
-    parameters:
-        - string:
-            name: AGENT_AXIS
-            default: '{default_windows-agent_axis}'
-            description: "Agent platforms on which to test {name}"
-        - string:
-            name: ARCH_AXIS
-            default: '{default_windows-arch_axis}'
-            description: "Architectures on which to run {name} windows tests."
-        - string:
-            name: PLATFORM_AXIS
-            default: '{default_platform_axis}'
-            description: "Platforms on which to test {name}"
-        - string:
-            name: LAYOUT_AXIS
-            default: '{default_layout_axis}'
-            description: "Layouts on which to test {name}"
     disabled: '{obj:kickoff_disabled}'
-    project-type: matrix
     execution-strategy:
         sequential: true
     triggers:
         - timed: '{kickoff_interval}'
-    axes:
-        - axis:
-            type: user-defined
-            name: pe_family
-            values:
-                - 3.7
     builders:
-        - shell:
-            !include-raw redis-dump-pe_version.sh
         - trigger-builds:
-            - project: '{phase-1-projects}'
-              property-file: '.props'
-              current-parameters: true
+            - project: '{obj:phase_1_projects}'
               block: true
         - trigger-builds:
-            - project: '{phase-2-projects}'
-              property-file: '.props'
-              current-parameters: true
+            - project: '{obj:phase_2_projects}'
               block: true
 
