@@ -11,3 +11,9 @@
         - 'higgs':
                 pe_family: 3.7
                 scm_branch: 3.7.x
+        - 'higgs':
+                pe_family: 3.99
+                scm_branch: 3.99.x
+        - 'higgs':
+                pe_family: 4.0
+                scm_branch: 4.0.x
