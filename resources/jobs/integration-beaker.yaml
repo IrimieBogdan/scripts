@@ -46,7 +46,7 @@
               git-revision: '{tpb_git_revision}'
 
 - job-template:
-    name: '{value_stream}_pe-integration_integration-system_{qualifier}'
+    name: '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
     dn-qualifier: 'Integration'
     project-type: matrix

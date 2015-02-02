@@ -74,7 +74,7 @@
             on-evaluation-failure: 'dont-run'
             steps:
                 - trigger-builds:
-                    - project: '{value_stream}_pe-integration_integration-system_smoke-monolithic_3.7.x'
+                    - project: '{value_stream}_{name}_integration-system_pe_smoke-monolithic_3.7.x'
                       block: False
                       current-parameters: True
         - conditional-step:
@@ -84,7 +84,7 @@
             on-evaluation-failure: 'dont-run'
             steps:
                 - trigger-builds:
-                    - project: '{value_stream}_pe-integration_integration-system_smoke-monolithic_3.99.x'
+                    - project: '{value_stream}_{name}_integration-system_pe_smoke-monolithic_3.99.x'
                       block: False
                       current-parameters: True
         - conditional-step:
@@ -94,6 +94,6 @@
             on-evaluation-failure: 'dont-run'
             steps:
                 - trigger-builds:
-                    - project: '{value_stream}_pe-integration_integration-system_smoke-monolithic_4.0.x'
+                    - project: '{value_stream}_{name}_integration-system_pe_smoke-monolithic_4.0.x'
                       block: False
                       current-parameters: True
