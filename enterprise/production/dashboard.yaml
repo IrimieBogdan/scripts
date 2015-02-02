@@ -6,6 +6,7 @@
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: False
+    promote_package: 'pe-puppet-dashboard'
     jobs:
         - 'dashboard':
                 pe_family: 3.7
