@@ -39,6 +39,7 @@
         - ubuntu1404
 
     jobs:
+        - '{value_stream}_pe-integration_init_compose-shim'
         - 'pe-integration-smoke':
             pe_family: 3.99
             scm_branch: 3.99.x
