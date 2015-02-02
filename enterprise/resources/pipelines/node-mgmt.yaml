@@ -59,7 +59,7 @@
             pgdb_user: 'rbac'
 
 - job-group:
-    name: 'pe-rbac-ui-ember-cli-pipeline'
+    name: 'pe-ui-ember-cli-pipeline'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: 'assets_{scm_branch}'
