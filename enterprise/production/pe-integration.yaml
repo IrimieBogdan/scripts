@@ -1,6 +1,6 @@
 - project:
     name: pe-integration
-    value_stream: experimental
+    value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
     git_url: git@github.com:puppetlabs/pe_acceptance_tests.git
     logrotate_daystokeep: 30
