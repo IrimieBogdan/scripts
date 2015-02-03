@@ -29,3 +29,21 @@
             tpb_condition: '{tpb_condition}'
             tpb_property_file: '{tpb_property_file}'
             tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_{name}_unit-js_ember-cli_{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} JS Unit Tests'
+    node: unit
+    builders:
+        - shell:
+            !include-raw unit-js-ember-cli.sh
+    publishers:
+        - email:
+            recipients:  'pe-ci@puppetlabs.com'
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
