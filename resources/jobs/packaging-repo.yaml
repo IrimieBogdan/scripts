@@ -1,4 +1,5 @@
 - job-template:
+    console_timeout: 45
     git-skip-tag: True
     name: '{value_stream}_{name}_pkg-pe_{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Build Packages'
