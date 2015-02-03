@@ -1,6 +1,6 @@
 - project:
     name: 'pe-hiera'
-    value_stream: experimental
+    value_stream: enterprise
     git_url: git@github.com:puppetlabs/pe-hiera.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30

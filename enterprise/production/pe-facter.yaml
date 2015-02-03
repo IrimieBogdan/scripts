@@ -1,6 +1,6 @@
 - project:
     name: 'pe-facter'
-    value_stream: experimental
+    value_stream: enterprise
     git_url: git@github.com:puppetlabs/pe-facter.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
