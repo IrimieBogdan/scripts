@@ -36,11 +36,11 @@
                     - '{value_stream}_pe-integration_packaging_promotion_{scm_branch}'
 
             - '{value_stream}_pe-integration_packaging_promotion_{scm_branch}':
-                dn-sort-index: ' 10:'
+                dn-sort-index: ' 19:'
             - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
                 dn-sort-index: ' 10:'
-                qualifier: 'smoke-upgrader'
-                dn-qualifier: 'Upgrader Smoke Integration'
+                qualifier: 'smoke-upgrade'
+                dn-qualifier: 'Upgrade Smoke Integration'
                 genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
                 beaker_loadpath: ''
                 beaker_optionsfile: ''
