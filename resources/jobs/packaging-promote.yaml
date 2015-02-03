@@ -37,3 +37,29 @@
         - shell: |
             #!/usr/bin/env bash
             redis-cli -h {redis_hostname} set {pe_family}_pe_version $pe_version
+
+- job-template:
+    name: '{value_stream}_enterprise-dist_module_promotion'
+    display-name: '{name} Module Promotion'
+    node: worker
+    parameters:
+        - string:
+            name: MODULE_NAME
+            description: "Name of module to promote."
+        - string:
+            name: REF
+            description: "Version of specified package to promote."
+        - string:
+            name: BRANCH
+            default: 4.0.x
+            description: "Branch of enterprise-dist to push to."
+    builders:
+        - trigger-remote:
+            remote-jenkins-name: jenkins-compose.delivery.puppetlabs.net
+            token: KERMINATORPROMOTESMODULESTOO
+            job: Module-Promotion
+            prevent-remote-build-queue: True
+            predefined-parameters: |
+                REF=$REF
+                MODULE_NAME=$MODULE_NAME
+                BRANCH=$BRANCH

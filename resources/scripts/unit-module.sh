@@ -15,3 +15,7 @@ set -x
 [ -s ".rspec" ] || echo '-fd -c' > .rspec
 
 bundle exec rake spec
+
+echo "REF=$GIT_COMMIT" > promote.properties
+echo "MODULE_NAME=puppetlabs-puppet_enterprise" >> promote.properties
+echo "BRANCH=3.99.x" >> promote.properties

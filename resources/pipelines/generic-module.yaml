@@ -7,3 +7,6 @@
             dn-sort-index: ' 00:'
         - '{value_stream}_{name}_unit-module_{scm_branch}':
             dn-sort-index: ' 01:'
+            tpb_projects: 'enterprise_enterprise-dist_module_promotion'
+            tpb_property_file: 'promote.properties'
+            tpb_git_revision: False
