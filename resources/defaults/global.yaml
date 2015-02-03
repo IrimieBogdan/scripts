@@ -238,3 +238,19 @@
     # containing what are presumably dependency versions for PE but it's not
     # clear where exactly this file is used.
     beaker_type: 'foss'
+
+    # VAR
+    # Used in the ruby unit test script to give rspec extra options
+    unit-rspec-extra: ''
+
+    # VAR
+    # Used in the ruby unit test script to adjust the environment
+    # under which rspec runs.
+    unit-rspec-env: ''
+
+    # VAR
+    # Used in the ruby unit test script to determine which versions of
+    # ruby to test against
+    unit_ruby_versions:
+        - '1.9.3-p484'
+        - '2.1.1'

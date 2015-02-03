@@ -1,7 +1,18 @@
 - job-template:
     name: '{value_stream}_{name}_unit-ruby_{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
+    project-type: matrix
     node: unit
+    axes:
+        - axis:
+            type: slave
+            name: label
+            values:
+                - unit
+        - axis:
+            type: user-defined
+            name: RUBY_VER
+            values: '{obj:unit_ruby_versions}'
     builders:
         - shell: !include-raw unit-rb.sh
     publishers:

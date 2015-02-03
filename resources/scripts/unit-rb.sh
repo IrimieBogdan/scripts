@@ -1,6 +1,6 @@
 #!/bin/bash +x
 source /usr/local/rvm/scripts/rvm
-rvm use 1.9.3-p484
+rvm use $RUBY_VER
 
 rm -rf .bundle*
 
@@ -12,4 +12,4 @@ bundle install {unit-bundler-opts}
 set -e
 set -x
 
-bundle exec rspec -fd -c spec
+env {unit-rspec-env} bundle exec rspec -fd -c spec {unit-rspec-extra}
