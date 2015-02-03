@@ -38,6 +38,14 @@ if [ ! -z "{is-pe}" ] ;then
       export pe_dep_versions="{pe_dep_versions}"
     fi
 
+    # very hackish. PLATFORM will typically be strings such as "debian6" or
+    # "sles10" but for windows integration testing the variable will be set to
+    # "64" or "32" presumably to indicate which of 32 vs 64 bit binary to
+    # install.
+    if [ $PLATFORM == 32 ] ;then
+      export pe_use_win32=1
+    fi
+
     if [ "$UPGRADE_FROM" != "NONE" ] ;then
       export pe_upgrade_version="${{pe_version:-$redis_pe_version}}"
       export pe_upgrade_family={pe_family}

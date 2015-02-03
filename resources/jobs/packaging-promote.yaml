@@ -26,7 +26,7 @@
 
 - job-template:
     name: '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}'
-    disabled: True
+    disabled: '{obj:promotion_disabled}'
     display-name: '{name} ({scm_branch}){dn-sort-index} PE Promote Build'
     node: worker
     parameters:

@@ -1,0 +1,70 @@
+- project:
+    name: qatests-pe
+    value_stream: enterprise
+    hipchat_room: ${{PROJECT_ROOM}}
+    git_url: git@github.com:puppetlabs/qatests.git
+    logrotate_daystokeep: 30
+    logrotate_numtokeep: 30
+    kickoff_disabled: True
+    is-pe: 'yes'
+    beaker_type: pe
+    jobs:
+        - 'qatest-pe-split-jobs':
+            scm_branch: '3.7.x'
+            pe_family: '3.7'
+            platform_axis:
+                - centos7
+            layout_axis:
+                - 64mcd
+
+        - 'qatest-pe-split-jobs':
+            scm_branch: '3.99.x'
+            pe_family: '3.99'
+            platform_axis:
+                - centos7
+            layout_axis:
+                - 64mcd
+
+        - 'qatest-pe-split-jobs':
+            scm_branch: '4.0.x'
+            pe_family: '4.0'
+            platform_axis:
+                - centos7
+            layout_axis:
+                - 64mcd
+
+- project:
+    name: qatests-puppet
+    value_stream: enterprise
+    hipchat_room: ${{PROJECT_ROOM}}
+    git_url: git@github.com:puppetlabs/qatests.git
+    logrotate_daystokeep: 30
+    logrotate_numtokeep: 30
+    kickoff_disabled: True
+    is-pe: 'yes'
+    beaker_type: pe
+    jobs:
+        - 'qatest-puppet-split-jobs':
+            scm_branch: '4.0.x'
+            pe_family: '4.0'
+            platform_axis:
+                - centos7
+            layout_axis:
+                - 64mcd
+
+        - 'qatest-puppet-split-jobs':
+            scm_branch: '3.99.x'
+            pe_family: '3.99'
+            platform_axis:
+                - centos7
+            layout_axis:
+                - 64mcd
+
+        - 'qatest-puppet-split-jobs':
+            scm_branch: '3.7.x'
+            pe_family: '3.7'
+            platform_axis:
+                - centos7
+            layout_axis:
+                - 64mcd
+
