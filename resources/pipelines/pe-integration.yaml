@@ -32,7 +32,7 @@
                 platform_axis: '{obj:split_smoke_platform_axis}'
                 layout_axis: '{obj:split_smoke_layout_axis}'
                 tpb_projects:
-                    - '{value_stream}_{name}_integration-system_pe_smoke-upgrader_{scm_branch}'
+                    - '{value_stream}_{name}_integration-system_pe_smoke-upgrade_{scm_branch}'
                     - '{value_stream}_pe-integration_packaging_promotion_{scm_branch}'
 
             - '{value_stream}_pe-integration_packaging_promotion_{scm_branch}':
@@ -56,7 +56,7 @@
         name: 'pe-integration-full'
         jobs:
             - '{value_stream}_pe-integration_integration-system_{qualifier}':
-                qualifier: 'agent-upgrader_{scm_branch}'
+                qualifier: 'agent-upgrade_{scm_branch}'
                 genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
                 beaker_loadpath: ''
                 beaker_optionsfile: ''
