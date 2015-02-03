@@ -6,7 +6,14 @@
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: False
+    module_name: 'puppetlabs-puppet_enterprise'
     jobs:
         - 'generic-unit-module':
                 pe_family: 3.7
                 scm_branch: 3.7.x
+        - 'generic-unit-module':
+                pe_family: 3.99
+                scm_branch: 3.99.x
+        - 'generic-unit-module':
+                pe_family: 4.0
+                scm_branch: 4.0.x

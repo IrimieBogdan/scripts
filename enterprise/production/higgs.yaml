@@ -6,6 +6,7 @@
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: False
+    promote_package: 'pe-installer'
     jobs:
         - 'higgs':
                 pe_family: 3.7
