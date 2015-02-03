@@ -12,4 +12,4 @@ bundle install {unit-bundler-opts}
 set -e
 set -x
 
-bundle exec rspec -fd -c spec
+env {unit-rspec-env} bundle exec rspec -fd -c spec {unit-rspec-extra}

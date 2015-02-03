@@ -1,0 +1,14 @@
+- project:
+    name: 'pe-facter'
+    value_stream: experimental
+    git_url: git@github.com:puppetlabs/pe-facter.git
+    logrotate_daystokeep: 30
+    logrotate_numtokeep: 30
+    kickoff_disabled: False
+    promote_package: 'pe-facter'
+    unit-rspec-env: 'RUBYLIB=`pwd`/lib'
+    unit-rspec-extra: '--require spec_helper'
+    jobs:
+        - 'generic-unit-ruby':
+                pe_family: 3.7
+                scm_branch: 3.7.x

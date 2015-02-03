@@ -1,0 +1,12 @@
+- project:
+    name: 'pe-hiera'
+    value_stream: experimental
+    git_url: git@github.com:puppetlabs/pe-hiera.git
+    logrotate_daystokeep: 30
+    logrotate_numtokeep: 30
+    kickoff_disabled: False
+    promote_package: 'pe-hiera'
+    jobs:
+        - 'generic-unit-ruby':
+                pe_family: 3.7
+                scm_branch: 3.7.x
