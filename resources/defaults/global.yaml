@@ -247,3 +247,10 @@
     # Used in the ruby unit test script to adjust the environment
     # under which rspec runs.
     unit-rspec-env: ''
+
+    # VAR
+    # Used in the ruby unit test script to determine which versions of
+    # ruby to test against
+    unit_ruby_versions:
+        - '1.9.3-p484'
+        - '2.1.1'

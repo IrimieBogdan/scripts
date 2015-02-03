@@ -1,6 +1,6 @@
 #!/bin/bash +x
 source /usr/local/rvm/scripts/rvm
-rvm use 1.9.3-p484
+rvm use $RUBY_VER
 
 rm -rf .bundle*
 
