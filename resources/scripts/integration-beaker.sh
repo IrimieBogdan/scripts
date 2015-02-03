@@ -22,6 +22,7 @@ BEAKER_HELPER="${{BEAKER_HELPER:-{beaker_helper}}}"
 BEAKER_PRESUITE="${{BEAKER_PRESUITE:-{beaker_presuite}}}"
 BEAKER_TESTSUITE="${{BEAKER_TESTSUITE:-$(echo {beaker_testsuite} | tr ' ' ',')}}"
 BEAKER_POSTSUITE="${{BEAKER_POSTSUITE:-{beaker_postsuite}}}"
+BEAKER_TYPE="${{BEAKER_TYPE:-{beaker_type}}}"
 
 #-------------------------------------------------------------------------------
 # PE-specific stuff
@@ -39,7 +40,7 @@ if [ ! -z "{is-pe}" ] ;then
 
     if [ "$UPGRADE_FROM" != "NONE" ] ;then
       export pe_upgrade_version="${{pe_version:-$redis_pe_version}}"
-      export pe_upgrade_family={pe_upgrade_family}
+      export pe_upgrade_family={pe_family}
       export pe_version=$UPGRADE_FROM
       export pe_family=$UPGRADE_FROM
       export pe_dist_dir="http://neptune.puppetlabs.lan/{pe_family}/ci-ready/"
@@ -48,13 +49,8 @@ if [ ! -z "{is-pe}" ] ;then
       export pe_family="{pe_family}"
       export pe_dist_dir="http://neptune.puppetlabs.lan/{pe_family}/ci-ready/"
     fi
-
-    #---------------------------------------
-    # Beaker variables
-    BEAKER_TYPE="pe"
 else
     unset IS_PE
-    BEAKER_TYPE="foss"
 fi
 
 #-------------------------------------------------------------------------------

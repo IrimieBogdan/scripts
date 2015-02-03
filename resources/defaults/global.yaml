@@ -232,3 +232,9 @@
     # containing what are presumably dependency versions for PE but it's not
     # clear where exactly this file is used.
     pe_dep_versions: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for path to a file
+    # containing what are presumably dependency versions for PE but it's not
+    # clear where exactly this file is used.
+    beaker_type: 'foss'
