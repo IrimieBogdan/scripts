@@ -1,4 +1,5 @@
 - job-group:
+        is-pe: true
         name: 'pe-integration-smoke'
         jobs:
             - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
