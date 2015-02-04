@@ -49,7 +49,7 @@
             tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
-    name: '{value_stream}_pe-integration_init_compose-shim'
+    name: '{value_stream}_pe-acceptance-tests_init_compose-shim'
     scm_branch: '3.7.x'
     description: |
         This job is intended to act as a shim between the

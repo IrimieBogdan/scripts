@@ -33,9 +33,9 @@
                 layout_axis: '{obj:split_smoke_layout_axis}'
                 tpb_projects:
                     - '{value_stream}_{name}_integration-system_pe_smoke-upgrade_{scm_branch}'
-                    - '{value_stream}_pe-integration_packaging_promotion_{scm_branch}'
+                    - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}'
 
-            - '{value_stream}_pe-integration_packaging_promotion_{scm_branch}':
+            - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}':
                 dn-sort-index: ' 19:'
             - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
                 dn-sort-index: ' 10:'

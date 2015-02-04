@@ -1,5 +1,5 @@
 - project:
-    name: pe-integration
+    name: pe-acceptance-tests
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
     git_url: git@github.com:puppetlabs/pe_acceptance_tests.git
@@ -39,7 +39,7 @@
         - ubuntu1404
 
     jobs:
-        - '{value_stream}_pe-integration_init_compose-shim'
+        - '{value_stream}_pe-acceptance-tests_init_compose-shim'
         - 'pe-integration-smoke':
             pe_family: 3.99
             scm_branch: 3.99.x
