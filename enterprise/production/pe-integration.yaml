@@ -10,7 +10,7 @@
     promotion_disabled: False
 
     # integration-beaker.sh settings:
-    is-pe: 'true'
+    is-pe: 'is-pe'
     beaker_type: 'pe'
 
     upgrader_smoke_upgrade_from_axis:

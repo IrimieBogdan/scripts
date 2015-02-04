@@ -6,7 +6,7 @@
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: True
-    is-pe: 'yes'
+    is-pe: 'is-pe'
     beaker_type: pe
     jobs:
         - 'qatest-pe-split-jobs':
@@ -41,7 +41,7 @@
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     kickoff_disabled: True
-    is-pe: 'yes'
+    is-pe: 'is-pe'
     beaker_type: pe
     jobs:
         - 'qatest-puppet-split-jobs':
