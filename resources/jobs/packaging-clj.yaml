@@ -46,7 +46,7 @@
               predefined-parameters: '{tpb_predefined_parameters}'
               current-parameters: '{tpb_current_parameters}'
               condition: '{tpb_condition}'
-              property-file: '{tpb_property_file}'
+              property-file: '.props'
               git-revision: '{tpb_git_revision}'
 
 - job-template:
@@ -67,5 +67,5 @@
               predefined-parameters: '{tpb_predefined_parameters}'
               current-parameters: '{tpb_current_parameters}'
               condition: '{tpb_condition}'
-              property-file: '{tpb_property_file}'
+              property-file: '.props'
               git-revision: '{tpb_git_revision}'
