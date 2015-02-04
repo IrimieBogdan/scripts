@@ -25,7 +25,7 @@
                 BRANCH=$BRANCH
 
 - job-template:
-    name: '{value_stream}_pe-integration_packaging_promotion_{scm_branch}'
+    name: '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}'
     disabled: True
     display-name: '{name} ({scm_branch}){dn-sort-index} PE Promote Build'
     node: worker
