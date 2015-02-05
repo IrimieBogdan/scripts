@@ -150,7 +150,7 @@
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier:
                 - 020_puppet_server_http_ca
-                - 023_reports_processor
+                - 023_pe_reports_processor
                 - 035_puppet_server_basic
                 - 120_jenkins_user_scenario
                 - 121_jvm_metrics
@@ -158,7 +158,7 @@
                 - 130_wordpress_user_scenario
                 - 215_jvm_inifile_module
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
-            qualifier: 030_external_ca
+            qualifier: 030_pe_external_ca
             beaker_presuite: pre-suite/pre_ste-remote_ca.rb
             layout_axis:
                 - 64u-64mda-64f
