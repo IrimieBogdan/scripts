@@ -1,6 +1,8 @@
 - job-template:
-    name: '{value_stream}_{name}_unit-clj_{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Clojure Unit Tests'
+    name: '{value_stream}_{name}_unit-clj_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
+    qualifier: '{scm_branch}'
+    dn-qualifier: 'Clojure Unit Tests'
     node: unit
     builders:
         - shell:

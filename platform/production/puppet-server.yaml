@@ -22,5 +22,4 @@
             ezbake-git-branch: 'puppetserver/stable'
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
-            ezbake-git-branch: 'stable'
             beaker_type: 'aio'
