@@ -3,6 +3,8 @@
     display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
     project-type: matrix
     node: unit
+    execution-strategy:
+        combination-filter: '{combination-filter}'
     axes:
         - axis:
             type: slave

@@ -84,6 +84,7 @@ bundle install --without development
 if [ $PLATFORM == centos7 ] \
     || [ $PLATFORM == oracle7 ] \
     || [ $PLATFORM == redhat7 ] \
+    || [ $PLATFORM == scientific7 ] \
     || [ $PLATFORM == sles12 ]
 then
   export LAYOUT=${{LAYOUT//32/64}}
