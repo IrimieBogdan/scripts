@@ -71,6 +71,7 @@
                 - 'NONE'
             layout_axis: '{obj:windows_layout_axis}'
             platform_axis: '{obj:windows_platform_axis}'
+            combination-filter: '!(PLATFORM == "64" && (LAYOUT ==~ /.+windows2003.+/))'
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier: 'full-upgrade'
             dn-qualifier: 'Full Upgrade Integration'
@@ -101,6 +102,7 @@
             layout_axis: '{obj:agent_layout_axis}'
             platform_axis:
                 - 'NOTUSED'
+            combination-filter: '(LAYOUT ==~/.+sles10.+/).implies(UPGRADE_FROM != "3.3.2")'
 
 - job-group:
     name: 'qatest-puppet-split-jobs'

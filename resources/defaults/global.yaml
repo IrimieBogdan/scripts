@@ -254,3 +254,7 @@
     unit_ruby_versions:
         - '1.9.3-p484'
         - '2.1.1'
+
+    # VAR
+    # Used in matrix jobs to mask certain cells from executing
+    combination-filter: ''
