@@ -49,6 +49,30 @@
             tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
+    name: '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Kickoff'
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '{scm_branch}'
+    node: worker
+    wrappers:
+        - ansicolor:
+            colormap: xterm
+    disabled: '{obj:kickoff_disabled}'
+    project-type: freestyle
+    triggers:
+        - timed: "@midnight"
+    builders:
+        - trigger-builds:
+            - project: '{obj:phase1_projects}'
+              block: True
+        - trigger-builds:
+            - project: '{obj:phase2_projects}'
+              block: True
+
+- job-template:
     name: '{value_stream}_pe-acceptance-tests_init_compose-shim'
     scm_branch: '3.7.x'
     description: |

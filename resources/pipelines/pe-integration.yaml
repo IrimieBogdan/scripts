@@ -1,177 +1,165 @@
 - job-group:
-        is-pe: true
-        name: 'pe-integration-smoke'
-        jobs:
-            - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
-                dn-sort-index: ' 00:'
-                dn-qualifier: 'Monolithic Smoke Integration'
-                qualifier: 'smoke-monolithic'
-                genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
-                beaker_loadpath: ''
-                beaker_optionsfile: ''
-                beaker_presuite: 'setup/install.rb'
-                beaker_testsuite: 'acceptance/tests'
-                beaker_postsuite: ''
-                beaker_helper: ''
-                upgrade_from_axis: '{obj:mono_smoke_upgrade_from_axis}'
-                platform_axis: '{obj:mono_smoke_platform_axis}'
-                layout_axis: '{obj:mono_smoke_layout_axis}'
-                tpb_projects: '{value_stream}_{name}_integration-system_pe_smoke-split_{scm_branch}'
-            - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
-                dn-sort-index: ' 01:'
-                dn-qualifier: 'Split Smoke Integration'
-                qualifier: 'smoke-split'
-                genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
-                beaker_loadpath: ''
-                beaker_optionsfile: ''
-                beaker_presuite: 'setup/install.rb'
-                beaker_testsuite: 'acceptance/tests'
-                beaker_postsuite: ''
-                beaker_helper: ''
-                upgrade_from_axis: '{obj:split_smoke_upgrade_from_axis}'
-                platform_axis: '{obj:split_smoke_platform_axis}'
-                layout_axis: '{obj:split_smoke_layout_axis}'
-                tpb_projects:
-                    - '{value_stream}_{name}_integration-system_pe_smoke-upgrade_{scm_branch}'
-                    - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}'
+    name: 'pe-integration-smoke'
+    jobs:
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            dn-sort-index: ' 00:'
+            dn-qualifier: 'Monolithic Smoke Integration'
+            qualifier: 'smoke-monolithic'
+            genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
+            beaker_loadpath: ''
+            beaker_optionsfile: ''
+            beaker_presuite: 'setup/install.rb'
+            beaker_testsuite: 'acceptance/tests'
+            beaker_postsuite: ''
+            beaker_helper: ''
+            upgrade_from_axis: '{obj:mono_smoke_upgrade_from_axis}'
+            platform_axis: '{obj:mono_smoke_platform_axis}'
+            layout_axis: '{obj:mono_smoke_layout_axis}'
+            tpb_projects: '{value_stream}_{name}_integration-system_pe_smoke-split_{scm_branch}'
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            dn-sort-index: ' 01:'
+            dn-qualifier: 'Split Smoke Integration'
+            qualifier: 'smoke-split'
+            genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
+            beaker_loadpath: ''
+            beaker_optionsfile: ''
+            beaker_presuite: 'setup/install.rb'
+            beaker_testsuite: 'acceptance/tests'
+            beaker_postsuite: ''
+            beaker_helper: ''
+            upgrade_from_axis: '{obj:split_smoke_upgrade_from_axis}'
+            platform_axis: '{obj:split_smoke_platform_axis}'
+            layout_axis: '{obj:split_smoke_layout_axis}'
+            tpb_projects:
+                - '{value_stream}_{name}_integration-system_pe_smoke-upgrade_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}'
 
-            - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}':
-                dn-sort-index: ' 19:'
-            - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
-                dn-sort-index: ' 10:'
-                qualifier: 'smoke-upgrade'
-                dn-qualifier: 'Upgrade Smoke Integration'
-                genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
-                beaker_loadpath: ''
-                beaker_optionsfile: ''
-                beaker_presuite: 'setup/install.rb'
-                beaker_testsuite: 'acceptance/tests'
-                beaker_postsuite: ''
-                beaker_helper: ''
-                upgrade_from_axis: '{obj:upgrader_smoke_upgrade_from_axis}'
-                platform_axis: '{obj:upgrader_smoke_platform_axis}'
-                layout_axis: '{obj:upgrader_smoke_layout_axis}'
+        - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}':
+            dn-sort-index: ' 19:'
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            dn-sort-index: ' 10:'
+            qualifier: 'smoke-upgrade'
+            dn-qualifier: 'Upgrade Smoke Integration'
+            genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
+            beaker_loadpath: ''
+            beaker_optionsfile: ''
+            beaker_presuite: 'setup/install.rb'
+            beaker_testsuite: 'acceptance/tests'
+            beaker_postsuite: ''
+            beaker_helper: ''
+            upgrade_from_axis: '{obj:upgrader_smoke_upgrade_from_axis}'
+            platform_axis: '{obj:upgrader_smoke_platform_axis}'
+            layout_axis: '{obj:upgrader_smoke_layout_axis}'
 
 - job-group:
-        name: 'pe-integration-full'
-        jobs:
-            - '{value_stream}_pe-integration_integration-system_{qualifier}':
-                qualifier: 'agent-upgrade_{scm_branch}'
-                genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
-                beaker_loadpath: ''
-                beaker_optionsfile: ''
-                beaker_helper: ''
-                beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
-                beaker_testsuite: 'acceptance/tests'
-                beaker_postsuite: ''
-                pe_family: 3.3
-                scm_branch: 3.3.x
-                upgrade_from_axis:
-                    - 3.3.2
-                    - 3.7.0
-                    - 3.7.1
-                layout_axis:
-                    - 64m-64c-64d-64a-32f
-                    - 64mcd-32a-64f
-                platform_axis:
-                    - centos5
-                    - centos6
-                    - centos7
-                    - debian6
-                    - debian7
-                    - oracle5
-                    - oracle6
-                    - oracle7
-                    - redhat5
-                    - redhat6
-                    - redhat7
-                    - scientific5
-                    - scientific6
-                    - scientific7
-                    - sles11
-                    - ubuntu1004
-                    - ubuntu1204
-                    - ubuntu1404
+    name: 'pe-integration-full'
+    genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
+    beaker_loadpath: ''
+    beaker_optionsfile: ''
+    beaker_helper: ''
+    beaker_presuite: 'setup/install.rb'
+    beaker_testsuite: 'acceptance/tests'
+    beaker_postsuite: ''
+    pe_dep_versions: 'config/versions/pe_version'
+    jobs:
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 'full-windows'
+            dn-sort-index: ' 21:'
+            dn-qualifier: 'Windows Integration'
+            genconfig: 'bundle exec genconfig2 $LAYOUT'
+            upgrade_from_axis:
+                - 'NONE'
+            layout_axis: '{obj:windows_layout_axis}'
+            platform_axis: '{obj:windows_platform_axis}'
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 'full-upgrade'
+            dn-qualifier: 'Full Upgrade Integration'
+            dn-sort-index: ' 21:'
+            beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 'full'
+            dn-qualifier: 'Full Integration'
+            dn-sort-index: ' 21:'
+            upgrade_from_axis:
+                - 'NONE'
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 'full-agent'
+            dn-qualifier: 'Agent Integration'
+            dn-sort-index: ' 21:'
+            genconfig: 'bundle exec genconfig2 $LAYOUT'
+            upgrade_from_axis:
+                - 'NONE'
+            layout_axis: '{obj:agent_layout_axis}'
+            platform_axis:
+                - 'NOTUSED'
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 'full-agent-upgrade'
+            dn-qualifier: 'Agent Upgrade Integration'
+            dn-sort-index: ' 21:'
+            genconfig: 'bundle exec genconfig2 $LAYOUT'
+            beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
+            layout_axis: '{obj:agent_layout_axis}'
+            platform_axis:
+                - 'NOTUSED'
 
 - job-group:
     name: 'qatest-puppet-split-jobs'
-    git_url: git@github.com:puppetlabs/qatests.git
-    scm_branch: master
-    beaker_loadpath: lib/
-    beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
     preserve_hosts: never
+    dn-sort-index: ' 22:'
+    dn-qualifier: ' {qualifier}'
+    genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
+    beaker_loadpath: lib/
+    beaker_optionsfile: ''
+    beaker_presuite: pre-suite/pe_install.rb
+    beaker_testsuite: 'suites/puppet/tests/{qualifier}'
+    beaker_postsuite: ''
+    beaker_helper: ''
+    upgrade_from_axis:
+        - 'NONE'
     jobs:
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 020_manifest_ordering
-            beaker_testsuite: suites/puppet/tests/020_manifest_ordering
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 020_puppet_resource_package
-            beaker_testsuite: suites/puppet/tests/020_puppet_resource_package
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 021_puppet_resource_service
-            beaker_testsuite: suites/puppet/tests/021_puppet_resource_service
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 021_puppet_resource_ssh_authorized_key
-            beaker_testsuite: suites/puppet/tests/021_puppet_resource_ssh_authorized_key
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 022_puppet_resource_group
-            beaker_testsuite: suites/puppet/tests/022_puppet_resource_group
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 022_puppet_resource_sshkey
-            beaker_testsuite: suites/puppet/tests/022_puppet_resource_sshkey
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 025_puppet_resource_user
-            beaker_testsuite: suites/puppet/tests/025_puppet_resource_user
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 029_puppet_resource_file_windows
-            beaker_testsuite: suites/puppet/tests/029_puppet_resource_file_windows
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 030_puppet_resource_exec_windows
-            beaker_testsuite: suites/puppet/tests/030_puppet_resource_exec_windows
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 030_puppet_resource_mount
-            beaker_testsuite: suites/puppet/tests/030_puppet_resource_mount
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 031_puppet_resource_exec
-            beaker_testsuite: suites/puppet/tests/031_puppet_resource_exec
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 041_puppet_resource_file
-            beaker_testsuite: suites/puppet/tests/041_puppet_resource_file
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier:
+                - 020_manifest_ordering
+                - 020_puppet_resource_package
+                - 021_puppet_resource_service
+                - 021_puppet_resource_ssh_authorized_key
+                - 022_puppet_resource_group
+                - 022_puppet_resource_sshkey
+                - 025_puppet_resource_user
+                - 029_puppet_resource_file_windows
+                - 030_puppet_resource_exec_windows
+                - 030_puppet_resource_mount
+                - 031_puppet_resource_exec
+                - 041_puppet_resource_file
 
 - job-group:
     name: 'qatest-pe-split-jobs'
-    git_url: git@github.com:puppetlabs/qatests.git
-    scm_branch: master
-    beaker_loadpath: lib/
-    beaker_presuite: suites/puppet/pre-suite/pe_install_env.rb
     preserve_hosts: never
+    dn-sort-index: ' 22:'
+    dn-qualifier: ' {qualifier}'
+    genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
+    beaker_loadpath: lib/
+    beaker_optionsfile: ''
+    beaker_presuite: pre-suite/pe_install.rb
+    beaker_testsuite: 'suites/pe/tests/{qualifier}'
+    beaker_postsuite: ''
+    beaker_helper: ''
+    upgrade_from_axis:
+        - 'NONE'
     jobs:
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe_020_puppet_server_http_ca
-            beaker_testsuite: suites/pe/tests/020_puppet_server_http_ca
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-023_reports_processor
-            beaker_testsuite: suites/pe/tests/023_pe_reports_processor
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-030_external_ca
-            beaker_testsuite: suites/pe/tests/030_pe_external_ca
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier:
+                - 020_puppet_server_http_ca
+                - 023_reports_processor
+                - 035_puppet_server_basic
+                - 120_jenkins_user_scenario
+                - 121_jvm_metrics
+                - 122_jvm_stdlib_module
+                - 130_wordpress_user_scenario
+                - 215_jvm_inifile_module
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 030_external_ca
             beaker_presuite: pre-suite/pre_ste-remote_ca.rb
-            LAYOUT_AXIS: 64u-64mda-64f
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-035_puppet_server_basic
-            beaker_testsuite: suites/pe/tests/035_puppet_server_basic
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-120_jenkins_user_scenario
-            beaker_testsuite: suites/pe/tests/120_jenkins_user_scenario
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-121_jvm_metrics
-            beaker_testsuite: suites/pe/tests/121_jvm_metrics
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-122_jvm_stdlib_module
-            beaker_testsuite: suites/pe/tests/122_jvm_stdlib_module
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-130_wordpress_user_scenario
-            beaker_testsuite: suites/pe/tests/130_wordpress_user_scenario
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: pe-215_jvm_inifile_module
-            beaker_testsuite: suites/pe/tests/215_jvm_inifile_module
+            layout_axis:
+                - 64u-64mda-64f
+

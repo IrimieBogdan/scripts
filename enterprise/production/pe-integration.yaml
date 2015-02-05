@@ -5,7 +5,13 @@
     git_url: git@github.com:puppetlabs/pe_acceptance_tests.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
-    kickoff_disabled: True
+
+    kickoff_disabled: False
+    promotion_disabled: False
+
+    # integration-beaker.sh settings:
+    is-pe: 'is-pe'
+    beaker_type: 'pe'
 
     upgrader_smoke_upgrade_from_axis:
         - 3.3.2
@@ -38,8 +44,59 @@
         - sles11
         - ubuntu1404
 
+    windows_layout_axis:
+        - centos6-64mcd-windows2003r2-32a
+        - centos6-64mcd-windows2003r2-64a
+        - centos6-64mcd-windows2003-64a
+        - centos6-64mcd-windows2008-64a
+        - centos6-64mcd-windows2008r2-64a
+        - centos6-64mcd-windows2012-64a
+        - centos6-64mcd-windows2012r2-64a
+    windows_platform_axis:
+        - '64'
+        - '32'
+
+    agent_layout_axis:
+        - centos6-64mcd-solaris10-64a-solaris10-64f
+        - centos6-64mcd-solaris11-64a-solaris11-64f
+        - centos6-64mcd-centos4-64a-centos4-64f
+        - centos6-64mcd-centos4-32a-centos4-32f
+        - centos6-64mcd-osx109-64a-osx109-64f
+        - centos6-64mcd-redhat4-64a-redhat4-64f
+        - centos6-64mcd-sles10-32a-sles10-32f
+        - centos6-64mcd-sles10-64a-sles10-64f
+
+    upgrade_from_axis:
+        - 3.3.2
+        - 3.7.0
+        - 3.7.1
+    layout_axis:
+        - 64m-64c-64d-64a-32f
+        - 64mcd-32a-64f
+    platform_axis:
+        - centos5
+        - centos6
+        - centos7
+        - debian6
+        - debian7
+        - oracle5
+        - oracle6
+        - oracle7
+        - redhat5
+        - redhat6
+        - redhat7
+        - scientific5
+        - scientific6
+        - scientific7
+        - sles11
+        - sles12
+        - ubuntu1004
+        - ubuntu1204
+        - ubuntu1404
+
     jobs:
         - '{value_stream}_pe-acceptance-tests_init_compose-shim'
+            disabled: False
         - 'pe-integration-smoke':
             pe_family: 3.99
             scm_branch: 3.99.x
@@ -68,3 +125,52 @@
         - 'pe-integration-smoke':
             pe_family: 4.0
             scm_branch: 4.0.x
+
+        - 'pe-integration-full':
+            pe_family: 3.99
+            scm_branch: 3.99.x
+        - 'pe-integration-full':
+            pe_family: 4.0
+            scm_branch: 4.0.x
+        - 'pe-integration-full':
+            pe_family: 3.7
+            scm_branch: 3.7.x
+
+        - '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}':
+            disabled: False
+            qualifier: '{scm_branch}'
+            dn-sort-index: ' 20:'
+            dn-qualifier: 'Nightly '
+            scm_branch:
+                - 3.7.x
+                - 3.99.x
+                - 4.0.x
+            phase1_projects:
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-windows_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-upgrade_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-agent_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-agent-upgrade_{scm_branch}'
+            phase2_projects:
+                - '{value_stream}_qatests-puppet_integration-system_pe_020_manifest_ordering_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_020_puppet_resource_package_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_resource_service_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_resource_ssh_authorized_key_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_022_puppet_resource_group_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_022_puppet_resource_sshkey_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_025_puppet_resource_user_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_029_puppet_resource_file_windows_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_030_puppet_resource_exec_windows_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_030_puppet_resource_mount_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_031_puppet_resource_exec_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_041_puppet_resource_file_{scm_branch}'
+
+                - '{value_stream}_qatests-pe_integration-system_pe_030_external_ca_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_020_puppet_server_http_ca_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_023_reports_processor_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_035_puppet_server_basic_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_120_jenkins_user_scenario_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_121_jvm_metrics_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_122_jvm_stdlib_module_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_130_wordpress_user_scenario_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_215_jvm_inifile_module_{scm_branch}'
