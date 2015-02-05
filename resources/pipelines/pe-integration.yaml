@@ -43,7 +43,7 @@
             genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
             beaker_loadpath: ''
             beaker_optionsfile: ''
-            beaker_presuite: 'setup/install.rb'
+            beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
             beaker_testsuite: 'acceptance/tests'
             beaker_postsuite: ''
             beaker_helper: ''
