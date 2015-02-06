@@ -92,9 +92,9 @@
               git-revision: '{tpb_git_revision}'
         - description-setter:
             regexp: "export pe_version=([\\w\\-.]+)"
-            description: '\1 {beaker_testsuite}'
+            description: '\1'
             regexp-for-failed: "export pe_version=([\\w\\-.]+)"
-            description-for-failed: '\1 {beaker_testsuite}'
+            description-for-failed: '\1'
             set-for-matrix: true
 
 - job-template:
