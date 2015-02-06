@@ -8,12 +8,16 @@
     logrotate_numtokeep: 14
     console_timeout: '10'
 
+    assets-composedir: "resources/console-ui/dist"
+    assets-tempdir: "resources/console-ui/dist"
+    assets-outdirs: "resources/console-ui/dist"
+    assets-builddir: "dev-resources/console-ui"
+
     jobs:
-        - 'pe-console-ui-composition-pipeline'
+        - 'pe-console-ui-composition-pipeline':
+            scm_branch: 'master'
 
         - 'pe-ui-ember-cli-pipeline':
-            assets-outdirs: "resources/console-ui/dist"
-            assets-builddir: "dev-resources/console-ui"
             scm_branch: 'master'
             downstream_jobs:
               - '{value_stream}_pe-console-ui_compose-console-{scm_branch}'
