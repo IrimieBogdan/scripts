@@ -21,7 +21,7 @@
         - junit:
             results:  '{junit-results}'
         - email:
-            recipients:  'pe-ci@puppetlabs.com'
+            recipients:  'node-mgmt-ui@puppetlabs.com'
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
               predefined-parameters: '{tpb_predefined_parameters}'
@@ -39,7 +39,25 @@
             !include-raw unit-js-ember-cli.sh
     publishers:
         - email:
-            recipients:  'pe-ci@puppetlabs.com'
+            recipients:  'node-mgmt-ui@puppetlabs.com'
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '{tpb_property_file}'
+              git-revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_{name}_unit-js_mocha_{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} JS Unit Tests'
+    node: unit
+    builders:
+        - shell:
+            !include-raw unit-js-mocha.sh
+    publishers:
+        - email:
+            recipients:  'node-mgmt-ui@puppetlabs.com'
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
               predefined-parameters: '{tpb_predefined_parameters}'
