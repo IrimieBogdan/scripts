@@ -18,3 +18,6 @@
         - 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline':
             scm_branch: 'master'
             default_PE_VER: '3.7'
+
+        - 'clj-unit-release':
+            scm_branch: 'master'

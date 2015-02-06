@@ -1,12 +1,13 @@
 - job-template:
-    name: '{value_stream}_{name}_unit-clj_{qualifier}'
+    name: '{value_stream}_{name}_release-clj_{qualifier}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
     qualifier: '{scm_branch}'
-    dn-qualifier: 'Clojure Unit Tests'
+    dn-qualifier: ' Lein Release'
+
     node: unit
     builders:
         - shell:
-            !include-raw-escape unit-clj.sh
+            !include-raw release-clj.sh
     publishers:
         - trigger-parameterized-build:
             tpb_projects: '{tpb_projects}'

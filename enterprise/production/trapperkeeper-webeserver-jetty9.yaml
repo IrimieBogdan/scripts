@@ -1,0 +1,9 @@
+- project:
+    name: trapperkeeper-webserver-jetty9
+    git_url: 'git@github.com:puppetlabs/{name}.git'
+    hipchat_room: 'Puppet Server (aka PE Green Team)'
+    value_stream: enterprise
+
+    jobs:
+        - 'clj-unit-release':
+            scm_branch: 'master'
