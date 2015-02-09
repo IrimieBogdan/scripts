@@ -1,0 +1,4 @@
+[submodule "jenkins-job-builder"]
+	path = jenkins-job-builder
+	url = git@github.com:puppetlabs/jenkins-job-builder.git
+	branch = experimental

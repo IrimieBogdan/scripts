@@ -1,4 +1,10 @@
 *swp
 *swo
-*local
+
+*pyc
+
+local
+output
+tmp
+
 vim.session
