@@ -14,23 +14,21 @@
     beaker_type: 'pe'
 
     upgrader_smoke_upgrade_from_axis:
-        - 3.3.2
-        - 3.7.1
+        - 'NONE'
     upgrader_smoke_layout_axis:
         - 64mcd
     upgrader_smoke_platform_axis:
         - centos6
-        - debian7
         - redhat7
-        - ubuntu1204
+        - ubuntu1404
 
     split_smoke_upgrade_from_axis:
         - 'NONE'
     split_smoke_layout_axis:
         - 64m-64c-64d
     split_smoke_platform_axis:
-        - centos6
-        - debian7
+        - sles12
+        - scientific6
         - redhat7
         - ubuntu1204
 
@@ -39,8 +37,8 @@
     mono_smoke_layout_axis:
         - 64mcd
     mono_smoke_platform_axis:
-        - centos5
-        - debian6
+        - centos6
+        - oracle7
         - sles11
         - ubuntu1404
 
@@ -74,23 +72,16 @@
         - 64m-64c-64d-64a-32f
         - 64mcd-32a-64f
     platform_axis:
-        - centos5
         - centos6
         - centos7
-        - debian6
-        - debian7
-        - oracle5
         - oracle6
         - oracle7
-        - redhat5
         - redhat6
         - redhat7
-        - scientific5
         - scientific6
         - scientific7
         - sles11
         - sles12
-        - ubuntu1004
         - ubuntu1204
         - ubuntu1404
 
@@ -121,6 +112,24 @@
         - 'pe-integration-smoke':
             pe_family: 3.7
             scm_branch: 3.7.x
+            upgrader_smoke_upgrade_from_axis:
+                - 3.3.2
+                - 3.7.1
+            upgrader_smoke_platform_axis:
+                - centos6
+                - debian7
+                - redhat7
+                - ubuntu1204
+            split_smoke_platform_axis:
+                - centos6
+                - debian7
+                - redhat7
+                - ubuntu1204
+            mono_smoke_platform_axis:
+                - centos5
+                - debian6
+                - sles11
+                - ubuntu1404
 
         - 'pe-integration-smoke':
             pe_family: 4.0
@@ -135,6 +144,26 @@
         - 'pe-integration-full':
             pe_family: 3.7
             scm_branch: 3.7.x
+            platform_axis:
+                - centos5
+                - centos6
+                - centos7
+                - debian6
+                - debian7
+                - oracle5
+                - oracle6
+                - oracle7
+                - redhat5
+                - redhat6
+                - redhat7
+                - scientific5
+                - scientific6
+                - scientific7
+                - sles11
+                - sles12
+                - ubuntu1004
+                - ubuntu1204
+                - ubuntu1404
 
         - '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}':
             disabled: False
