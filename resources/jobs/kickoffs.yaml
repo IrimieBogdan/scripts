@@ -68,9 +68,11 @@
         - trigger-builds:
             - project: '{obj:phase1_projects}'
               block: True
-        - trigger-builds:
+    publishers:
+        - trigger-parameterized-builds:
             - project: '{obj:phase2_projects}'
-              block: True
+              current-parameters: True
+              condition: 'ALWAYS'
 
 - job-template:
     name: '{value_stream}_pe-acceptance-tests_init_compose-shim'
