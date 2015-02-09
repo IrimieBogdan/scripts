@@ -14,13 +14,14 @@
     beaker_type: 'pe'
 
     upgrader_smoke_upgrade_from_axis:
-        - 'NONE'
+        - 3.7.1
     upgrader_smoke_layout_axis:
         - 64mcd
     upgrader_smoke_platform_axis:
         - centos6
         - redhat7
         - ubuntu1404
+        - sles12
 
     split_smoke_upgrade_from_axis:
         - 'NONE'
