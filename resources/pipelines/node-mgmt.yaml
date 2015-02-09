@@ -75,7 +75,5 @@
 - job-group:
     name: 'pe-console-ui-composition-pipeline'
     jobs:
-        - '{value_stream}_pe-console-ui_compose-console-{scm_branch}'
+        - '{value_stream}_pe-console-ui_compose-console-{scm_branch}':
             dn-sort-index: ' 05:'
-        - '{value_stream}_{name}_unit-js_ember-cli_{scm_branch}':
-            dn-sort-index: ' 10:'
