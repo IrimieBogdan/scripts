@@ -1,16 +1,25 @@
 - job-group:
     name: 'foss_puppet-server_full-lein-ezbake'
+    meta_path_jobgroup: resources/pipelines/puppet-server-acceptance-pipeline.yaml
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 ubuntu1404"
+            tpb_predefined_parameters: |
+                PLATFORM_AXIS=centos6 centos7 ubuntu1404
+
+                SHIP_NIGHTLY=FALSE
+
         - '{value_stream}_{name}_init_nightly-{qualifier}':
             qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
+            tpb_predefined_parameters: |
+                PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
+
+                SHIP_NIGHTLY=TRUE
+
         - '{value_stream}_{name}_unit-clj_{qualifier}':
             dn-sort-index: ' 01:'
             tpb_projects: '{value_stream}_{name}_unit-jruby_{scm_branch}'
@@ -27,7 +36,13 @@
             qualifier: 'smoke-{scm_branch}'
             dn-sort-index: ' 20:'
             dn-qualifier: ' Smoke'
-            tpb_projects: '{value_stream}_{name}_integration-system_full-{scm_branch}'
+            tpb_projects:
+                - '{value_stream}_{name}_integration-system_full-{scm_branch}'
+                - 'Trigger Nightly Repo Ship'
+            tpb_predefined_parameters: |
+                PROJECT=puppetserver
+                REF=$PACKAGE_BUILD_VERSION
+                JOB_URL=$BUILD_URL
             bjp_additional: ',log/latest/puppetserver/**/*'
             beaker_loadpath: 'acceptance/lib'
             beaker_optionsfile: 'acceptance/config/beaker/options.rb'
@@ -50,6 +65,7 @@
 
 - job-group:
     name: 'foss_puppet-server_full-pipeline'
+    meta_path_jobgroup: resources/pipelines/puppet-server-acceptance-pipeline.yaml
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: '{scm_branch}'
@@ -103,6 +119,7 @@
 
 - job-group:
     name: 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline'
+    meta_path_jobgroup: resources/pipelines/puppet-server-acceptance-pipeline.yaml
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: '{scm_branch}'
