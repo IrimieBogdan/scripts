@@ -112,7 +112,7 @@
     genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
     beaker_loadpath: lib/
     beaker_optionsfile: ''
-    beaker_presuite: pre-suite/pe_install.rb
+    beaker_presuite: pre-suite/pe_install_env.rb
     beaker_testsuite: 'suites/puppet/tests/{qualifier}'
     beaker_postsuite: ''
     beaker_helper: ''
@@ -142,7 +142,7 @@
     genconfig: 'bundle exec genconfig2 $PLATFORM-$LAYOUT'
     beaker_loadpath: lib/
     beaker_optionsfile: ''
-    beaker_presuite: pre-suite/pe_install.rb
+    beaker_presuite: pre-suite/pe_install_env.rb
     beaker_testsuite: 'suites/pe/tests/{qualifier}'
     beaker_postsuite: ''
     beaker_helper: ''
