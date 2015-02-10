@@ -80,6 +80,31 @@
             tpb_git_revision: '{tpb_git_revision}'
 
 - job-template:
+    name: '{value_stream}_{name}_init-gpr_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} PR Kickoff [{dn-qualifier}]'
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '{scm_branch}'
+            refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+            submodule:
+                recursive: True
+            excluded-regions: '{obj:git_excluded_regions}'
+            included-regions: '{obj:git_included_regions}'
+    node: worker
+    triggers:
+        - github-pull-request:
+            admin-list: '{obj:gpr_admin_list}'
+            cron: '{obj:gpr_cron}'
+            org-list: '{obj:gpr_orgs}'
+            trigger-phrase: '{obj:gpr_trigger_phrase}'
+            only-trigger-phrase: '{obj:gpr_only_trigger_phrase}'
+            permit-all: '{obj:gpr_permit_all}'
+    builders: '{obj:gpr_builders}'
+
+- job-template:
     name: '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}'
     meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Kickoff'

@@ -13,6 +13,7 @@
         - 'utils/.*'
         - '.gitmodules'
 
+    github_http_url: 'https://github.com/puppetlabs/ci-job-configs'
     kickoff_disabled: False
 
     jenkins_instance: 'enterprise'
@@ -27,6 +28,20 @@
             hcnotifier_notify_failure: True
             hcnotifier_notify_aborted: True
 
+            hcnotifier_notify_not_built: False
+            hcnotifier_notify_unstable: False
+            hcnotifier_notify_back_to_normal: False
+
+        - 'meta-ci-job-configs-pr':
+            scm_branch: 'master'
+            kickoff_disabled: True
+            hipchat_room: 'ci-job-configs'
+
+            hcnotifier_notify_success: True
+            hcnotifier_notify_failure: True
+
+            hcnotifier_start_notify: False
+            hcnotifier_notify_aborted: False
             hcnotifier_notify_not_built: False
             hcnotifier_notify_unstable: False
             hcnotifier_notify_back_to_normal: False

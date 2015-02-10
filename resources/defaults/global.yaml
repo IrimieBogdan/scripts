@@ -18,14 +18,28 @@
     name: global
     project-type: freestyle
 
+    properties:
+        - github:
+            url: '{github_http_url}'
+
+    github_http_url: '{git_url}'
+
     scm:
         - git:
             url: '{git_url}'
+            refspec: '{obj:git_refspec}'
             submodule:
                 recursive: True
             branches:
                 - '{scm_branch}'
             skip-tag: '{git-skip-tag}'
+
+    # VAR
+    # Set the git refspec for a job using a git repo. This is the value jenkins
+    # git plugin sets by default. We provide a default value here so that github
+    # PR builder jobs and their downstreams can actually pull all the necessary
+    # PR commits.
+    git_refspec: '+refs/heads/*:refs/remotes/origin/*'
     git_excluded_regions: ''
     git_included_regions: ''
     scm_branch: ''
@@ -307,3 +321,44 @@
     # VAR
     # Path to the defaults file.
     meta_path_defaults: 'resources/defaults/global.yaml'
+
+    # VAR
+    meta_ci_compare_revisions_instances:
+        - enterprise
+        - platform
+
+    # VAR
+    # Used in Github PR Jobs to bestow great responsibility on the named
+    # parties. ie, trigger phrases such as
+    #   "okay to test"
+    #     let jenkins loose on the PR
+    #   "test this please"
+    #     one-time test run
+    #   "add to whitelist"
+    #     add the named parties to the list of people who can issue these
+    #     commands and expect jenkins to respond
+    gpr_admin_list:
+        - doug-rosser
+        - rji
+        - waynr
+        - branan
+        - steveax
+
+    # VAR
+    # Used in Github PR Jobs to bestow great responsibility on the named
+    # parties. ie, trigger phrases such as
+    #   "okay to test"
+    #     let jenkins loose on the PR
+    #   "test this please"
+    #     one-time test run
+    #   "add to whitelist"
+    #     add the named parties to the list of people who can issue these
+    #     commands and expect jenkins to respond
+    gpr_orgs:
+        - puppetlabs
+
+    gpr_trigger_phrase: ''
+    gpr_only_trigger_phrase: False
+    gpr_permit_all: False
+
+    gpr_cron: 'H/5 * * * *'
