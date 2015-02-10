@@ -95,13 +95,21 @@
     hipchat:
         enabled: true
         room: '{obj:hipchat_room}'
-        start-notify: true
-        notify-success: true
-        notify-aborted: true
-        notify-not-built: true
-        notify-failure: true
-        notify-unstable: true
-        notify-back-to-normal: true
+        start-notify: '{obj:hcnotifier_start_notify}'
+        notify-success: '{obj:hcnotifier_notify_success}'
+        notify-aborted: '{obj:hcnotifier_notify_aborted}'
+        notify-not-built: '{obj:hcnotifier_notify_not_built}'
+        notify-failure: '{obj:hcnotifier_notify_failure}'
+        notify-unstable: '{obj:hcnotifier_notify_unstable}'
+        notify-back-to-normal: '{obj:hcnotifier_notify_back_to_normal}'
+
+    hcnotifier_start_notify: True
+    hcnotifier_notify_success: True
+    hcnotifier_notify_aborted: True
+    hcnotifier_notify_not_built: True
+    hcnotifier_notify_failure: True
+    hcnotifier_notify_unstable: True
+    hcnotifier_notify_back_to_normal: True
 
     # VAR
     # Can be a comma-delimited list of hipchat room names. There should be no
@@ -114,6 +122,11 @@
     # only have a single template and there is no such thing as template
     # inheritance.
     #
+
+    # VAR
+    # Used in the {value_stream}_{name}_init-periodic_{qualifier} jobs to
+    # specify run intervals in cron format.
+    timed_trigger_cron: ''
 
     # VAR
     # Deprecated variable used by ezbake packaging jobs to work around jankiness

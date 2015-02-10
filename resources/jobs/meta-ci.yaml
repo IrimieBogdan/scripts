@@ -1,0 +1,8 @@
+- job-template:
+    name: '{value_stream}_ci-job-configs_meta_update-{deployment}_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/meta-ci.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index}    {dn-qualifier} [update {deployment}]'
+    node: worker
+    builders:
+        - shell:
+            !include-raw meta-ci-jjb-update.sh

@@ -1,0 +1,28 @@
+- job-group:
+    name: 'meta-ci-job-configs-merge-periodic'
+    meta_path_jobgroup: 'resources/pipelines/meta-ci.yaml'
+    gpr_only-trigger_phrase: True
+
+    jobs:
+        ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Periodic (bi-daily) deployment of ci-job-configs production jobs
+        #
+        - '{value_stream}_{name}_init-periodic_{qualifier}':
+            qualifier: 'update-production'
+            dn-qualifier: 'Bi-Daily '
+            dn-sort-index: ' 00:'
+            timed_trigger_cron: 'H 7,19 * * *'
+            tpb_projects:
+                - '{value_stream}_ci-job-configs_meta_update-production_{scm_branch}'
+
+        ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Per-merge deployment of ci-job-configs production jobs
+        #
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            dn-sort-index: ' 00:'
+            tpb_projects:
+                - '{value_stream}_ci-job-configs_meta_update-production_{scm_branch}'
+
+        - '{value_stream}_ci-job-configs_meta_update-{deployment}_{scm_branch}':
+            dn-sort-index: ' 05:'
+            deployment: production

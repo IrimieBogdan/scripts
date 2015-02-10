@@ -1,0 +1,32 @@
+- project:
+    name: 'ci-job-configs'
+    meta_path_project: 'enterprise/production/meta-ci-job-configs.yaml'
+    value_stream: 'qe'
+    git_url: git@github.com:puppetlabs/{name}.git
+
+    git_excluded_regions:
+        - 'doc/.*'
+        - 'README.md'
+    git_included_regions:
+        - 'enterprise/.*'
+        - 'resource/.*'
+        - 'utils/.*'
+        - '.gitmodules'
+
+    kickoff_disabled: False
+
+    jenkins_instance: 'enterprise'
+    jobs:
+        - 'meta-ci-job-configs-merge-periodic':
+            scm_branch: 'master'
+            kickoff_disabled: False
+            hipchat_room: 'ci-job-configs'
+
+            hcnotifier_start_notify: True
+            hcnotifier_notify_success: True
+            hcnotifier_notify_failure: True
+            hcnotifier_notify_aborted: True
+
+            hcnotifier_notify_not_built: False
+            hcnotifier_notify_unstable: False
+            hcnotifier_notify_back_to_normal: False
