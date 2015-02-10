@@ -9,9 +9,11 @@
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
     console_timeout: '20'
-    preserve_hosts: 'onfail'
     genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
     package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
+    beaker_type: 'pe'
+    preserve_hosts: 'onfail'
 
     jobs:
         - 'classifier-unit-pipeline':
