@@ -156,7 +156,6 @@
                 - 035_puppet_server_basic
                 - 120_jenkins_user_scenario
                 - 121_jvm_metrics
-                - 122_jvm_stdlib_module
                 - 130_wordpress_user_scenario
                 - 215_jvm_inifile_module
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
@@ -164,4 +163,7 @@
             beaker_presuite: pre-suite/pre_ste-remote_ca.rb
             layout_axis:
                 - 64u-64mda-64f
+        - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            qualifier: 122_jvm_stdlib_module
+            beaker_presuite: pre-suite/pe_install_env.rb,pre-suite/stdlib_install.rb
 
