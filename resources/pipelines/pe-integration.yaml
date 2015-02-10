@@ -1,5 +1,6 @@
 - job-group:
     name: 'pe-integration-smoke'
+    preserve_hosts: onfail
     jobs:
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             dn-sort-index: ' 00:'
@@ -61,6 +62,7 @@
     beaker_testsuite: 'acceptance/tests'
     beaker_postsuite: ''
     pe_dep_versions: 'config/versions/pe_version'
+    preserve_hosts: onfail
     jobs:
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier: 'full-windows'
