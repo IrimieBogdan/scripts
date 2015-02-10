@@ -77,3 +77,12 @@
     jobs:
         - '{value_stream}_pe-console-ui_compose-console-{scm_branch}':
             dn-sort-index: ' 05:'
+
+- job-group:
+    name: 'pe-ui-mocha-unit-pipeline'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-js_mocha_{scm_branch}'
+        - '{value_stream}_{name}_unit-js_mocha_{scm_branch}':
+            dn-sort-index: ' 01:'
