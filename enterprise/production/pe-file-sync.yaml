@@ -7,3 +7,5 @@
     jobs:
         - 'clj-unit-release':
             scm_branch: 'master'
+        - 'clj-merge-unit':
+            scm_branch: 'master'
