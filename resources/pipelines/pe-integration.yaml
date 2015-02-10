@@ -77,6 +77,7 @@
             dn-qualifier: 'Full Upgrade Integration'
             dn-sort-index: ' 21:'
             beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
+            combination-filter: '{obj:full_upgrade_combination_filter}'
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier: 'full'
             dn-qualifier: 'Full Integration'

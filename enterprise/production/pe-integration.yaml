@@ -43,6 +43,8 @@
         - sles11
         - ubuntu1404
 
+    full_upgrade_combination_filter: ''
+
     windows_layout_axis:
         - centos6-64mcd-windows2003r2-32a
         - centos6-64mcd-windows2003r2-64a
@@ -153,6 +155,7 @@
             pe_family: 3.7
             scm_branch: 3.7.x
             preserve_hosts: onfail
+            full_upgrade_combination_filter: '(PLATFORM == "sles12").implies(UPGRADE_FROM != "3.3.2" && UPGRADE_FROM != "3.7.0")'
             platform_axis:
                 - centos5
                 - centos6
