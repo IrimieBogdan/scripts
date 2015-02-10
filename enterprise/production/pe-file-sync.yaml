@@ -7,5 +7,5 @@
     jobs:
         - 'clj-unit-release':
             scm_branch: 'master'
-        - 'enterprise_pe-file-sync_full-pipeline':
+        - 'clj-merge-unit':
             scm_branch: 'master'
