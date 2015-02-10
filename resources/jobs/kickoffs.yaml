@@ -71,7 +71,9 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:phase2_projects}'
-              current-parameters: True
+              predefined-parameters: |
+                  BOGUS=yes
+              current-parameters: False
               condition: 'ALWAYS'
 
 - job-template:

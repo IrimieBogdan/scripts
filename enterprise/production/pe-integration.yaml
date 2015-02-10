@@ -92,6 +92,7 @@
         - 'pe-integration-smoke':
             pe_family: 3.99
             scm_branch: 3.99.x
+            preserve_hosts: onfail
 
             upgrader_smoke_upgrade_from_axis:
                 - 'NONE'
@@ -113,6 +114,7 @@
         - 'pe-integration-smoke':
             pe_family: 3.7
             scm_branch: 3.7.x
+            preserve_hosts: onfail
             upgrader_smoke_upgrade_from_axis:
                 - 3.3.2
                 - 3.7.1
@@ -135,16 +137,22 @@
         - 'pe-integration-smoke':
             pe_family: 4.0
             scm_branch: 4.0.x
+            preserve_hosts: onfail
 
         - 'pe-integration-full':
             pe_family: 3.99
             scm_branch: 3.99.x
+            preserve_hosts: never
+            platform_axis:
+                - centos7
         - 'pe-integration-full':
             pe_family: 4.0
             scm_branch: 4.0.x
+            preserve_hosts: never
         - 'pe-integration-full':
             pe_family: 3.7
             scm_branch: 3.7.x
+            preserve_hosts: onfail
             platform_axis:
                 - centos5
                 - centos6
