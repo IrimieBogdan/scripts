@@ -21,7 +21,8 @@
     scm:
         - git:
             url: '{git_url}'
-            recursive-submodules: true
+            submodule:
+                recursive: True
             branches:
                 - '{scm_branch}'
             skip-tag: '{git-skip-tag}'
@@ -93,7 +94,7 @@
 
     hipchat:
         enabled: true
-        room: '{hipchat_room}'
+        room: '{obj:hipchat_room}'
         start-notify: true
         notify-success: true
         notify-aborted: true
@@ -258,3 +259,38 @@
     # VAR
     # Used in matrix jobs to mask certain cells from executing
     combination-filter: ''
+
+    # JJB Built-in VAR
+    # Sets the default value for a job description.
+    #
+    # To reduce confusion for those trying to understand the relationship
+    # between Jenkins jobs and ci-job-configs we make it possible to add
+    # important ci-job-configs meta data to a job description in a standardized
+    # format.
+    description: |
+        {meta_description}
+        -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        ci-job-configs job-template file: {meta_path_jobtemplate}
+        ci-job-configs project file: {meta_path_project}
+        ci-job-configs job-group file: {meta_path_jobgroup}
+        ci-job-configs defaults file: {meta_path_defaults}
+
+    # VAR
+    # Describe the intent of the job.
+    meta_description: 'No description entered in JJB configs.'
+
+    # VAR
+    # Path to the job-template file.
+    meta_path_jobtemplate: ''
+
+    # VAR
+    # Path to the project file.
+    meta_path_project: ''
+
+    # VAR
+    # Path to the job-group file.
+    meta_path_jobgroup: ''
+
+    # VAR
+    # Path to the defaults file.
+    meta_path_defaults: 'resources/defaults/global.yaml'

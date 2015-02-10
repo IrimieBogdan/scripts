@@ -1,11 +1,13 @@
 - job-template:
     name: '{value_stream}_{name}_init-merge_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     scm:
         - git:
             url: '{git_url}'
             branches:
                 - '{scm_branch}'
-            recursive-submodules: true
+            submodule:
+                recursive: True
             excluded-regions: '{obj:git_excluded_regions}'
             included-regions: '{obj:git_included_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Mergely Kickoff'
@@ -15,22 +17,24 @@
     triggers:
         - pollscm: "H/5 * * * *"
     publishers:
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '{tpb_property_file}'
-            tpb_git_revision: '{tpb_git_revision}'
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{tpb_predefined_parameters}'
+              current-parameters: '{tpb_current_parameters}'
+              condition: '{tpb_condition}'
+              property-file: '{tpb_property_file}'
+              git-revision: '{tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_init_nightly-{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     scm:
         - git:
             url: '{git_url}'
             branches:
                 - '{scm_branch}'
-            recursive-submodules: true
+            submodule:
+                recursive: True
             excluded-regions: '{obj:git_excluded_regions}'
             included-regions: '{obj:git_included_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Nightly Kickoff'
@@ -50,6 +54,7 @@
 
 - job-template:
     name: '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Kickoff'
     scm:
         - git:
@@ -78,6 +83,7 @@
 
 - job-template:
     name: '{value_stream}_pe-acceptance-tests_init_compose-shim'
+    meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     scm_branch: '3.7.x'
     description: |
         This job is intended to act as a shim between the

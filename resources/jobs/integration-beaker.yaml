@@ -1,5 +1,6 @@
 - job-template:
     name: '{value_stream}_{name}_integration-system_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} Integration{dn-qualifier} Test Suite'
     project-type: matrix
     node: beaker
@@ -49,6 +50,7 @@
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
     dn-qualifier: 'Integration'
     project-type: matrix
@@ -99,6 +101,7 @@
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_windows-{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
     display-name: '{name} Windows PE Integration Tests ({qualifier})'
     project-type: matrix
     execution-strategy:
@@ -145,6 +148,7 @@
 
 - job-template:
     name: '{value_stream}_{name}_init_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
     display-name: '{displayname}'
     defaults: global-no-scm
     node: worker
