@@ -1,0 +1,11 @@
+- project:
+    name: pe-console-auth-ui
+    git_url: 'git@github.com:puppetlabs/{name}.git'
+    hipchat_room: 'Node Management UI'
+    value_stream: enterprise
+
+    jobs:
+        - 'clj-unit-release':
+            scm_branch: 'master'
+        - 'clj-merge-unit':
+            scm_branch: 'master'
