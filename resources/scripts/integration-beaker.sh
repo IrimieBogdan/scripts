@@ -24,6 +24,8 @@ BEAKER_TESTSUITE="${{BEAKER_TESTSUITE:-$(echo {beaker_testsuite} | tr ' ' ',')}}
 BEAKER_POSTSUITE="${{BEAKER_POSTSUITE:-{beaker_postsuite}}}"
 BEAKER_TYPE="${{BEAKER_TYPE:-{beaker_type}}}"
 
+UPGRADE_FROM="${{UPGRADE_FROM:-NONE}}"
+
 #-------------------------------------------------------------------------------
 # PE-specific stuff
 
