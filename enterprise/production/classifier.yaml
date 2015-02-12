@@ -1,7 +1,7 @@
 - project:
     name: classifier
     git_url: git@github.com:puppetlabs/classifier.git
-    default_platform_axis: centos5 centos6 centos7 redhat7 debian6 ubuntu1404
+    default_platform_axis: centos6 centos7 redhat7 ubuntu1404
     default_layout_axis: 64mdcal 64mdcal-32a
     hipchat_room: 'Node Classifier'
     value_stream: enterprise
