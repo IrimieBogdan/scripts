@@ -46,7 +46,7 @@
               current-parameters: '{tpb_current_parameters}'
               condition: '{tpb_condition}'
               property-file: '{tpb_property_file}'
-              git-revision: '{tpb_git_revision}'
+              git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_unit-js_mocha_{scm_branch}'

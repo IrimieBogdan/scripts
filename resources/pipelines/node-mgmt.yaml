@@ -71,6 +71,7 @@
         - '{value_stream}_{name}_unit-js_ember-cli_{scm_branch}':
             dn-sort-index: ' 01:'
             tpb_projects: '{obj:downstream_jobs}'
+            tpb_git_revision: False
 
 - job-group:
     name: 'pe-console-ui-composition-pipeline'
