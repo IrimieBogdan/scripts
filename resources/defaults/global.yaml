@@ -18,13 +18,28 @@
     name: global
     project-type: freestyle
 
+    properties:
+        - github:
+            url: '{github_http_url}'
+
+    github_http_url: '{git_url}'
+
     scm:
         - git:
             url: '{git_url}'
-            recursive-submodules: true
+            refspec: '{obj:git_refspec}'
+            submodule:
+                recursive: True
             branches:
                 - '{scm_branch}'
             skip-tag: '{git-skip-tag}'
+
+    # VAR
+    # Set the git refspec for a job using a git repo. This is the value jenkins
+    # git plugin sets by default. We provide a default value here so that github
+    # PR builder jobs and their downstreams can actually pull all the necessary
+    # PR commits.
+    git_refspec: '+refs/heads/*:refs/remotes/origin/*'
     git_excluded_regions: ''
     git_included_regions: ''
     scm_branch: ''
@@ -93,14 +108,22 @@
 
     hipchat:
         enabled: true
-        room: '{hipchat_room}'
-        start-notify: true
-        notify-success: true
-        notify-aborted: true
-        notify-not-built: true
-        notify-failure: true
-        notify-unstable: true
-        notify-back-to-normal: true
+        room: '{obj:hipchat_room}'
+        start-notify: '{obj:hcnotifier_start_notify}'
+        notify-success: '{obj:hcnotifier_notify_success}'
+        notify-aborted: '{obj:hcnotifier_notify_aborted}'
+        notify-not-built: '{obj:hcnotifier_notify_not_built}'
+        notify-failure: '{obj:hcnotifier_notify_failure}'
+        notify-unstable: '{obj:hcnotifier_notify_unstable}'
+        notify-back-to-normal: '{obj:hcnotifier_notify_back_to_normal}'
+
+    hcnotifier_start_notify: True
+    hcnotifier_notify_success: True
+    hcnotifier_notify_aborted: True
+    hcnotifier_notify_not_built: True
+    hcnotifier_notify_failure: True
+    hcnotifier_notify_unstable: True
+    hcnotifier_notify_back_to_normal: True
 
     # VAR
     # Can be a comma-delimited list of hipchat room names. There should be no
@@ -113,6 +136,11 @@
     # only have a single template and there is no such thing as template
     # inheritance.
     #
+
+    # VAR
+    # Used in the {value_stream}_{name}_init-periodic_{qualifier} jobs to
+    # specify run intervals in cron format.
+    timed_trigger_cron: ''
 
     # VAR
     # Deprecated variable used by ezbake packaging jobs to work around jankiness
@@ -258,3 +286,79 @@
     # VAR
     # Used in matrix jobs to mask certain cells from executing
     combination-filter: ''
+
+    # JJB Built-in VAR
+    # Sets the default value for a job description.
+    #
+    # To reduce confusion for those trying to understand the relationship
+    # between Jenkins jobs and ci-job-configs we make it possible to add
+    # important ci-job-configs meta data to a job description in a standardized
+    # format.
+    description: |
+        {meta_description}
+        -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        ci-job-configs job-template file: {meta_path_jobtemplate}
+        ci-job-configs project file: {meta_path_project}
+        ci-job-configs job-group file: {meta_path_jobgroup}
+        ci-job-configs defaults file: {meta_path_defaults}
+
+    # VAR
+    # Describe the intent of the job.
+    meta_description: 'No description entered in JJB configs.'
+
+    # VAR
+    # Path to the job-template file.
+    meta_path_jobtemplate: ''
+
+    # VAR
+    # Path to the project file.
+    meta_path_project: ''
+
+    # VAR
+    # Path to the job-group file.
+    meta_path_jobgroup: ''
+
+    # VAR
+    # Path to the defaults file.
+    meta_path_defaults: 'resources/defaults/global.yaml'
+
+    # VAR
+    meta_ci_compare_revisions_instances:
+        - enterprise
+        - platform
+
+    # VAR
+    # Used in Github PR Jobs to bestow great responsibility on the named
+    # parties. ie, trigger phrases such as
+    #   "okay to test"
+    #     let jenkins loose on the PR
+    #   "test this please"
+    #     one-time test run
+    #   "add to whitelist"
+    #     add the named parties to the list of people who can issue these
+    #     commands and expect jenkins to respond
+    gpr_admin_list:
+        - doug-rosser
+        - rji
+        - waynr
+        - branan
+        - steveax
+
+    # VAR
+    # Used in Github PR Jobs to bestow great responsibility on the named
+    # parties. ie, trigger phrases such as
+    #   "okay to test"
+    #     let jenkins loose on the PR
+    #   "test this please"
+    #     one-time test run
+    #   "add to whitelist"
+    #     add the named parties to the list of people who can issue these
+    #     commands and expect jenkins to respond
+    gpr_orgs:
+        - puppetlabs
+
+    gpr_trigger_phrase: ''
+    gpr_only_trigger_phrase: False
+    gpr_permit_all: False
+
+    gpr_cron: 'H/5 * * * *'

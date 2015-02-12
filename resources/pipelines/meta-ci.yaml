@@ -1,0 +1,59 @@
+- job-group:
+    name: 'meta-ci-job-configs-merge-periodic'
+    meta_path_jobgroup: 'resources/pipelines/meta-ci.yaml'
+    gpr_only-trigger_phrase: True
+
+    jobs:
+        ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Periodic (bi-daily) deployment of ci-job-configs production jobs
+        #
+        - '{value_stream}_{name}_init-periodic_{qualifier}':
+            qualifier: 'update-production'
+            dn-qualifier: 'Bi-Daily '
+            dn-sort-index: ' 00:'
+            timed_trigger_cron: 'H 7,19 * * *'
+            tpb_projects:
+                - '{value_stream}_ci-job-configs_meta_update-production_{scm_branch}'
+
+        ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Per-merge deployment of ci-job-configs production jobs
+        #
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            dn-sort-index: ' 00:'
+            tpb_projects:
+                - '{value_stream}_ci-job-configs_meta_update-production_{scm_branch}'
+
+        - '{value_stream}_ci-job-configs_meta_update-{deployment}_{scm_branch}':
+            dn-sort-index: ' 05:'
+            deployment: production
+
+- job-group:
+    name: 'meta-ci-job-configs-pr'
+    meta_path_jobgroup: 'resources/pipelines/meta-ci.yaml'
+    git_refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+    jobs:
+        ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Github PR Command: 'jenkins, please compare revisions'
+        #
+        - '{value_stream}_{name}_init-gpr_{qualifier}':
+            qualifier: 'compare-revisions_{scm_branch}'
+            dn-qualifier: 'compare revisions'
+            dn-sort-index: ' 10:'
+            project-type: matrix
+            axes:
+                - axis:
+                    type: user-defined
+                    name: JENKINS_INSTANCE
+                    values: '{obj:meta_ci_compare_revisions_instances}'
+            gpr_trigger_phrase: 'jenkins, please compare revisions'
+            gpr_only_trigger_phrase: False
+            gpr_permit_all: True
+            gpr_permit_all: True
+            gpr_cron: 'H/5 * * * *'
+            gpr_builders:
+                - trigger-builds:
+                    - project: '{value_stream}_ci-job-configs_meta_compare-revisions_{scm_branch}'
+                      current-parameters: True
+                      block: True
+        - '{value_stream}_ci-job-configs_meta_compare-revisions_{scm_branch}':
+            dn-sort-index: ' 11:'
