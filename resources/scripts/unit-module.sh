@@ -17,5 +17,5 @@ set -x
 bundle exec rake spec
 
 echo "REF=$GIT_COMMIT" > promote.properties
-echo "MODULE_NAME=puppetlabs-puppet_enterprise" >> promote.properties
-echo "BRANCH=3.99.x" >> promote.properties
+echo "MODULE_NAME={module_name}" >> promote.properties
+echo "BRANCH={scm_branch}" >> promote.properties
