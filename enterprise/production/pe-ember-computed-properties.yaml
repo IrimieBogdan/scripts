@@ -1,0 +1,12 @@
+- project:
+    name: pe-ember-computed-properties
+    git_url: git@github.com:puppetlabs/pe-ember-computed-properties.git
+    hipchat_room: ['Node Management UI','Configuration Management']
+    value_stream: enterprise
+    kickoff_disabled: False
+    console_timeout: '10'
+    assets-builddir: ""
+
+    jobs:
+        - 'pe-ui-ember-cli-pipeline':
+            scm_branch: 'master'

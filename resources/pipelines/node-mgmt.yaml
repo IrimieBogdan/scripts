@@ -60,6 +60,7 @@
 
 - job-group:
     name: 'pe-ui-ember-cli-pipeline'
+    downstream_jobs: ''
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: 'assets_{scm_branch}'
