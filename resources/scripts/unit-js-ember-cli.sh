@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd {assets-builddir}
+cd $WORKSPACE/{assets-builddir}
 
 # install phantomjs locally
 npm install phantomjs@1.9.8
