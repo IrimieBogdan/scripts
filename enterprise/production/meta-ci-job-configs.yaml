@@ -9,7 +9,7 @@
         - 'README.md'
     git_included_regions:
         - 'enterprise/.*'
-        - 'resource/.*'
+        - 'resources/.*'
         - 'utils/.*'
         - '.gitmodules'
 
