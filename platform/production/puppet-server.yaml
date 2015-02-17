@@ -8,18 +8,17 @@
     hipchat_room: 'Puppet Server (aka PE Green Team)'
     value_stream: platform
     kickoff_disabled: False
-    shell_workspace: ''
     logrotate_daystokeep: 14
     logrotate_numtokeep: 14
     console_timeout: '20'
-    ezbake-git-branch: 'master'
     preserve_hosts: 'onfail'
     genconfig: "bundle exec genconfig $PLATFORM-$LAYOUT"
 
     jobs:
-        - 'foss_puppet-server_full-pipeline':
+        - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'stable'
-            ezbake-git-branch: 'puppetserver/stable'
+            beaker_type: 'foss'
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
             beaker_type: 'aio'
+            ship_nightly: 'TRUE'

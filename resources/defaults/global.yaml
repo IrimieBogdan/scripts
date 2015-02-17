@@ -368,8 +368,26 @@
     gpr_orgs:
         - puppetlabs
 
+    # VAR
+    # The phrase that will cause the job to build.
     gpr_trigger_phrase: ''
+
+    # VAR
+    # If set to True, only commenting the trigger phrase will cause the job to
+    # build.
     gpr_only_trigger_phrase: False
+
+    # VAR
+    # Indicate whether all PRs should automatically be built.
     gpr_permit_all: False
 
+    # VAR
+    # Githup PR trigger polling interval.
     gpr_cron: 'H/5 * * * *'
+
+    # VAR
+    # Used to indicate whether or not a particular project, job-group, or
+    # job-template should cause a build artifact to be preserved in a nightly
+    # build. The only value here that will cause the artifact to be preserved is
+    # "TRUE".
+    ship-nightly: 'FALSE'

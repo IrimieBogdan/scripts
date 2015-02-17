@@ -18,11 +18,6 @@
     name: '{value_stream}_{name}_packaging-os-clj_{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Packaging Uberbuild'
     node: worker
-    metadata:
-        - string:
-            name: SCRIPT_DIR
-            value: ezbake
-            expose-to-env: true
     parameters:
         - string:
             name: LEIN_PROJECT_VERSION
@@ -31,15 +26,30 @@
             name: PE_VER
             default: '{default_PE_VER}'
             description: "Maven artifact version to build."
+
     builders:
-        - git-clone:
-            git-repo: git@github.com:puppetlabs/ezbake.git
-            git-branch: '{ezbake-git-branch}'
-            git-dir-name: ezbake
-        - ezbake-packaging-foss:
-            script_dir: ezbake
-            ezbake_package_name: '{ezbake_package_name}'
-            maven_artifact_name: '{maven_artifact_name}'
+        - shell: |
+            #!/usr/bin/env bash
+
+            GIT_REPO="${{GIT_REPO:-{ezbake-git-repo}}}"
+            GIT_REF="${{GIT_REF:-{ezbake-git-branch}}}"
+
+            set -x
+            set -e
+
+            echo
+            echo "Clone git repository."
+            git clone git@github.com:puppetlabs/ezbake.git ezbake
+
+            if [ ! -z "$GIT_REF" ] ;then
+                cd ezbake
+
+                echo
+                echo "Checkout given ref"
+                git checkout $GIT_REF
+            fi
+        - shell: !include-raw ezbake-packaging-foss.sh
+
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
