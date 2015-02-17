@@ -100,7 +100,15 @@
     # Default git revision passing behavior for downstream job.
     tpb_git_revision: True
 
+    # VAR
+    # Intedned to be used on a job-template so that instances of the
+    # job-template may pass different downstream jobs.
     tpb_projects: ''
+
+    # VAR
+    # Intended to be used as an alias for 'tpb_projects' at the job-group level,
+    # to provide a means to connect different pipelines.
+    downstream_jobs: ''
 
     # VAR
     # Default no-activity build timeout wrapper in seconds.
