@@ -8,8 +8,8 @@
     logrotate_numtokeep: 14
     console_timeout: '10'
 
-    assets-composedir: "resources/console-ui/dist"
-    assets-tempdir: "resources/console-ui/dist"
+    assets-composedir: "composition"
+    assets-tempdir: ".tmp/pe-console-ui/dev-resources/console-ui"
     assets-outdirs: "resources/console-ui/dist"
     assets-builddir: "dev-resources/console-ui"
 
