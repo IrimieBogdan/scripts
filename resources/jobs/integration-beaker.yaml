@@ -6,7 +6,7 @@
     node: beaker
     parameters:
         - string:
-            name: PACKAGE_BUILD_VERSION
+            name: '{package_build_version_varname}'
             description: "Version of {name} to use in test."
         - string:
             name: PLATFORM_AXIS
