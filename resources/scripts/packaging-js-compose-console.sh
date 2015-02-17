@@ -3,17 +3,17 @@
 set -x
 set -e
 
-cd {assets-composedir}
+cd $WORKSPACE/{assets-composedir}
 
 ./compose.sh manifest.json
 
 cd $WORKSPACE/{assets-tempdir}
 
 # install phantomjs locally
-npm install phantomjs@1.9.8
+npm install phantomjs@1.9.8 --save
 
 # install bower locally
-npm install bower
+npm install bower --save
 
 npm install
 
@@ -29,4 +29,4 @@ ember g pe-base-styles
 
 ember test
 
-ember build --environment=production
+ember build --environment=production -output-path=$WORKSPACE/.tmp/pe-console-ui/resources/dist/

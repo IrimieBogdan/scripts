@@ -17,7 +17,7 @@
 - job-template:
     name: '{value_stream}_pe-console-ui_compose-console-{scm_branch}'
     display-name: '{name} ({scm_branch}){dn-sort-index} Compose and Build Console'
-    node: worker
+    node: unit
     builders:
         - shell:
             !include-raw packaging-js-compose-console.sh
