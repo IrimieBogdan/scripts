@@ -16,6 +16,16 @@
     preserve_hosts: 'onfail'
 
     jobs:
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+            scm_branch: 'master'
+
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+            scm_branch: 'stable'
+
         - 'classifier-unit-pipeline':
             scm_branch: "master"
             puppet_branch: "master"
