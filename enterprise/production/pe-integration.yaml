@@ -64,8 +64,12 @@
         - centos6-64mcd-centos4-32a-centos4-32f
         - centos6-64mcd-osx109-64a-osx109-64f
         - centos6-64mcd-redhat4-64a-redhat4-64f
+        - centos6-64mcd-redhat5-64a-redhat5-64f
         - centos6-64mcd-sles10-32a-sles10-32f
         - centos6-64mcd-sles10-64a-sles10-64f
+        - centos6-64mcd-debian6-64a-debian6-64f
+        - centos6-64mcd-debian7-64a-debian7-64f
+        - centos6-64mcd-ubuntu1004-64a-ubuntu1004-64f
 
     upgrade_from_axis:
         - 3.3.2
@@ -156,6 +160,15 @@
             scm_branch: 3.7.x
             preserve_hosts: onfail
             full_upgrade_combination_filter: '(PLATFORM == "sles12").implies(UPGRADE_FROM != "3.3.2" && UPGRADE_FROM != "3.7.0")'
+            agent_layout_axis:
+                - centos6-64mcd-solaris10-64a-solaris10-64f
+                - centos6-64mcd-solaris11-64a-solaris11-64f
+                - centos6-64mcd-centos4-64a-centos4-64f
+                - centos6-64mcd-centos4-32a-centos4-32f
+                - centos6-64mcd-osx109-64a-osx109-64f
+                - centos6-64mcd-redhat4-64a-redhat4-64f
+                - centos6-64mcd-sles10-32a-sles10-32f
+                - centos6-64mcd-sles10-64a-sles10-64f
             platform_axis:
                 - centos5
                 - centos6
