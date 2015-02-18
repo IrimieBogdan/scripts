@@ -6,6 +6,7 @@
     kickoff_disabled: False
     console_timeout: '10'
     assets-builddir: ""
+    testem-port: 7360
 
     jobs:
         - 'pe-ui-ember-cli-pipeline':

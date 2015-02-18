@@ -18,9 +18,11 @@
     jobs:
         - 'pe-console-ui-composition-pipeline':
             scm_branch: 'master'
+            testem-port: 7362
 
         - 'pe-ui-ember-cli-pipeline':
             scm_branch: 'master'
+            testem-port: 7365
             downstream_jobs:
               - 'enterprise_pe-console-ui_compose-console-master'
 

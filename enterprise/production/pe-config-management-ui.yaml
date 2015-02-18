@@ -11,6 +11,7 @@
 
     assets-outdirs: "resources/config-management-ui/dist"
     assets-builddir: "dev-resources/config-management-ui"
+    testem-port: 7359
 
     kickoff_disabled: False
     jobs:
