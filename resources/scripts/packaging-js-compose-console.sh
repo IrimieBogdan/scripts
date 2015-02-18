@@ -28,5 +28,3 @@ bower install
 ember g pe-base-styles
 
 ember test --port {testem-port}
-
-ember build --environment=production -output-path=$WORKSPACE/.tmp/pe-console-ui/resources/dist/
