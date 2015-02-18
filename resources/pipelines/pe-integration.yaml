@@ -163,7 +163,7 @@
             qualifier: 030_pe_external_ca
             beaker_presuite: pre-suite/pre_ste-remote_ca.rb
             layout_axis:
-                - 64u-64mda-64f
+                - 64u-64mdca-64f
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier: 122_jvm_stdlib_module
             beaker_presuite: pre-suite/pe_install_env.rb,pre-suite/stdlib_install.rb
