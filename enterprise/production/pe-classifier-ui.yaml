@@ -11,6 +11,7 @@
 
     assets-outdirs: "resources/classifier-ui/dist"
     assets-builddir: "dev-resources/classifier-ui"
+    testem-port: 7358
 
     cobertura-report-file: 'dev-resources/classifier-ui/test/coverage/xml/**/coverage.xml'
     junit-results:  'dev-resources/classifier-ui/test/reports/results.xml'
