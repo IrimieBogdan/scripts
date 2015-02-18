@@ -22,7 +22,10 @@
         - github:
             url: '{github_http_url}'
 
-    github_http_url: '{git_url}'
+    github_user: 'puppetlabs'
+    github_project: 'GITHUB-PROJECT-JJB-VARIABLE-NOT-SET'
+    git_url: 'git@github.com:{github_user}/{github_project}.git'
+    github_http_url: 'https://github.com/{github_user}/{github_project}'
 
     scm:
         - git:

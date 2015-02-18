@@ -1,11 +1,15 @@
 - project:
     name: pe-uber-compose-lib
-    git_url: git@github.com:puppetlabs/pe-uber-compose-lib.git
+    meta_path_project: 'enterprise/production/pe-uber-compose-lib.yaml'
     value_stream: enterprise
-    hipchat_room: 'Node Management UI'
-    kickoff_disabled: False
-    console_timeout: '10'
 
+    github_user: 'puppetlabs'
+    github_project: 'pe-uber-compose-lib'
+
+    hipchat_room:
+        - 'Node Management UI'
+
+    kickoff_disabled: False
     jobs:
         - 'pe-ui-mocha-unit-pipeline':
             scm_branch: 'master'
