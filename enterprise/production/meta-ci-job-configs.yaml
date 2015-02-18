@@ -2,7 +2,9 @@
     name: 'ci-job-configs'
     meta_path_project: 'enterprise/production/meta-ci-job-configs.yaml'
     value_stream: 'qe'
-    git_url: git@github.com:puppetlabs/{name}.git
+
+    github_user: 'puppetlabs'
+    github_project: 'ci-job-configs'
 
     git_excluded_regions:
         - 'doc/.*'
@@ -13,7 +15,6 @@
         - 'utils/.*'
         - '.gitmodules'
 
-    github_http_url: 'https://github.com/puppetlabs/ci-job-configs'
     kickoff_disabled: False
 
     jenkins_instance: 'enterprise'

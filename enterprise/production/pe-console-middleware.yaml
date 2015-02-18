@@ -1,13 +1,13 @@
 - project:
-    name: pe-file-sync
-    meta_path_project: 'enterprise/production/pe-file-sync.yaml'
+    name: 'pe-console-middleware'
+    meta_path_project: 'enterprise/production/pe-console-middleware.yaml'
     value_stream: 'enterprise'
 
     github_user: 'puppetlabs'
-    github_project: 'pe-file-sync'
+    github_project: 'pe-console-middleware'
 
     hipchat_room:
-        - 'Puppet Server (aka PE Green Team)'
+        - 'Configuration Management'
 
     kickoff_disabled: False
     jobs:
