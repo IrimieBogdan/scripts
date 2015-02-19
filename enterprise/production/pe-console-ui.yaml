@@ -34,6 +34,7 @@
             git_included_regions:
                 - 'dev-resources/conf.d/.*'
                 - 'dev-resources/bootstrap.cfg'
+                - 'resources/.*'
                 - 'src/.*'
                 - 'test/.*'
                 - 'project.clj'
