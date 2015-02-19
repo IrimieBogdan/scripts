@@ -1,0 +1,60 @@
+- project:
+    name: rbac
+    git_url: git@github.com:puppetlabs/pe-rbac-service
+    default_platform_axis: centos6 centos7 redhat7 ubuntu1404
+    default_layout_axis: 64mdcal 64mdcal-32a
+    hipchat_room: 'RBAC'
+    value_stream: enterprise
+    kickoff_disabled: False
+    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
+    package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+    mergely_platform_axis: 'centos6 ubuntu1404'
+
+    git_excluded_regions:
+            - 'doc/.*'
+            - 'README.md'
+    git_included_regions:
+        - 'dev-resources/.*'
+        - 'resources/.*'
+        - 'src/.*'
+        - 'test/.*'
+
+    beaker_type: 'pe'
+    preserve_hosts: 'onfail'
+
+    jobs:
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+            scm_branch: 'master'
+
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+            scm_branch: 'stable'
+
+        - 'rbac-unit-pipeline':
+            scm_branch: "master"
+            puppet_branch: "master"
+            downstream_jobs:
+                - 'enterprise_rbac_packaging-ezbake_multiproject_3.7_master'
+                - 'enterprise_rbac_packaging-ezbake_multiproject_4.0_master'
+        - 'rbac-acceptance-pipeline':
+            pe_family: '3.7'
+            scm_branch: "master"
+            puppet_branch: "master"
+        - 'rbac-acceptance-pipeline':
+            pe_family: '4.0'
+            scm_branch: "master"
+            puppet_branch: "master"
+            packaging_sleep: 10
+
+        - 'rbac-unit-pipeline':
+            scm_branch: "stable"
+            puppet_branch: "stable"
+            downstream_jobs:
+                - 'enterprise_rbac_packaging-ezbake_multiproject_3.7_stable'
+        - 'rbac-acceptance-pipeline':
+            pe_family: '3.7'
+            scm_branch: "stable"
+            puppet_branch: "stable"

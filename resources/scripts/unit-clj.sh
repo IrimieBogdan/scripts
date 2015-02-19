@@ -10,8 +10,8 @@ set -x
 wget https://raw.githubusercontent.com/technomancy/leiningen/2.5.1/bin/lein
 chmod u+x lein
 
-if [ ! -z "${JDK_BIN_PATH}" ] ;then
-	export PATH="${JDK_BIN_PATH:-}:${PATH}"
+if [ ! -z "$JDK_BIN_PATH" ] ;then
+	export PATH="${{JDK_BIN_PATH:-}}:$PATH"
 fi
 
 java -version
@@ -20,4 +20,4 @@ java -version
 #
 
 ./lein version
-./lein -U test :all
+./lein -U test {clj_lein_test_selector}

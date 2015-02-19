@@ -1,0 +1,58 @@
+- job-group:
+    name: 'rbac-unit-pipeline'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS={mergely_platform_axis}"
+
+        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+            dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_directory-services_ad_{scm_branch}'
+            clj_lein_test_selector: ':unit'
+
+        - '{value_stream}_{name}_unit-clj_directory-services_{qualifier}':
+            qualifier: 'ad_{scm_branch}'
+            dn-sort-index: ' 05:'
+            ds_user: CN=Administrator,CN=Users,DC=delivery,DC=puppetlabs,DC=net
+            ds_host: rudra.delivery.puppetlabs.net
+            ds_type: activedirectory
+            ds_group_dn: CN=Groups
+            ds_user_dn: CN=Users
+            ds_base_dn: DC=delivery,DC=puppetlabs,DC=net
+            tpb_projects: '{value_stream}_{name}_unit-clj_directory-services_openldap_{scm_branch}'
+            clj_lein_test_selector: ':integration'
+
+        - '{value_stream}_{name}_unit-clj_directory-services_{qualifier}':
+            qualifier: 'openldap_{scm_branch}'
+            ds_user: cn=admin,dc=delivery,dc=puppetlabs,dc=net
+            ds_host: devi.delivery.puppetlabs.net
+            ds_type: openldap
+            ds_group_dn: ou=groups
+            ds_user_dn: ou=users
+            ds_base_dn: dc=delivery,dc=puppetlabs,dc=net
+            dn-sort-index: ' 10:'
+            tpb_projects: '{obj:downstream_jobs}'
+            clj_lein_test_selector: ':integration'
+
+- job-group:
+    name: 'rbac-acceptance-pipeline'
+    jobs:
+        - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
+            qualifier: '{pe_family}_{scm_branch}'
+            dn-sort-index: ' 10:'
+            tpb_projects: '{value_stream}_{name}_integration-system_full-{pe_family}_{scm_branch}'
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'full-{pe_family}_{scm_branch}'
+            dn-sort-index: ' 25:'
+            dn-qualifier: ' PE {pe_family}.x Full'
+            bjp_additional: ''
+            is-pe: "true"
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'
