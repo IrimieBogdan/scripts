@@ -141,6 +141,29 @@
                 - ubuntu1404
 
         - 'pe-integration-smoke':
+            pe_family: 3.8
+            scm_branch: 3.8.x
+            preserve_hosts: onfail
+            upgrader_smoke_upgrade_from_axis:
+                - 3.3.2
+                - 3.7.2
+            upgrader_smoke_platform_axis:
+                - centos6
+                - debian7
+                - redhat7
+                - ubuntu1204
+            split_smoke_platform_axis:
+                - centos6
+                - debian7
+                - redhat7
+                - ubuntu1204
+            mono_smoke_platform_axis:
+                - centos5
+                - debian6
+                - sles11
+                - ubuntu1404
+
+        - 'pe-integration-smoke':
             pe_family: 4.0
             scm_branch: 4.0.x
             preserve_hosts: onfail
@@ -189,6 +212,41 @@
                 - ubuntu1004
                 - ubuntu1204
                 - ubuntu1404
+        - 'pe-integration-full':
+            pe_family: 3.8
+            scm_branch: 3.8.x
+            preserve_hosts: never
+            full_upgrade_combination_filter: '(PLATFORM == "sles12").implies(UPGRADE_FROM != "3.3.2" && UPGRADE_FROM != "3.7.0")'
+            agent_layout_axis:
+                - centos6-64mcd-solaris10-64a-solaris10-64f
+                - centos6-64mcd-solaris11-64a-solaris11-64f
+                - centos6-64mcd-centos4-64a-centos4-64f
+                - centos6-64mcd-centos4-32a-centos4-32f
+                - centos6-64mcd-osx109-64a-osx109-64f
+                - centos6-64mcd-redhat4-64a-redhat4-64f
+                - centos6-64mcd-sles10-32a-sles10-32f
+                - centos6-64mcd-sles10-64a-sles10-64f
+            platform_axis:
+                - centos5
+                - centos6
+                - centos7
+                - debian6
+                - debian7
+                - oracle5
+                - oracle6
+                - oracle7
+                - redhat5
+                - redhat6
+                - redhat7
+                - scientific5
+                - scientific6
+                - scientific7
+                - sles11
+                - sles12
+                - ubuntu1004
+                - ubuntu1204
+                - ubuntu1404
+
 
         - '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}':
             disabled: False
@@ -197,6 +255,7 @@
             dn-qualifier: 'Nightly '
             scm_branch:
                 - 3.7.x
+                - 3.8.x
                 - 3.99.x
                 - 4.0.x
             phase1_projects:
