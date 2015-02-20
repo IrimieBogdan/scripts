@@ -1,6 +1,9 @@
 - project:
     name: pe-console-auth-ui
-    git_url: 'git@github.com:puppetlabs/{name}.git'
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-console-auth-ui'
+
     hipchat_room: 'Node Management UI'
     value_stream: enterprise
 
