@@ -1,0 +1,17 @@
+- project:
+    name: dujour-version-check
+    meta_path_project: 'enterprise/production/dujour-version-check.yaml'
+    value_stream: 'enterprise'
+
+    github_user: 'puppetlabs'
+    github_project: 'dujour-version-check'
+   
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
+    
+    kickoff_disabled: False
+    jobs:
+        - 'clj-unit-release':
+            scm_branch: 'master'
+        - 'clj-merge-unit':
+            scm_branch: 'master'
