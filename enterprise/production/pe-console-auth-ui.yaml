@@ -3,6 +3,7 @@
     git_url: 'git@github.com:puppetlabs/{name}.git'
     hipchat_room: 'Node Management UI'
     value_stream: enterprise
+    kickoff_disabled: False
 
     jobs:
         - 'clj-unit-release':
