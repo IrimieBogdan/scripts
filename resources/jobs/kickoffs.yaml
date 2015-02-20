@@ -166,6 +166,16 @@
         - conditional-step:
             condition-kind: strings-match
             condition-string1: '${{ENV,var="pe_family"}}'
+            condition-string2: '3.8'
+            on-evaluation-failure: 'dont-run'
+            steps:
+                - trigger-builds:
+                    - project: '{value_stream}_{name}_integration-system_pe_smoke-monolithic_3.8.x'
+                      block: False
+                      current-parameters: True
+        - conditional-step:
+            condition-kind: strings-match
+            condition-string1: '${{ENV,var="pe_family"}}'
             condition-string2: '3.99'
             on-evaluation-failure: 'dont-run'
             steps:
