@@ -16,7 +16,7 @@
 
             echo
             echo "Set database passwords."
-            export RBAC_DBPASS={pgdb_password}
+            export PGPASSWORD={pgdb_password}
 
             # Generate a temporary database identifier
             RBAC_DB_ID=`echo "nc_unit_rbac_$BUILD_ID" | tr - _`
@@ -24,7 +24,6 @@
             export RBAC_DBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
             export RBAC_DBUSER="$DBUSER"
             export RBAC_DBPASS="$PGPASSWORD"
-
 
             echo
             echo "Create temporary database names."
