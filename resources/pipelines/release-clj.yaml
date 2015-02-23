@@ -10,3 +10,15 @@
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+- job-group:
+    name: 'clj-pe-console-middleware-unit-release'
+    jobs:
+        - '{value_stream}_{name}_unit-clj_pe-console-middleware_{qualifier}':
+            qualifier: 'release_{scm_branch}'
+            dn-qualifier: ' Pre-Release Clojure Unit Tests'
+            dn-sort-index: ' Release-01:'
+            tpb_projects: '{value_stream}_{name}_release-clj_{scm_branch}'
+
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'

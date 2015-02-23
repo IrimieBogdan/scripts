@@ -8,10 +8,14 @@
 
     hipchat_room:
         - 'Configuration Management'
+        - 'Node Management UI'
+        - 'RBAC'
 
+    pgdb_password: 'rbac851'
+    pgdb_user: 'rbac'
     kickoff_disabled: False
     jobs:
-        - 'clj-unit-release':
+        - 'clj-pe-console-middleware-unit-release':
             scm_branch: 'master'
-        - 'clj-merge-unit':
+        - 'clj-pe-console-middleware-merge-unit':
             scm_branch: 'master'
