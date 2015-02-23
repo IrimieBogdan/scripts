@@ -17,3 +17,7 @@
             !include-raw meta-ci-ghprb-fetch-pr.sh
         - shell:
             !include-raw meta-ci-compare-revisions.sh
+    publishers:
+        - archive:
+            artifacts: '*.diff'
+            allow-empty: 'true'

@@ -25,5 +25,6 @@ popd
 
 echo
 echo "compare head of master against merged head of PR"
-./utils/compare.sh -d production enterprise origin/master origin/merged-pr
+./utils/compare.sh -d production -o compare-xml-enterprise.diff enterprise origin/master origin/merged-pr
+./utils/compare.sh -d production -o compare-xml-platform.diff platform origin/master origin/merged-pr
 
