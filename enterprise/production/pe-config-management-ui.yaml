@@ -14,6 +14,9 @@
     testem-port: 7359
 
     kickoff_disabled: False
+    git_included_regions:
+        - 'dev-resources/.*'
+
     jobs:
         - 'pe-ui-ember-cli-pipeline':
             scm_branch: 'master'
