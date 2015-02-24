@@ -74,8 +74,8 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
-              predefined-parameters: '{tpb_predefined_parameters}'
-              current-parameters: '{tpb_current_parameters}'
-              condition: '{tpb_condition}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
               property-file: '.props'
-              git-revision: '{tpb_git_revision}'
+              git-revision: '{obj:tpb_git_revision}'

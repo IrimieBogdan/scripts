@@ -390,4 +390,4 @@
     # job-template should cause a build artifact to be preserved in a nightly
     # build. The only value here that will cause the artifact to be preserved is
     # "TRUE".
-    ship-nightly: 'FALSE'
+    ship_nightly: 'FALSE'
