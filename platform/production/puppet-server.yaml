@@ -18,6 +18,7 @@
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'stable'
             beaker_type: 'foss'
+            ship_nightly: 'FALSE'
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
             beaker_type: 'aio'
