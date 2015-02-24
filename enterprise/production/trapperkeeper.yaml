@@ -1,0 +1,14 @@
+- project:
+    name: trapperkeeper
+
+    github_user: 'puppetlabs'
+    github_project: 'trapperkeeper'
+
+    hipchat_room: 'Puppet Server (aka PE Green Team)'
+    value_stream: enterprise
+
+    jobs:
+        - 'clj-unit-release':
+            scm_branch: 'master'
+        - 'clj-merge-unit':
+            scm_branch: 'master'
