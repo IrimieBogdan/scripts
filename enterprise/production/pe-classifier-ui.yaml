@@ -17,11 +17,14 @@
     junit-results:  'dev-resources/classifier-ui/test/reports/results.xml'
 
     kickoff_disabled: False
+
     jobs:
         - 'pe-classifier-ui-legacy-pipeline':
             scm_branch: '3.7.x'
 
         - 'pe-ui-ember-cli-pipeline':
+            git_included_regions:
+                - 'dev-resources/.*'
             scm_branch: 'pod-conversion'
             downstream_jobs:
               - 'enterprise_pe-console-ui_compose-console-master'

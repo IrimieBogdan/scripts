@@ -59,7 +59,7 @@ RUNDIR="$(mktemp -d /tmp/ci-job-configs_XXXXXX)"
 # Parse environment and command line
 #
 
-while getopts d:o:Dhv OPT; do
+while getopts d:f:o:Dhv OPT; do
     case "$OPT" in
     d)
         DEPLOYMENT_TYPE="${OPTARG}"
@@ -74,6 +74,9 @@ while getopts d:o:Dhv OPT; do
         ;;
     o)
         RUNDIR="${OPTARG}"
+        ;;
+    f)
+        DIFF_OUTPUT_FILE="${OPTARG}"
         ;;
     v)
         message "`basename $0` version ${VERSION}"
@@ -160,6 +163,7 @@ then
   No difference in XML output.
 HEREDOC
 else
+  echo "$OUTPUT" > ${DIFF_OUTPUT_FILE:-compare-xml-output.diff}
 	cat <<HEREDOC
 
   Diff of $JENKINS_INSTANCE XML output for git revision $REVISION_A vs \

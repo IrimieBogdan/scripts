@@ -15,6 +15,9 @@
     assets-builddir: "dev-resources/console-ui"
 
     kickoff_disabled: False
+    git_included_regions:
+        - 'dev-resources/.*'
+
     jobs:
         - 'pe-console-ui-composition-pipeline':
             scm_branch: 'master'

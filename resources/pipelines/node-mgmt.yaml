@@ -64,8 +64,6 @@
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: 'assets_{scm_branch}'
             dn-qualifier: 'Assets '
-            git_included_regions: !!python/tuple
-                - dev-resources/.*
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-js_ember-cli_{scm_branch}'
         - '{value_stream}_{name}_unit-js_ember-cli_{scm_branch}':

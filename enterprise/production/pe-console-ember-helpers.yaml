@@ -1,12 +1,21 @@
 - project:
     name: pe-console-ember-helpers
-    git_url: git@github.com:puppetlabs/pe-console-ember-helpers.git
-    hipchat_room: ['Node Management UI','Configuration Management']
+    meta_path_project: 'enterprise/production/pe-console-ember-helpers.yaml'
     value_stream: enterprise
-    kickoff_disabled: False
-    console_timeout: '10'
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-console-ember-helpers'
+
+    hipchat_room:
+        - 'Node Management UI'
+        - 'Configuration Management'
+
     assets-builddir: ""
     testem-port: 7361
+
+    kickoff_disabled: False
+    git_included_regions:
+        - 'dev-resources/.*'
 
     jobs:
         - 'pe-ui-ember-cli-pipeline':

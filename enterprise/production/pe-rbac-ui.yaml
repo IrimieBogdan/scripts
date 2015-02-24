@@ -1,12 +1,17 @@
 - project:
     name: pe-rbac-ui
-    git_url: git@github.com:puppetlabs/pe-rbac-ui.git
-    hipchat_room: 'Node Management UI'
+    meta_path_project: 'enterprise/production/pe-rbac-ui.yaml'
     value_stream: enterprise
-    kickoff_disabled: False
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-rbac-ui'
+
     logrotate_daystokeep: -1
     logrotate_numtokeep: 30
-    console_timeout: '10'
+
+    hipchat_room:
+        - 'Node Management UI'
+
     assets-outdirs: "resources/{{rbac-ui,auth-ui}}/dist"
     assets-builddir: "dev-resources/rbac-ui"
     testem-port: 7364
@@ -14,11 +19,15 @@
     cobertura-report-file: 'dev-resources/rbac-ui/test/coverage/xml/**/coverage.xml'
     junit-results:  'dev-resources/rbac-ui/test/reports/results.xml'
 
+    kickoff_disabled: False
+
     jobs:
         - 'pe-rbac-ui-legacy-pipeline':
             scm_branch: '3.7.x'
 
         - 'pe-ui-ember-cli-pipeline':
             scm_branch: 'pod-conversion'
+            git_included_regions:
+                - 'dev-resources/.*'
             downstream_jobs:
               - 'enterprise_pe-console-ui_compose-console-master'
