@@ -1,5 +1,6 @@
 - job-template:
     name: '{value_stream}_{name}_unit-js_grunt-{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-js.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} JS Unit Tests'
     node: unit
     builders:
@@ -32,6 +33,7 @@
 
 - job-template:
     name: '{value_stream}_{name}_unit-js_ember-cli_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-js.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} JS Unit Tests'
     node: unit
     builders:
@@ -50,6 +52,7 @@
 
 - job-template:
     name: '{value_stream}_{name}_unit-js_mocha_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-js.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} JS Unit Tests'
     node: unit
     builders:
@@ -65,3 +68,51 @@
               condition: '{tpb_condition}'
               property-file: '{tpb_property_file}'
               git-revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_event-inspector_unit-javascript_legacy-{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-js.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Javascript Unit Test'
+    node: unit
+    builders:
+        - shell: !include-raw unit-js-event-inspector.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_certificate-manager_unit-javascript_legacy-{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-js.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Javascript Unit Test'
+    node: unit
+    builders:
+        - shell: !include-raw unit-js-certificate-manager.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_console_unit-javascript_legacy-{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-js.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Javascript Unit Test'
+    node: unit
+    builders:
+        - shell: !include-raw unit-js-console.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'

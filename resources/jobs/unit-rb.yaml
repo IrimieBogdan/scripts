@@ -1,5 +1,6 @@
 - job-template:
     name: '{value_stream}_{name}_unit-ruby_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-rb.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
     project-type: matrix
     node: unit
@@ -25,3 +26,52 @@
             tpb_condition: '{tpb_condition}'
             tpb_property_file: '{tpb_property_file}'
             tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_puppet-license_unit-ruby_{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-rb.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
+    node: unit
+    builders:
+        - shell: !include-raw unit-license-cli.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_live-management_unit-ruby_legacy-{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-rb.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
+    node: unit
+    builders:
+        - shell: !include-raw unit-live-management.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_dashboard_unit-ruby_legacy-{scm_branch}'
+    meta_path_jobtemplate: 'resources/jobs/unit-rb.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Ruby Unit Test'
+    node: unit
+    builders:
+        - shell: !include-raw unit-dashboard.sh
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
+
