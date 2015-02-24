@@ -124,15 +124,21 @@
             export PGPASSWORD={pgdb_password}
 
             # Generate a temporary database identifier
-            RBAC_DB_ID=`echo "nc_unit_rbac_$BUILD_ID" | tr - _`
+            RBAC_DB_ID=`echo "cmw_unit_rbac_$BUILD_ID" | tr - _`
+            ACTIVITY_DB_ID=`echo "cmw_unit_activity_$BUILD_ID" | tr - _`
 
             export RBAC_DBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
             export RBAC_DBUSER="$DBUSER"
             export RBAC_DBPASS="$PGPASSWORD"
 
+            export ACTIVITY_DBNAME="//$DBHOST:$DBPORT/$ACTIVITY_DB_ID"
+            export ACTIVITY_DBUSER="$DBUSER"
+            export ACTIVITY_DBPASS="$PGPASSWORD"
+
             echo
             echo "Create temporary database names."
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
 
             if [ "$DBUSER" = "rbac" ] ;then
                 echo
@@ -159,6 +165,7 @@
             echo
             echo "Clean up databases"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $RBAC_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $ACTIVITY_DB_ID"
 
             set -x
             set -e
