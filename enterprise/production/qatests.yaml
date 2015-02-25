@@ -13,7 +13,10 @@
             scm_branch: '3.7.x'
             pe_family: '3.7'
             platform_axis:
+                - redhat7
                 - centos7
+                - centos6
+                - ubuntu1404            
             layout_axis:
                 - 64mcd
 - project:
@@ -31,7 +34,10 @@
             scm_branch: '3.7.x'
             pe_family: '3.7'
             platform_axis:
+                - redhat7
                 - centos7
+                - centos6
+                - ubuntu1404
             layout_axis:
                 - 64mcd
 
