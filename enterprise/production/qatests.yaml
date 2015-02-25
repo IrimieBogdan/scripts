@@ -16,23 +16,6 @@
                 - centos7
             layout_axis:
                 - 64mcd
-
-        - 'qatest-pe-split-jobs':
-            scm_branch: '3.99.x'
-            pe_family: '3.99'
-            platform_axis:
-                - centos7
-            layout_axis:
-                - 64mcd
-
-        - 'qatest-pe-split-jobs':
-            scm_branch: '4.0.x'
-            pe_family: '4.0'
-            platform_axis:
-                - centos7
-            layout_axis:
-                - 64mcd
-
 - project:
     name: qatests-puppet
     value_stream: enterprise
@@ -44,22 +27,6 @@
     is-pe: 'is-pe'
     beaker_type: pe
     jobs:
-        - 'qatest-puppet-split-jobs':
-            scm_branch: '4.0.x'
-            pe_family: '4.0'
-            platform_axis:
-                - centos7
-            layout_axis:
-                - 64mcd
-
-        - 'qatest-puppet-split-jobs':
-            scm_branch: '3.99.x'
-            pe_family: '3.99'
-            platform_axis:
-                - centos7
-            layout_axis:
-                - 64mcd
-
         - 'qatest-puppet-split-jobs':
             scm_branch: '3.7.x'
             pe_family: '3.7'
