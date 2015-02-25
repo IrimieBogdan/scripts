@@ -1,0 +1,23 @@
+- project:
+    name: 'pe-trapperkeeper-proxy'
+    meta_path_project: 'enterprise/production/pe-trapperkeeper-proxy.yaml'
+    value_stream: 'enterprise'
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-trapperkeeper-proxy'
+
+    hipchat_room:
+        - 'Configuration Management'
+        - 'Node Management Services'
+        - 'Node Management UI'
+
+    kickoff_disabled: False
+
+    pgdb_user: 'rbac'
+    pgdb_password: 'rbac851'
+
+    jobs:
+        - 'clj-merge-unit_postgres-integration':
+            scm_branch: 'master'
+        - 'clj-unit-release_postgres-integration':
+            scm_branch: 'master'

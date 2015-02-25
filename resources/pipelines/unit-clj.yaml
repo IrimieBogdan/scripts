@@ -7,6 +7,7 @@
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
         - '{value_stream}_{name}_unit-clj_{qualifier}':
              dn-sort-index: ' 01:'
+
 - job-group:
     name: 'clj-pe-console-middleware-merge-unit'
     jobs:
@@ -14,4 +15,14 @@
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_pe-console-middleware_{scm_branch}'
         - '{value_stream}_{name}_unit-clj_pe-console-middleware_{qualifier}':
+            dn-sort-index: ' 01:'
+
+- job-group:
+    name: 'clj-merge-unit_postgres-integration'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+        - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
+            qualifier: '{scm_branch}'
             dn-sort-index: ' 01:'

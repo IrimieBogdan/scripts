@@ -177,3 +177,84 @@
             tpb_condition: '{tpb_condition}'
             tpb_property_file: '{tpb_property_file}'
             tpb_git_revision: '{tpb_git_revision}'
+
+- job-template:
+    name: '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/unit-clj.yaml'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Clj/Postgres Unit/Integration Test'
+    node: worker
+    builders:
+        - shell: |
+            #!/usr/bin/env bash
+            set -x
+            set -e
+
+            export DBHOST=vasu.delivery.puppetlabs.net
+            export DBUSER={pgdb_user}
+            export DBPORT=5432
+
+            echo
+            echo "Set postgres password."
+            export PGPASSWORD={pgdb_password}
+
+            echo
+            echo "Create unique database names."
+            CLASSIFIER_DB_ID=`echo "{name}_classifier_$BUILD_ID" | tr - _`
+            RBAC_DB_ID=`echo "{name}_rbac_$BUILD_ID" | tr - _`
+            ACTIVITY_DB_ID=`echo "{name}_activity_$BUILD_ID" | tr - _`
+
+            export CLASSIFIER_DBSUBNAME="//$DBHOST:$DBPORT/$DB_ID"
+            export CLASSIFIER_DBUSER="$DBUSER"
+            export CLASSIFIER_DBPASS="$PGPASSWORD"
+
+            export RBAC_DBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
+            export RBAC_DBUSER="$DBUSER"
+            export RBAC_DBPASS="$PGPASSWORD"
+
+            export ACTIVITY_DBNAME="//$DBHOST:$DBPORT/$ACTIVITY_DB_ID"
+            export ACTIVITY_DBUSER="$DBUSER"
+            export ACTIVITY_DBPASS="$PGPASSWORD"
+
+            set +e # failing the script by exit code during this section will
+                   # cause the database cleanup to not happen
+                   #
+            echo
+            echo "Create temporary database names."
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $CLASSIFIER_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
+
+            if [ "$DBUSER" = "rbac" ] ;then
+                echo
+                echo "Running with DBUSER=rbac, do this special thing."
+                psql -h "$DBHOST" -U "$DBUSER" -d "$RBAC_DB_ID" -c "create extension citext"
+            fi
+
+            if [ ! -z "$JDK_BIN_PATH" ] ;then
+                export PATH="$JDK_BIN_PATH:$PATH"
+            fi
+
+            java -version
+
+            echo
+            echo "Run leiningen tests."
+            lein version
+            lein -U test :all
+            RETVAL=$?
+
+            echo
+            echo "Clean up databases"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $CLASSIFIER_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $RBAC_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $ACTIVITY_DB_ID"
+
+            exit $RETVAL # exit with the return code of the leiningen test run
+
+    publishers:
+        - trigger-parameterized-build:
+            tpb_projects: '{tpb_projects}'
+            tpb_predefined_parameters: '{tpb_predefined_parameters}'
+            tpb_current_parameters: '{tpb_current_parameters}'
+            tpb_condition: '{tpb_condition}'
+            tpb_property_file: '{tpb_property_file}'
+            tpb_git_revision: '{tpb_git_revision}'
