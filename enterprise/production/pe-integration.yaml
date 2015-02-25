@@ -3,8 +3,8 @@
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
     git_url: git@github.com:puppetlabs/pe_acceptance_tests.git
-    logrotate_daystokeep: 30
-    logrotate_numtokeep: 30
+    logrotate_daystokeep: 15
+    logrotate_numtokeep: 10
 
     kickoff_disabled: False
     promotion_disabled: False
