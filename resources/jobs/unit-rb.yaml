@@ -75,3 +75,69 @@
               property-file: '{obj:tpb_property_file}'
               git-revision: '{obj:tpb_git_revision}'
 
+- job-template:
+    name: '{value_stream}_pe-razor-server_unit-ruby_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/unit-rb.yaml'
+    qualifier: '{scm_branch}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} PE Razor Ruby Unit Test'
+    node: unit
+    builders:
+        - shell: |
+            #!/usr/bin/env bash
+            set -e
+
+            DBNAME=$(echo "razor_server_spec_${{BUILD_ID}}" | tr - _)
+            DBUSER="razor"
+            DBPASSWORD="razor986"
+            DBHOST="vasu.delivery.puppetlabs.net"
+            DBPORT="5432"
+            export PGPASSWORD="razor986"
+
+            export database="jdbc:postgresql://$DBHOST/$DBNAME?user=$DBUSER&password=$DBPASSWORD"
+            export JRUBY_OPTS="--debug"
+            export LC_ALL="en_US.UTF-8"
+            export LANG="en_US.UTF-8"
+            export TERM="xterm"
+            export TORQUEBOX_FALLBACK_LOGFILE="torquebox.log"
+
+            echo " * remove old fallback logfile"
+            rm -vf $TORQUEBOX_FALLBACK_LOGFILE
+
+            echo " * select our ruby and install our gems"
+            source /usr/local/rvm/scripts/rvm
+            rvm install jruby-1.7.13
+            rvm use jruby-1.7.13
+            bundle install --clean --path=vendor/bundle
+
+            echo " * set up our configuration for the tests"
+            mkdir -p repo-store
+            ruby -ryaml <<RUBY
+            YAML.dump(
+            YAML.load_file('config.yaml.sample').tap do |c|
+              c['all']['repo_store_root'] = "#{{Dir.getwd}}/repo-store"
+              c['all']['database_url'] = ENV['database']
+              c.delete('production')
+              c.delete('development')
+              c.delete('test')
+            end, File.open('config.yaml', 'w'))
+            RUBY
+
+            echo " * creating a new database: $DBNAME"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $DBNAME"
+
+            echo " * reset the database to a fresh, pristine state"
+            bundle exec bin/razor-admin reset-database
+
+            echo " * run the tests"
+            bundle exec rspec --color --order random -fd
+
+            echo " * dropping database: $DBNAME"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $DBNAME"
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
+              property-file: '{obj:tpb_property_file}'
+              git-revision: '{obj:tpb_git_revision}'
