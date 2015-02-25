@@ -10,13 +10,13 @@
         - shell:
             !include-raw release-clj.sh
     publishers:
-        - trigger-parameterized-build:
-            tpb_projects: '{tpb_projects}'
-            tpb_predefined_parameters: '{tpb_predefined_parameters}'
-            tpb_current_parameters: '{tpb_current_parameters}'
-            tpb_condition: '{tpb_condition}'
-            tpb_property_file: '{tpb_property_file}'
-            tpb_git_revision: '{tpb_git_revision}'
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
+              property-file: '{obj:tpb_property_file}'
+              git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_pe-console-services_release_{scm_branch}'

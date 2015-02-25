@@ -38,8 +38,12 @@
         - shell:
             !include-raw integration-beaker.sh
     publishers:
-        - beaker-junit-publisher:
-            additional: '{bjp_additional}'
+        - archive:
+            artifacts: 'junit/latest/*.xml{bjp_additional}'
+            allow-empty: true
+        - junit:
+            results: 'junit/latest/*.xml'
+            test-stability: true
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
               predefined-parameters: '{tpb_predefined_parameters}'
@@ -83,8 +87,12 @@
         - shell:
             !include-raw integration-beaker.sh
     publishers:
-        - beaker-junit-publisher:
-            additional: ''
+        - archive:
+            artifacts: 'junit/latest/*.xml'
+            allow-empty: true
+        - junit:
+            results: 'junit/latest/*.xml'
+            test-stability: true
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
               predefined-parameters: '{tpb_predefined_parameters}'
@@ -137,31 +145,15 @@
             !include-raw integration-beaker.sh
 
     publishers:
-        - beaker-junit-publisher:
-            additional: ''
+        - archive:
+            artifacts: 'junit/latest/*.xml'
+            allow-empty: true
+        - junit:
+            results: 'junit/latest/*.xml'
+            test-stability: true
         - description-setter:
             regexp: "export pe_version=([\\w\\-.]+)"
             description: '\1 {beaker_testsuite}'
             regexp-for-failed: "export pe_version=([\\w\\-.]+)"
             description-for-failed: '\1 {beaker_testsuite}'
             set-for-matrix: true
-
-- job-template:
-    name: '{value_stream}_{name}_init_{qualifier}'
-    meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
-    display-name: '{displayname}'
-    defaults: global-no-scm
-    node: worker
-    disabled: '{obj:kickoff_disabled}'
-    execution-strategy:
-        sequential: true
-    triggers:
-        - timed: '{kickoff_interval}'
-    builders:
-        - trigger-builds:
-            - project: '{obj:phase_1_projects}'
-              block: true
-        - trigger-builds:
-            - project: '{obj:phase_2_projects}'
-              block: true
-
