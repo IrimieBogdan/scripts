@@ -1,18 +1,27 @@
 - project:
     name: puppet-server
-    git_url: git@github.com:puppetlabs/puppet-server.git
-    ezbake_package_name: puppetserver
-    maven_artifact_name: puppet-server
+    meta_path_project: 'platform/production/puppet-server.yaml'
+    value_stream: platform
+
+    github_user: 'puppetlabs'
+    github_project: 'puppet-server'
+
+    hipchat_room: 'Puppet Server (aka PE Green Team)'
+
+    # Used to set values on the integration jobs themselves.
     default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
     default_layout_axis: 64mdca 64mdca-64a
-    hipchat_room: 'Puppet Server (aka PE Green Team)'
-    value_stream: platform
-    kickoff_disabled: False
-    logrotate_daystokeep: 14
-    logrotate_numtokeep: 14
-    console_timeout: '20'
-    preserve_hosts: 'onfail'
+
+    # Used to set values on kickoff jobs that get passed as paramters to the
+    # integration jobs
+    nightly_platform_axis: "centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
+    mergely_platform_axis: "centos6 centos7 ubuntu1404"
+
     genconfig: "bundle exec genconfig $PLATFORM-$LAYOUT"
+    preserve_hosts: 'onfail'
+
+    console_timeout: '20'
+    kickoff_disabled: False
 
     jobs:
         - 'foss_puppet-server_full-lein-ezbake':
@@ -23,3 +32,6 @@
             scm_branch: 'master'
             beaker_type: 'aio'
             ship_nightly: 'TRUE'
+            default_platform_axis: centos7
+            nightly_platform_axis: centos7
+            mergely_platform_axis: centos7

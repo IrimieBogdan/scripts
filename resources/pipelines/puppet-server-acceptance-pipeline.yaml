@@ -7,7 +7,7 @@
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: |
-                PLATFORM_AXIS=centos6 centos7 ubuntu1404
+                PLATFORM_AXIS={mergely_platform_axis}
                 SHIP_NIGHTLY=FALSE
 
         - '{value_stream}_{name}_init_nightly-{qualifier}':
@@ -15,7 +15,7 @@
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: |
-                PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
+                PLATFORM_AXIS={nightly_platform_axis}
                 SHIP_NIGHTLY={ship_nightly}
 
         - '{value_stream}_{name}_unit-clj_{qualifier}':
