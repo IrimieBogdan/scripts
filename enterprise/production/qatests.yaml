@@ -3,8 +3,9 @@
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
     git_url: git@github.com:puppetlabs/qatests.git
-    logrotate_daystokeep: 30
-    logrotate_numtokeep: 30
+
+    logrotate_numtokeep: 5
+
     kickoff_disabled: True
     is-pe: 'is-pe'
     beaker_type: pe
@@ -19,13 +20,15 @@
                 - ubuntu1404            
             layout_axis:
                 - 64mcd
+
 - project:
     name: qatests-puppet
     value_stream: enterprise
     hipchat_room: ${{PROJECT_ROOM}}
     git_url: git@github.com:puppetlabs/qatests.git
-    logrotate_daystokeep: 30
-    logrotate_numtokeep: 30
+
+    logrotate_numtokeep: 5
+
     kickoff_disabled: True
     is-pe: 'is-pe'
     beaker_type: pe
