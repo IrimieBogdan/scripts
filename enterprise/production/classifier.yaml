@@ -1,26 +1,33 @@
 - project:
     name: classifier
-    git_url: git@github.com:puppetlabs/classifier.git
+    meta_path_project: 'enterprise/production/classifier.yaml'
+    value_stream: enterprise
+
+    github_user: 'puppetlabs'
+    github_project: 'classifier'
+
+    hipchat_room: 'Node Classifier'
+
+    package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
     default_platform_axis: centos6 centos7 redhat7 ubuntu1404
     default_layout_axis: 64mdcal 64mdcal-32a
-    hipchat_room: 'Node Classifier'
-    value_stream: enterprise
-    kickoff_disabled: False
-    logrotate_daystokeep: 30
-    logrotate_numtokeep: 30
-    console_timeout: '20'
-    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
-    package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
     beaker_type: 'pe'
     preserve_hosts: 'onfail'
+    kickoff_disabled: False
+    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
 
     jobs:
-        - '{value_stream}_{name}_release-clj_{qualifier}':
-            dn-sort-index: ' Release-05:'
-            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
-            scm_branch: 'master'
-
+        - 'classifier-unit-pipeline':
+            scm_branch: "stable"
+            puppet_branch: "stable"
+            downstream_jobs:
+                - 'enterprise_classifier_packaging-ezbake_multiproject_3.7_stable'
+        - 'classifier-acceptance-pipeline':
+            pe_family: '3.7'
+            scm_branch: "stable"
+            puppet_branch: "stable"
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
@@ -31,23 +38,23 @@
             puppet_branch: "master"
             downstream_jobs:
                 - 'enterprise_classifier_packaging-ezbake_multiproject_3.7_master'
+                - 'enterprise_classifier_packaging-ezbake_multiproject_3.8_master'
                 - 'enterprise_classifier_packaging-ezbake_multiproject_4.0_master'
         - 'classifier-acceptance-pipeline':
             pe_family: '3.7'
             scm_branch: "master"
             puppet_branch: "master"
         - 'classifier-acceptance-pipeline':
+            pe_family: '3.8'
+            scm_branch: "master"
+            puppet_branch: "master"
+            packaging_sleep: 10
+        - 'classifier-acceptance-pipeline':
             pe_family: '4.0'
             scm_branch: "master"
             puppet_branch: "master"
             packaging_sleep: 10
-
-        - 'classifier-unit-pipeline':
-            scm_branch: "stable"
-            puppet_branch: "stable"
-            downstream_jobs:
-                - 'enterprise_classifier_packaging-ezbake_multiproject_3.7_stable'
-        - 'classifier-acceptance-pipeline':
-            pe_family: '3.7'
-            scm_branch: "stable"
-            puppet_branch: "stable"
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+            scm_branch: 'master'
