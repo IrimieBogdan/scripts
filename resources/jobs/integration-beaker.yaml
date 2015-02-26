@@ -20,6 +20,12 @@
             name: LDAP_TYPE_AXIS
             default: '{default_ldap_type_axis}'
             description: 'List of LDAP service types. Known types include active directory and openldap'
+        - string:
+            name: SHIP_NIGHTLY
+            default: 'FALSE'
+            description: |
+                If this job happens to trigger nightly builds, then make sure
+                the nightly build is shipped by intention only.
     execution-strategy:
         combination-filter: '{combination-filter}'
     axes:
