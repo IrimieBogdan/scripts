@@ -1,8 +1,7 @@
 - job-template:
-    name: '{value_stream}_{name}_unit-clj-directory-services_{qualifier}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} {ldap_type} {dn-qualifier}'
+    name: '{value_stream}_{name}_unit-clj_directory-services_{qualifier}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier} Integration Test'
     qualifier: '{scm_branch}'
-    dn-qualifier: 'RBAC Unit Directory Server Tests'
     node: unit
     builders:
         - shell:
