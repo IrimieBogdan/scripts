@@ -7,7 +7,7 @@
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: "PLATFORM_AXIS={mergely_platform_axis}"
 
-        - '{value_stream}_{name}_unit-clj_{scm_branch}':
+        - '{value_stream}_{name}_unit-clj_{qualifier}':
             dn-sort-index: ' 01:'
             tpb_projects: '{value_stream}_{name}_unit-clj_directory-services_ad_{scm_branch}'
             clj_lein_test_selector: ':unit'
@@ -15,6 +15,7 @@
         - '{value_stream}_{name}_unit-clj_directory-services_{qualifier}':
             qualifier: 'ad_{scm_branch}'
             dn-sort-index: ' 05:'
+            dn-qualifier: 'Active Directory'
             ds_user: CN=Administrator,CN=Users,DC=delivery,DC=puppetlabs,DC=net
             ds_host: rudra.delivery.puppetlabs.net
             ds_type: activedirectory
@@ -26,13 +27,14 @@
 
         - '{value_stream}_{name}_unit-clj_directory-services_{qualifier}':
             qualifier: 'openldap_{scm_branch}'
+            dn-sort-index: ' 06:'
+            dn-qualifier: 'LDAP'
             ds_user: cn=admin,dc=delivery,dc=puppetlabs,dc=net
             ds_host: devi.delivery.puppetlabs.net
             ds_type: openldap
             ds_group_dn: ou=groups
             ds_user_dn: ou=users
             ds_base_dn: dc=delivery,dc=puppetlabs,dc=net
-            dn-sort-index: ' 10:'
             tpb_projects: '{obj:downstream_jobs}'
             clj_lein_test_selector: ':integration'
 
