@@ -10,4 +10,6 @@
         - '{value_stream}_pe-console-services_release_{scm_branch}':
             scm_branch: '3.7.x'
             pe_family: '3.7'
-
+        - '{value_stream}_pe-console-services_release_{scm_branch}':
+            scm_branch: '3.8.x'
+            pe_family: '3.8'
