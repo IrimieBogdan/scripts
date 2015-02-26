@@ -154,7 +154,6 @@
             qualifier:
                 - 020_puppet_server_http_ca
                 - 023_pe_reports_processor
-                - 035_puppet_server_basic
                 - 120_jenkins_user_scenario
                 - 121_jvm_metrics
                 - 130_wordpress_user_scenario
