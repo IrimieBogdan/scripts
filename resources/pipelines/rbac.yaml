@@ -15,9 +15,11 @@
         - '{value_stream}_{name}_unit-clj_directory-services_{qualifier}':
             qualifier: 'ad_{scm_branch}'
             dn-sort-index: ' 05:'
-            dn-qualifier: 'Active Directory'
+            dn-qualifier: 'Integration (Active Directory)'
             ds_user: CN=Administrator,CN=Users,DC=delivery,DC=puppetlabs,DC=net
             ds_host: rudra.delivery.puppetlabs.net
+            ds_pass: Vihoccyt1
+            ds_cert: dev-resources/ssl/activedirectory/rudra.pem
             ds_type: activedirectory
             ds_group_dn: CN=Groups
             ds_user_dn: CN=Users
@@ -28,9 +30,11 @@
         - '{value_stream}_{name}_unit-clj_directory-services_{qualifier}':
             qualifier: 'openldap_{scm_branch}'
             dn-sort-index: ' 06:'
-            dn-qualifier: 'LDAP'
+            dn-qualifier: 'Integration (OpenLDAP)'
             ds_user: cn=admin,dc=delivery,dc=puppetlabs,dc=net
             ds_host: devi.delivery.puppetlabs.net
+            ds_pass: puppet
+            ds_cert: dev-resources/ssl/openldap/devi.pem
             ds_type: openldap
             ds_group_dn: ou=groups
             ds_user_dn: ou=users
