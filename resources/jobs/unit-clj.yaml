@@ -7,7 +7,7 @@
     node: unit
     builders:
         - shell:
-            !include-raw-escape unit-clj.sh
+            !include-raw unit-clj.sh
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'

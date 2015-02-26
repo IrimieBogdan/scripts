@@ -391,3 +391,8 @@
     # build. The only value here that will cause the artifact to be preserved is
     # "TRUE".
     ship_nightly: 'FALSE'
+
+    # VAR
+    # Used as the lein test selector(Run 'lein help test' for more info).
+    # Default is set to all
+    clj_lein_test_selector: ':all'
