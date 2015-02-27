@@ -281,7 +281,6 @@
                 - '{value_stream}_qatests-pe_integration-system_pe_030_pe_external_ca_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_020_puppet_server_http_ca_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_023_pe_reports_processor_{scm_branch}'
-                - '{value_stream}_qatests-pe_integration-system_pe_035_puppet_server_basic_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_120_jenkins_user_scenario_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_121_jvm_metrics_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_122_jvm_stdlib_module_{scm_branch}'
