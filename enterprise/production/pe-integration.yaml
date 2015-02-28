@@ -287,7 +287,7 @@
                 - '{value_stream}_qatests-pe_integration-system_pe_215_jvm_inifile_module_{scm_branch}'
 
         - '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}':
-            disabled: True
+            kickoff_disabled: True
             qualifier: '{scm_branch}'
             dn-sort-index: ' 20:'
             dn-qualifier: 'Nightly '
