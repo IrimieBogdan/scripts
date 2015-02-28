@@ -254,10 +254,45 @@
             dn-sort-index: ' 20:'
             dn-qualifier: 'Nightly '
             scm_branch:
-                - 3.7.x
                 - 3.8.x
                 - 3.99.x
                 - 4.0.x
+            phase1_projects:
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-windows_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-upgrade_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-agent_{scm_branch}'
+                - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-agent-upgrade_{scm_branch}'
+            phase2_projects:
+                - '{value_stream}_qatests-puppet_integration-system_pe_020_manifest_ordering_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_020_puppet_resource_package_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_resource_service_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_resource_ssh_authorized_key_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_022_puppet_resource_group_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_022_puppet_resource_sshkey_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_025_puppet_resource_user_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_029_puppet_resource_file_windows_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_030_puppet_resource_exec_windows_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_030_puppet_resource_mount_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_031_puppet_resource_exec_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_041_puppet_resource_file_{scm_branch}'
+
+                - '{value_stream}_qatests-pe_integration-system_pe_030_pe_external_ca_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_020_puppet_server_http_ca_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_023_pe_reports_processor_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_120_jenkins_user_scenario_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_121_jvm_metrics_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_122_jvm_stdlib_module_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_130_wordpress_user_scenario_{scm_branch}'
+                - '{value_stream}_qatests-pe_integration-system_pe_215_jvm_inifile_module_{scm_branch}'
+
+        - '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}':
+            disabled: True
+            qualifier: '{scm_branch}'
+            dn-sort-index: ' 20:'
+            dn-qualifier: 'Nightly '
+            scm_branch:
+                - 3.7.x
             phase1_projects:
                 - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-windows_{scm_branch}'
                 - '{value_stream}_pe-acceptance-tests_integration-system_pe_full-upgrade_{scm_branch}'
