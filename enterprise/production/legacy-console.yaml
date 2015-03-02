@@ -11,3 +11,6 @@
         - 'console':
                 pe_family: 3.7
                 scm_branch: 3.7.x
+        - 'console':
+                pe_family: 3.8
+                scm_branch: 3.8.x
