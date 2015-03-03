@@ -24,6 +24,8 @@
     jobs:
         - 'pe-rbac-ui-legacy-pipeline':
             scm_branch: '3.7.x'
+        - 'pe-rbac-ui-legacy-pipeline':
+            scm_branch: '3.8.x'
 
         - 'pe-ui-ember-cli-pipeline':
             scm_branch: 'pod-conversion'

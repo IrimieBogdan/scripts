@@ -21,6 +21,8 @@
     jobs:
         - 'pe-classifier-ui-legacy-pipeline':
             scm_branch: '3.7.x'
+        - 'pe-classifier-ui-legacy-pipeline':
+            scm_branch: '3.8.x'
 
         - 'pe-ui-ember-cli-pipeline':
             git_included_regions:
