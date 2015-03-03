@@ -64,6 +64,7 @@
         - centos6-64mcd-centos4-32a-centos4-32f
         - centos6-64mcd-osx109-64a-osx109-64f
         - centos6-64mcd-redhat4-64a-redhat4-64f
+        - centos6-64mcd-redhat5-32a-redhat5-32f
         - centos6-64mcd-redhat5-64a-redhat5-64f
         - centos6-64mcd-sles10-32a-sles10-32f
         - centos6-64mcd-sles10-64a-sles10-64f
@@ -224,6 +225,7 @@
                 - centos6-64mcd-centos4-32a-centos4-32f
                 - centos6-64mcd-osx109-64a-osx109-64f
                 - centos6-64mcd-redhat4-64a-redhat4-64f
+                - centos6-64mcd-redhat5-32a-redhat5-32f
                 - centos6-64mcd-sles10-32a-sles10-32f
                 - centos6-64mcd-sles10-64a-sles10-64f
             platform_axis:
