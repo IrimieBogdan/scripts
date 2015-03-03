@@ -21,6 +21,17 @@
             layout_axis:
                 - 64mcd
 
+        - 'qatest-pe-split-jobs':
+            scm_branch: '3.8.x'
+            pe_family: '3.8'
+            platform_axis:
+                - redhat7
+                - centos7
+                - centos6
+                - ubuntu1404            
+            layout_axis:
+                - 64mcd
+
 - project:
     name: qatests-puppet
     value_stream: enterprise
@@ -36,6 +47,17 @@
         - 'qatest-puppet-split-jobs':
             scm_branch: '3.7.x'
             pe_family: '3.7'
+            platform_axis:
+                - redhat7
+                - centos7
+                - centos6
+                - ubuntu1404
+            layout_axis:
+                - 64mcd
+
+        - 'qatest-puppet-split-jobs':
+            scm_branch: '3.8.x'
+            pe_family: '3.8'
             platform_axis:
                 - redhat7
                 - centos7
