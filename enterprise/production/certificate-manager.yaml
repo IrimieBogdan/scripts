@@ -12,5 +12,6 @@
                 pe_family: 3.7
                 scm_branch: 3.7.x
         - 'certificate-manager':
+                kickoff_disabled: True
                 pe_family: 3.8
                 scm_branch: 3.8.x
