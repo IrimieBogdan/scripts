@@ -11,3 +11,5 @@
     jobs:
         - 'clj-unit-release':
             scm_branch: 'master'
+        - 'clj-unit-release':
+            scm_branch: 'stable'

@@ -35,7 +35,7 @@
                 recursive: True
             branches:
                 - '{scm_branch}'
-            skip-tag: '{git-skip-tag}'
+            skip-tag: '{git_skip_tag}'
 
     # VAR
     # Set the git refspec for a job using a git repo. This is the value jenkins
@@ -231,7 +231,7 @@
     # VAR
     # Used to indicate that Jenkins shouldn't do its default stupid
     # tagging behavior
-    git-skip-tag: False
+    git_skip_tag: False
 
     # VAR
     # Used in jobs that call 'rake pl:jenkins:uber_build' to conflicts between

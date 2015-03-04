@@ -5,6 +5,8 @@
     qualifier: '{scm_branch}'
     dn-qualifier: ' Lein Release'
 
+    git_skip_tag: True
+
     node: unit
     builders:
         - shell:
@@ -22,6 +24,9 @@
     name: '{value_stream}_pe-console-services_release_{scm_branch}'
     meta_path_jobtemplate: 'resources/jobs/release-clj.yaml'
     display-name: 'pe-console-services ({scm_branch}): Release & Promote to PE'
+
+    git_skip_tag: True
+
     description: |
 
         This job runs against {git_url} at the {scm_branch} branch.
