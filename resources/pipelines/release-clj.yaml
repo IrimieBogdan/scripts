@@ -11,6 +11,10 @@
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
 
+        - '{value_stream}_{name}_packaging-nexus-clj_{qualifier}':
+            qualifier: 'release_{scm_branch}'
+            dn-sort-index: ' Packaging-00:'
+
 - job-group:
     name: 'clj-pe-console-middleware-unit-release'
     jobs:
