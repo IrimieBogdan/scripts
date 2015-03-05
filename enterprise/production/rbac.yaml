@@ -18,11 +18,6 @@
     git_excluded_regions:
             - 'doc/.*'
             - 'README.md'
-    git_included_regions:
-        - 'dev-resources/.*'
-        - 'resources/.*'
-        - 'src/.*'
-        - 'test/.*'
 
     beaker_type: 'pe'
     preserve_hosts: 'onfail'
