@@ -1,6 +1,18 @@
 - job-template:
     name: '{value_stream}_{name}_release-clj_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/release-clj.yaml'
+    meta_description: |
+        <p>This job performs the following tasks: <\p><\br>
+        <p>    * Bumps to 'release' version (modifes maven version string in project.clj)<\br><\p>
+        <p>    * Commits project.clj change to repo.<\br><\p>
+        <p>    * Bumps to ${{VERSION_LEVEL:-patch}} version (modifes maven version string in project.clj)<\br><\p>
+        <p>    * Pushes the change to {scm_branch} branch at {git_url}.<\br><\p>
+        <p>    * Tags the repo at the release commit.<\br><\p>
+        <p>    * Pushes the new tag to {scm_branch} branch at {git_url}.<\br><\p>
+        <p>    * Runs 'lein deploy' at the release commit.<\br><\p>
+
+        <p>Please note that this job has a build parameter which allows you to
+        set the "next" version level that should incremented.<\p>
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
     qualifier: '{scm_branch}'
     dn-qualifier: ' Lein Release'
@@ -8,6 +20,12 @@
     git_skip_tag: True
 
     node: unit
+    parameters:
+        - string:
+            name: VERSION_LEVEL
+            default: :patch
+            description: |
+                Set the version level that should be set by the second version bump in this job.
     builders:
         - shell:
             !include-raw release-clj.sh
@@ -29,27 +47,27 @@
 
     description: |
 
-        This job runs against {git_url} at the {scm_branch} branch.
+        <p>This job runs against {git_url} at the {scm_branch} branch.<\p>
 
-        It accepts a comma-separated list of project=version tuples representing
+        <p>It accepts a comma-separated list of project=version tuples representing
         new versions of components that should be included in the
-        pe-console-services package.
+        pe-console-services package.<\p>
 
-        It performs the following tasks in order:
-            * Updates the given list of pe-console-services dependencies.
-            * Bumps the current pe-console-services version to the next "release".
-            * Commits this change to the git repo then tags it with the release version.
-            * Builds a pe-console-services uberjar and packages for Puppet Enterprise.
-            * Bump the current pe-console-services version from its current
-              "release" state to the next snapshot level.
-            * Pushes the current head and recently-created release snapshot to
-              the {scm_branch} branch of pe-console-services repo.
-            * Promotes the built package into the {pe_family}.x branch of
-              https://github.com/puppetlabs/enterprise-dis
+        <p>It performs the following tasks in order:<\p>
+        <p>    * Updates the given list of pe-console-services dependencies.<\p>
+        <p>    * Bumps the current pe-console-services version to the next "release".<\p>
+        <p>    * Commits this change to the git repo then tags it with the release version.<\p>
+        <p>    * Builds a pe-console-services uberjar and packages for Puppet Enterprise.<\p>
+        <p>    * Bump the current pe-console-services version from its current
+              "release" state to the next snapshot level.<\p>
+        <p>    * Pushes the current head and recently-created release snapshot to
+              the {scm_branch} branch of pe-console-services repo.<\p>
+        <p>    * Promotes the built package into the {pe_family}.x branch of
+              https://github.com/puppetlabs/enterprise-dis<\p>
 
-        **NOTE** that if the package building step of this job is successful it
+        <p>**NOTE** that if the package building step of this job is successful it
         will COMMIT the project.clj changes to the pe-console-services
-        repository.
+        repository.<\p>
     node: worker
     project-type: freestyle
     parameters:
