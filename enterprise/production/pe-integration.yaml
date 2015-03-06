@@ -179,6 +179,7 @@
             pe_family: 4.0
             scm_branch: 4.0.x
             preserve_hosts: never
+            full_upgrade_combination_filter: '(PLATFORM == "sles12").implies(UPGRADE_FROM != "3.3.2" && UPGRADE_FROM != "3.7.0")'
         - 'pe-integration-full':
             pe_family: 3.7
             scm_branch: 3.7.x
