@@ -396,3 +396,8 @@
     # Used as the lein test selector(Run 'lein help test' for more info).
     # Default is set to all
     clj_lein_test_selector: ':all'
+
+    # VAR
+    # List of LDAP service types. Known types include active directory and
+    # openldap
+    default_ldap_type_axis: ''
