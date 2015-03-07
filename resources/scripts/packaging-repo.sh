@@ -19,7 +19,7 @@ ref=$(rake pl:print_build_param[ref])
 rake package:implode
 
 set +x
-cat > "$WORKSPACE/promote.properties" <<PROPS
+cat > "$WORKSPACE/packaging-repo.props" <<PROPS
 REF=${{ref?}}
 PKG={promote_package}
 BRANCH={pe_family}.x
@@ -27,4 +27,4 @@ BRANCH={pe_family}.x
 PROPS
 set -x
 
-cat "$WORKSPACE/promote.properties"
+cat "$WORKSPACE/packaging-repo.props"

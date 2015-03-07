@@ -14,5 +14,5 @@
               predefined-parameters: '{obj:tpb_predefined_parameters}'
               current-parameters: '{obj:tpb_current_parameters}'
               condition: '{obj:tpb_condition}'
-              property-file: '{obj:tpb_property_file}'
+              property-file: 'packaging-repo.props'
               git-revision: '{obj:tpb_git_revision}'
