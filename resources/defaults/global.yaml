@@ -279,6 +279,11 @@
     beaker_type: 'foss'
 
     # VAR
+    # Used in integration-beaker.sh to set default value for the directory from
+    # which beaker should be run.
+    beaker_root: ''
+
+    # VAR
     # Used in the ruby unit test script to give rspec extra options
     unit-rspec-extra: ''
 

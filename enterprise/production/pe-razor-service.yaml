@@ -16,6 +16,7 @@
 
     promote_package: 'pe-razor-server'
 
+    beaker_root: 'acceptance'
     jobs:
         - 'unit-rb_pe-razor-server':
             scm_branch: '4.0.x'
