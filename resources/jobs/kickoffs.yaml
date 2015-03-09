@@ -88,6 +88,10 @@
             default: '{default_platform_axis}'
             description: "List of platforms for user-defined PLAFORM axis."
         - string:
+            name: LAYOUT_AXIS
+            default: '{default_layout_axis}'
+            description: "List of layouts for user-defined LAYOUT axis."
+        - string:
             name: GIT_SHA
             default: 'master'
             description: |
