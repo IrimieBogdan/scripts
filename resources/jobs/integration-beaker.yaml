@@ -47,6 +47,7 @@
         - shell:
             !include-raw integration-beaker.sh
     publishers:
+        - claim-build
         - archive:
             artifacts: 'junit/latest/*.xml{bjp_additional}'
             allow-empty: true
@@ -96,6 +97,7 @@
         - shell:
             !include-raw integration-beaker.sh
     publishers:
+        - claim-build
         - archive:
             artifacts: 'junit/latest/*.xml'
             allow-empty: true

@@ -126,6 +126,7 @@
             - project: '{obj:phase1_projects}'
               block: True
     publishers:
+        - claim-build
         - trigger-parameterized-builds:
             - project: '{obj:phase2_projects}'
               predefined-parameters: |
