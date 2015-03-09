@@ -84,6 +84,10 @@
     meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     parameters:
         - string:
+            name: PLATFORM_AXIS
+            default: '{default_platform_axis}'
+            description: "List of platforms for user-defined PLAFORM axis."
+        - string:
             name: GIT_SHA
             default: 'master'
             description: |
@@ -105,10 +109,8 @@
             included-regions: '{obj:git_included_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Manual Kickoff'
     node: worker
-    disabled: '{obj:kickoff_disabled}'
+    disabled: False
     project-type: freestyle
-    triggers:
-        - timed: "@midnight"
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
