@@ -22,8 +22,6 @@
             qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: |
-                PLATFORM_AXIS={default_platform_axis}
 
         - '{value_stream}_{name}_unit-clj_{qualifier}':
             dn-sort-index: ' 01:'
