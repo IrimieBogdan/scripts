@@ -80,6 +80,45 @@
               git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
+    name: '{value_stream}_{name}_init-manual_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
+    parameters:
+        - string:
+            name: GIT_SHA
+            default: 'master'
+            description: |
+                This sets the GIT_SHA against which the entire pipeline should be built.
+        - string:
+            name: SHIP_NIGHTLY
+            default: 'FALSE'
+            description: |
+                If this job happens to trigger nightly builds, then make sure
+                the nightly build is shipped by intention only.
+    scm:
+        - git:
+            url: '{git_url}'
+            branches:
+                - '$GIT_SHA'
+            submodule:
+                recursive: True
+            excluded-regions: '{obj:git_excluded_regions}'
+            included-regions: '{obj:git_included_regions}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Manual Kickoff'
+    node: worker
+    disabled: '{obj:kickoff_disabled}'
+    project-type: freestyle
+    triggers:
+        - timed: "@midnight"
+    publishers:
+        - trigger-parameterized-builds:
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
+              property-file: '{obj:tpb_property_file}'
+              git-revision: '{obj:tpb_git_revision}'
+
+- job-template:
     name: '{value_stream}_{name}_init-gpr_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/kickoffs.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} PR Kickoff [{dn-qualifier}]'
