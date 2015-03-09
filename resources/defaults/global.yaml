@@ -306,12 +306,27 @@
     # important ci-job-configs meta data to a job description in a standardized
     # format.
     description: |
-        {meta_description}
-        -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-        ci-job-configs job-template file: {meta_path_jobtemplate}
-        ci-job-configs project file: {meta_path_project}
-        ci-job-configs job-group file: {meta_path_jobgroup}
-        ci-job-configs defaults file: {meta_path_defaults}
+        <p>{meta_description}</p>
+        <p>-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</p>
+        <p><h3>ci-job-configs Relative paths and links:</h3>
+        job-template: <a href="{meta_github_tree_url}/{meta_path_jobtemplate}">
+            {meta_path_jobtemplate}
+            </a><br />
+        project: <a href="{meta_github_tree_url}/{meta_path_project}">
+            {meta_path_project}
+            </a><br />
+        job-group: <a href="{meta_github_tree_url}/{meta_path_jobgroup}">
+            {meta_path_jobgroup}
+            </a><br />
+        defaults: <a href="{meta_github_tree_url}/{meta_path_defaults}">
+            {meta_path_defaults}
+            </a><br />
+        </p>
+
+    # VAR
+    # URL used to point to the github tree view of the ci-job-configs repo, for
+    # linking to relevant YAML files from job views in Jenkins.
+    meta_github_tree_url: "https://github.com/puppetlabs/ci-job-configs/tree/master"
 
     # VAR
     # Describe the intent of the job.
