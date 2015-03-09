@@ -1,8 +1,14 @@
 - project:
     name: pe-console-services
-    git_url: git@github.com:puppetlabs/pe-console-services.git
+    meta_path_project: 'enterprise/production/pe-console-services.yaml'
     value_stream: enterprise
-    hipchat_room: 'Node Classifier'
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-console-services'
+
+    hipchat_room:
+        - 'Node Classifier'
+
     jobs:
         - '{value_stream}_pe-console-services_release_{scm_branch}':
             scm_branch: '4.0.x'

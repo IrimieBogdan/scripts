@@ -45,29 +45,39 @@
 
     git_skip_tag: True
 
-    description: |
+    meta_description: |
 
-        <p>This job runs against {git_url} at the {scm_branch} branch.<\p>
+        <p>This job runs against git@github.com:{github_user}/{github_project}.git at the {scm_branch} branch.</p>
 
         <p>It accepts a comma-separated list of project=version tuples representing
         new versions of components that should be included in the
-        pe-console-services package.<\p>
+        pe-console-services package.</p>
 
-        <p>It performs the following tasks in order:<\p>
-        <p>    * Updates the given list of pe-console-services dependencies.<\p>
-        <p>    * Bumps the current pe-console-services version to the next "release".<\p>
-        <p>    * Commits this change to the git repo then tags it with the release version.<\p>
-        <p>    * Builds a pe-console-services uberjar and packages for Puppet Enterprise.<\p>
-        <p>    * Bump the current pe-console-services version from its current
-              "release" state to the next snapshot level.<\p>
-        <p>    * Pushes the current head and recently-created release snapshot to
-              the {scm_branch} branch of pe-console-services repo.<\p>
-        <p>    * Promotes the built package into the {pe_family}.x branch of
-              https://github.com/puppetlabs/enterprise-dis<\p>
+        <p>It performs the following tasks in order:
+        <ul>
+        <li> Updates the given list of pe-console-services dependencies.
+        </li>
+        <li> Bumps the current pe-console-services version to the next "release".
+        </li>
+        <li> Commits this change to the git repo then tags it with the release version.
+        </li>
+        <li> Builds a pe-console-services uberjar and packages for Puppet Enterprise.
+        </li>
+        <li> Bump the current pe-console-services version from its current
+              "release" state to the next snapshot level.
+        </li>
+        <li> Pushes the current head and recently-created release snapshot to
+              the {scm_branch} branch of pe-console-services repo.
+        </li>
+        <li> Promotes the built package into the {pe_family}.x branch of
+              https://github.com/puppetlabs/enterprise-dis
+        </li>
+        </ul>
+        </p>
 
-        <p>**NOTE** that if the package building step of this job is successful it
+        <p><b>NOTE</b> that if the package building step of this job is successful it
         will COMMIT the project.clj changes to the pe-console-services
-        repository.<\p>
+        repository.</p>
     node: worker
     project-type: freestyle
     parameters:
