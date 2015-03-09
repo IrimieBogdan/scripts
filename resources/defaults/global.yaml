@@ -309,14 +309,14 @@
         <p>{meta_description}</p>
         <p>-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --</p>
         <p><h3>ci-job-configs Relative paths and links:</h3>
-        job-template: <a href="{meta_github_tree_url}/{meta_path_jobtemplate}">
-            {meta_path_jobtemplate}
-            </a><br />
         project: <a href="{meta_github_tree_url}/{meta_path_project}">
             {meta_path_project}
             </a><br />
         job-group: <a href="{meta_github_tree_url}/{meta_path_jobgroup}">
             {meta_path_jobgroup}
+            </a><br />
+        job-template: <a href="{meta_github_tree_url}/{meta_path_jobtemplate}">
+            {meta_path_jobtemplate}
             </a><br />
         defaults: <a href="{meta_github_tree_url}/{meta_path_defaults}">
             {meta_path_defaults}
