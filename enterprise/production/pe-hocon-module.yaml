@@ -7,7 +7,7 @@
     github_project: 'puppetlabs-pe_hocon'
     module_name: 'puppetlabs-pe_hocon'
 
-    hipchat_room: ${{PROJECT_ROOM}}
+    hipchat_room: 'Integration (PE Yellow Team)'
     kickoff_disabled: False
     jobs:
         - 'generic-unit-module':
