@@ -8,7 +8,7 @@
     module_name: 'puppetlabs-pe_hocon'
 
     hipchat_room: 'Integration (PE Yellow Team)'
-    kickoff_disabled: False
+    kickoff_disabled: True
     jobs:
         - 'generic-unit-module':
                 pe_family: 3.99
