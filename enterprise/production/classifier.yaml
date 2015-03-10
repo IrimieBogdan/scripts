@@ -28,33 +28,35 @@
             pe_family: '3.7'
             scm_branch: "stable"
             puppet_branch: "stable"
+            packaging_sleep: 0
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
-            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
             scm_branch: 'stable'
 
         - 'classifier-unit-pipeline':
             scm_branch: "master"
             puppet_branch: "master"
             downstream_jobs:
-                - 'enterprise_classifier_packaging-ezbake_multiproject_3.7_master'
                 - 'enterprise_classifier_packaging-ezbake_multiproject_3.8_master'
-                - 'enterprise_classifier_packaging-ezbake_multiproject_4.0_master'
-        - 'classifier-acceptance-pipeline':
-            pe_family: '3.7'
-            scm_branch: "master"
-            puppet_branch: "master"
         - 'classifier-acceptance-pipeline':
             pe_family: '3.8'
             scm_branch: "master"
             puppet_branch: "master"
-            packaging_sleep: 10
-        - 'classifier-acceptance-pipeline':
-            pe_family: '4.0'
-            scm_branch: "master"
-            puppet_branch: "master"
-            packaging_sleep: 10
+            packaging_sleep: 0
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
-            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
             scm_branch: 'master'
+
+        - 'classifier-unit-pipeline':
+            scm_branch: "shallowgravy"
+            puppet_branch: "master"
+            downstream_jobs:
+                - 'enterprise_classifier_packaging-ezbake_multiproject_4.0_shallowgravy'
+        - 'classifier-acceptance-pipeline':
+            pe_family: '4.0'
+            scm_branch: "shallowgravy"
+            puppet_branch: "master"
+            packaging_sleep: 0
+        - '{value_stream}_{name}_release-clj_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            scm_branch: 'shallowgravy'
