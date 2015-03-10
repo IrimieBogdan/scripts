@@ -2,17 +2,25 @@
     name: '{value_stream}_{name}_release-clj_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/release-clj.yaml'
     meta_description: |
-        <p>This job performs the following tasks: <\p><\br>
-        <p>    * Bumps to 'release' version (modifes maven version string in project.clj)<\br><\p>
-        <p>    * Commits project.clj change to repo.<\br><\p>
-        <p>    * Bumps to ${{VERSION_LEVEL:-patch}} version (modifes maven version string in project.clj)<\br><\p>
-        <p>    * Pushes the change to {scm_branch} branch at {git_url}.<\br><\p>
-        <p>    * Tags the repo at the release commit.<\br><\p>
-        <p>    * Pushes the new tag to {scm_branch} branch at {git_url}.<\br><\p>
-        <p>    * Runs 'lein deploy' at the release commit.<\br><\p>
+        <p>This job performs the following tasks: 
+        <ul>
+        <li>Bumps to 'release' version (modifes maven version string in project.clj)
+        </li>
+        <li>Commits project.clj change to repo.
+        </li>
+        <li>Bumps to ${{<b>VERSION_LEVEL</b>:-<i>patch</i>}} version (modifes maven version string in project.clj)
+        </li>
+        <li>Pushes the change to <b>{scm_branch}</b> branch at <b>git@github.com:{github_user}/{github_project}</b>.
+        </li>
+        <li>Tags the repo at the release commit.
+        </li>
+        <li>Pushes the new tag to <b>{scm_branch}</b> branch at <b>git@github.com:{github_user}/{github_project}</b>.
+        </li>
+        <li>Runs 'lein deploy' at the release commit.
+        </li>
 
         <p>Please note that this job has a build parameter which allows you to
-        set the "next" version level that should incremented.<\p>
+        set the "next" version level that should incremented.</p>
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
     qualifier: '{scm_branch}'
     dn-qualifier: ' Lein Release'
