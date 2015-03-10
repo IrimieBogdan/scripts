@@ -1,12 +1,13 @@
 - project:
     name: 'pe-hocon'
+    meta_path_project: 'enterprise/production/pe-hocon-module.yaml'
     value_stream: experimental
-    #hipchat_room: ${{PROJECT_ROOM}}
-    git_url: git@github.com:puppetlabs/puppetlabs-pe_hocon.git
-    logrotate_daystokeep: 30
-    logrotate_numtokeep: 30
-    kickoff_disabled: True
+
+    github_project: 'puppetlabs-pe_hocon'
     module_name: 'puppetlabs-pe_hocon'
+
+    #hipchat_room: ${{PROJECT_ROOM}}
+    kickoff_disabled: True
     jobs:
         - 'generic-unit-module':
                 pe_family: 3.99
