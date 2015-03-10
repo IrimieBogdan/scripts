@@ -1,6 +1,7 @@
 - job-template:
-    name: '{value_stream}_{name}_pkg-pe_{scm_branch}'
+    name: '{value_stream}_{name}_pkg-pe_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/packaging-repo.yaml'
+    qualifier: '{scm_branch}'
     console_timeout: 45
     git-skip-tag: True
     display-name: '{name} ({scm_branch}){dn-sort-index} Build Packages'

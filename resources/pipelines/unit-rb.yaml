@@ -3,15 +3,15 @@
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             dn-sort-index: ' 00:'
-            qualifier: '{scm_branch}'
+            qualifier: '{pe_family}.x-{scm_branch}'
             tpb_projects:
-                - '{value_stream}_pe-razor-server_unit-ruby_{scm_branch}'
+                - '{value_stream}_pe-razor-server_unit-ruby_{pe_family}.x-{scm_branch}'
         - '{value_stream}_{name}_init-periodic_{qualifier}':
             dn-sort-index: ' 00:'
-            qualifier: '{scm_branch}'
+            qualifier: '{pe_family}.x-{scm_branch}'
             tpb_projects:
-                - '{value_stream}_pe-razor-server_unit-ruby_{scm_branch}'
+                - '{value_stream}_pe-razor-server_unit-ruby_{pe_family}.x-{scm_branch}'
         - '{value_stream}_pe-razor-server_unit-ruby_{qualifier}':
             dn-sort-index: ' 05:'
-            qualifier: '{scm_branch}'
+            qualifier: '{pe_family}.x-{scm_branch}'
             tpb_projects: '{obj:downstream_jobs}'

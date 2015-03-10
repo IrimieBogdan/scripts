@@ -1,18 +1,20 @@
 - job-group:
     name: 'acceptance-beaker_pe-razor-server'
     jobs:
-        - '{value_stream}_{name}_pkg-pe_{scm_branch}':
+        - '{value_stream}_{name}_pkg-pe_{qualifier}':
+            qualifier: '{pe_family}.x-{scm_branch}'
             dn-sort-index: ' 10:'
             tpb_projects:
-                - '{value_stream}_{name}_integration-system_full_{scm_branch}'
+                - '{value_stream}_{name}_integration-system_full_{pe_family}.x-{scm_branch}'
         - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 'full_{scm_branch}'
+            qualifier: 'full_{pe_family}.x-{scm_branch}'
             dn-sort-index: ' 20:'
-            dn-qualifier: ' Full'
-            beaker_loadpath: 'acceptance/test/lib'
+            dn-qualifier: ' PE {pe_family}.x Full'
+            is-pe: "true"
+            beaker_loadpath: 'lib'
             beaker_optionsfile: ''
-            beaker_helper: 'acceptance/tests/razor_helper.rb'
-            beaker_presuite: 'acceptance/tests/10_installation_and_configuration/install_pe.rb,acceptance/tests/10_installation_and_configuration/C03_install_razor_server.rb,acceptance/tests/10_installation_and_configuration/C06_install_razor_client.rb'
-            beaker_testsuite: 'acceptance/tests/10_installation_and_configuration/install_pe.rb,acceptance/tests/20_client_commands,acceptance/tests/30_authentication'
+            beaker_helper: 'lib/helper.rb'
+            beaker_presuite: 'suites/pre_suite/pe'
+            beaker_testsuite: 'suites/tests'
             beaker_postsuite: ''
             bjp_additional: ''
