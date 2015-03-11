@@ -6,7 +6,7 @@
     github_user: 'puppetlabs'
     github_project: 'pe-razor-server'
 
-    hipchat_room: 'Node Classifier'
+    hipchat_room: 'razor'
 
     genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
 
