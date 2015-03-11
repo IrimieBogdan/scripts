@@ -1,25 +1,30 @@
 - project:
     name: pe-puppet-server-extensions
-    git_url: git@github.com:puppetlabs/pe-puppet-server-extensions.git
-    ezbake_package_name: pe-puppetserver
-    maven_artifact_name: pe-puppet-server
+    meta_path_project: 'enterprise/production/pe-puppet-server-extensions.yaml'
+    value_stream: enterprise
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-puppet-server-extensions'
+
+    hipchat_room: 'Puppet Server (aka PE Green Team)'
+
+    kickoff_disabled: False
+
     default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
     default_layout_axis: 64mdca 64mdca-64a
-    hipchat_room: 'Puppet Server (aka PE Green Team)'
-    value_stream: enterprise
-    kickoff_disabled: False
-    shell_workspace: ''
-    logrotate_daystokeep: 14
-    logrotate_numtokeep: 14
-    console_timeout: '20'
 
     jobs:
         - 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline':
+            kickoff_disabled: True
+            scm_branch: 'master'
+            default_PE_VER: '4.0'
+
+        - 'clj-unit-release':
+            scm_branch: 'master'
+
+        - 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline':
             scm_branch: 'stable'
-            #ezbake-git-branch: 'puppetserver/stable'
-            #ezbake-git-repo: 'git@github.com:puppetlabs/ezbake.git'
-            #script_dir: 'ezbake'
-            default_PE_VER: '3.7'
+            default_PE_VER: '3.8'
 
         - 'clj-unit-release':
             scm_branch: 'stable'
