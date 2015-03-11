@@ -31,7 +31,6 @@
             qualifier: 'full-{pe_family}_{scm_branch}'
             dn-sort-index: ' 25:'
             dn-qualifier: ' PE {pe_family}.x Full'
-            bjp_additional: ''
             is-pe: "true"
             beaker_loadpath: ''
             beaker_postsuite: ''

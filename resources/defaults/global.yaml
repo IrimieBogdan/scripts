@@ -421,3 +421,13 @@
     # List of LDAP service types. Known types include active directory and
     # openldap
     default_ldap_type_axis: ''
+
+    # VAR
+    # Set the pathname to capture JUnit XML output in the Jenkins publisher used
+    # for this purpose.
+    junit_results_glob: '**/junit/latest/*.xml'
+
+    # VAR
+    # Set the path globs used to capture file artifacts using the "Archive
+    # Artifacts" Jenkins publisher.
+    archive_artifacts_glob: '**/junit/latest/*.xml'
