@@ -93,7 +93,7 @@
             description: "List of layouts for user-defined LAYOUT axis."
         - string:
             name: GIT_SHA
-            default: 'master'
+            default: '{scm_branch}'
             description: |
                 This sets the GIT_SHA against which the entire pipeline should be built.
         - string:

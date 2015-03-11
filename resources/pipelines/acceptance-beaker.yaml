@@ -4,17 +4,48 @@
         - '{value_stream}_{name}_pkg-pe_{qualifier}':
             qualifier: '{pe_family}.x-{scm_branch}'
             dn-sort-index: ' 10:'
+            dn-qualifier: ' PE {pe_family}.x pe-razor-server Package'
             tpb_projects:
-                - '{value_stream}_{name}_integration-system_full_{pe_family}.x-{scm_branch}'
+                - '{value_stream}_{name}_integration-system_smoke_{pe_family}.x-{scm_branch}'
+
         - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 'full_{pe_family}.x-{scm_branch}'
+            qualifier: 'smoke_{pe_family}.x-{scm_branch}'
             dn-sort-index: ' 20:'
-            dn-qualifier: ' PE {pe_family}.x Full'
+            dn-qualifier: ' PE {pe_family}.x Smoke'
             is-pe: "true"
             beaker_loadpath: 'lib'
             beaker_optionsfile: ''
             beaker_helper: 'lib/helper.rb'
-            beaker_presuite: 'suites/pre_suite/pe'
-            beaker_testsuite: 'suites/tests'
+            beaker_presuite: 'suites/pre_suite/install-server-from-package'
+            beaker_testsuite: 'suites/tests/smoke'
+            beaker_postsuite: ''
+            bjp_additional: ''
+            tpb_projects:
+                - '{value_stream}_{name}_integration-system_full-module_{pe_family}.x-{scm_branch}'
+                - '{value_stream}_{name}_integration-system_full-package_{pe_family}.x-{scm_branch}'
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'full-package_{pe_family}.x-{scm_branch}'
+            dn-sort-index: ' 21:'
+            dn-qualifier: ' PE {pe_family}.x Full - Package Install'
+            is-pe: "true"
+            beaker_loadpath: 'lib'
+            beaker_optionsfile: ''
+            beaker_helper: 'lib/helper.rb'
+            beaker_presuite: 'suites/pre_suite/install-server-from-package'
+            beaker_testsuite: 'suites/tests/smoke,suites/tests/full'
+            beaker_postsuite: ''
+            bjp_additional: ''
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'full-module_{pe_family}.x-{scm_branch}'
+            dn-sort-index: ' 21:'
+            dn-qualifier: ' PE {pe_family}.x Full - Module Install'
+            is-pe: "true"
+            beaker_loadpath: 'lib'
+            beaker_optionsfile: ''
+            beaker_helper: 'lib/helper.rb'
+            beaker_presuite: 'suites/pre_suite/install-server-from-module'
+            beaker_testsuite: 'suites/tests/smoke,suites/tests/full'
             beaker_postsuite: ''
             bjp_additional: ''

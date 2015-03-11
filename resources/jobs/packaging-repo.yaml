@@ -4,7 +4,8 @@
     qualifier: '{scm_branch}'
     console_timeout: 45
     git-skip-tag: True
-    display-name: '{name} ({scm_branch}){dn-sort-index} Build Packages'
+    display-name: '{name} ({scm_branch}){dn-sort-index} Build {dn-qualifier}'
+    dn-qualifier: 'Package'
     node: worker
     builders:
         - shell:
