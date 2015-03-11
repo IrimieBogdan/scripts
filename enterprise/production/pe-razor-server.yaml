@@ -6,7 +6,8 @@
     github_user: 'puppetlabs'
     github_project: 'pe-razor-server'
 
-    kickoff_disabled: True
+    hipchat_room: 'Node Classifier'
+
     genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
 
     default_platform_axis: 'centos6 centos7'
@@ -21,7 +22,7 @@
     preserve_hosts: 'onfail'
 
     git_skip_tag: True
-    disable_kickoffs: False
+    kickoff_disabled: False
 
     jobs:
         - 'unit-rb_pe-razor-server':
