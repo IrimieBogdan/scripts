@@ -280,7 +280,9 @@
 
     # VAR
     # Used in integration-beaker.sh to set default value for the directory from
-    # which beaker should be run.
+    # which beaker should be run. The default value of '' indicates that by
+    # default projects which don't override this value should run beaker from
+    # the root directory of their repository.
     beaker_root: ''
 
     # VAR

@@ -116,6 +116,7 @@
             YAML.load_file('config.yaml.sample').tap do |c|
               c['all']['repo_store_root'] = "#{{Dir.getwd}}/repo-store"
               c['all']['database_url'] = ENV['database']
+              c['all']['secure_api'] = true
               c.delete('production')
               c.delete('development')
               c.delete('test')
