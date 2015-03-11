@@ -27,7 +27,7 @@
         - 'unit-rb_pe-razor-server':
             scm_branch: '3.8.x'
             downstream_jobs:
-                - 'experimental_pe-razor-server_pkg-pe_3.8.x-3.8.x'
+                - 'enterprise_pe-razor-server_pkg-pe_3.8.x-3.8.x'
 
         - 'acceptance-beaker_pe-razor-server':
             scm_branch: '3.8.x'
@@ -36,7 +36,7 @@
         - 'unit-rb_pe-razor-server':
             scm_branch: '4.0.x'
             downstream_jobs:
-                - 'experimental_pe-razor-server_pkg-pe_4.0.x-4.0.x'
+                - 'enterprise_pe-razor-server_pkg-pe_4.0.x-4.0.x'
 
         - 'acceptance-beaker_pe-razor-server':
             scm_branch: '4.0.x'
