@@ -18,7 +18,7 @@
 
     beaker_root: 'acceptance'
     beaker_type: 'pe'
-    preserve_hosts: 'never'
+    preserve_hosts: 'onfail'
 
     git_skip_tag: True
     disable_kickoffs: False
