@@ -1,17 +1,20 @@
 - job-template:
+    name: '{value_stream}_{name}_pkg-pe_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/packaging-repo.yaml'
+    qualifier: '{scm_branch}'
     console_timeout: 45
-    git_skip_tag: True
-    name: '{value_stream}_{name}_pkg-pe_{scm_branch}'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Build Packages'
+    git-skip-tag: True
+    display-name: '{name} ({scm_branch}){dn-sort-index} Build {dn-qualifier}'
+    dn-qualifier: 'Package'
     node: worker
     builders:
         - shell:
             !include-raw packaging-repo.sh
     publishers:
         - trigger-parameterized-builds:
-            - project: '{tpb_projects}'
-              predefined-parameters: '{tpb_predefined_parameters}'
-              current-parameters: '{tpb_current_parameters}'
-              condition: '{tpb_condition}'
-              property-file: '{tpb_property_file}'
+            - project: '{obj:tpb_projects}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
+              property-file: 'packaging-repo.props'
               git-revision: '{obj:tpb_git_revision}'

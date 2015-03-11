@@ -1,6 +1,7 @@
 - job-group:
     name: 'foss_puppet-server_full-lein-ezbake'
     meta_path_jobgroup: resources/pipelines/puppet-server-acceptance-pipeline.yaml
+    archive_artifacts_glob: '**/junit/latest/*.xml,log/latest/puppetserver/**/*'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: '{scm_branch}'
@@ -46,7 +47,6 @@
                 PROJECT=puppetserver
                 REF=$PACKAGE_BUILD_VERSION
                 JOB_URL=$BUILD_URL
-            bjp_additional: ',log/latest/puppetserver/**/*'
             beaker_loadpath: 'acceptance/lib'
             beaker_optionsfile: 'acceptance/config/beaker/options.rb'
             beaker_helper: 'acceptance/lib/helper.rb'
@@ -58,7 +58,6 @@
             qualifier: 'full-{scm_branch}'
             dn-sort-index: ' 25:'
             dn-qualifier: ' Full'
-            bjp_additional: ',log/latest/puppetserver/**/*'
             beaker_loadpath: 'ruby/puppet/acceptance/lib'
             beaker_optionsfile: 'acceptance/config/beaker/options.rb'
             beaker_helper: 'acceptance/lib/helper.rb'

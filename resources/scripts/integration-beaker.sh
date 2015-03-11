@@ -15,6 +15,7 @@ set -x
 #-------------------------------------------------------------------------------
 # Variables
 
+BEAKER_ROOT="${{BEAKER_ROOT:-{beaker_root}}}"
 BEAKER_KEYFILE="${{BEAKER_KEYFILE:-$HOME/.ssh/id_rsa-acceptance}}"
 BEAKER_LOADPATH="${{BEAKER_LOADPATH:-{beaker_loadpath}}}"
 BEAKER_OPTIONSFILE="${{BEAKER_OPTIONSFILE:-{beaker_optionsfile}}}"
@@ -64,7 +65,7 @@ else
 fi
 
 #-------------------------------------------------------------------------------
-# Configure Ruby & Bundle install
+# Configure Ruby
 #
 # TODO: Remove hard dependency on rvm here so this script can be useful outside
 # of CI.
@@ -75,6 +76,21 @@ set +x
 source /usr/local/rvm/scripts/rvm
 rvm use {rvm_ruby_version}
 set -x
+
+unset pushd
+unset popd
+
+#-------------------------------------------------------------------------------
+# Bundle install
+#
+# Using JJB we set the beaker_root to {beaker_root}. Here we use that value to
+# set the correct working directory before bundle installing and running beaker
+# commands.
+#
+
+if [ ! -z "$BEAKER_ROOT" ] ;then
+  pushd $BEAKER_ROOT
+fi
 
 rm -rf .bundle* Gemfile.lock install_log.*
 
