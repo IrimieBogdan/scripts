@@ -1,0 +1,44 @@
+- project:
+    name: pe-razor-server
+    meta_path_project: 'enterprise/production/pe-razor-server.yaml'
+    value_stream: 'enterprise'
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-razor-server'
+
+    kickoff_disabled: True
+    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
+
+    default_platform_axis: 'centos6 centos7'
+    default_layout_axis: '64mdca-64a'
+
+    package_build_version_varname: 'PE_RAZOR_SERVER_PACKAGE_BUILD_VERSION'
+
+    promote_package: 'pe-razor-server'
+
+    beaker_root: 'acceptance'
+    beaker_type: 'pe'
+    preserve_hosts: 'never'
+
+    git_skip_tag: True
+    disable_kickoffs: False
+
+    jobs:
+        - 'unit-rb_pe-razor-server':
+            scm_branch: '3.8.x'
+            downstream_jobs:
+                - 'experimental_pe-razor-server_pkg-pe_3.8.x-3.8.x'
+
+        - 'acceptance-beaker_pe-razor-server':
+            scm_branch: '3.8.x'
+            pe_family: '3.8'
+
+        - 'unit-rb_pe-razor-server':
+            scm_branch: '4.0.x'
+            downstream_jobs:
+                - 'experimental_pe-razor-server_pkg-pe_4.0.x-4.0.x'
+
+        - 'acceptance-beaker_pe-razor-server':
+            scm_branch: '4.0.x'
+            pe_family: '4.0'
+
