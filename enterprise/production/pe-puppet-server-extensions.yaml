@@ -15,11 +15,11 @@
 
     jobs:
         - 'enterprise_pe-puppet-server-extensions_unit-packaging-pipeline':
-            scm_branch: 'master'
-            ezbake-git-branch: 'puppetserver/stable'
-            ezbake-git-repo: 'git@github.com:puppetlabs/ezbake.git'
-            script_dir: 'ezbake'
+            scm_branch: 'stable'
+            #ezbake-git-branch: 'puppetserver/stable'
+            #ezbake-git-repo: 'git@github.com:puppetlabs/ezbake.git'
+            #script_dir: 'ezbake'
             default_PE_VER: '3.7'
 
         - 'clj-unit-release':
-            scm_branch: 'master'
+            scm_branch: 'stable'
