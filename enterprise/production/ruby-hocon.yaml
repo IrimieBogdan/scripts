@@ -1,0 +1,15 @@
+- project:
+    name: ruby-hocon
+    meta_path_project: 'enterprise/production/ruby-hocon.yaml'
+    value_stream: 'enterprise'
+
+    github_user: 'puppetlabs'
+    github_project: 'ruby-hocon'
+
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
+
+    kickoff_disabled: False
+    jobs:
+        - 'generic-unit-ruby-no-pkg':
+            scm_branch: 'master'
