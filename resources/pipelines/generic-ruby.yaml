@@ -7,7 +7,6 @@
             dn-sort-index: ' 00:'
         - '{value_stream}_{name}_unit-ruby_{scm_branch}':
             dn-sort-index: ' 01:'
-            tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
 
 - job-group:
     name: 'generic-unit-ruby'
