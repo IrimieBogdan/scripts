@@ -1,0 +1,280 @@
+- project:
+    name: ezbake
+    meta_path_project: 'enterprise/production/ezbake.yaml'
+    value_stream: enterprise
+
+    github_user: puppetlabs
+    github_project: ezbake
+
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
+
+    default_platform_axis: centos6 centos7 ubuntu1404
+    default_layout_axis: 64mdca
+    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
+
+    kickoff_disabled: False
+    preserve_hosts: never
+
+    jobs:
+        #-----------------------------------------------------------------------
+        # ezbake kickoff jobs
+        #-----------------------------------------------------------------------
+        - 'clj-unit-release':
+            scm_branch: 'master'
+        - 'clj-unit-release':
+            scm_branch: 'stable'
+        - 'clj-unit-release':
+            scm_branch: 'deprecated'
+
+        #-----------------------------------------------------------------------
+        # ezbake kickoff jobs
+        #-----------------------------------------------------------------------
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'master'
+            scm_branch: 'master'
+            dn-sort-index: ' 00:'
+            git_excluded_regions:
+                - 'doc/.*'
+                - 'README.md'
+            tpb_git_revision: False
+            tpb_projects:
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_puppet-server-master_puppet-server-master_master'
+
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'stable'
+            scm_branch: 'stable'
+            dn-sort-index: ' 00:'
+            git_excluded_regions:
+                - 'doc/.*'
+                - 'README.md'
+            tpb_git_revision: False
+            tpb_projects:
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-4.0.x_pe-rbac-service-shallowgravy_stable'
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-4.0.x_classifier-master_stable'
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_puppet-server-stable_puppet-server-stable_stable'
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.8.x_pe-rbac-service-stable_stable'
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.8.x_classifier-stable_stable'
+
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: 'deprecated'
+            scm_branch: 'deprecated'
+            dn-sort-index: ' 00:'
+            git_excluded_regions:
+                - 'doc/.*'
+                - 'README.md'
+            tpb_git_revision: False
+            tpb_projects:
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.7.x_pe-rbac-service-stable'
+
+        #-----------------------------------------------------------------------
+        # ezbake stable branch
+        #-----------------------------------------------------------------------
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'stable'
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'puppet-server'
+            packaging_git_branch: 'stable'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'puppet-server'
+            acceptance_git_branch: 'stable'
+
+            is-pe: "true"
+            beaker_type: 'foss'
+            beaker_loadpath: 'acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'acceptance/suites/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
+
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'stable'
+            pe_family: '3.8'
+            package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'pe-console-services'
+            packaging_git_branch: '3.8.x'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'classifier'
+            acceptance_git_branch: 'stable'
+
+            default_layout_axis: 64mdcal
+
+            is-pe: "true"
+            beaker_type: 'pe'
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/pe-options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'
+
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'stable'
+            pe_family: '4.0'
+            package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'pe-console-services'
+            packaging_git_branch: '4.0.x'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'classifier'
+            acceptance_git_branch: 'master'
+
+            default_layout_axis: 64mdcal
+
+            is-pe: "true"
+            beaker_type: 'pe'
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/pe-options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'
+
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'stable'
+            pe_family: '3.8'
+            package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'pe-console-services'
+            packaging_git_branch: '3.8.x'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'pe-rbac-service'
+            acceptance_git_branch: 'master'
+
+            default_layout_axis: 64mdcal
+
+            is-pe: "true"
+            beaker_type: 'pe'
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'
+
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'stable'
+            pe_family: '4.0'
+            package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'pe-console-services'
+            packaging_git_branch: '4.0.x'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'pe-rbac-service'
+            acceptance_git_branch: 'shallowgravy'
+
+            default_layout_axis: 64mdcal
+
+            is-pe: "true"
+            beaker_type: 'pe'
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'
+
+        #-----------------------------------------------------------------------
+        # ezbake deprecated branch
+        #-----------------------------------------------------------------------
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'deprecated'
+            pe_family: '3.7'
+            package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'pe-console-services'
+            packaging_git_branch: '3.7.x'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'pe-rbac-service'
+            acceptance_git_branch: 'stable'
+
+            default_layout_axis: 64mdcal
+
+            is-pe: "true"
+            beaker_type: 'pe'
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'
+
+        #-----------------------------------------------------------------------
+        # ezbake master branch
+        #-----------------------------------------------------------------------
+        - 'acceptance-clj-ezbake-test-dependent':
+            scm_branch: 'master'
+            default_platform_axis: centos7
+
+            # Used to clone the appropriate github project that uses
+            # lein-ezbake for packaging.
+            packaging_github_project: 'puppet-server'
+            packaging_git_branch: 'master'
+
+            # Used to clone the appropriate github project for the sake of
+            # acceptance smoke testing. This is usually a project that is a
+            # co-dependent of the packaging_github_project and may even be the
+            # same as the packaging_github_project as in the case of
+            # puppet-server which both contains ezbake configuration and
+            # acceptance tests.
+            acceptance_github_project: 'puppet-server'
+            acceptance_git_branch: 'master'
+
+            is-pe: "true"
+            beaker_type: 'aio'
+            beaker_loadpath: 'acceptance/lib'
+            beaker_optionsfile: 'acceptance/config/beaker/options.rb'
+            beaker_helper: 'acceptance/lib/helper.rb'
+            beaker_presuite: 'acceptance/suites/pre_suite/foss'
+            beaker_testsuite: 'acceptance/suites/tests'
+            beaker_postsuite: 'acceptance/suites/post_suite'
