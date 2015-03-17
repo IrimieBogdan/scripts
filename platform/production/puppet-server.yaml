@@ -31,7 +31,7 @@
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
             beaker_type: 'aio'
-            ship_nightly: 'TRUE'
+            ship_nightly: 'FALSE'
             default_platform_axis: centos7
             nightly_platform_axis: centos7
             mergely_platform_axis: centos7
