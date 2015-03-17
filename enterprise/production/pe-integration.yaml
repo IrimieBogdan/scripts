@@ -217,7 +217,7 @@
         - 'pe-integration-full':
             pe_family: 3.8
             scm_branch: 3.8.x
-            preserve_hosts: never
+            preserve_hosts: onfail
             full_upgrade_combination_filter: '(PLATFORM == "sles12").implies(UPGRADE_FROM != "3.3.2" && UPGRADE_FROM != "3.7.0")'
             agent_layout_axis:
                 - centos6-64mcd-solaris10-64a-solaris10-64f
