@@ -168,7 +168,7 @@
             pe_family: 4.0
             scm_branch: 4.0.x
             preserve_hosts: onfail
-            upgrader_smoke_platform_axis:
+            upgrader_smoke_upgrade_from_axis:
                 - 'NONE'
 
         - 'pe-integration-full':
