@@ -24,6 +24,8 @@
     kickoff_disabled: False
     genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
 
+    packaging_github_project: 'pe-console-services'
+
     jobs:
         - 'rbac-unit-pipeline':
             scm_branch: "stable"
@@ -34,6 +36,7 @@
             pe_family: '3.7'
             scm_branch: "stable"
             puppet_branch: "stable"
+            packaging_git_branch: '3.7.x'
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
@@ -49,6 +52,7 @@
             pe_family: '3.8'
             scm_branch: "master"
             puppet_branch: "master"
+            packaging_git_branch: '3.8.x'
             packaging_sleep: 15
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
@@ -65,6 +69,7 @@
             pe_family: '4.0'
             scm_branch: "shallowgravy"
             puppet_branch: "master"
+            packaging_git_branch: '4.0.x'
             packaging_sleep: 10
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'

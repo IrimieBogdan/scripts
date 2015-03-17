@@ -107,7 +107,8 @@
 - job-template:
     name: '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/packaging-clj.yaml'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Build pe-console-services for PE {pe_family}'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
+    dn-qualifier: 'Build {packaging_github_project} for PE {pe_family}'
     node: worker
     project-type: freestyle
     parameters:
@@ -117,8 +118,8 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
-              predefined-parameters: '{tpb_predefined_parameters}'
-              current-parameters: '{tpb_current_parameters}'
-              condition: '{tpb_condition}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
               property-file: '.props'
-              git-revision: '{tpb_git_revision}'
+              git-revision: '{obj:tpb_git_revision}'

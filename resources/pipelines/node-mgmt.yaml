@@ -28,6 +28,7 @@
 
 - job-group:
     name: 'pe-classifier-ui-legacy-pipeline'
+    meta_path_jobgroup: 'resources/pipelines/node-mgmt.yaml'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: 'assets_{scm_branch}'
