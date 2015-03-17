@@ -1,6 +1,6 @@
 - job-group:
     name: 'acceptance-beaker_pe-razor-server'
-    meta_path_jobgropu: 'resources/pipelines/acceptance-beaker.yaml'
+    meta_path_jobgroup: 'resources/pipelines/acceptance-beaker.yaml'
     jobs:
         - '{value_stream}_{name}_pkg-pe_{qualifier}':
             qualifier: '{pe_family}.x-{scm_branch}'

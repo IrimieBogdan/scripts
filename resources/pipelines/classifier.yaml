@@ -21,6 +21,10 @@
 
 - job-group:
     name: 'classifier-acceptance-pipeline'
+
+    acceptance_github_project: ''
+    acceptance_git_branch: ''
+
     jobs:
         - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
             qualifier: '{pe_family}_{scm_branch}'
