@@ -41,27 +41,3 @@
             ds_base_dn: dc=delivery,dc=puppetlabs,dc=net
             tpb_projects: '{obj:downstream_jobs}'
             clj_lein_test_selector: ':integration'
-
-- job-group:
-    name: 'rbac-acceptance-pipeline'
-
-    acceptance_github_project: ''
-    acceptance_git_branch: ''
-
-    jobs:
-        - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
-            qualifier: '{pe_family}_{scm_branch}'
-            dn-sort-index: ' 10:'
-            tpb_projects: '{value_stream}_{name}_integration-system_full-{pe_family}_{scm_branch}'
-
-        - '{value_stream}_{name}_integration-system_{qualifier}':
-            qualifier: 'full-{pe_family}_{scm_branch}'
-            dn-sort-index: ' 25:'
-            dn-qualifier: ' PE {pe_family}.x Full'
-            is-pe: "true"
-            beaker_loadpath: ''
-            beaker_postsuite: ''
-            beaker_optionsfile: 'integration/options.rb'
-            beaker_helper: ''
-            beaker_presuite: ''
-            beaker_testsuite: 'integration/tests'

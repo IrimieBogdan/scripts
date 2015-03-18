@@ -86,17 +86,10 @@
         - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
             qualifier: '{pe_family}_{scm_branch}'
             dn-sort-index: ' 10:'
-            dn-qualifier: 'Build {packaging_github_project} for PE {pe_family}'
             tpb_projects: '{value_stream}_{name}_integration-system_full-{pe_family}_{scm_branch}'
 
         - '{value_stream}_{name}_integration-system_{qualifier}':
             qualifier: 'full-{pe_family}_{scm_branch}'
             dn-sort-index: ' 25:'
-            dn-qualifier: ' pe {pe_family}.x full'
+            dn-qualifier: ' PE {pe_family}.x Full'
             is-pe: "true"
-            beaker_loadpath: ''
-            beaker_postsuite: ''
-            beaker_optionsfile: 'integration/options.rb'
-            beaker_helper: ''
-            beaker_presuite: ''
-            beaker_testsuite: 'integration/tests'
