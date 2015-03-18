@@ -53,7 +53,6 @@
                 - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-4.0.x_pe-rbac-service-shallowgravy_stable'
                 - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-4.0.x_classifier-master_stable'
                 - '{value_stream}_{name}_packaging-ezbake_multiproject_puppet-server-stable_puppet-server-stable_stable'
-                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.8.x_pe-rbac-service-stable_stable'
                 - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.8.x_classifier-stable_stable'
 
         - '{value_stream}_{name}_init-merge_{qualifier}':
@@ -65,7 +64,7 @@
                 - 'README.md'
             tpb_git_revision: False
             tpb_projects:
-                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.7.x_pe-rbac-service-stable'
+                - '{value_stream}_{name}_packaging-ezbake_multiproject_pe-console-services-3.7.x_pe-rbac-service-stable_deprecated'
 
         #-----------------------------------------------------------------------
         # ezbake stable branch
