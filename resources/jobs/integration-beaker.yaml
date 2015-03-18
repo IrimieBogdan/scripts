@@ -1,7 +1,7 @@
 - job-template:
     name: '{value_stream}_{name}_integration-system_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Integration{dn-qualifier} Test Suite'
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier} Acceptance Test Suite'
     project-type: matrix
     node: beaker
     parameters:
@@ -63,11 +63,11 @@
             test-stability: true
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
-              predefined-parameters: '{tpb_predefined_parameters}'
-              current-parameters: '{tpb_current_parameters}'
-              condition: '{tpb_condition}'
-              property-file: '{tpb_property_file}'
-              git-revision: '{tpb_git_revision}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
+              property-file: '{obj:tpb_property_file}'
+              git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}'

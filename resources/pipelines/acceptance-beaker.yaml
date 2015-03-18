@@ -47,3 +47,56 @@
             beaker_presuite: 'suites/pre_suite/install-server-from-module'
             beaker_testsuite: 'suites/tests/smoke,suites/tests/full'
             beaker_postsuite: ''
+
+- job-group:
+    name: 'acceptance-clj-ezbake-test-dependent'
+    meta_path_jobgroup: 'resources/pipelines/acceptance-beaker.yaml'
+
+    jobs:
+
+        - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
+            meta_description: |
+                <p> This job is intended to build an ezbake-based package for
+                <b>{packaging_github_project}</b> package using
+                <b>{packaging_git_branch}</b> branch. If the package build is
+                successful, the resulting artifact is tested using acceptance
+                tests from <b>{acceptance_git_branch}</b> branch of
+                <b>https://github.com/{github_user}/{acceptance_github_project}</b>
+            console_timeout: 40
+            qualifier: '{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{scm_branch}'
+            dn-qualifier: '10: Build {packaging_github_project} ({packaging_git_branch}) package with {acceptance_github_project} ({acceptance_git_branch}) '
+            tpb_git_revision: False
+            tpb_projects:
+                - '{value_stream}_{name}_integration-system_{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{scm_branch}'
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            git_url: 'git@github.com:{github_user}/{acceptance_github_project}.git'
+            github_http_url: 'https://github.com/{github_user}/{acceptance_github_project}'
+
+            qualifier: '{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{scm_branch}'
+            dn-qualifier: '20: Test {name} using {packaging_github_project} ({packaging_git_branch}) package and {acceptance_github_project} ({acceptance_git_branch})'
+
+- job-group:
+    name: 'pe-console-services-acceptance-pipeline'
+
+    acceptance_github_project: ''
+    acceptance_git_branch: ''
+
+    jobs:
+        - '{value_stream}_{name}_packaging-ezbake_multiproject_{qualifier}':
+            qualifier: '{pe_family}_{scm_branch}'
+            dn-sort-index: ' 10:'
+            dn-qualifier: 'Build {packaging_github_project} for PE {pe_family}'
+            tpb_projects: '{value_stream}_{name}_integration-system_full-{pe_family}_{scm_branch}'
+
+        - '{value_stream}_{name}_integration-system_{qualifier}':
+            qualifier: 'full-{pe_family}_{scm_branch}'
+            dn-sort-index: ' 25:'
+            dn-qualifier: ' pe {pe_family}.x full'
+            is-pe: "true"
+            beaker_loadpath: ''
+            beaker_postsuite: ''
+            beaker_optionsfile: 'integration/options.rb'
+            beaker_helper: ''
+            beaker_presuite: ''
+            beaker_testsuite: 'integration/tests'

@@ -17,6 +17,7 @@ Usage: ${0} <cmd> [<options>] <jenkins-instance> [<deployment-type>[,
   OPTIONS:
   -h Print this usage message.
   -v Print script name and version number.
+  -l JJB debug level (default: info)
 
   COMMANDS:
     update <glob>
@@ -38,11 +39,14 @@ HEREDOC
 # Optional Arg Handling
 #
 
-while getopts o:hv OPT; do
+while getopts o:l:hv OPT; do
     case "$OPT" in
     h)
         print_usage
         exit 0
+        ;;
+    l)
+        JJB_DEBUG_LEVEL="${OPTARG}"
         ;;
     v)
         message "`basename $0` version ${VERSION}"
@@ -93,7 +97,7 @@ fi
 #
 
 JJB_PATHS="resources:${JENKINS_INSTANCE}/resources:${JENKINS_INSTANCE}/${DEPLOYMENT_TYPE}"
-JJB_OPTS="--conf ${JENKINS_INSTANCE}/builder.conf"
+JJB_OPTS="-l ${JJB_DEBUG_LEVEL:-info} --conf ${JENKINS_INSTANCE}/builder.conf"
 
 echo "Running Jenkins Job Builder."
 echo

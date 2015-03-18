@@ -19,11 +19,11 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
-              predefined-parameters: '{tpb_predefined_parameters}'
-              current-parameters: '{tpb_current_parameters}'
-              condition: '{tpb_condition}'
-              property-file: '{tpb_property_file}'
-              git-revision: '{tpb_git_revision}'
+              predefined-parameters: '{obj:tpb_predefined_parameters}'
+              current-parameters: '{obj:tpb_current_parameters}'
+              condition: '{obj:tpb_condition}'
+              property-file: '{obj:tpb_property_file}'
+              git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_init-periodic_{qualifier}'
