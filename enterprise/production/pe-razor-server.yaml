@@ -10,7 +10,7 @@
 
     genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
 
-    default_platform_axis: 'centos6 centos7'
+    default_platform_axis: 'centos6 centos7 redhat6 redhat7'
     default_layout_axis: '64mdca-64a'
 
     package_build_version_varname: 'PE_RAZOR_SERVER_PACKAGE_BUILD_VERSION'
