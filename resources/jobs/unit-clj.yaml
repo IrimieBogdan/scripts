@@ -202,8 +202,13 @@
             CLASSIFIER_DB_ID=`echo "{name}_classifier_$BUILD_ID" | tr - _`
             RBAC_DB_ID=`echo "{name}_rbac_$BUILD_ID" | tr - _`
             ACTIVITY_DB_ID=`echo "{name}_activity_$BUILD_ID" | tr - _`
+            REDROVER_DB_ID=`echo "{name}_redrover_$BUILD_ID" | tr - _`
 
-            export CLASSIFIER_DBSUBNAME="//$DBHOST:$DBPORT/$DB_ID"
+            export REDROVER_DBSUBNAME="//$DBHOST:$DBPORT/$REDROVER_DB_ID"
+            export REDROVER_DBUSER="$DBUSER"
+            export REDROVER_DBPASS="$PGPASSWORD"
+
+            export CLASSIFIER_DBSUBNAME="//$DBHOST:$DBPORT/$CLASSIFIER_DB_ID"
             export CLASSIFIER_DBUSER="$DBUSER"
             export CLASSIFIER_DBPASS="$PGPASSWORD"
 
@@ -220,6 +225,7 @@
                    #
             echo
             echo "Create temporary database names."
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $REDROVER_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $CLASSIFIER_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
@@ -244,6 +250,7 @@
 
             echo
             echo "Clean up databases"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $REDROVER_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $CLASSIFIER_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $RBAC_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $ACTIVITY_DB_ID"
