@@ -175,6 +175,7 @@
             acceptance_git_branch: 'master'
 
             default_layout_axis: 64mdcal
+            default_ldap_type_axis: 'openldap'
 
             is-pe: "true"
             beaker_type: 'pe'
@@ -205,6 +206,7 @@
             acceptance_git_branch: 'shallowgravy'
 
             default_layout_axis: 64mdcal
+            default_ldap_type_axis: 'openldap'
 
             is-pe: "true"
             beaker_type: 'pe'
@@ -238,6 +240,7 @@
             acceptance_git_branch: 'stable'
 
             default_layout_axis: 64mdcal
+            default_ldap_type_axis: 'openldap'
 
             is-pe: "true"
             beaker_type: 'pe'
