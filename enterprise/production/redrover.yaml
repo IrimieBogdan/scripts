@@ -13,7 +13,7 @@
     default_layout_axis: 64mdca
     genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
 
-    #kickoff_disabled: False
+    kickoff_disabled: False
     preserve_hosts: never
 
     jobs:
@@ -21,10 +21,3 @@
             scm_branch: 'master'
             pgdb_user: 'rbac'
             pgdb_password: 'rbac851'
-        - 'clj-merge-unit_postgres-integration':
-            github_user: waynr
-            github_project: redrover
-            scm_branch: 'qeng-1910'
-            pgdb_user: 'rbac'
-            pgdb_password: 'rbac851'
-
