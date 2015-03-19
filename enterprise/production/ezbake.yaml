@@ -70,7 +70,7 @@
         # ezbake stable branch
         #-----------------------------------------------------------------------
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'stable'
+            ezbake_git_branch: 'stable'
 
             # Used to clone the appropriate github project that uses
             # lein-ezbake for packaging.
@@ -96,7 +96,7 @@
             beaker_postsuite: 'acceptance/suites/post_suite'
 
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'stable'
+            ezbake_git_branch: 'stable'
             pe_family: '3.8'
             package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
@@ -126,7 +126,7 @@
             beaker_testsuite: 'integration/tests'
 
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'stable'
+            ezbake_git_branch: 'stable'
             pe_family: '4.0'
             package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
@@ -156,7 +156,7 @@
             beaker_testsuite: 'integration/tests'
 
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'stable'
+            ezbake_git_branch: 'stable'
             pe_family: '3.8'
             package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
@@ -187,7 +187,7 @@
             beaker_testsuite: 'integration/tests'
 
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'stable'
+            ezbake_git_branch: 'stable'
             pe_family: '4.0'
             package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
@@ -221,7 +221,7 @@
         # ezbake deprecated branch
         #-----------------------------------------------------------------------
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'deprecated'
+            ezbake_git_branch: 'deprecated'
             pe_family: '3.7'
             package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
@@ -255,7 +255,7 @@
         # ezbake master branch
         #-----------------------------------------------------------------------
         - 'acceptance-clj-ezbake-test-dependent':
-            scm_branch: 'master'
+            ezbake_git_branch: 'master'
             default_platform_axis: centos7
 
             # Used to clone the appropriate github project that uses

@@ -63,17 +63,19 @@
                 tests from <b>{acceptance_git_branch}</b> branch of
                 <b>https://github.com/{github_user}/{acceptance_github_project}</b>
             console_timeout: 40
-            qualifier: '{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{scm_branch}'
+            scm_branch: '{ezbake_git_branch}'
+            qualifier: '{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{ezbake_git_branch}'
             dn-qualifier: '10: Build {packaging_github_project} ({packaging_git_branch}) package with {acceptance_github_project} ({acceptance_git_branch}) '
             tpb_git_revision: False
             tpb_projects:
-                - '{value_stream}_{name}_integration-system_{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{scm_branch}'
+                - '{value_stream}_{name}_integration-system_{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{ezbake_git_branch}'
 
-        - '{value_stream}_{name}_integration-system_{qualifier}':
+        - '{value_stream}_ezbake_integration-system_{qualifier}':
             git_url: 'git@github.com:{github_user}/{acceptance_github_project}.git'
+            scm_branch: '{acceptance_git_branch}'
             github_http_url: 'https://github.com/{github_user}/{acceptance_github_project}'
 
-            qualifier: '{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{scm_branch}'
+            qualifier: '{packaging_github_project}-{packaging_git_branch}_{acceptance_github_project}-{acceptance_git_branch}_{ezbake_git_branch}'
             dn-qualifier: '20: Test {name} using {packaging_github_project} ({packaging_git_branch}) package and {acceptance_github_project} ({acceptance_git_branch})'
 
 - job-group:
