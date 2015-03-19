@@ -1,0 +1,23 @@
+- project:
+    name: redrover
+    meta_path_project: 'enterprise/production/redrover.yaml'
+    value_stream: enterprise
+
+    github_user: puppetlabs
+    github_project: redrover
+
+    hipchat_room:
+        - 'Node Classifier'
+
+    default_platform_axis: centos6 centos7 ubuntu1404
+    default_layout_axis: 64mdca
+    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
+
+    kickoff_disabled: False
+    preserve_hosts: never
+
+    jobs:
+        - 'clj-merge-unit_postgres-integration':
+            scm_branch: 'master'
+            pgdb_user: 'rbac'
+            pgdb_password: 'rbac851'

@@ -19,6 +19,7 @@
 
 - job-group:
     name: 'clj-merge-unit_postgres-integration'
+    meta_path_jobgroup: 'resources/pipelines/unit-clj.yaml'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':
             dn-sort-index: ' 00:'

@@ -286,6 +286,36 @@
     beaker_root: ''
 
     # VAR
+    # Used in integration-beaker.sh to set default value for the beaker
+    # loadpath.
+    beaker_loadpath: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for the beaker
+    # post suite.
+    beaker_postsuite: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for the beaker
+    # options file.
+    beaker_optionsfile: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for the beaker
+    # helper file.
+    beaker_helper: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for the beaker
+    # pre suite.
+    beaker_presuite: ''
+
+    # VAR
+    # Used in integration-beaker.sh to set default value for the beaker
+    # test suite.
+    beaker_testsuite: ''
+
+    # VAR
     # Used in the ruby unit test script to give rspec extra options
     unit-rspec-extra: ''
 
