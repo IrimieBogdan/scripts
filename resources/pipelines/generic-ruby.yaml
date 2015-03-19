@@ -18,8 +18,9 @@
         - '{value_stream}_{name}_unit-ruby_{scm_branch}':
             dn-sort-index: ' 01:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
-        - '{value_stream}_{name}_pkg-pe_{scm_branch}':
+        - '{value_stream}_{name}_pkg-pe_{qualifier}':
             dn-sort-index: ' 02:'
+            qualifier: '{scm_branch}'
             tpb_projects: 'enterprise_enterprise-dist_packaging_promotion'
             tpb_property_file: 'promote.properties'
             tpb_git_revision: False
