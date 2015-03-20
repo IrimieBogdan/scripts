@@ -231,7 +231,7 @@
     # VAR
     # Used to indicate that Jenkins shouldn't do its default stupid
     # tagging behavior
-    git_skip_tag: False
+    git_skip_tag: True
 
     # VAR
     # Used in jobs that call 'rake pl:jenkins:uber_build' to conflicts between
