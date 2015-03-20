@@ -1,6 +1,6 @@
 - project:
     name: 'ci-job-configs'
-    meta_path_project: 'enterprise/production/meta-ci-job-configs.yaml'
+    meta_path_project: 'qe/production/ci-job-configs.yaml'
     value_stream: 'qe'
 
     github_user: 'puppetlabs'
