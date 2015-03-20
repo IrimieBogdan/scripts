@@ -15,9 +15,23 @@
 
     kickoff_disabled: False
     preserve_hosts: never
+    git_skip_tag: True
 
     jobs:
         - 'clj-merge-unit_postgres-integration':
             scm_branch: 'master'
             pgdb_user: 'rbac'
             pgdb_password: 'rbac851'
+            tpb_projects:
+                - '{value_stream}_{name}_pkg-pe_master'
+
+        - '{value_stream}_{name}_pkg-pe_{qualifier}':
+            pe_family: '3.8'
+            qualifier: 'master'
+            scm_branch: 'master'
+
+            dn-sort-index: ' 02:'
+            promote_package: 'redrover'
+
+            tpb_property_file: 'promote.properties'
+            tpb_git_revision: False
