@@ -13,3 +13,6 @@
     jobs:
         - 'pe-ui-mocha-unit-pipeline':
             scm_branch: 'master'
+        - '{value_stream}_{name}_release-js_{qualifier}':
+            dn-sort-index: ' Release-05:'
+            scm_branch: 'master'
