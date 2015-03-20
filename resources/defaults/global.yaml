@@ -37,6 +37,9 @@
                 - '{scm_branch}'
             skip-tag: '{git_skip_tag}'
 
+    disabled: '{obj:set_disabled}'
+    set_disabled: False
+
     # VAR
     # Set the git refspec for a job using a git repo. This is the value jenkins
     # git plugin sets by default. We provide a default value here so that github

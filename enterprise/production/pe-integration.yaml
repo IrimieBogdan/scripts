@@ -93,6 +93,8 @@
         - ubuntu1204
         - ubuntu1404
 
+    smoke_upgrade_disabled: False
+
     jobs:
         - '{value_stream}_pe-acceptance-tests_init_compose-shim':
             disabled: False
@@ -170,6 +172,7 @@
             preserve_hosts: onfail
             upgrader_smoke_upgrade_from_axis:
                 - 'NONE'
+            smoke_upgrade_disabled: True
 
         - 'pe-integration-full':
             pe_family: 3.99

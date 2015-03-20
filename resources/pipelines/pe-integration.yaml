@@ -37,6 +37,7 @@
         - '{value_stream}_pe-acceptance-tests_packaging_promotion_{scm_branch}':
             dn-sort-index: ' 19:'
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
+            set_disabled: '{obj:smoke_upgrade_disabled}'
             dn-sort-index: ' 10:'
             qualifier: 'smoke-upgrade'
             dn-qualifier: 'Upgrade Smoke Integration'
