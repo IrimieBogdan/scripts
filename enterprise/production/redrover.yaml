@@ -28,6 +28,7 @@
         - '{value_stream}_{name}_pkg-pe_{qualifier}':
             pe_family: '3.8'
             qualifier: 'master'
+            dn-qualifier: 'Package for PE 3.8.x'
             scm_branch: 'master'
 
             dn-sort-index: ' 02:'
