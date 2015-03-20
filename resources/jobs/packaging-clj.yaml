@@ -19,6 +19,7 @@
                 recursive: True
             branches:
                 - '${{GIT_SHA}}'
+            skip-tag: '{git_skip_tag}'
     parameters:
         - string:
             name: 'GIT_SHA'

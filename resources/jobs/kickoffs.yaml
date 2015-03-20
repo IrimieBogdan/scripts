@@ -4,6 +4,7 @@
     scm:
         - git:
             url: '{git_url}'
+            skip-tag: '{git_skip_tag}'
             branches:
                 - '{scm_branch}'
             submodule:
@@ -31,6 +32,7 @@
     scm:
         - git:
             url: '{git_url}'
+            skip-tag: '{git_skip_tag}'
             branches:
                 - '{scm_branch}'
             submodule:
@@ -58,6 +60,7 @@
     scm:
         - git:
             url: '{git_url}'
+            skip-tag: '{git_skip_tag}'
             branches:
                 - '{scm_branch}'
             submodule:
@@ -105,6 +108,7 @@
     scm:
         - git:
             url: '{git_url}'
+            skip-tag: '{git_skip_tag}'
             branches:
                 - '$GIT_SHA'
             submodule:
@@ -131,6 +135,7 @@
     scm:
         - git:
             url: '{git_url}'
+            skip-tag: '{git_skip_tag}'
             branches:
                 - '{scm_branch}'
             refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
@@ -156,6 +161,7 @@
     scm:
         - git:
             url: '{git_url}'
+            skip-tag: '{git_skip_tag}'
             branches:
                 - '{scm_branch}'
     node: worker
