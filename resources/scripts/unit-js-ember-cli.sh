@@ -17,4 +17,4 @@ npm ls --depth 0
 export PATH=$(npm bin):$PATH
 
 bower install
-ember test --port {testem-port}
+ember test --port {testem-port} > $WORKSPACE/test-results.tap

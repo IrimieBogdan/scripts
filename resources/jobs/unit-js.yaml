@@ -42,6 +42,9 @@
     publishers:
         - email:
             recipients:  'node-mgmt-ui@puppetlabs.com'
+        - tap:
+            results: 'test-results.tap'
+            todo-is-failure: false
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
               predefined-parameters: '{tpb_predefined_parameters}'
