@@ -1,0 +1,29 @@
+- job-template:
+    name: '{value_stream}_{name}_release-js_{qualifier}'
+    meta_path_jobtemplate: 'resources/jobs/release-js.yaml'
+    meta_description: |
+        <p>This job performs the following tasks:
+        <ul>
+        <li>Increments the patch version of the project
+        </li>
+        <li>Commits the package.json change to repo.
+        </li>
+        <li>Pushes the change to <b>{scm_branch}</b> branch at <b>git@github.com:{github_user}/{github_project}</b>.
+        </li>
+        <li>Tags the repo with the patch version.
+        </li>
+        <li>Pushes the new tag to <b>{scm_branch}</b> branch at <b>git@github.com:{github_user}/{github_project}</b>.
+        </li>
+
+    display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
+    qualifier: '{scm_branch}'
+    dn-qualifier: ' npm version'
+
+    git_skip_tag: True
+
+    node: unit
+
+    builders:
+        - shell:
+            !include-raw release-js.sh
+
