@@ -18,167 +18,6 @@
               git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
-    # This unit test is meant to be used for both classifier and classifier-ui,
-    # both of which have similar database fixture needs.
-    name: '{value_stream}_{name}_unit-clj_classifier_{scm_branch}'
-    meta_path_jobtemplate: 'resources/jobs/unit-clj.yaml'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Classifier Unit Test'
-    node: worker
-    builders:
-        - shell: |
-            #!/usr/bin/env bash
-            set -x
-            set -e
-
-            export DBHOST=vasu.delivery.puppetlabs.net
-            export DBUSER={pgdb_user}
-            export DBPORT=5432
-
-            echo
-            echo "Set database passwords."
-            export RBAC_DBPASS={pgdb_password}
-            export ACTIVITY_DBPASS={pgdb_password}
-            export CLASSIFIER_DBPASS={pgdb_password}
-            export PGPASSWORD={pgdb_password}
-
-            # Generate a temporary database identifier
-            DB_ID=`echo "nc_unit_$BUILD_ID" | tr - _`
-            RBAC_DB_ID=`echo "nc_unit_rbac_$BUILD_ID" | tr - _`
-            ACTIVITY_DB_ID=`echo "nc_unit_activity_$BUILD_ID" | tr - _`
-
-            export CLASSIFIER_DBSUBNAME="//$DBHOST:$DBPORT/$DB_ID"
-            export CLASSIFIER_DBUSER="$DBUSER"
-
-            export RBAC_DBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
-            export RBAC_DBUSER="$DBUSER"
-            export RBAC_DBPASS="$PGPASSWORD"
-
-            export ACTIVITY_DBNAME="//$DBHOST:$DBPORT/$ACTIVITY_DB_ID"
-            export ACTIVITY_DBUSER="$DBUSER"
-            export ACTIVITY_DBPASS="$PGPASSWORD"
-
-            echo
-            echo "Create temporary database names."
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $DB_ID"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
-
-            if [ "$DBUSER" = "rbac" ] ;then
-                echo
-                echo "Running with DBUSER=rbac, do this special thing."
-                psql -h "$DBHOST" -U "$DBUSER" -d "$RBAC_DB_ID" -c "create extension citext"
-            fi
-
-            if [ ! -z "$JDK_BIN_PATH" ] ;then
-                export PATH="$JDK_BIN_PATH:$PATH"
-            fi
-
-            java -version
-
-            echo
-            echo "Install Leiningen 2.5.1"
-            wget https://raw.githubusercontent.com/technomancy/leiningen/2.5.1/bin/lein
-            chmod u+x lein
-
-            echo
-            echo "Run leiningen tests."
-            ./lein version
-            ./lein -U test :all
-
-            echo
-            echo "Clean up databases"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $DB_ID"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $RBAC_DB_ID"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $ACTIVITY_DB_ID"
-
-            set -x
-            set -e
-    publishers:
-        - trigger-parameterized-builds:
-            - project: '{obj:tpb_projects}'
-              predefined-parameters: '{obj:tpb_predefined_parameters}'
-              current-parameters: '{obj:tpb_current_parameters}'
-              condition: '{obj:tpb_condition}'
-              property-file: '{obj:tpb_property_file}'
-              git-revision: '{obj:tpb_git_revision}'
-
-- job-template:
-    # This unit test is meant to be used for the pe-console-middleware which needs to setup an RBAC database,
-    # both of which have similar database fixture needs.
-    name: '{value_stream}_{name}_unit-clj_pe-console-middleware_{qualifier}'
-    meta_path_jobtemplate: 'resources/jobs/unit-clj.yaml'
-    display-name: '{name} ({scm_branch}){dn-sort-index} Console Middleware Unit Test'
-    node: worker
-    builders:
-        - shell: |
-            #!/usr/bin/env bash
-            set -x
-            set -e
-
-            export DBHOST=vasu.delivery.puppetlabs.net
-            export DBUSER={pgdb_user}
-            export DBPORT=5432
-
-            echo
-            echo "Set database passwords."
-            export PGPASSWORD={pgdb_password}
-
-            # Generate a temporary database identifier
-            RBAC_DB_ID=`echo "cmw_unit_rbac_$BUILD_ID" | tr - _`
-            ACTIVITY_DB_ID=`echo "cmw_unit_activity_$BUILD_ID" | tr - _`
-
-            export RBAC_DBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
-            export RBAC_DBUSER="$DBUSER"
-            export RBAC_DBPASS="$PGPASSWORD"
-
-            export ACTIVITY_DBNAME="//$DBHOST:$DBPORT/$ACTIVITY_DB_ID"
-            export ACTIVITY_DBUSER="$DBUSER"
-            export ACTIVITY_DBPASS="$PGPASSWORD"
-
-            echo
-            echo "Create temporary database names."
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
-
-            if [ "$DBUSER" = "rbac" ] ;then
-                echo
-                echo "Running with DBUSER=rbac, do this special thing."
-                psql -h "$DBHOST" -U "$DBUSER" -d "$RBAC_DB_ID" -c "create extension citext"
-            fi
-
-            if [ ! -z "$JDK_BIN_PATH" ] ;then
-                export PATH="$JDK_BIN_PATH:$PATH"
-            fi
-
-            java -version
-
-            echo
-            echo "Install Leiningen 2.5.1"
-            wget https://raw.githubusercontent.com/technomancy/leiningen/2.5.1/bin/lein
-            chmod u+x lein
-
-            echo
-            echo "Run leiningen tests."
-            ./lein version
-            ./lein -U test :all
-
-            echo
-            echo "Clean up databases"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $RBAC_DB_ID"
-            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $ACTIVITY_DB_ID"
-
-            set -x
-            set -e
-    publishers:
-        - trigger-parameterized-builds:
-            - project: '{obj:tpb_projects}'
-              predefined-parameters: '{obj:tpb_predefined_parameters}'
-              current-parameters: '{obj:tpb_current_parameters}'
-              condition: '{obj:tpb_condition}'
-              property-file: '{obj:tpb_property_file}'
-              git-revision: '{obj:tpb_git_revision}'
-
-- job-template:
     name: '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/unit-clj.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} Clj/Postgres Unit/Integration Test'
@@ -213,8 +52,8 @@
             export CLASSIFIER_DBPASS="$PGPASSWORD"
 
             export RBAC_DBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
-            export RBAC_DBUSER="$DBUSER"
-            export RBAC_DBPASS="$PGPASSWORD"
+            export RBAC_DBUSER="rbac"
+            export RBAC_DBPASS="rbac851"
 
             export ACTIVITY_DBNAME="//$DBHOST:$DBPORT/$ACTIVITY_DB_ID"
             export ACTIVITY_DBUSER="$DBUSER"
@@ -230,11 +69,9 @@
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
 
-            if [ "$DBUSER" = "rbac" ] ;then
-                echo
-                echo "Running with DBUSER=rbac, do this special thing."
-                psql -h "$DBHOST" -U "$DBUSER" -d "$RBAC_DB_ID" -c "create extension citext"
-            fi
+            echo
+            echo "Running with DBUSER=rbac, do this special thing."
+            env PGPASSWORD=$RBAC_DBPASS psql -h "$DBHOST" -U "$RBAC_DBUSER" -d "$RBAC_DB_ID" -c "create extension citext"
 
             if [ ! -z "$JDK_BIN_PATH" ] ;then
                 export PATH="$JDK_BIN_PATH:$PATH"

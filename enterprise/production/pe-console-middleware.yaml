@@ -15,7 +15,7 @@
     pgdb_user: 'rbac'
     kickoff_disabled: False
     jobs:
-        - 'clj-pe-console-middleware-unit-release':
+        - 'clj-unit-release_postgres-integration':
             scm_branch: 'master'
-        - 'clj-pe-console-middleware-merge-unit':
+        - 'clj-merge-unit_postgres-integration':
             scm_branch: 'master'

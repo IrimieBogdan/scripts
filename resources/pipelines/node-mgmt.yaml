@@ -52,12 +52,13 @@
                 - dev-resources/.*
                 - resources/classifier-ui/dist/.*
             dn-sort-index: ' 10:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_classifier_{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
 
-        - '{value_stream}_{name}_unit-clj_classifier_{scm_branch}':
+        - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
             dn-sort-index: ' 15:'
-            pgdb_password: 'rbac851'
-            pgdb_user: 'rbac'
+            tpb_projects: '{value_stream}_classifier_unit-jruby_{scm_branch}'
+            pgdb_password: 'classifier919'
+            pgdb_user: 'classifier'
 
 - job-group:
     name: 'pe-ui-ember-cli-pipeline'
