@@ -4,10 +4,10 @@
         - '{value_stream}_{name}_init-merge_{qualifier}':
             qualifier: '{scm_branch}'
             dn-sort-index: ' 00:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_classifier_{scm_branch}'
+            tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
             tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
 
-        - '{value_stream}_{name}_unit-clj_classifier_{scm_branch}':
+        - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
             dn-sort-index: ' 01:'
             tpb_projects: '{value_stream}_classifier_unit-jruby_{scm_branch}'
             pgdb_password: 'classifier919'

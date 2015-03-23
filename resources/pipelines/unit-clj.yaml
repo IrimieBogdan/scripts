@@ -9,15 +9,6 @@
              dn-sort-index: ' 01:'
 
 - job-group:
-    name: 'clj-pe-console-middleware-merge-unit'
-    jobs:
-        - '{value_stream}_{name}_init-merge_{qualifier}':
-            dn-sort-index: ' 00:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_pe-console-middleware_{scm_branch}'
-        - '{value_stream}_{name}_unit-clj_pe-console-middleware_{qualifier}':
-            dn-sort-index: ' 01:'
-
-- job-group:
     name: 'clj-merge-unit_postgres-integration'
     meta_path_jobgroup: 'resources/pipelines/unit-clj.yaml'
     jobs:
