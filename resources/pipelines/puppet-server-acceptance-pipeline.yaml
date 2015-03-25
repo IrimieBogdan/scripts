@@ -8,6 +8,7 @@
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: |
+                LAYOUT_AXIS={mergely_layout_axis}
                 PLATFORM_AXIS={mergely_platform_axis}
                 SHIP_NIGHTLY=FALSE
 
@@ -16,6 +17,7 @@
             dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
             tpb_predefined_parameters: |
+                LAYOUT_AXIS={nightly_layout_axis}
                 PLATFORM_AXIS={nightly_platform_axis}
                 SHIP_NIGHTLY={ship_nightly}
 
