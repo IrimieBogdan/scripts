@@ -45,7 +45,7 @@ if [ ! -z "{is-pe}" ] ;then
     # "sles10" but for windows integration testing the variable will be set to
     # "64" or "32" presumably to indicate which of 32 vs 64 bit binary to
     # install.
-    if [ $PLATFORM == 32 ] ;then
+    if [ "$PLATFORM" == 32 ] ;then
       export pe_use_win32=1
     fi
 
@@ -99,11 +99,11 @@ bundle install --without development
 #-------------------------------------------------------------------------------
 # Generate Beaker host.cfg
 
-if [ $PLATFORM == centos7 ] \
-    || [ $PLATFORM == oracle7 ] \
-    || [ $PLATFORM == redhat7 ] \
-    || [ $PLATFORM == scientific7 ] \
-    || [ $PLATFORM == sles12 ]
+if [ "$PLATFORM" == centos7 ] \
+    || [ "$PLATFORM" == oracle7 ] \
+    || [ "$PLATFORM" == redhat7 ] \
+    || [ "$PLATFORM" == scientific7 ] \
+    || [ "$PLATFORM" == sles12 ]
 then
   export LAYOUT=${{LAYOUT//32/64}}
 fi

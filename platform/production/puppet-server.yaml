@@ -17,7 +17,10 @@
     nightly_platform_axis: "centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404"
     mergely_platform_axis: "centos6 centos7 ubuntu1404"
 
-    genconfig: "bundle exec genconfig $PLATFORM-$LAYOUT"
+    nightly_layout_axis: "64mdca 64mdca-64a"
+    mergely_layout_axis: "64mdca"
+
+    genconfig: "bundle exec genconfig2 $PLATFORM-$LAYOUT"
     preserve_hosts: 'onfail'
 
     console_timeout: '20'
@@ -30,8 +33,15 @@
             ship_nightly: 'FALSE'
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
+
             beaker_type: 'aio'
             ship_nightly: 'FALSE'
-            default_platform_axis: centos7
-            nightly_platform_axis: centos7
-            mergely_platform_axis: centos7
+
+            genconfig: "bundle exec genconfig2 $LAYOUT"
+            default_platform_axis: ''
+            nightly_platform_axis: ''
+            mergely_platform_axis: ''
+
+            default_layout_axis: "redhat7-64ma"
+            nightly_layout_axis: "redhat7-64ma redhat7-64m-redhat7-64a redhat6-64ma redhat6-64m-redhat6-32a"
+            mergely_layout_axis: "redhat7-64ma redhat6-64ma"
