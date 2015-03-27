@@ -1,0 +1,17 @@
+- project:
+    name: trapperkeeper-status
+    meta_path_project: 'enterprise/production/trapperkeeper-status.yaml'
+    value_stream: 'enterprise'
+
+    github_user: 'puppetlabs'
+    github_project: 'trapperkeeper-status'
+
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
+
+    kickoff_disabled: False
+    jobs:
+        - 'clj-unit-release':
+            scm_branch: 'master'
+        - 'clj-merge-unit':
+            scm_branch: 'master'
