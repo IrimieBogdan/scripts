@@ -8,6 +8,7 @@
 
     hipchat_room:
         - 'Node Management UI'
+        - 'Configuration Management'
 
     assets-composedir: "composition"
     assets-tempdir: ".tmp/pe-console-ui/dev-resources/console-ui"
