@@ -1,0 +1,26 @@
+- project:
+    name: 'pe-activity-service'
+    meta_path_project: 'enterprise/production/pe-activity-service.yaml'
+    value_stream: 'enterprise'
+
+    github_user: 'puppetlabs'
+    github_project: 'pe-activity-service'
+
+    hipchat_room:
+        - 'RBAC'
+
+    kickoff_disabled: False
+
+    pgdb_user: 'rbac'
+    pgdb_password: 'rbac851'
+
+    jobs:
+        - 'clj-merge-unit_postgres-integration':
+            scm_branch: 'master'
+        - 'clj-unit-release_postgres-integration':
+            scm_branch: 'master'
+
+        - 'clj-merge-unit_postgres-integration':
+            scm_branch: 'shallowgravy'
+        - 'clj-unit-release_postgres-integration':
+            scm_branch: 'shallowgravy'
