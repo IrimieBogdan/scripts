@@ -24,6 +24,8 @@
     git_skip_tag: True
     kickoff_disabled: False
 
+    timed_trigger_cron: 'H H(21-23) * * *'
+
     jobs:
         - 'init_merge-manual-periodic':
             scm_branch: master

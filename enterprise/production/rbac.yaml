@@ -31,9 +31,11 @@
     init_mergely_predefined_parameters: |
         LAYOUT_AXIS=64mdcal
         PLATFORM_AXIS=centos6 ubuntu1404
-    init_nightly_predefined_parameters: |
+    init_periodic_predefined_parameters: |
         LAYOUT_AXIS=64mdcal 64m-32adcal
         PLATFORM_AXIS=centos6 centos7 redhat7 ubuntu1404
+
+    timed_trigger_cron: 'H H(21-23) * * *'
 
     jobs:
         - 'init_merge-manual-periodic':
