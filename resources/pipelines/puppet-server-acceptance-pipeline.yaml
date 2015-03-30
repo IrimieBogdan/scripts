@@ -3,29 +3,6 @@
     meta_path_jobgroup: resources/pipelines/puppet-server-acceptance-pipeline.yaml
     archive_artifacts_glob: '**/junit/latest/*.xml,log/latest/puppetserver/**/*'
     jobs:
-        - '{value_stream}_{name}_init-merge_{qualifier}':
-            qualifier: '{scm_branch}'
-            dn-sort-index: ' 00:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: |
-                LAYOUT_AXIS={mergely_layout_axis}
-                PLATFORM_AXIS={mergely_platform_axis}
-                SHIP_NIGHTLY=FALSE
-
-        - '{value_stream}_{name}_init_nightly-{qualifier}':
-            qualifier: '{scm_branch}'
-            dn-sort-index: ' 00:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-            tpb_predefined_parameters: |
-                LAYOUT_AXIS={nightly_layout_axis}
-                PLATFORM_AXIS={nightly_platform_axis}
-                SHIP_NIGHTLY={ship_nightly}
-
-        - '{value_stream}_{name}_init-manual_{qualifier}':
-            qualifier: '{scm_branch}'
-            dn-sort-index: ' 00:'
-            tpb_projects: '{value_stream}_{name}_unit-clj_{scm_branch}'
-
         - '{value_stream}_{name}_unit-clj_{qualifier}':
             dn-sort-index: ' 01:'
             tpb_projects: '{value_stream}_{name}_unit-jruby_{scm_branch}'
