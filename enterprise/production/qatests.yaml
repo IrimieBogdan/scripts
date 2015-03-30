@@ -4,7 +4,7 @@
     meta_path_project: enterprise/production/qatests.yaml
 
     github_user: puppetlabs
-    github_project: qatest
+    github_project: qatests
 
     hipchat_room: ${{PROJECT_ROOM}}
 
@@ -39,7 +39,7 @@
     meta_path_project: enterprise/production/qatests.yaml
 
     github_user: puppetlabs
-    github_project: qatest
+    github_project: qatests
 
     hipchat_room: ${{PROJECT_ROOM}}
 
