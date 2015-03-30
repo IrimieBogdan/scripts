@@ -1,7 +1,6 @@
 - job-group:
     name: 'init_merge-manual-periodic'
     meta_path_jobgroup: 'resources/pipelines/init.yaml'
-    tpb_projects: '{obj:init_downstream_jobs}'
     dn-sort-index: ' 00:'
     jobs:
         - '{value_stream}_{name}_init-merge_{qualifier}':

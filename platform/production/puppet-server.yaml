@@ -19,7 +19,7 @@
     kickoff_disabled: False
 
 
-    init_downstream_jobs:
+    tpb_projects:
         - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
     jobs:

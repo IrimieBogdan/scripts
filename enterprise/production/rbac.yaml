@@ -35,17 +35,21 @@
         LAYOUT_AXIS=64mdcal 64m-32adcal
         PLATFORM_AXIS=centos6 centos7 redhat7 ubuntu1404
 
-    init_downstream_jobs:
-        - '{value_stream}_{name}_unit-clj_{scm_branch}'
     jobs:
         - 'init_merge-manual-periodic':
             scm_branch: master
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'init_merge-manual-periodic':
             scm_branch: stable
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'init_merge-manual-periodic':
             scm_branch: shallowgravy
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'rbac-unit-pipeline':
             scm_branch: "stable"
