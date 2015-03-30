@@ -19,9 +19,6 @@
     kickoff_disabled: False
 
 
-    tpb_projects:
-        - '{value_stream}_{name}_unit-clj_{scm_branch}'
-
     jobs:
         #-----------------------------------------------------------------------
         # "stable" branch pipelines
@@ -30,13 +27,16 @@
             scm_branch: stable
 
             init_mergely_predefined_parameters: |
-                LAYOUT_AXIS= 64mdca
+                LAYOUT_AXIS=64mdca
                 PLATFORM_AXIS=centos6 centos7 ubuntu1404
                 SHIP_NIGHTLY=FALSE
             init_nightly_predefined_parameters: |
                 LAYOUT_AXIS=64mdca 64mdca-64a
                 PLATFORM_AXIS=centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
                 SHIP_NIGHTLY=FALSE
+
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'stable'
@@ -48,14 +48,19 @@
         - 'init_merge-manual-periodic':
             scm_branch: master
 
+            default_platform_axis: ''
+            default_layout_axis: "redhat7-64ma"
             init_mergely_predefined_parameters: |
-                PLATFORM_AXIS=
                 LAYOUT_AXIS=redhat6-64ma redhat7-64m-windows2008r2-64a ubuntu1404-64ma
+                PLATFORM_AXIS=
                 SHIP_NIGHTLY=FALSE
             init_nightly_predefined_parameters: |
-                PLATFORM_AXIS=
                 LAYOUT_AXIS=debian7-64m-32a debian7-64ma redhat6-64m-32a redhat6-64ma redhat7-64m-64a redhat7-64ma redhat7-64m-windows2008r2-64a ubuntu1204-64m-32a ubuntu1204-64ma ubuntu1404-64m-32a ubuntu1404-64ma ubuntu1404-64m-windows2008r2-64a
+                PLATFORM_AXIS=
                 SHIP_NIGHTLY=FALSE
+
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'foss_puppet-server_full-lein-ezbake':
             scm_branch: 'master'
