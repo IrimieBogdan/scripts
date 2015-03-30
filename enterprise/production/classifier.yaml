@@ -23,7 +23,31 @@
     beaker_optionsfile: 'integration/pe-options.rb'
     beaker_testsuite: 'integration/tests'
 
+    init_mergely_predefined_parameters: |
+        LAYOUT_AXIS=64mdcal
+        PLATFORM_AXIS=centos6 ubuntu1404
+    init_nightly_predefined_parameters: |
+        LAYOUT_AXIS=64mdcal 64m-32adcal
+        PLATFORM_AXIS=centos6 centos7 redhat7 ubuntu1404
+
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            qualifier: '{scm_branch}'
+            dn-sort-index: ' 00:'
+            tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+            tpb_predefined_parameters: "PLATFORM_AXIS=centos6 ubuntu1404"
+
+    init_downstream_jobs:
+        - '{value_stream}_{name}_unit-clj_{scm_branch}'
     jobs:
+        - 'init_merge-manual-periodic':
+            scm_branch: master
+
+        - 'init_merge-manual-periodic':
+            scm_branch: stable
+
+        - 'init_merge-manual-periodic':
+            scm_branch: shallowgravy
+
         - 'classifier-unit-pipeline':
             scm_branch: "stable"
             puppet_branch: "stable"
