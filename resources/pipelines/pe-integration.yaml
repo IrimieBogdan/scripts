@@ -126,6 +126,7 @@
                 - 020_puppet_resource_package
                 - 021_puppet_resource_service
                 - 021_puppet_resource_ssh_authorized_key
+                - 021_puppet_service
                 - 022_puppet_resource_group
                 - 022_puppet_resource_sshkey
                 - 025_puppet_resource_user
