@@ -10,8 +10,8 @@
 
     package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
-    default_platform_axis: centos6 centos7 redhat7 ubuntu1404
-    default_layout_axis: 64mdcal 64mdcal-32a
+    default_platform_axis: centos6 redhat7 ubuntu1404
+    default_layout_axis: 64mdcal
 
     beaker_type: 'pe'
     preserve_hosts: 'onfail'
