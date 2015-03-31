@@ -24,7 +24,24 @@
     git_skip_tag: True
     kickoff_disabled: False
 
+    timed_trigger_cron: 'H H(21-23) * * *'
+
     jobs:
+        - 'init_merge-manual-periodic':
+            scm_branch: master
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+
+        - 'init_merge-manual-periodic':
+            scm_branch: stable
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+
+        - 'init_merge-manual-periodic':
+            scm_branch: shallowgravy
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+
         - 'unit-rb_pe-razor-server':
             scm_branch: '3.8.x'
             downstream_jobs:

@@ -10,9 +10,8 @@
 
     package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 
-    default_platform_axis: centos6 centos7 redhat7 ubuntu1404
-    default_layout_axis: 64mdcal 64mdcal-32a
-    mergely_platform_axis: 'centos6 ubuntu1404'
+    default_platform_axis: centos6 redhat7 ubuntu1404
+    default_layout_axis: 64mdcal
     default_ldap_type_axis: 'active_directory openldap'
 
     git_excluded_regions:
@@ -29,7 +28,31 @@
     beaker_optionsfile: 'integration/options.rb'
     beaker_testsuite: 'integration/tests'
 
+    init_mergely_predefined_parameters: |
+        LAYOUT_AXIS=64mdcal
+        PLATFORM_AXIS=centos6 ubuntu1404
+    init_periodic_predefined_parameters: |
+        LAYOUT_AXIS=64mdcal 64m-32adcal
+        PLATFORM_AXIS=centos6 centos7 redhat7 ubuntu1404
+
+    timed_trigger_cron: 'H H(21-23) * * *'
+
     jobs:
+        - 'init_merge-manual-periodic':
+            scm_branch: master
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
+
+        - 'init_merge-manual-periodic':
+            scm_branch: stable
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
+
+        - 'init_merge-manual-periodic':
+            scm_branch: shallowgravy
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
+
         - 'rbac-unit-pipeline':
             scm_branch: "stable"
             puppet_branch: "stable"

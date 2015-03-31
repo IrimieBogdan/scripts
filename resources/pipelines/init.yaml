@@ -1,0 +1,12 @@
+- job-group:
+    name: 'init_merge-manual-periodic'
+    meta_path_jobgroup: 'resources/pipelines/init.yaml'
+    dn-sort-index: ' 00:'
+    jobs:
+        - '{value_stream}_{name}_init-merge_{qualifier}':
+            tpb_predefined_parameters: '{obj:init_mergely_predefined_parameters}'
+
+        - '{value_stream}_{name}_init-periodic_{qualifier}':
+            tpb_predefined_parameters: '{obj:init_periodic_predefined_parameters}'
+
+        - '{value_stream}_{name}_init-manual_{qualifier}'

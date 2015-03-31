@@ -154,7 +154,7 @@
     # VAR
     # Used in the {value_stream}_{name}_init-periodic_{qualifier} jobs to
     # specify run intervals in cron format.
-    timed_trigger_cron: ''
+    timed_trigger_cron: '@midnight'
 
     # VAR
     # Deprecated variable used by ezbake packaging jobs to work around jankiness
@@ -473,3 +473,9 @@
     ds_desc: ''
     ds_regexp_for_failed: ''
     ds_desc_for_failed: ''
+
+    # VAR
+    # Set the default value of predefined parameters for the
+    # init_merge-manual-periodic pipeline.
+    init_mergely_predefined_parameters: ''
+    init_periodic_predefined_parameters: ''
