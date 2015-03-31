@@ -27,20 +27,13 @@
     timed_trigger_cron: 'H H(21-23) * * *'
 
     jobs:
+        #---------------------------------------------------------------------
+        # 3.8.x branch
+        #
         - 'init_merge-manual-periodic':
-            scm_branch: master
+            scm_branch: '3.8.x'
             tpb_projects:
-                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
-
-        - 'init_merge-manual-periodic':
-            scm_branch: stable
-            tpb_projects:
-                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
-
-        - 'init_merge-manual-periodic':
-            scm_branch: shallowgravy
-            tpb_projects:
-                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+                - '{value_stream}_pe-razor-server_unit-ruby_{scm_branch}'
 
         - 'unit-rb_pe-razor-server':
             scm_branch: '3.8.x'
@@ -50,6 +43,15 @@
         - 'acceptance-beaker_pe-razor-server':
             scm_branch: '3.8.x'
             pe_family: '3.8'
+
+
+        #---------------------------------------------------------------------
+        # 4.0.x branch
+        #
+        - 'init_merge-manual-periodic':
+            scm_branch: '4.0.x'
+            tpb_projects:
+                - '{value_stream}_pe-razor-server_unit-ruby_{scm_branch}'
 
         - 'unit-rb_pe-razor-server':
             scm_branch: '4.0.x'
