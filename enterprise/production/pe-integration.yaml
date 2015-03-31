@@ -276,6 +276,7 @@
                 - '{value_stream}_qatests-puppet_integration-system_pe_020_puppet_resource_package_{scm_branch}'
                 - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_resource_service_{scm_branch}'
                 - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_resource_ssh_authorized_key_{scm_branch}'
+                - '{value_stream}_qatests-puppet_integration-system_pe_021_puppet_service_{scm_branch}'
                 - '{value_stream}_qatests-puppet_integration-system_pe_022_puppet_resource_group_{scm_branch}'
                 - '{value_stream}_qatests-puppet_integration-system_pe_022_puppet_resource_sshkey_{scm_branch}'
                 - '{value_stream}_qatests-puppet_integration-system_pe_025_puppet_resource_user_{scm_branch}'
