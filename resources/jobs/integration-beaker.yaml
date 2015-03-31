@@ -76,6 +76,10 @@
     dn-qualifier: 'Integration'
     project-type: matrix
     node: beaker
+    ds_regexp: 'export pe_version=([\w\-.]+)'
+    ds_desc: '\1'
+    ds_regexp_for_failed: 'export pe_version=([\w\-.]+)'
+    ds_desc_for_failed: '\1'
     parameters:
         - string:
             name: pe_version
@@ -120,10 +124,10 @@
               property-file: '{tpb_property_file}'
               git-revision: '{tpb_git_revision}'
         - description-setter:
-            regexp: "export pe_version=([\\w\\-.]+)"
-            description: '\1'
-            regexp-for-failed: "export pe_version=([\\w\\-.]+)"
-            description-for-failed: '\1'
+            regexp: '{ds_regexp}'
+            description: '{ds_desc}'
+            regexp-for-failed: '{ds_regexp_for_failed}'
+            description-for-failed: '{ds_desc_for_failed}'
             set-for-matrix: true
 
 - job-template:
