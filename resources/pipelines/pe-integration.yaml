@@ -79,6 +79,10 @@
             dn-sort-index: ' 21:'
             beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
             combination-filter: '{obj:full_upgrade_combination_filter}'
+            ds_regexp: 'export pe_upgrade_version=([\w\-.]+)'
+            ds_desc: '\1'
+            ds_regexp_for_failed: 'export pe_upgrade_version=([\w\-.]+)'
+            ds_desc_for_failed: '\1'
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier: 'full'
             dn-qualifier: 'Full Integration'
@@ -106,6 +110,10 @@
             platform_axis:
                 - 'NOTUSED'
             combination-filter: '(LAYOUT ==~/.+sles10.+/).implies(UPGRADE_FROM != "3.3.2")'
+            ds_regexp: 'export pe_upgrade_version=([\\w\\-.]+)'
+            ds_desc: '\1'
+            ds_regexp_for_failed: 'export pe_upgrade_version=([\\w\\-.]+)'
+            ds_desc_for_failed: '\1'
 
 - job-group:
     name: 'qatest-puppet-split-jobs'

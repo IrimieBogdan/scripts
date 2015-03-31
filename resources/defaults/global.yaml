@@ -466,3 +466,10 @@
     # Set the path globs used to capture file artifacts using the "Archive
     # Artifacts" Jenkins publisher.
     archive_artifacts_glob: '**/junit/latest/*.xml'
+
+    # VAR
+    # set the regular expressions used by the description setter plugin
+    ds_regexp: ''
+    ds_desc: ''
+    ds_regexp_for_failed: ''
+    ds_desc_for_failed: ''
