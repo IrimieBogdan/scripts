@@ -110,9 +110,9 @@
             platform_axis:
                 - 'NOTUSED'
             combination-filter: '(LAYOUT ==~/.+sles10.+/).implies(UPGRADE_FROM != "3.3.2")'
-            ds_regexp: 'export pe_upgrade_version=([\\w\\-.]+)'
+            ds_regexp: 'export pe_upgrade_version=([\w\-.]+)'
             ds_desc: '\1'
-            ds_regexp_for_failed: 'export pe_upgrade_version=([\\w\\-.]+)'
+            ds_regexp_for_failed: 'export pe_upgrade_version=([\w\-.]+)'
             ds_desc_for_failed: '\1'
 
 - job-group:
