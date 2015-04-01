@@ -106,7 +106,6 @@
             genconfig: 'bundle exec genconfig2 $LAYOUT'
             beaker_presuite: 'setup/install.rb,setup/upgrade.rb'
             layout_axis: '{obj:agent_layout_axis}'
-            console_timeout: '30'
             platform_axis:
                 - 'NOTUSED'
             combination-filter: '(LAYOUT ==~/.+sles10.+/).implies(UPGRADE_FROM != "3.3.2")'
