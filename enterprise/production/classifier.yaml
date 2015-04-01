@@ -27,7 +27,7 @@
         LAYOUT_AXIS=64mdcal
         PLATFORM_AXIS=centos6 ubuntu1404
     init_periodic_predefined_parameters: |
-        LAYOUT_AXIS=64mdcal 64m-32adcal
+        LAYOUT_AXIS=64mdcal 64mdcal-32a
         PLATFORM_AXIS=centos6 centos7 redhat7 ubuntu1404
 
     timed_trigger_cron: 'H H(21-23) * * *'
