@@ -51,6 +51,10 @@
             upgrade_from_axis: '{obj:upgrader_smoke_upgrade_from_axis}'
             platform_axis: '{obj:upgrader_smoke_platform_axis}'
             layout_axis: '{obj:upgrader_smoke_layout_axis}'
+            ds_regexp: 'export pe_upgrade_version=([\w\-.]+)'
+            ds_desc: '\1'
+            ds_regexp_for_failed: 'export pe_upgrade_version=([\w\-.]+)'
+            ds_desc_for_failed: '\1'
 
 - job-group:
     name: 'pe-integration-full'
