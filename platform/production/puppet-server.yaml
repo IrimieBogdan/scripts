@@ -70,3 +70,32 @@
             genconfig: "bundle exec genconfig2 $LAYOUT"
             default_platform_axis: ''
             default_layout_axis: "redhat7-64ma"
+
+        #-----------------------------------------------------------------------
+        # temp "2.1.x" branch pipelines
+        #-----------------------------------------------------------------------
+        - 'init_merge-manual-periodic':
+            scm_branch: '2.1.x'
+
+            default_platform_axis: ''
+            default_layout_axis: "redhat7-64ma"
+            init_mergely_predefined_parameters: |
+                LAYOUT_AXIS=redhat6-64ma redhat7-64m-windows2008r2-64a ubuntu1404-64ma
+                PLATFORM_AXIS=
+                SHIP_NIGHTLY=FALSE
+            init_periodic_predefined_parameters: |
+                LAYOUT_AXIS=debian7-64m-32a debian7-64ma redhat6-64m-32a redhat6-64ma redhat7-64m-64a redhat7-64ma redhat7-64m-windows2008r2-64a ubuntu1204-64m-32a ubuntu1204-64ma ubuntu1404-64m-32a ubuntu1404-64ma ubuntu1404-64m-windows2008r2-64a
+                PLATFORM_AXIS=
+                SHIP_NIGHTLY=FALSE
+
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
+
+        - 'foss_puppet-server_full-lein-ezbake':
+            scm_branch: '2.1.x'
+
+            beaker_type: 'aio'
+
+            genconfig: "bundle exec genconfig2 $LAYOUT"
+            default_platform_axis: ''
+            default_layout_axis: "redhat7-64ma"
