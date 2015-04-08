@@ -1,12 +1,12 @@
 - project:
-    name: 'pe-hiera'
-    meta_path_project: 'enterprise/production/pe-hiera.yaml'
+    name: 'pe-mcollective'
+    meta_path_project: 'enterprise/production/pe-mcollective.yaml'
     value_stream: 'enterprise'
 
     github_user: 'puppetlabs'
-    github_project: 'pe-hiera'
+    github_project: 'pe-mcollective'
 
-    promote_package: 'pe-hiera'
+    promote_package: 'pe-mcollective'
     kickoff_disabled: False
     jobs:
         - 'generic-unit-ruby':
