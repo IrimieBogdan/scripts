@@ -30,7 +30,7 @@
             downstream_jobs:
               - 'enterprise_pe-console-ui_compose-console-master'
 
-        - 'clj-unit-release':
+        - 'clj-release-deploy':
             scm_branch: 'master'
 
         - 'clj-merge-unit':
