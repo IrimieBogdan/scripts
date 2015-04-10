@@ -25,6 +25,10 @@ BEAKER_TESTSUITE="${{BEAKER_TESTSUITE:-$(echo {beaker_testsuite} | tr ' ' ',')}}
 BEAKER_POSTSUITE="${{BEAKER_POSTSUITE:-{beaker_postsuite}}}"
 BEAKER_TYPE="${{BEAKER_TYPE:-{beaker_type}}}"
 
+# BUNDLER_PATH (not to be confused with BUNDLE_PATH) is used to set the path to
+# which bundler will install gems (see the `bundle install` command below)
+BUNDLER_PATH="${{BUNDLER_PATH:-{bundler_path}}}"
+
 UPGRADE_FROM="${{UPGRADE_FROM:-NONE}}"
 
 #-------------------------------------------------------------------------------
@@ -94,7 +98,11 @@ fi
 
 rm -rf .bundle* Gemfile.lock install_log.*
 
-bundle install --without development
+if [ ! -z "$BUNDLER_PATH" ] ;then
+  bundle install --without development --path $BUNDLER_PATH
+else
+  bundle install --without development
+fi
 
 #-------------------------------------------------------------------------------
 # Generate Beaker host.cfg
