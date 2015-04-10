@@ -9,7 +9,7 @@
     kickoff_disabled: False
 
     jobs:
-        - 'clj-unit-release':
+        - 'clj-release-deploy':
             scm_branch: 'master'
         - 'clj-merge-unit':
             scm_branch: 'master'

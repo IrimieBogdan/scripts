@@ -19,5 +19,5 @@
     jobs:
         - 'clj-merge-unit_postgres-integration':
             scm_branch: 'master'
-        - 'clj-unit-release_postgres-integration':
+        - 'clj-release-deploy':
             scm_branch: 'master'
