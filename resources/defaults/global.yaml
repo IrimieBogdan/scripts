@@ -479,3 +479,7 @@
     # init_merge-manual-periodic pipeline.
     init_mergely_predefined_parameters: ''
     init_periodic_predefined_parameters: ''
+
+    # VAR
+    # Set the default workspace-local path for bundler gem installs.
+    bundler_path: './vendor/bundler'
