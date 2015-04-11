@@ -15,12 +15,32 @@
     pgdb_password: 'rbac851'
 
     jobs:
-        - 'clj-merge-unit_postgres-integration':
+        #---------------------------------------------------
+        # "master" branch
+        #
+
+        - '{value_stream}_{name}_init-merge_{qualifier}':
             scm_branch: 'master'
+            tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+
+        - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
+            scm_branch: 'master'
+            dn-sort-index: ' 01:'
+
         - 'clj-release-deploy':
             scm_branch: 'master'
 
-        - 'clj-merge-unit_postgres-integration':
+        #---------------------------------------------------
+        # "shallowgravy" branch
+        #
+
+        - '{value_stream}_{name}_init-merge_{qualifier}':
             scm_branch: 'shallowgravy'
+            tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+
+        - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
+            scm_branch: 'shallowgravy'
+            dn-sort-index: ' 01:'
+
         - 'clj-release-deploy':
             scm_branch: 'shallowgravy'

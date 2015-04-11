@@ -38,18 +38,12 @@
     timed_trigger_cron: 'H H(21-23) * * *'
 
     jobs:
-        - 'init_merge-manual-periodic':
-            scm_branch: master
-            tpb_projects:
-                - '{value_stream}_{name}_unit-clj_{scm_branch}'
+        #---------------------------------------------------
+        # "stable" branch
+        #
 
         - 'init_merge-manual-periodic':
             scm_branch: stable
-            tpb_projects:
-                - '{value_stream}_{name}_unit-clj_{scm_branch}'
-
-        - 'init_merge-manual-periodic':
-            scm_branch: shallowgravy
             tpb_projects:
                 - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
@@ -58,33 +52,53 @@
             puppet_branch: "stable"
             downstream_jobs:
                 - 'enterprise_rbac_packaging-ezbake_multiproject_3.7_stable'
+
         - 'pe-console-services-acceptance-pipeline':
             pe_family: '3.7'
             scm_branch: "stable"
             puppet_branch: "stable"
             packaging_git_branch: '3.7.x'
+
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
             scm_branch: 'stable'
 
+        #---------------------------------------------------
+        # "master" branch
+        #
+
+        - 'init_merge-manual-periodic':
+            scm_branch: master
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'rbac-unit-pipeline':
             scm_branch: "master"
             puppet_branch: "master"
             downstream_jobs:
                 - 'enterprise_rbac_packaging-ezbake_multiproject_3.8_master'
+
         - 'pe-console-services-acceptance-pipeline':
             pe_family: '3.8'
             scm_branch: "master"
             puppet_branch: "master"
             packaging_git_branch: '3.8.x'
             packaging_sleep: 15
+
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
             scm_branch: 'master'
 
+        #---------------------------------------------------
+        # "shallowgravy" branch
+        #
+
+        - 'init_merge-manual-periodic':
+            scm_branch: shallowgravy
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_{scm_branch}'
 
         - 'rbac-unit-pipeline':
             scm_branch: "shallowgravy"
@@ -97,6 +111,7 @@
             puppet_branch: "master"
             packaging_git_branch: '4.0.x'
             packaging_sleep: 10
+
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
             tpb_projects: '{value_stream}_{name}_pkg-pe_{scm_branch}'
