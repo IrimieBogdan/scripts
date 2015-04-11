@@ -58,6 +58,8 @@
             scm_branch: "stable"
             puppet_branch: "stable"
             packaging_git_branch: '3.7.x'
+            downstream_jobs:
+                - 'enterprise_rbac_release-clj_stable'
 
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
@@ -85,6 +87,8 @@
             puppet_branch: "master"
             packaging_git_branch: '3.8.x'
             packaging_sleep: 15
+            downstream_jobs:
+                - 'enterprise_rbac_release-clj_master'
 
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'
@@ -111,6 +115,8 @@
             puppet_branch: "master"
             packaging_git_branch: '4.0.x'
             packaging_sleep: 10
+            downstream_jobs:
+                - 'enterprise_rbac_release-clj_shallowgravy'
 
         - '{value_stream}_{name}_release-clj_{qualifier}':
             dn-sort-index: ' Release-05:'

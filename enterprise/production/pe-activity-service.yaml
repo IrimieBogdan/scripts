@@ -21,11 +21,13 @@
 
         - '{value_stream}_{name}_init-merge_{qualifier}':
             scm_branch: 'master'
+            dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
 
         - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
             scm_branch: 'master'
             dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_release-clj_{scm_branch}'
 
         - 'clj-release-deploy':
             scm_branch: 'master'
@@ -36,11 +38,13 @@
 
         - '{value_stream}_{name}_init-merge_{qualifier}':
             scm_branch: 'shallowgravy'
+            dn-sort-index: ' 00:'
             tpb_projects: '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
 
         - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
             scm_branch: 'shallowgravy'
             dn-sort-index: ' 01:'
+            tpb_projects: '{value_stream}_{name}_release-clj_{scm_branch}'
 
         - 'clj-release-deploy':
             scm_branch: 'shallowgravy'
