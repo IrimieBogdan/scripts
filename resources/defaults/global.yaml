@@ -46,6 +46,13 @@
     # PR builder jobs and their downstreams can actually pull all the necessary
     # PR commits.
     git_refspec: '+refs/heads/*:refs/remotes/origin/*'
+
+    # The git_excluded_users refers to users by the git configured user name
+    # (git config --get user.name) rather than the github name as some folks
+    # might expect.
+    git_excluded_users:
+        - 'Jenkins CI'
+
     git_excluded_regions: ''
     git_included_regions: ''
     scm_branch: ''
