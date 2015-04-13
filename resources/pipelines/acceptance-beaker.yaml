@@ -95,3 +95,4 @@
             dn-sort-index: ' 25:'
             dn-qualifier: ' PE {pe_family}.x Full'
             is-pe: "true"
+            tpb_projects: '{obj:downstream_jobs}'
