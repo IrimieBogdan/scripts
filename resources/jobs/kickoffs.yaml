@@ -9,6 +9,7 @@
                 - '{scm_branch}'
             submodule:
                 recursive: True
+            excluded-users: '{obj:git_excluded_users}'
             excluded-regions: '{obj:git_excluded_regions}'
             included-regions: '{obj:git_included_regions}'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}Mergely Kickoff'
