@@ -32,7 +32,7 @@
             scm_branch: 'master'
 
             dn-sort-index: ' 02:'
-            promote_package: 'redrover'
+            promote_package: 'pe-nc-migration-tool'
 
             tpb_projects: 'enterprise_enterprise-dist_packaging_promotion'
             tpb_property_file: 'promote.properties'
