@@ -292,7 +292,6 @@
                 - '{value_stream}_qatests-pe_integration-system_pe_120_jenkins_user_scenario_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_121_jvm_metrics_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_122_jvm_stdlib_module_{scm_branch}'
-                - '{value_stream}_qatests-pe_integration-system_pe_130_wordpress_user_scenario_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_215_jvm_inifile_module_{scm_branch}'
 
         - '{value_stream}_pe-acceptance-tests_init-periodic_{scm_branch}':
@@ -328,5 +327,4 @@
                 - '{value_stream}_qatests-pe_integration-system_pe_120_jenkins_user_scenario_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_121_jvm_metrics_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_122_jvm_stdlib_module_{scm_branch}'
-                - '{value_stream}_qatests-pe_integration-system_pe_130_wordpress_user_scenario_{scm_branch}'
                 - '{value_stream}_qatests-pe_integration-system_pe_215_jvm_inifile_module_{scm_branch}'
