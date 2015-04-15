@@ -4,28 +4,6 @@
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier} Acceptance Test Suite'
     project-type: matrix
     node: beaker
-    parameters:
-        - string:
-            name: '{package_build_version_varname}'
-            description: "Version of {name} to use in test."
-        - string:
-            name: PLATFORM_AXIS
-            default: '{default_platform_axis}'
-            description: "List of platforms for user-defined PLAFORM axis."
-        - string:
-            name: LAYOUT_AXIS
-            default: '{default_layout_axis}'
-            description: "List of layouts for user-defined LAYOUT axis."
-        - string:
-            name: LDAP_TYPE_AXIS
-            default: '{default_ldap_type_axis}'
-            description: 'List of LDAP service types. Known types include active directory and openldap'
-        - string:
-            name: SHIP_NIGHTLY
-            default: 'FALSE'
-            description: |
-                If this job happens to trigger nightly builds, then make sure
-                the nightly build is shipped by intention only.
     execution-strategy:
         combination-filter: '{combination-filter}'
     axes:
