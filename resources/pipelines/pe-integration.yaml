@@ -170,7 +170,6 @@
                 - 023_pe_reports_processor
                 - 120_jenkins_user_scenario
                 - 121_jvm_metrics
-                - 130_wordpress_user_scenario
                 - 215_jvm_inifile_module
         - '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}':
             qualifier: 030_pe_external_ca
