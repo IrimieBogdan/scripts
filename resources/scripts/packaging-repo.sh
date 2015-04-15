@@ -13,6 +13,8 @@ if [ ! -z "{script_dir}" ] ;then
 fi
 
 export PE_VER={pe_family}
+{additional_exports}
+
 rake package:bootstrap
 rake pe:jenkins:uber_build[20]
 ref=$(rake pl:print_build_param[ref])
