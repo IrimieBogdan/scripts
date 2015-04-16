@@ -20,11 +20,6 @@
             branches:
                 - '${{GIT_SHA}}'
             skip-tag: '{git_skip_tag}'
-    parameters:
-        - string:
-            name: 'GIT_SHA'
-            description: |
-                Version of {name} to use when deploying.
     builders:
         - shell:
             !include-raw-escape packaging-clj-lein-deploy.sh
@@ -88,11 +83,6 @@
     meta_path_jobtemplate: 'resources/jobs/packaging-clj.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} Lein EZBake'
     node: worker
-    parameters:
-        - string:
-            name: PE_VER
-            default: '{default_PE_VER}'
-            description: "Maven artifact version to build."
     builders:
         - shell:
             !include-raw packaging-clj-lein-ezbake.sh
@@ -112,7 +102,6 @@
     dn-qualifier: 'Build {packaging_github_project} for PE {pe_family}'
     node: worker
     project-type: freestyle
-    parameters:
     builders:
         - shell: !include-raw packaging-clj-lein-ezbake-multiproject.sh
 

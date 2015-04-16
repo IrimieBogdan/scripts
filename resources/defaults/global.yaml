@@ -459,12 +459,6 @@
     # Default is set to all
     clj_lein_test_selector: ':all'
 
-    # VAR
-    # List of LDAP service types. Known types include active directory and
-    # openldap
-    default_ldap_type_axis: ''
-
-    # VAR
     # Set the pathname to capture JUnit XML output in the Jenkins publisher used
     # for this purpose.
     junit_results_glob: '**/junit/latest/*.xml'
@@ -490,3 +484,79 @@
     # VAR
     # Set the default workspace-local path for bundler gem installs.
     bundler_path: './vendor/bundler'
+
+    # VAR
+    # Here we set the default "parameters" used for all jobs that don't
+    # explicitly override them.
+
+    default_ldap_type_axis: ''
+    default_platform_axis: ''
+    default_layout_axis: ''
+    default_jdk_axis: 'openjdk7'
+    default_puppetdb_dbtype_axis: ''
+
+    parameters:
+        - string:
+            name: '{package_build_version_varname}'
+            description: |
+                This parameter is dynamically named in ci-job-configs to match
+                the variable used in a Beaker integration test setup to acquire
+                the version string of for a package to be installed during the
+                Beaker presuite.
+        - string:
+            name: JDK_AXIS
+            default: '{default_jdk_axis}'
+            description: |
+                JDK version to use for unit/integration testing. Mostly relevant
+                for Java projects, in particular clojure unit tests.
+        - string:
+            name: PLATFORM_AXIS
+            default: '{default_platform_axis}'
+            description: |
+                List of platforms for user-defined PLATFORM axis. This variable
+                is used by the "genconfig2" utility to select a platform when
+                generating Beaker host configs. For a list of supported
+                platforms, see the output of "genconfig2 --list".
+        - string:
+            name: LAYOUT_AXIS
+            default: '{default_layout_axis}'
+            description: |
+                List of layouts for user-defined LAYOUT axis. This variable
+                is used by the "genconfig2" utility to set a platform layout when
+                generating Beaker host configs. For more info about how this
+                layout is specified, please see the output of
+                "genconfig2 --help"
+        - string:
+            name: LDAP_TYPE_AXIS
+            default: '{default_ldap_type_axis}'
+            description: |
+                List of LDAP service types. Known types include active directory
+                and openldap.
+        - string:
+            name: PUPPETDB_DBTYPE_AXIS
+            default: '{default_puppetdb_dbtype_axis}'
+            description: |
+                List of DB types for dynamic PUPPETDB_DBTYPE axis. Known types
+                include "hsqldb" and "postgres".
+        - string:
+            name: PE_VER
+            default: '{default_PE_VER}'
+            description: |
+                The PE version family to use. Typically only needed if some tool
+                used by the job reads this info from the PE_VER environment
+                variable. Valid values are of the form X.Y where X and Y are
+                respectively the major and minor versions of PE to target
+        - string:
+            name: SHIP_NIGHTLY
+            default: 'FALSE'
+            description: |
+                If this job is part of a pipeline that happens to trigger
+                nightly builds, then make sure the nightly build is shipped by
+                intention only by using a default value of "FALSE"
+        - string:
+            name: GIT_SHA
+            description: |
+                Git version of {name} to use for this run of the job/pipeline.
+                Beware that not all jobs/pipelines respect this variable--it is
+                primarily intended for "Manual Kickoff" style jobs which allows
+                users to set the git sha when manually triggering a pipeline.
