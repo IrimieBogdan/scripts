@@ -26,6 +26,10 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
+              parameter-order:
+                  - 'current-parameters'
+                  - 'predefined-parameters'
+                  - 'property-file'
               predefined-parameters: '{obj:tpb_predefined_parameters}'
               current-parameters: '{obj:tpb_current_parameters}'
               condition: '{obj:tpb_condition}'
@@ -72,6 +76,10 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
+              parameter-order:
+                  - 'current-parameters'
+                  - 'predefined-parameters'
+                  - 'property-file'
               predefined-parameters: '{tpb_predefined_parameters}'
               current-parameters: '{tpb_current_parameters}'
               condition: '{tpb_condition}'
@@ -89,6 +97,10 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
+              parameter-order:
+                  - 'current-parameters'
+                  - 'predefined-parameters'
+                  - 'property-file'
               predefined-parameters: '{obj:tpb_predefined_parameters}'
               current-parameters: '{obj:tpb_current_parameters}'
               condition: '{obj:tpb_condition}'
@@ -108,8 +120,12 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
+              parameter-order:
+                  - 'current-parameters'
+                  - 'predefined-parameters'
+                  - 'property-file'
               predefined-parameters: '{obj:tpb_predefined_parameters}'
-              current-parameters: '{obj:tpb_current_parameters}'
               condition: '{obj:tpb_condition}'
+              current-parameters: '{obj:tpb_current_parameters}'
               property-file: '.props'
               git-revision: '{obj:tpb_git_revision}'
