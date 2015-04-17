@@ -4,7 +4,8 @@
     github_user: 'puppetlabs'
     github_project: 'comidi'
 
-    hipchat_room: 'Puppet Server (aka PE Green Team)'
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
     value_stream: enterprise
 
     jobs:

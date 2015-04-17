@@ -1,7 +1,8 @@
 - project:
     name: 'console-license-status'
     value_stream: enterprise
-    hipchat_room: pe-team
+    hipchat_room:
+        - pe-team
     git_url: git@github.com:puppetlabs/console_license_status.git
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30

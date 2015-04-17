@@ -6,7 +6,8 @@
     github_user: 'puppetlabs'
     github_project: 'pe-puppet-server-extensions'
 
-    hipchat_room: 'Puppet Server (aka PE Green Team)'
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
 
     kickoff_disabled: False
 

@@ -6,7 +6,8 @@
     github_user: 'puppetlabs'
     github_project: 'pe-rbac-service'
 
-    hipchat_room: 'RBAC'
+    hipchat_room:
+        - 'RBAC'
 
     package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 

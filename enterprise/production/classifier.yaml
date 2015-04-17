@@ -6,7 +6,8 @@
     github_user: 'puppetlabs'
     github_project: 'classifier'
 
-    hipchat_room: 'Node Classifier'
+    hipchat_room:
+        - 'Node Classifier'
 
     package_build_version_varname: 'PE_CONSOLE_SERVICES_BUILD_VERSION'
 

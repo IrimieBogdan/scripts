@@ -129,7 +129,7 @@
 
     hipchat:
         enabled: true
-        room: '{obj:hipchat_room}'
+        rooms: '{obj:hipchat_room}'
         start-notify: '{obj:hcnotifier_start_notify}'
         notify-success: '{obj:hcnotifier_notify_success}'
         notify-aborted: '{obj:hcnotifier_notify_aborted}'
@@ -149,7 +149,8 @@
     # VAR
     # Can be a comma-delimited list of hipchat room names. There should be no
     # spaces between comma and room names.
-    hipchat_room: ''
+    hipchat_room:
+        - ''
 
     ###
     # Below are variables that would ideally belong to project or job-specific
