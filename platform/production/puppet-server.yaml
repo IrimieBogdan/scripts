@@ -6,7 +6,8 @@
     github_user: 'puppetlabs'
     github_project: 'puppet-server'
 
-    hipchat_room: 'Puppet Server (aka PE Green Team)'
+    hipchat_room:
+        - 'Puppet Server (aka PE Green Team)'
 
     # Used to set values on the integration jobs themselves.
     default_platform_axis: centos6 centos7 redhat5 redhat6 redhat7 ubuntu1204 ubuntu1404
