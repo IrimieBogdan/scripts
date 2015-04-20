@@ -13,6 +13,10 @@
     publishers:
         - trigger-parameterized-builds:
             - project: '{obj:tpb_projects}'
+              parameter-order:
+                  - 'current-parameters'
+                  - 'predefined-parameters'
+                  - 'property-file'
               predefined-parameters: '{obj:tpb_predefined_parameters}'
               current-parameters: '{obj:tpb_current_parameters}'
               condition: '{obj:tpb_condition}'
