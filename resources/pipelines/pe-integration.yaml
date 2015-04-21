@@ -175,6 +175,7 @@
             qualifier: 030_pe_external_ca
             beaker_presuite: pre-suite/pre_ste-remote_ca.rb
             genconfig: 'bundle exec genconfig2 $LAYOUT'
+            platform_axis: ''
             layout_axis:
                 - centos6-64u-64mdca-64f
                 - centos6-64u-redhat7-64mdca-64f
