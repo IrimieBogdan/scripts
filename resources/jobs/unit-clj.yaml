@@ -4,7 +4,19 @@
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier}'
     qualifier: '{scm_branch}'
     dn-qualifier: 'Clojure Unit Tests'
-    node: unit
+    node: worker
+    project-type: matrix
+    axes:
+        - axis:
+            type: dynamic
+            name: JDK
+            values:
+                - JDK_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - unit
     builders:
         - shell:
             !include-raw unit-clj.sh
@@ -22,11 +34,33 @@
     meta_path_jobtemplate: 'resources/jobs/unit-clj.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} Clj/Postgres Unit/Integration Test'
     node: worker
+    project-type: matrix
+    axes:
+        - axis:
+            type: dynamic
+            name: PUPPETDB_DBTYPE
+            values:
+                - PUPPETDB_DBTYPE_AXIS
+        - axis:
+            type: dynamic
+            name: JDK
+            values:
+                - JDK_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - unit
     builders:
         - shell: |
             #!/usr/bin/env bash
             set -x
             set -e
+
+            {additional_exports}
+
+            source ~/jdk_switcher.sh
+            jdk_switcher use $JDK
 
             export DBHOST=vasu.delivery.puppetlabs.net
             export DBUSER={pgdb_user}
@@ -36,12 +70,15 @@
             echo "Set postgres password."
             export PGPASSWORD={pgdb_password}
 
+            BUILD_ID=$BUILD_ID-$JDK-$PUPPETDB_DBTYPE
+
             echo
             echo "Create unique database names."
             CLASSIFIER_DB_ID=`echo "{name}_classifier_$BUILD_ID" | tr - _`
             RBAC_DB_ID=`echo "{name}_rbac_$BUILD_ID" | tr - _`
             ACTIVITY_DB_ID=`echo "{name}_activity_$BUILD_ID" | tr - _`
             REDROVER_DB_ID=`echo "{name}_redrover_$BUILD_ID" | tr - _`
+            PUPPETDB_DB_ID=`echo "{name}_puppetdb_$BUILD_ID" | tr - _`
 
             export REDROVER_DBSUBNAME="//$DBHOST:$DBPORT/$REDROVER_DB_ID"
             export REDROVER_DBUSER="$DBUSER"
@@ -59,6 +96,10 @@
             export ACTIVITY_DBUSER="$DBUSER"
             export ACTIVITY_DBPASS="$PGPASSWORD"
 
+            export PUPPETDB_DBSUBNAME="//$DBHOST:$DBPORT/$RBAC_DB_ID"
+            export PUPPETDB_DBUSER="$DBUSER"
+            export PUPPETDB_DBPASSWORD="$PGPASSWORD"
+
             set +e # failing the script by exit code during this section will
                    # cause the database cleanup to not happen
                    #
@@ -68,6 +109,7 @@
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $CLASSIFIER_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $RBAC_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $ACTIVITY_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "create database $PUPPETDB_DB_ID"
 
             echo
             echo "Running with DBUSER=rbac, do this special thing."
@@ -91,6 +133,7 @@
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $CLASSIFIER_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $RBAC_DB_ID"
             psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $ACTIVITY_DB_ID"
+            psql -h "$DBHOST" -U "$DBUSER" -d postgres -c "drop database $PUPPETDB_DB_ID"
 
             exit $RETVAL # exit with the return code of the leiningen test run
 
@@ -108,7 +151,19 @@
     meta_path_jobtemplate: 'resources/jobs/unit-clj.yaml'
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier} Test'
     qualifier: '{scm_branch}'
-    node: unit
+    node: worker
+    project-type: matrix
+    axes:
+        - axis:
+            type: dynamic
+            name: JDK
+            values:
+                - JDK_AXIS
+        - axis:
+            type: slave
+            name: label
+            values:
+                - unit
     builders:
         - shell:
             !include-raw unit-clj-directory-services.sh

@@ -1,0 +1,53 @@
+- project:
+    name: pe-puppetdb
+    meta_path_project: 'enterprise/production/pe-puppetdb.yaml'
+    value_stream: enterprise
+
+    github_user: puppetlabs
+    github_project: pe-puppetdb
+
+    hipchat_room:
+        - 'PuppetDB'
+
+    kickoff_disabled: False
+
+    default_jdk_axis: openjdk7 oraclejdk7 oraclejdk8
+    default_puppetdb_dbtype_axis: 'postgres'
+
+    jobs:
+        #---------------------------------------------------
+        # "3.8.x" branch
+        #
+
+        - 'init_merge-manual-periodic':
+            scm_branch: 3.8.x
+            timed_trigger_cron: ''
+            tpb_projects:
+                - '{value_stream}_{name}_unit-clj_postgres-integration_{scm_branch}'
+
+        - '{value_stream}_{name}_unit-clj_postgres-integration_{qualifier}':
+            scm_branch: '3.8.x'
+            dn-sort-index: ' 01:'
+            pgdb_user: 'puppetdb'
+            pgdb_password: 'puppetdb137'
+            additional_exports: |
+                export HTTP_CLIENT="wget --no-check-certificate -O"
+            tpb_projects:
+                - '{value_stream}_{name}_pkg-pe_{scm_branch}'
+
+        - '{value_stream}_{name}_pkg-pe_{qualifier}':
+            pe_family: '3.8'
+            dn-qualifier: 'Package for PE 3.8.x'
+            scm_branch: '3.8.x'
+            additional_exports: |
+                export COW="base-lucid-amd64.cow base-precise-amd64.cow base-squeeze-amd64.cow base-wheezy-amd64.cow"
+                export MOCK="pupent-{pe_family}-el5-x86_64 pupent-{pe_family}-el6-x86_64 pupent-{pe_family}-el7-x86_64 pupent-{pe_family}-sles11-x86_64 pupent-{pe_family}-sles12-x86_64"
+                bundle install
+
+            dn-sort-index: ' 02:'
+            promote_package: 'pe-puppetdb'
+
+            tpb_projects:
+                - 'enterprise_enterprise-dist_packaging_promotion'
+            tpb_property_file: 'promote.properties'
+            tpb_git_revision: False
