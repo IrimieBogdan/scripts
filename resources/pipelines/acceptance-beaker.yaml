@@ -95,4 +95,5 @@
             dn-sort-index: ' 25:'
             dn-qualifier: ' PE {pe_family}.x Full'
             is-pe: "true"
+            condition_param_varname: 'RELEASE'
             tpb_projects: '{obj:downstream_jobs}'

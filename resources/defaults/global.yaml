@@ -495,6 +495,7 @@
     default_layout_axis: ''
     default_jdk_axis: 'openjdk7'
     default_puppetdb_dbtype_axis: ''
+    condition_param_varname: ''
 
     parameters:
         - string:
@@ -504,6 +505,19 @@
                 the variable used in a Beaker integration test setup to acquire
                 the version string of for a package to be installed during the
                 Beaker presuite.
+        - string:
+            name: 'RELEASE'
+            description: |
+                This variable may be used to determine whether or not current
+                pipeline will trigger a "release" of some artifact; for example,
+                a clojure CI pipeline may trigger a deploy to nexus of a release
+                artifact followed by bumping to the next SNAPSHOT version level
+                for the project.
+
+                If a pipeline is controlled by this variable then its value must
+                be set to "TRUE" for the conditional behavior to be triggered.
+
+                This behavior relies on the Flexible Publish Jenkins plugin.
         - string:
             name: JDK_AXIS
             default: '{default_jdk_axis}'

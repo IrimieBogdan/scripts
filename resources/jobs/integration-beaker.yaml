@@ -1,6 +1,14 @@
 - job-template:
     name: '{value_stream}_{name}_integration-system_{qualifier}'
     meta_path_jobtemplate: 'resources/jobs/integration-beaker.yaml'
+    meta_description: |
+        This job honors the build parameter named by the JJB variable
+        "condition_param_varname" to determine whether or not to trigger its
+        downstream job. By default this job-template does not have this JJB
+        variable defined; if the job-template instance that is used to reify
+        this job does not set a value here then the downstream job will always
+        be triggered, making the conditional trigger "opt-in" behavior.
+        Hopefully this description doesn't confuse anyone.
     display-name: '{name} ({scm_branch}){dn-sort-index} {dn-qualifier} Acceptance Test Suite'
     project-type: matrix
     node: beaker
@@ -39,13 +47,29 @@
             results: '{junit_results_glob}'
             claim-build: true
             test-stability: true
-        - trigger-parameterized-builds:
-            - project: '{obj:tpb_projects}'
-              predefined-parameters: '{obj:tpb_predefined_parameters}'
-              current-parameters: '{obj:tpb_current_parameters}'
-              condition: '{obj:tpb_condition}'
-              property-file: '{obj:tpb_property_file}'
-              git-revision: '{obj:tpb_git_revision}'
+        - conditional-publisher:
+            - condition-kind: shell
+              condition-command: |
+                  #!/usr/bin/env bash
+
+                  if [ -z "{condition_param_varname}" ] ;then
+                      # JJB variable 'condition_param_varname undefined, so
+                      # always trigger parameterized downstream job.
+                      exit 0
+                  fi
+
+                  if [ "${condition_param_varname}" = "TRUE"] ;then
+                      exit 0
+                  fi
+                  exit 1
+              action:
+                  - trigger-parameterized-builds:
+                      - project: '{obj:tpb_projects}'
+                        predefined-parameters: '{obj:tpb_predefined_parameters}'
+                        current-parameters: '{obj:tpb_current_parameters}'
+                        condition: '{obj:tpb_condition}'
+                        property-file: '{obj:tpb_property_file}'
+                        git-revision: '{obj:tpb_git_revision}'
 
 - job-template:
     name: '{value_stream}_{name}_integration-system_pe_{qualifier}_{scm_branch}'
