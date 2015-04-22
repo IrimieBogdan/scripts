@@ -1,13 +1,21 @@
 - project:
     name: higgs
+    meta_path_project: 'enterprise/production/higgs.yaml'
     value_stream: enterprise
+
+    github_user: puppetlabs
+    github_project: higgs
+
     hipchat_room:
-        - ${{PROJECT_ROOM}}
-    git_url: git@github.com:puppetlabs/higgs.git
+        - 'Integration (PE Yellow Team)'
+
+    kickoff_disabled: False
+
     logrotate_daystokeep: 30
     logrotate_numtokeep: 30
-    kickoff_disabled: False
+
     promote_package: 'pe-installer'
+
     jobs:
         - 'higgs':
                 pe_family: 3.7
