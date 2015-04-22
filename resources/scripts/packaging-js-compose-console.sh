@@ -27,4 +27,6 @@ bower install
 
 ember g pe-base-styles
 
+ember g pe-console-ember-test-helpers
+
 ember test --port {testem-port}
