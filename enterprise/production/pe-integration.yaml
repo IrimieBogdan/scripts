@@ -235,6 +235,9 @@
                 - centos6-64mcd-redhat5-32a-redhat5-32f
                 - centos6-64mcd-sles10-32a-sles10-32f
                 - centos6-64mcd-sles10-64a-sles10-64f
+            upgrade_from_axis:
+                - 3.3.2
+                - 3.7.2
             platform_axis:
                 - centos5
                 - centos6
