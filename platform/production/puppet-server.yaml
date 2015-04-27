@@ -58,7 +58,7 @@
             init_periodic_predefined_parameters: |
                 LAYOUT_AXIS=debian7-64m-32a debian7-64ma redhat6-64m-32a redhat6-64ma redhat7-64m-64a redhat7-64ma redhat7-64m-windows2008r2-64a ubuntu1204-64m-32a ubuntu1204-64ma ubuntu1404-64m-32a ubuntu1404-64ma ubuntu1404-64m-windows2008r2-64a
                 PLATFORM_AXIS=
-                SHIP_NIGHTLY=FALSE
+                SHIP_NIGHTLY=TRUE
 
             tpb_projects:
                 - '{value_stream}_{name}_unit-clj_{scm_branch}'
