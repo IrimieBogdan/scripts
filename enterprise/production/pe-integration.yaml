@@ -105,7 +105,7 @@
             preserve_hosts: onfail
 
             upgrader_smoke_upgrade_from_axis:
-                - 'NONE'
+                - 3.8.0
             upgrader_smoke_layout_axis:
                 - 64mcd
             upgrader_smoke_platform_axis:
@@ -181,6 +181,8 @@
             preserve_hosts: never
             platform_axis:
                 - centos7
+            upgrade_from_axis:
+                - 3.8.0
         #- 'pe-integration-full':
         #    pe_family: 4.0
         #    scm_branch: 4.0.x
