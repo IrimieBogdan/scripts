@@ -181,6 +181,8 @@
             preserve_hosts: never
             platform_axis:
                 - centos7
+            upgrade_from_axis:
+                - 3.8.0
         #- 'pe-integration-full':
         #    pe_family: 4.0
         #    scm_branch: 4.0.x
