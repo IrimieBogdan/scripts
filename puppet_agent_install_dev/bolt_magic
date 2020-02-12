@@ -1,0 +1,29 @@
+puppet module install puppetlabs-puppet_agent
+Notice: Preparing to install into /Users/gheorghe.popescu/.puppetlabs/etc/code/modules ...
+
+export MODULES_PATH=/Users/$USER/.puppetlabs/etc/code/modules
+
+cp ~/Workspace/scripts/install_dev_powershell.ps1 $MODULES_PATH/puppet_agent/tasks
+cp ~/Workspace/scripts/install_dev.json $MODULES_PATH/puppet_agent/tasks
+cp ~/Workspace/scripts/install_dev_powershell.json $MODULES_PATH/puppet_agent/tasks
+
+bolt task show --modulepath $MODULES_PATH
+
+# https://github.com/puppetlabs/puppetlabs-acl.git
+# cd puppetlabs-acl
+# bundle
+
+VM_HOST=$(bundle exec rake 'litmus:provision[vmpooler, win-2012r2-x86_64]' | awk -F"," '{print $1}')
+
+bolt task run puppet_agent::install_dev \
+version=6.4.4.124.gb247d26 \
+sha=b247d268d018afbaf5e9820a690b1f721df51a21 \
+--nodes winrm://$VM_HOST \
+--no-ssl \
+--user Administrator \
+--password $PASSWORD \
+--modulepath $MODULES_PATH
+
+bundle exec rake 'litmus:install_module'
+rake litmus:acceptance:$VM_HOST
+
