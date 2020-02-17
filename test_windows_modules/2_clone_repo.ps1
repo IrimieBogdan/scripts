@@ -3,6 +3,7 @@
     [String]$module
   )
 
+  $env:GIT_REDIRECT_STDERR = '2>&1'
   Set-Alias exist Test-Path -Option "Constant, AllScope"
 
   if (exist "$env:temp\$module") {
