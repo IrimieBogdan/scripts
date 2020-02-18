@@ -1,6 +1,8 @@
 [CmdletBinding()]
   Param(
-    [String]$module
+    [String]$module,
+    [String]$gem_source,
+    [String]$facter_gem_version
   )
 
   function not-exist { -not (Test-Path $args) }
@@ -26,6 +28,12 @@
 
   gem install bundler
   bundle lock --add-platform ruby
-  bundle install -j4
+
+  $env:GEM_SOURCE=$gem_source
+  $env:FACTER_GEM_VERSION=$facter_gem_version
+
+  Write-Output $env:FACTER_GEM_VERSION
+
+  bundle update -j4
 
   exit $LASTEXITCODE

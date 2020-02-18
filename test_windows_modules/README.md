@@ -3,9 +3,9 @@
 
 ```
 # run for single module
-./run_acceptance.sh $module_name
+MODULE=puppetlabs-registry PASSWORD= GEM_SOURCE= FACTER_GEM_VERSION= ./run_acceptance.sh
 
 # run for a subset of defined modules using iTerm2
-./run_acceptance_parallel.sh
+PASSWORD= GEM_SOURCE= FACTER_GEM_VERSION= ./run_acceptance_parallel.sh
 ```
 
