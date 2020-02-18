@@ -9,7 +9,7 @@ mkdir -p results
 for module_name in "${modules[@]}"
 do
   MODULE=${module_name} PASSWORD=${PASSWORD} GEM_SOURCE=${GEM_SOURCE} FACTER_GEM_VERSION=${FACTER_GEM_VERSION} ./run_acceptance.sh &>results/${module_name} &
-  pids[${i}]=$!
+  pids[${module_name}]=$!
 done
 
 # wait for all pids
