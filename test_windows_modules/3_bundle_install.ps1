@@ -36,4 +36,7 @@
 
   bundle update -j4
 
+  Write-Output "Facter version is:"
+  bundle exec facter --version
+
   exit $LASTEXITCODE
