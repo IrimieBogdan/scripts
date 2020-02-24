@@ -14,6 +14,7 @@
   }
 
   Write-Output "Start running tests"
+  bundle exec rake spec_prep
   bundle exec rake litmus:acceptance:localhost
 
   exit $LASTEXITCODE
